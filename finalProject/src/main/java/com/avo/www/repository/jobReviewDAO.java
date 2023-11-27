@@ -1,5 +1,5 @@
 package com.avo.www.repository;
 
-public interface StoareBoardDAO {
+public interface jobReviewDAO {
 
 }
