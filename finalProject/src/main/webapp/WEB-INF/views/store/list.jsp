@@ -61,23 +61,23 @@
 <jsp:include page="../common/header.jsp" />
 
 <div class="allBtns">
-<a href="/store/register" class="regiBtn">작성하기</a>
+<a href="/store/register" class="regiBtn listBtns">작성하기</a>
 <!-- 카테고리 버튼 -->
-<button type="button" class="cateBtns" id="all" value="null">전체</button>
-<button type="button" class="cateBtns" id="lesson" value="lesson">과외/클래스</button>
-<button type="button" class="cateBtns" id="pet" value="pet">반려동물</button>
-<button type="button" class="cateBtns" id="hospital" value="hospital">병원/약국</button>
-<button type="button" class="cateBtns" id="beauty" value="beauty">뷰티샵</button>
-<button type="button" class="cateBtns" id="laundry" value="laundry">세탁소</button>
-<button type="button" class="cateBtns" id="repair" value="repair">수리</button>
-<button type="button" class="cateBtns" id="sports" value="sports">운동</button>
-<button type="button" class="cateBtns" id="infant" value="infant">육아</button>
-<button type="button" class="cateBtns" id="eatery" value="eatery">음식점</button>
-<button type="button" class="cateBtns" id="move" value="move">이사/용달</button>
-<button type="button" class="cateBtns" id="interior" value="interior">인테리어 시공</button>
-<button type="button" class="cateBtns" id="cleaning" value="cleaning">청소</button>
-<button type="button" class="cateBtns" id="hobby" value="hobby">취미</button>
-<button type="button" class="cateBtns" id="dessert" value="dessert">카페/디저트</button>
+<button type="button" class="clicked listBtns" id="all" value="null">전체</button>
+<button type="button" class="cateBtns listBtns" id="lesson" value="lesson">과외/클래스</button>
+<button type="button" class="cateBtns listBtns" id="pet" value="pet">반려동물</button>
+<button type="button" class="cateBtns listBtns" id="hospital" value="hospital">병원/약국</button>
+<button type="button" class="cateBtns listBtns" id="beauty" value="beauty">뷰티샵</button>
+<button type="button" class="cateBtns listBtns" id="laundry" value="laundry">세탁소</button>
+<button type="button" class="cateBtns listBtns" id="repair" value="repair">수리</button>
+<button type="button" class="cateBtns listBtns" id="sports" value="sports">운동</button>
+<button type="button" class="cateBtns listBtns" id="infant" value="infant">육아</button>
+<button type="button" class="cateBtns listBtns" id="eatery" value="eatery">음식점</button>
+<button type="button" class="cateBtns listBtns" id="move" value="move">이사/용달</button>
+<button type="button" class="cateBtns listBtns" id="interior" value="interior">인테리어 시공</button>
+<button type="button" class="cateBtns listBtns" id="cleaning" value="cleaning">청소</button>
+<button type="button" class="cateBtns listBtns" id="hobby" value="hobby">취미</button>
+<button type="button" class="cateBtns listBtns" id="dessert" value="dessert">카페/디저트</button>
 </div>
 
 <!-- list 시작 -->
@@ -115,32 +115,24 @@
 </div>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
-	  var allBtn = document.getElementById('all');
-	  allBtn.classList.remove('cateBtns');
-	  allBtn.classList.add('clicked');
+  var otherBtns = document.querySelectorAll('.listBtns');
 
-	  //나머지 버튼에 클릭 이벤트 추가
-	  var otherBtns = document.querySelectorAll('.cateBtns');
-	  otherBtns.forEach(function(btn) {
-	    btn.addEventListener('click', function() {
-	      //클릭된 버튼에만 clicked 클래스 추가
-	      btn.classList.add('clicked');
-	      btn.classList.remove('cateBtns');
+  otherBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      // 클릭된 버튼에만 clicked 클래스 추가
+      btn.classList.add('clicked');
+      btn.classList.remove('cateBtns');
 
- 	      //#all 버튼의 clicked 클래스 제거
-	      allBtn.classList.remove('clicked');
-	      allBtn.classList.add('cateBtns'); 
-
-	      //나머지 버튼들의 clicked 클래스 제거
-	      otherBtns.forEach(function(other) {
-	        if (other !== btn) {
-	          other.classList.remove('clicked');
-	          other.classList.add('cateBtns');       
-	        }
-	      });
-	    });
-	  });
-	});
+      // 나머지 버튼들의 clicked 클래스 제거
+      otherBtns.forEach(function(other) {
+        if (other !== btn) {
+          other.classList.remove('clicked');
+          other.classList.add('cateBtns');
+        }
+      });
+    });
+  });
+});
 </script>
 <script src="/resources/js/storeBoardList.js"></script>
 <script type="text/javascript">
