@@ -14,7 +14,7 @@
 <form action="/hmember/passOrFail" method="post">
 	<p class="siteTitle">Avocart</p>
 	<div class="pwInput">
-	  <label for="p" class="labels">비밀번호를 다시 한번 입력해 주세요.</label>
+	  <label for="p" class="labels">회원 정보 보호를 위해 비밀번호를 다시 한번 입력해 주세요.</label>
 	  <input type="password" name="inputPw" id="pw" class="inputs">
 	  <i class="bi bi-eye-slash" id="showPwBtn"></i>
 	</div>

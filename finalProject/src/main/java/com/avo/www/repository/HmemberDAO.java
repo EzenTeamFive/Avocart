@@ -7,6 +7,15 @@ public interface HmemberDAO {
 	MemberVO getDeail(String email);
 
 	String getPw(String email);
+	
+	//수정 관련
+	int jjsModify(MemberVO mvo);
+	
+	int cmModify(MemberVO mvo);
+	
+	int cmCmtModify(MemberVO mvo);
+	
+	int cmReCmtModify(MemberVO mvo);
 
 	int modifyPwEmpty(MemberVO mvo);
 
@@ -19,6 +28,6 @@ public interface HmemberDAO {
 
 	int amDelte(String email);
 
-	int mbDelete(String email);
+	int mbDelete(String email);	
 
 }

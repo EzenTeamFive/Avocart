@@ -75,6 +75,10 @@ form{
 	color: red;
 }
 
+#pw2:disabled {
+    background: #ffffff;
+}
+
 .registerBtn{
 	margin-top: 30px;
 	width: 400px;

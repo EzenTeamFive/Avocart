@@ -93,18 +93,19 @@
 
 .modBtn{
 	width: 125px;
-	border: 1px solid #93b336;
+	border: 3px solid #84a331;
 	background-color: white;
-	border-radius: 50px;
+	border-radius: 38px;
 	position: relative;
 	top: -3px;
 	padding: 5px;
+	color: #84a331;
+	font-size: 15px;
 }
 
 .modBtn:hover{
-	font-weight: 800;
-	background-color: #93b336;
-	color: white;	
+	background-color: #84a331;
+	color: white;
 }
 
 .forBorder {
@@ -117,7 +118,7 @@
 
 .memMsg1{
 	position: relative;
-	top: 14px;
+	top: 12px;
 	margin-right: 30px;
 	color: rgb(136, 136, 136);
 }
@@ -129,23 +130,35 @@
 
 .memMsg2{
 	position: relative;
-	top: 14px;
-	margin-right: 20px;
+	top: 12px;
+	margin-right: 30px;
 	color: rgb(136, 136, 136);
 }
 
 .memMsg2 i{
-	margin-right: 8px;
-	color: #93b336;
+	margin-right: 7px;
+	color: #7B4B1E ;
 }
 
 .memMsg3{
 	position: relative;
-	top: 14px;
+	top: 12px;
+	margin-right: 20px;
 	color: rgb(136, 136, 136);
 }
 
 .memMsg3 i{
+	margin-right: 7px;
+	color: #93b336;
+}
+
+.memMsg4{
+	position: relative;
+	top: 12px;
+	color: rgb(136, 136, 136);
+}
+
+.memMsg4 i{
 	margin-right: 5px;
 	color: #FA5858;
 }

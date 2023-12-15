@@ -9,11 +9,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,8 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.avo.www.domain.FileVO;
-import com.avo.www.domain.StoreMenuVO;
 import com.avo.www.handler.FileHandler;
+import com.avo.www.security.AuthMember;
 import com.avo.www.security.MemberVO;
 import com.avo.www.service.HmemberService;
 
@@ -103,6 +102,24 @@ public class HMemberController {
 			mvo.setMemEmd(mvo.getMemEmd());
 			hsv.modify(mvo);
 		}
+		
+		//Principal 업데이트
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        //Principal => AuthMember 변환
+        AuthMember member = (AuthMember) authentication.getPrincipal();
+        
+        member.getMvo().setMemNickName(mvo.getMemNickName());
+        member.getMvo().setMemSido(mvo.getMemSido());
+        member.getMvo().setMemSigg(mvo.getMemSigg());
+        member.getMvo().setMemEmd(mvo.getMemEmd());
+        member.getMvo().setMemPw(mvo.getMemPw());
+        
+        Authentication newAuthentication = new UsernamePasswordAuthenticationToken(member, authentication.getCredentials(), authentication.getAuthorities());
+
+        //SecurityContextHolder에 새로운 Authentication 설정
+        SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+        
 		String email = principal.getName();
 		re.addAttribute("memEmail", email);
 		return "redirect:/hmember/modify";		

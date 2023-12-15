@@ -9,10 +9,12 @@ let regYear = regAt.slice(0,4);
 let regMonth = regAt.slice(5,7);
 let regDay = regAt.slice(8,10);
 
- //현재 날짜와 가입 날짜 차이 계산
- let timeDifference = Math.abs(today - new Date(regYear, regMonth-1, regDay)); 
- let daysDifference = Math.ceil(timeDifference / (1000*60*60*24));
+//현재 날짜와 가입 날짜 차이 계산
+let timeDifference = Math.abs(today - new Date(regYear, regMonth-1, regDay)); 
+let daysDifference = Math.ceil(timeDifference / (1000*60*60*24));
 
+//주소, 가입일 수정
+document.getElementById('userAddr').innerHTML = `<i class="bi bi-geo-alt-fill"></i>주소<span class="black">${sido} ${sigg} ${emd}</span>`;
 document.getElementById('calcDate').innerHTML = `<i class="bi bi-calendar"></i>아보카트 가입일<span class="black">${daysDifference} 일 전</span>`;
 
 //기본 프로필일 경우, 삭제 버튼 가리기

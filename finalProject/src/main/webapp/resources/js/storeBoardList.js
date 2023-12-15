@@ -1,3 +1,4 @@
+// 페이지가 다 로드되면 로딩화면 삭제
 window.onload = function() {
     setTimeout(()=> document.getElementById('loading').style.display = 'none', 500);
 };
@@ -12,9 +13,9 @@ window.onload = function() {
 //     lastLi.style.marginRight = "376px";
 // }
 
-async function spreadStoreFromServer(page, type){
+async function spreadStoreFromServer(page, type, sort){
     try{
-        const resp = await fetch('/store/page/'+page+'/'+type);
+        const resp = await fetch('/store/page/'+page+'/'+type+'/'+sort);
         const result = await resp.json();
         return result;
     }catch(err){
@@ -23,8 +24,8 @@ async function spreadStoreFromServer(page, type){
 }
 
 //페이지가 처음 로드될 때 전체 업체 표시
-function getStoreList(page = 1, type = null) {
-    spreadStoreFromServer(page, type).then(result => {
+function getStoreList(page = 1, type = null, sort = null) {
+    spreadStoreFromServer(page, type, sort).then(result => {
         console.log(result);
         const ul = document.getElementById('ulZone');
         const moreBtn = document.getElementById('moreBtn');
@@ -41,27 +42,30 @@ function getStoreList(page = 1, type = null) {
                  const matchingFvo = result.prodFileList.find(f => f.bno === svo.proBno);
 
                  let imgSrc = "";
+                 
                  if (matchingFvo) {
                      //matchingFvo가 존재할 경우 이미지 경로 설정
                      imgSrc = `/upload/product/${matchingFvo.saveDir.replace('\\', '/')}/${matchingFvo.uuid}_${matchingFvo.fileName}`;
-                 }
-
+                 } else {
+				    //matchingFvo가 없는 경우 기본 이미지 
+				    imgSrc = "../resources/image/logoimage.png";
+				}
+				
                 //li 생성
                 const li = document.createElement('li');
                 li.innerHTML = `
-                    <a href="/store/detail?bno=${svo.proBno}">
-                        <div>
-                            <div>
-                                <img class="profile" src="${imgSrc}" onerror="this.onerror=null; this.src='../resources/image/logoimage.png';">
+                    <a href="/store/detail?bno=${svo.proBno}">     
+                            <div class="profileContainer">
+                                <img class="profile" src="${imgSrc}">
                             </div>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="title">${svo.proTitle}</span>
-                                <span class="gray">${svo.proEmd }</span>
-                            </div>
+
+                        <div class="textContainer">                          
+                        	<span class="title">${svo.proTitle}</span>                            
                             <span class="content">${svo.proContent}</span>
-                            <span class="gray">${svo.proMenu}</span>
+                            
+                            <div class="infoTexts">
+                            	<span class="gray">${svo.proEmd } · ${svo.proMenu} · 후기 수정</span>
+                            </div>	
                         </div>
                     </a>
                 `;
@@ -85,17 +89,34 @@ function getStoreList(page = 1, type = null) {
     });
 }
 
-let type = null;
+let cateType; 
+let sortType;
+
+document.addEventListener('change', (e) => {
+    let cateSelect = document.getElementsByName("categorySelect")[0];
+    cateType = cateSelect.options[cateSelect.selectedIndex].value;
+    
+    let sortSelect = document.getElementsByName("sortSelect")[0];
+    sortType = sortSelect.options[sortSelect.selectedIndex].value;
+    const targetId = e.target.id;
+
+    if (targetId === 'categorySelect') {
+        document.getElementById('loading').style.display = 'block';
+        getStoreList(1, cateType, sortType);
+        setTimeout(() => document.getElementById('loading').style.display = 'none', 200);
+    } else if(targetId === 'sortSelect') {
+        document.getElementById('loading').style.display = 'block';
+        getStoreList(1, cateType, sortType);
+        setTimeout(() => document.getElementById('loading').style.display = 'none', 200);
+    }
+});
 
 document.addEventListener('click', (e) => {
     const targetId = e.target.id;
-    if (targetId === 'all' || targetId === 'lesson' || targetId === 'pet' || targetId === 'hospital' || targetId === 'beauty' || targetId === 'laundry' || targetId === 'repair' || targetId === 'sports' || targetId === 'infant' || targetId === 'eatery' || targetId === 'move' || targetId === 'interior' || targetId === 'cleaning' || targetId === 'hobby' || targetId === 'dessert') {
-        type = e.target.value;
-        getStoreList(1, type);
-    }
-    
-    if (targetId === 'moreBtn') {
-        getStoreList(parseInt(e.target.dataset.page), type);
-    } 
 
+    if (targetId === 'moreBtn') {
+        document.getElementById('loading').style.display = 'block';
+        getStoreList(parseInt(e.target.dataset.page), cateType, sortType);
+        setTimeout(() => document.getElementById('loading').style.display = 'none', 500);
+    }
 });

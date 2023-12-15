@@ -46,58 +46,89 @@ document.getElementById('showPwBtn2').addEventListener('click',(e)=>{
 //비밀번호 정규표현식
 let pwVal = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
 
-document.getElementById('pw1').addEventListener('keyup',()=>{
+document.getElementById('pw1').addEventListener('input',()=>{
     let pw1 = document.getElementById('pw1').value;
     let pw2 = document.getElementById('pw2').value;
 
     //문자길이
     if(pw1.length < 8 || pw1.length > 16){
         document.getElementById('pwMsg2_1').style = "display:inline-block";
+        registerBtnAbled();
     }else{
         document.getElementById('pwMsg2_1').style = "display:none";
         //정규표현식
         if(!pwVal.test(pw1)){
             document.getElementById('pwMsg1_1').style = "display:inline-block";
             document.getElementById('pwMsg1_2').style = "display:none";
-            document.getElementById('pwMsg2_2').style = "display:none";
             registerBtnAbled();
         } else{
             document.getElementById('pwMsg1_1').style = "display:none";
+            //정규식 통과 후
 
             //비밀번호 입력 체크
-            if(pw1!=='' && pw2=='') {
-                document.getElementById('pwMsg2_2').style = "display:inline-block";
-            } else {
-                document.getElementById('pwMsg2_2').style = "display:none";
+            if(pw1!=='' && pw2==='') {
+                registerBtnAbled();
+            } else if(pw1!=='' && pw2!==''){
+                registerBtnAbled();
+            } 
+            
+            if(pw1=='' && pw2=='') {
+                document.getElementById('pwMsg1_1').style = "display:none";
+                document.getElementById('pwMsg2_1').style = "display:none";
+                document.getElementById('pwMsg1_2').style = "display:none";
                 registerBtnAbled();
             }
+            
+            if(pw1!='' && pw1!=pw2){
+                document.getElementById('pwMsg1_2').style = "display:inline-block";
+                registerBtnAbled();
+            } 
         }
     }   
+
+    //정규식 통과 전
+    if(pw1=='' && pw2=='') {
+        document.getElementById('pwMsg1_1').style = "display:none";
+        document.getElementById('pwMsg2_1').style = "display:none";
+        document.getElementById('pwMsg1_2').style = "display:none";
+        registerBtnAbled();
+    }
+
 })
 
-document.getElementById('pw2').addEventListener('keyup',()=>{
+document.getElementById('pw2').addEventListener('input',()=>{
     let pw1 = document.getElementById('pw1').value;
     let pw2 = document.getElementById('pw2').value;
 
     //비밀번호 입력 체크
     if(pw1!=='' && pw2=='') {
         document.getElementById('pwMsg2_2').style = "display:inline-block";
+        registerBtnAbled();
      } else if(pw1=='' && pw2=='') {
         document.getElementById('pwMsg1_1').style = "display:none";
         document.getElementById('pwMsg2_1').style = "display:none";
         document.getElementById('pwMsg1_2').style = "display:none";
-        document.getElementById('pwMsg2_2').style = "display:none";
         registerBtnAbled();
      } else {
-         document.getElementById('pwMsg2_2').style = "display:none";
   
         //비밀번호 일치 체크
         if(pw1!=pw2){
             document.getElementById('pwMsg1_2').style = "display:inline-block";
+            registerBtnAbled();
         } else {
             document.getElementById('pwMsg1_2').style = "display:none";
             registerBtnAbled();
         }
+     }
+
+     if(pw1!=='' && pw2=='') {
+        document.getElementById('pwMsg1_2').style = "display:none";
+        registerBtnAbled();
+     }
+
+     if(pw1=='' && pw2!=='') {
+        document.getElementById('pwMsg2_1').style = "display:inline-block";
+        registerBtnAbled();
      }
 })
 
@@ -132,7 +163,7 @@ function registerBtnAbled(){
     const pwMsg1_1 = document.getElementById('pwMsg1_1');
     const pwMsg2_1 = document.getElementById('pwMsg2_1');
     const pwMsg1_2 = document.getElementById('pwMsg1_2');
-    const pwMsg2_2 = document.getElementById('pwMsg2_2');
+    // const pwMsg2_2 = document.getElementById('pwMsg2_2');
     const nickMsg = document.getElementById('nickMsg');
     const addrValue = document.getElementById('addr').value;
     const nickValue = document.getElementById('nick').value;
@@ -140,10 +171,11 @@ function registerBtnAbled(){
     const pwMsg1_1Display = window.getComputedStyle(pwMsg1_1).getPropertyValue('display');
     const pwMsg2_1Display = window.getComputedStyle(pwMsg2_1).getPropertyValue('display');
     const pwMsg1_2Display = window.getComputedStyle(pwMsg1_2).getPropertyValue('display');
-    const pwMsg2_2Display = window.getComputedStyle(pwMsg2_2).getPropertyValue('display');
+    // const pwMsg2_2Display = window.getComputedStyle(pwMsg2_2).getPropertyValue('display');
     const nickMsgDisplay = window.getComputedStyle(nickMsg).getPropertyValue('display');
 
-    if(pwMsg1_1Display === 'none' && pwMsg2_1Display === 'none'&& pwMsg1_2Display === 'none' && pwMsg2_2Display === 'none' && nickMsgDisplay ==='none'
+    // && pwMsg2_2Display === 'none'
+    if(pwMsg1_1Display === 'none' && pwMsg2_1Display === 'none'&& pwMsg1_2Display === 'none' && nickMsgDisplay ==='none'
         && addrValue !== '' && nickValue !== ''){
        document.getElementById('regiBtn').disabled = false;
    } else {
@@ -176,5 +208,3 @@ document.getElementById('deleteMemBtn').addEventListener('click',(e)=>{
         deleteMemBtn(email);
     }
 });
-
-

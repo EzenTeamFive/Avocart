@@ -26,9 +26,9 @@ form{
 }
 
 .labels{
-	display: block;
-	font-weight: 800;
-	margin-bottom: 7px;
+    display: block;
+    font-weight: 800;
+    margin-bottom: 7px;
     font-family: 'Pretendard-Regular';
     color: #334010;
 }

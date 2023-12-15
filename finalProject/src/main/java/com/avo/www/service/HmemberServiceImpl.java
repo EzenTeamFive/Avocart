@@ -4,6 +4,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +30,7 @@ public class HmemberServiceImpl implements HmemberService {
 	
 	@Inject
 	private ProfileFileDAO pdao;
-	
+	 
 	@Override
 	public MemberVO getDetail(String email) {
 		MemberVO mvo = hdao.getDeail(email);
@@ -53,12 +58,33 @@ public class HmemberServiceImpl implements HmemberService {
 
 	@Override
 	public int modifyPwEmpty(MemberVO mvo) {
-		return hdao.modifyPwEmpty(mvo);
+		int isOk = hdao.modifyPwEmpty(mvo);
+		
+		//중고, 알바, 업체 게시글 닉네임 변경
+		hdao.jjsModify(mvo);
+		//동네 게시글 닉네임 변경
+		hdao.cmModify(mvo);
+		//동네 댓글 닉네임 변경
+		hdao.cmCmtModify(mvo);
+		//동네 대댓글 닉네임 변경
+		hdao.cmReCmtModify(mvo);
+
+		return isOk;
 	}
 
 	@Override
 	public int modify(MemberVO mvo) {
-		return hdao.modify(mvo);
+		int isOk =  hdao.modify(mvo);
+		//중고, 알바, 업체 게시글 닉네임 변경
+		hdao.jjsModify(mvo);
+		//동네 게시글 닉네임 변경
+		hdao.cmModify(mvo);
+		//동네 댓글 닉네임 변경
+		hdao.cmCmtModify(mvo);
+		//동네 대댓글 닉네임 변경
+		hdao.cmReCmtModify(mvo);
+		
+		return isOk;
 	}
 
 	@Override

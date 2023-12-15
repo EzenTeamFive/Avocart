@@ -4,8 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.avo.www.repository.StoreBoardDAO">
 	<insert id="insert">
-		insert into product(pro_email, pro_nick_name, pro_sido, pro_sigg, pro_emd, pro_title, pro_content, pro_category, pro_menu)
-		values (#{proEmail}, #{proNickName}, #{proSido}, #{proSigg}, #{proEmd}, #{proTitle}, #{proContent}, #{proCategory}, #{proMenu})
+		insert into product(pro_email, pro_nick_name, pro_sido, pro_sigg, pro_emd, pro_title, pro_content, pro_category, pro_menu, proFullAddr, proDetailAddr)
+		values (#{proEmail}, #{proNickName}, #{proSido}, #{proSigg}, #{proEmd}, #{proTitle}, #{proContent}, #{proCategory}, #{proMenu}, #{proFullAddr}, #{proDetailAddr})
 	</insert>  
 	<update id="readCount">
   		update product set pro_read_cnt = pro_read_cnt + #{cnt} where pro_bno = #{bno}
@@ -13,9 +13,10 @@
   	<select id="getDetail" resultType="com.avo.www.domain.ProductBoardVO">
   		select * from product where pro_bno = #{bno}
   	</select>
-  	<!-- 회원 정보 수정 반영 -->
+  	<!-- 회원 정보 수정 반영X -->
   	<update id="update">
-  	  	update product set pro_menu = #{proMenu}, pro_title = #{proTitle}, pro_content = #{proContent}, pro_mod_at = now()
+  	  	update product set pro_menu = #{proMenu}, pro_title = #{proTitle}, pro_content = #{proContent}, pro_mod_at = now(), 
+  	  	proFullAddr = #{proFullAddr}, proDetailAddr = #{proDetailAddr} 
   		where pro_bno = #{proBno}
   	</update>
 	<update id="delete">
@@ -30,7 +31,8 @@
   		select * from product 		
   		where pro_is_del = "N" and pro_category = 'store'
 	    <include refid="search"></include>		
-  		order by pro_re_at desc limit #{pageStart}, #{qty}
+ 		<include refid="orderBy"></include>
+  		limit #{pageStart}, #{qty}
   	</select>
   	<update id="repost">
   		update product set pro_re_at = now() where pro_bno = #{bno}
@@ -95,4 +97,24 @@
         </trim>
     </if>
 </sql>	
+
+<sql id="orderBy">
+    <choose>
+        <when test="sorted == 'latest'">
+            order by pro_re_at desc
+        </when>
+        <when test="sorted == 'oldest'">
+            order by pro_re_at asc
+        </when>
+        <when test="sorted == 'likes'">
+            order by pro_like_cnt desc
+        </when>
+        <when test="sorted == 'views'">
+            order by pro_read_cnt desc
+        </when>
+        <otherwise>
+            order by pro_re_at desc
+        </otherwise>
+    </choose>
+</sql>
 </mapper>
