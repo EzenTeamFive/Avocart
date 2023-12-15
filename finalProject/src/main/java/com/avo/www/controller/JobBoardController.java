@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.avo.www.domain.FileVO;
 import com.avo.www.domain.JobBoardDTO;
 import com.avo.www.domain.LikeItemVO;
+import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ProductBoardVO;
 import com.avo.www.handler.FileHandler;
+import com.avo.www.handler.PagingHandler;
 import com.avo.www.service.JobBoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,27 +46,21 @@ public class JobBoardController {
 	   log.info(">>>>> job list page >> ");
 	   log.info(">>>>> pbvo >> "+pbvo);
 	   
-	   
-	   List<JobBoardDTO> list = jbsv.getList();
-	   log.info(">>>>> get list >> "+list);
-
-	   m.addAttribute("list",list);
-	   return ("/job/list");
-   }
-   
-//   //LIST에 페이징추가
-//   @GetMapping(value="/list", produces = MediaType.APPLICATION_JSON_VALUE)
-//   public ResponseEntity<PagingHandler> spread(
-//			@PathVariable("proBno") long pbno, @PathVariable("page")int page, Model m){
-//	   log.info(">>>>> job list page >> ");
-//	   PagingVO pgvo = new PagingVO(page , 5);
-//	   List<ProductBoardVO> list = jbsv.getList(pbno,pgvo);
+//	   //알바리스트
+//	   List<JobBoardDTO> list = jbsv.getList();
+//	   log.info(">>>>> get list >> "+list);
 //	   m.addAttribute("list",list);
-//	   
-//	   return new ResponseEntity<PagingHandler>(jbsv.getList(pbno,pgvo),HttpStatus.OK);
-//   }
-//   
-   
+
+	   //인기알바리스트
+	   List<JobBoardDTO> hotList = jbsv.getHotList();
+	   log.info(">>>>> get hotList >> "+hotList);
+	   m.addAttribute("hotList",hotList);
+	   
+	   
+	   return ("/job/list");
+	   
+   }
+
    @GetMapping("/register")
    public void getRegister() {
 	   log.info(">>>>> job register page >> ");
@@ -148,12 +145,11 @@ public class JobBoardController {
 	}
 	
 
-	@PostMapping(value = "/like", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
+	@PostMapping(value = "/list/like", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> likeBtn(@RequestBody LikeItemVO livo){
         log.info("LikeItemVO >> "+livo);
 
         // likeVO service 전송
-        // status가 3일 경우 첫 찜하기 이므로 like insert로 생성
         if(livo.getLiStatus() == 1) {
         	int isOk = jbsv.insertLike(livo);
         	log.info("찜 "+(isOk > 0 ? "성공" : "실패"));
@@ -162,13 +158,41 @@ public class JobBoardController {
         log.info("like>> deleteLike >> else live >> " + livo);
         log.info("찜 "+(isOk > 0 ? "성공" : "실패"));
         }
-        
-
-		
 		return new ResponseEntity<String>("", HttpStatus.OK);
 	}
 
+//	리스트 페이징 매핑
+	@GetMapping(value = "/list/{page}/{menu}/{sort}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PagingHandler> spread(@PathVariable("page") int page, 
+	        @PathVariable("menu") String menu, @PathVariable("sort") String sort, Model m) {
+	    log.info("page >> " + page + "/ menu >> " + menu + " sort >> " + sort );
+	    // pgvo 생성하여 page, qty(보여줄 게시글 수) 설정
+	    PagingVO pgvo = new PagingVO(page, 8);
+	    // 타입, 정렬 설정
+	    pgvo.setType(menu);
+	    pgvo.setSorted(sort);
+	    
+	    int totalCount = jbsv.getTotalCount(pgvo);
+	    // pgvo,전체 게시글수, qty 담은 ph객체 생성
+	    PagingHandler ph = new PagingHandler(pgvo , totalCount, 8);
+	    
+	    ph.setProdList(jbsv.getMoreList(pgvo));
+	    
+	    
+	    return new ResponseEntity<PagingHandler>(ph, HttpStatus.OK);
+	}
 	
+//	리스트 썸네일
+	@PostMapping(value = "/list/thumb/{proBno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FileVO> getThumb(@PathVariable("proBno")long proBno){
+		
+		//썸네일 가져와서 flist에 담기
+		List<FileVO> flist = jbsv.getThumb(proBno);
+		log.info("thumbnail >>  flist >> "+flist);
+		
+		return new ResponseEntity<FileVO>(flist.get(0), HttpStatus.OK);
+	}
+
 	
 	 @GetMapping("/about")
 	 public void getAbout() {

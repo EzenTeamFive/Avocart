@@ -6,13 +6,14 @@ import org.apache.ibatis.annotations.Param;
 
 import com.avo.www.domain.JobBoardDTO;
 import com.avo.www.domain.LikeItemVO;
+import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ProductBoardVO;
 
 public interface JobBoardDAO {
 
 	ProductBoardVO detail(long proBno);
 
-	List<ProductBoardVO> getList();
+//	List<ProductBoardVO> getList();
 
 	ProductBoardVO jobLike(long proBno);
 
@@ -30,7 +31,10 @@ public interface JobBoardDAO {
 
 	int checkLikeCnt(long proBno);
 
-//	PagingHandler getList(long pbno, PagingVO pgvo);
+	int getTotalCount(PagingVO pgvo);
 
+	List<ProductBoardVO> getHotList();
+
+	List<ProductBoardVO> getMoreList(PagingVO pgvo);
 
 }

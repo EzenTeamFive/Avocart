@@ -6,6 +6,7 @@ import com.avo.www.domain.CommunityBoardVO;
 import com.avo.www.domain.CommunityCmtVO;
 import com.avo.www.domain.CommunityReCmtVO;
 import com.avo.www.domain.FileVO;
+import com.avo.www.domain.JobBoardDTO;
 import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ProductBoardVO;
 import com.avo.www.domain.ReviewVO;
@@ -86,5 +87,10 @@ public class PagingHandler {
 	    this(pgvo, totalCount, 5);
 	    this.jobReList = jobReList;
 	}
+   
+   public PagingHandler(PagingVO pgvo, int totalCount, List<CommunityBoardVO> cmList, int minus) {
+	   this(pgvo, totalCount, minus);
+	   this.cmList = cmList;
+   }
 
 }
