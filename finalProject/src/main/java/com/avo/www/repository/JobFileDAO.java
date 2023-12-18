@@ -15,4 +15,6 @@ public interface JobFileDAO {
 
 	List<FileVO> allFlieList();
 
+	FileVO getProfileImg(String proEmail);
+
 }

@@ -60,7 +60,17 @@
 	
 	<div class="profileSecction">
 		<div class="userInfo">
-			<span><img class="frofileImg" alt="frofile error" src="../resources/image/기본 프로필.png"></i>${jbdto.pbvo.proNickName}</span>
+			<span>
+				<c:choose>
+					<c:when test="${empty profile}">
+						<img class="frofileImg" alt="frofile error" src="../resources/image/기본 프로필.png">			
+					</c:when>
+					<c:otherwise>
+						<img class="frofileImg" alt="frofile error" src="/upload/profile/${fn:replace(profile.saveDir,'\\','/')}/${profile.uuid}_th_${profile.fileName}">
+					</c:otherwise>
+				</c:choose>
+				${jbdto.pbvo.proNickName}
+				</span>
 		</div>
 		<div class="userScore">
 			<i class="bi bi-thermometer-half"></i>매너온도
@@ -77,7 +87,7 @@
 	</div>
 	
 	<div class="jobInfoSecction">
-		<p><strong><i class="bi bi-coin"></i>${jbdto.pbvo.proMenu}
+		<p><strong><i class="bi bi-coin"></i>${jbdto.pbvo.proPayment}
 		<fmt:formatNumber type="number" maxFractionDigits="3" value="${jbdto.pbvo.proPrice}" />원</strong></p>
 		<p><i class="bi bi-geo-alt"></i>근무지 <br> ${jbdto.pbvo.proSido} ${jbdto.pbvo.proSigg} ${jbdto.pbvo.proEmd}</p>
 <!--

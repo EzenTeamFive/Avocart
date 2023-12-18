@@ -34,7 +34,6 @@
 	.boardMenuName:hover{
 		text-decoration: underline;
 	}
-	
 	/* 사용자 정보 라인 */
 	.top_line>*, .top_line div>*, .under_line>*, .under_line div>* {
 		display: inline;

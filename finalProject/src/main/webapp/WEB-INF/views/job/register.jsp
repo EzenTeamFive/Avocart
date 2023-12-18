@@ -30,14 +30,27 @@
 	    <input type="text" class="form-control" name="proTitle" id="proTitle">
 	  </div>
 	  <div class="mb-3">
-	  <label for="jobDetail" class="form-label">구인 정보</label>
+	  <label for="jobMenu" class="form-label">카테고리</label>
+			<select class="form-select form-select-sm" aria-label="Small select example" name="proMenu" id="proMenu">
+				<option value="선택" style="display:none">선택</option>
+				<option value="food">외식.음료</option>
+				<option value="shop">매장관리.판매</option>
+				<option value="service">서비스</option>
+				<option value="office">사무직</option>
+				<option value="product">생산.건설</option>
+				<option value="driver">운전.배달</option>
+				<option value="education">교육.강사</option>
+				<option value="etc">기타</option>
+			</select>
+	  
 	  <!-- 지급기준 메뉴에 담기 -->
-		    <select class="form-select form-select-sm" aria-label="Small select example" name="proMenu">
-			  <option value="지급기준" >지급 기준</option>
-			  <option value="시급">시급</option>
-			  <option value="일급">일급</option>
-			  <option value="월급">월급</option>
-			  <option value="건별">건별</option>
+	  <label for="jobPayment" class="form-label">지급 기준</label>
+		    <select class="form-select form-select-sm" aria-label="Small select example" name="proPayment" id="proPayment">
+				<option value="선택" style="display:none">선택</option>
+				<option value="시급">시급</option>
+				<option value="일급">일급</option>
+				<option value="월급">월급</option>
+				<option value="건별">건별</option>
 			</select>
 		
 		<label for="jobProPrice" class="form-label">급여</label>
@@ -67,6 +80,7 @@
 	  <!-- 첨부파일 표시 될 영역 -->
 	  </div>
   
+	  <p id="attention">※ 빈 칸을 작성해주세요.</p>
 	  <button type="reset" class="cancelBtn">취소</button>
 	  <button type="submit" class="regBtn" id="regBtn">작성</button>
 	</form>
@@ -77,7 +91,26 @@
 
 <script type="text/javascript" src="/resources/js/jobBoardRegister.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript">
 
+//주소입력창 클릭시 카카오주소 연결
+document.getElementById('proAddress').addEventListener('click', ()=>{
+ new daum.Postcode({
+     oncomplete: function(data) { //선택시 입력값 세팅
+         console.log(data);
+     	//input에 보여질 전체주소값 설정
+		    let address = data.sido + ' ' + data.sigungu + ' ' + data.bname;
+         document.getElementById('proAddress').value = address ;
+         //db에 넣을 주소값 설정
+         document.getElementById('proSido').value = data.sido;
+         document.getElementById('proSigg').value = data.sigungu;
+         document.getElementById('proEmd').value = data.bname;
+     }
+ }).open();
+})
+
+
+</script>
 <jsp:include page="../common/footer.jsp" />
 
 </body>

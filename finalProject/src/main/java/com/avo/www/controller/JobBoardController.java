@@ -114,7 +114,19 @@ public class JobBoardController {
 	    }
 
 	    // 파일 내용도 포함해서 같이 가져가야 함
-	    m.addAttribute("jbdto", jbsv.getDetail(proBno));
+	    JobBoardDTO jbdto = jbsv.getDetail(proBno);
+	    m.addAttribute("jbdto", jbdto);
+	    
+	    
+    	// 프로필 사진 가져오기
+	    FileVO fvo = new FileVO();
+	    // 이메일 주고 이미지 가져오기
+	    fvo = jbsv.getProfileImg(jbdto.getPbvo().getProEmail());
+	    if(fvo != null) {
+	    	m.addAttribute("profile",fvo);
+	    	
+	    }
+    	log.info(">>>>>>>>>> fvo >>>>>> "+fvo);
 	}
 
 	@PostMapping("/modify")

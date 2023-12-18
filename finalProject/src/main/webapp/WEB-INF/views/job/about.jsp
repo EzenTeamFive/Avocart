@@ -10,20 +10,25 @@
 <meta charset="UTF-8">
 <title>about page</title>
 <link rel="stylesheet" href="/resources/css/page.css">
-<link rel="stylesheet" href="/resources/css/jobDetail.css">
+<link rel="stylesheet" href="/resources/css/jobAbout.css">
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
 
+<div class="info">
+	<div class="infoText">
+		<h1>우리동네 <strong class="textAbocado">알바카도</strong></h1>
+		<p><strong>아보카트</strong>하듯 <strong>'쉽게'</strong> 동네에서 일거리를 찾고 <br>
+		일할 분을 만날 수 있어요</p>
+	</div>
+	<div class="infoImageArea">
+		<img alt="workImageError" src="../resources/image/jobs_about_1.png" >
+		<img alt="workImageError" src="../resources/image/jobs_about_2.png" >
+	</div>
+</div>
+
 <div class="bodyContainer">
 
-	<div class="info">
-		<h1>우리동네 알바카도</h1>
-		<p>알바카트하듯 쉽게 동네에서 일거리를 찾고 <br>
-		일할 분을 구할 수 있어요</p>
-		
-		<img alt="workImageError" src="https://www.daangn.com/_next/static/media/jobs_about_hero_2x.f4e0e4cd.png" style="width: 100%">
-	</div>
 	
 	<div class="howTo">
 		<h1>쉽고 빠른 당근알바 이용방법</h1>

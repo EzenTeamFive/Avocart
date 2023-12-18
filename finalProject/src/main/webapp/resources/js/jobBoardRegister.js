@@ -54,22 +54,41 @@ document.addEventListener('change', (e) => {
     
 });
 
-// 파일제외 입력되지 않은 항목이 있는경우 regBtn 비활성화 및 class 변경
+// 파일제외 모든 항목에 input 발생시 regBtn 활성화 및 class 변경
+//각 항목 변수
+const regBtn = document.getElementById('regBtn');
+const proTitle = document.getElementById('proTitle');
+const proMenu = document.getElementById('proMenu');
+const proPayment = document.getElementById('proPayment');
+const proPrice = document.getElementById('proPrice');
+const proAddress = document.getElementById('proAddress');
+const proContent = document.getElementById('proContent');
+const attention = document.getElementById('attention');
 
- 
+regBtn.disabled = true;
 
-// 주소입력창 클릭시 카카오주소 연결
-document.getElementById('proAddress').addEventListener('click', ()=>{
-    new daum.Postcode({
-        oncomplete: function(data) { //선택시 입력값 세팅
-            console.log(data);
-        	//input에 보여질 전체주소값 설정
-		    let address = data.sido + ' ' + data.sigungu + ' ' + data.bname;
-            document.getElementById('proAddress').value = address ;
-            //db에 넣을 주소값 설정
-            document.getElementById('proSido').value = data.sido;
-            document.getElementById('proSigg').value = data.sigungu;
-            document.getElementById('proEmd').value = data.bname;
-        }
-    }).open();
-})
+proTitle.addEventListener('input', checkFields);
+proMenu.addEventListener('input', checkFields);
+proPayment.addEventListener('input', checkFields);
+proPrice.addEventListener('input', checkFields);
+proAddress.addEventListener('input', checkFields);
+proContent.addEventListener('input', checkFields);
+
+function checkFields() {
+    const proTitleValue = proTitle.value;
+    const proMenuValue = proMenu.value;
+    const proPaymentValue = proPayment.value;
+    const proPriceValue = proPrice.value;
+    const proAddressValue = proAddress.value;
+    const proContentValue = proContent.value;
+
+    if (proTitleValue.trim() === '' || proMenuValue === '선택' ||proPaymentValue === '선택' || proPriceValue.trim() === '' || proAddressValue.trim() === '' || proContentValue.trim() === '') {
+        regBtn.disabled = true;
+        attention.innerHTML="※ 빈 칸을 작성해주세요.";
+    } else {
+        regBtn.disabled = false;
+        attention.innerHTML= '<br>';
+    }
+
+}
+

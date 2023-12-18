@@ -27,7 +27,7 @@
 	min-width: 1440px;
     height: 360px;
     background-color: #e3edc8;
-    margin: 50px 0px auto 0px;
+    margin: 0px auto;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -97,14 +97,15 @@
     width: 43%;
     height: 280px;
     margin-bottom: 20px;
-    border: 2px solid rgba(227, 237, 200, 0.3);
-    border-radius: 5px;
     box-sizing: border-box;
-    transition: 0.3s;
+    transition: 0.5s;
+    background-color: white;
+    border: 1px solid #ededed;
+    border-radius: 10px;
 }
 
 .hotJobListContent:hover, .jobListContent:hover {
-    box-shadow: 3px 3px 10px #e3edc8;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .hotJobListContent span, .jobListContent span {
@@ -135,7 +136,7 @@
     margin-bottom: 5px;
 }
 section select {
-	border: 2px solid rgba(227, 237, 200, 0.3);
+	border: 1px solid #d3d3d3;
 	padding: 6px;
 	border-radius: 10px;
 	

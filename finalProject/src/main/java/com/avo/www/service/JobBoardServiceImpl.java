@@ -221,6 +221,12 @@ public class JobBoardServiceImpl implements JobBoardService {
 	}
 
 
+	@Override
+	public FileVO getProfileImg(String proEmail) {
+		return fdao.getProfileImg(proEmail);
+	}
+
+
 
 
 

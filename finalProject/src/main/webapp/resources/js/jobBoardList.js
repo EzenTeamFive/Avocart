@@ -96,7 +96,7 @@ async function spreadJobFromServer(page = 1, menu, sort){
                 inner += `<a href="/job/detail?proBno=${job.proBno}">`;
                 if (job.proFileCnt > 0) {
                     let thumb = await getThumbnailToServer(job.proBno);
-                    inner += `<img alt="job image error" src="../upload/product/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}">`;;
+                    inner += `<img alt="job image error" src="../upload/product/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}">`;
                 }else{
                     inner += `<img alt="job image error" src="../resources/image/logoimage.png">`
                 }
@@ -113,11 +113,15 @@ async function spreadJobFromServer(page = 1, menu, sort){
                 moreJobArea.innerHTML += inner;
             }
 
+            if(result.prodList.length <= 8 ){
+                document.getElementById('moreBtn').style.display = 'none';
+            }
+
             
         
 
         }else {
-            let inner = `비었어`;
+            let inner = `게시글이 없습니다.`;
             moreJobArea.innerHTML = inner;
         }
 
