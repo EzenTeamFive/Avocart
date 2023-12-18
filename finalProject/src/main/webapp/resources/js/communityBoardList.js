@@ -118,18 +118,21 @@ window.onload = function() {
     setTimeout(()=> document.getElementById('loading').style.display = 'none', 500);
 };
 
+//현재 fullPath
+let fullPath = window.location.href;
+console.log(fullPath);
 //div의 a 요소 가져오기
 let aList = document.querySelectorAll('.CommunityCategory a');
 console.log(aList);
 
 for(let a of aList){
     // 이전 active 클래스 삭제
-    if(path != "http://localhost:8089/community/list"){
+    if(fullPath != "http://localhost:8088//community/list"){
         a.classList.remove('cmActive');
     }
 
     //현재 링크와 a태그의 링크가 동일하면 active 클래스 적용
-    if(a.href == path){
+    if(a.href == fullPath){
         a.classList.add('cmActive');
     }
 }

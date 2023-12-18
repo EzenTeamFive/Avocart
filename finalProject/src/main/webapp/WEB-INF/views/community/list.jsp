@@ -17,8 +17,11 @@
 <div class="bodyContainer">
 
 
+	<a href="/faq/list">
+		<button type="button">고객센터</button>
+	</a>
 <div class="CommunityCategory">
-	<a href="/community/list?cmMenu=전체" class="menu cmActive">전체</a>
+	<a href="/community/list" class="menu cmActive">전체</a>
 	<a href="/community/list?cmMenu=일상" class="menu">일상</a>
 	<a href="/community/list?cmMenu=모임" class="menu">모임</a>
 	<a href="/community/list?cmMenu=질문" class="menu">질문</a>
@@ -68,19 +71,10 @@
 </div>
 
 </div>
+<!-- 여기까지 bodyContainer -->
 
-<div class="fixedBtn">
-	<a href="/community/register">
-		<button type="button">글쓰기</button>
-	</a>
-	<button type="button">채팅하기</button>
-	<a href="/faq/list?faqCategory=전체">
-		<button type="button">고객센터</button>
-	</a>
-	<a href="#top">
-		<button type="button">TOP</button>
-	</a>
-</div>
+<!-- floatingMenu -->
+<jsp:include page="../common/mainFloatingMenu.jsp"/>
 
 <jsp:include page="../common/footer.jsp" />
 <!-- 프로필 메서드 불러오기 위해서 -->

@@ -1,9 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
 @font-face {
    font-family: 'suit';
    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
    font-weight: normal;
    font-style: normal;
+}
+@font-face {
+   font-family: fugaz;
+   src: url(../font/Fugaz_One/FugazOne-Regular.ttf);
 }
 input:focus {outline: none;}
 ::selection {
@@ -17,7 +20,7 @@ input:focus {outline: none;}
 .bodyContainer{
    font-family: 'suit';
    margin: 0 auto;
-   width: 1440px;
+   width: 1280px;
 }
 #loading{
    width: 100%;
@@ -31,18 +34,18 @@ input:focus {outline: none;}
 
 /* header start */
 header{
-   width: 1440px;
+   width: 1280px;
    height: 90px;
    margin: 0 auto;
    display: flex;
    align-items: center;
+   padding-top: 30px;
 }
 /* logoSec start */
 .logoSec{
    width: 20%;
    display: flex;
    align-items: center;
-   padding-top: 10px;
 }
 .logoSec img{
    width: 30px;
@@ -52,7 +55,8 @@ header{
    padding-left: 12px;
 }
 .logoSec h1 a{
-   font-family: 'Fugaz One', sans-serif;
+   font-family: fugaz;
+   /* font-family: 'Fugaz One', sans-serif; */
    line-height: 45px;
    text-decoration: none;
    font-size: 36px;
@@ -74,26 +78,27 @@ header{
    position: relative;
 }
 .searchSec input[type='search']{
-   height: 50px;
+   height: 40px;
    width: 100%;
-   border: 1px solid #93b336;
+   border: 2px solid #93b336;
    border-radius: 5px;
    padding: 0 20px 0 15px;
+   font-size: 14px;
 }
 .searchSec button{
    position: absolute;
    right: 0px;
    z-index: 10;
    width: 50px;
-   height: 50px;
+   height: 40px;
    border: 0;
    border-radius: 20px;
    background-color: transparent;
-   font-size: 18px;
+   font-size: 14px;
 }
 .searchSec .bi-person{
    font-size: 25px;
-   margin-left: 30px;
+   margin-left: 15px;
    cursor: pointer;
 }
 .searchSec .searchMenu{
@@ -107,48 +112,53 @@ header{
    border: 1px solid #d3d3d3;
    padding: 20px 15px;
    box-sizing: border-box;
+   border-radius: 0 0 5px 5px;
 }
 .searchSec .searchMenu.off{
    display: none;
 }
 .searchSec .searchMenu h2{
-   font-size: 20px;
+   font-size: 18px;
    font-weight: 600;
+   padding-left: 10px;
 }
 .searchSec .searchMenu input{
-   margin-bottom: 20px;
+   margin-bottom: 15px;
    border: 3px solid #93b336;
-   height: 60px;
+   height: 40px;
    border-radius: 30px;
 }
 .searchSec .searchMenu button{
-   width: 60px;
-   height: 60px;
    right: 20px;
+   color: #93b336;
 }
 .searchSec .searchMenu h3{
    font-size: 18px;
    font-weight: 600;
+   padding-left: 10px;
 }
 .searchSec .searchMenu ul{
    padding: 0;
    margin: 0;
+   display: flex;
+   justify-content: space-evenly;
 }
 .searchSec .searchMenu ul li{
    display: inline-block;
 }
 .searchSec .searchMenu ul li label{
-   background-color: #ececec;
    border: 1px solid #d3d3d3;
    width: 100px;
-   height: 50px;
    border-radius: 25px;
    text-align: center;
    line-height: 50px;
+   font-size: 14px;
+   cursor: pointer;
 }
 .searchSec .searchMenu ul li:hover label{
-   background-color: #dbdf80;
-   border: 1px solid #dbdf80;
+   background-color: #93b336;
+   border: 1px solid #93b336;
+   color: white;
    transition: 0.2s;
 }
 .searchSec .searchMenu ul li input:checked + label{
@@ -166,9 +176,10 @@ header{
    position: absolute;
    top: 45px;
    z-index: 10;
-   border: 1px solid #d3d3d3;
+   border: 1px solid #efefef;
+   border-radius: 5px;
    background-color: #fff;
-   box-shadow: 0 0 5px #cdcdcd;
+  /* box-shadow: 0 0 5px #cdcdcd; */
 }
 #myMenu.off{
    display: none;
@@ -178,10 +189,13 @@ header{
    margin: 0;
    text-align: center;
 }
+#myMenu ul li:nth-child(1){
+   border-bottom: 1px solid #efefef;
+}
 #myMenu ul li a{
    text-decoration: none;
    color: #333;
-   font-size: 16px;
+   font-size: 14px;
    line-height: 30px;
    padding: 0px 5px;
 }
@@ -193,7 +207,7 @@ header{
 
 /* nav start */
 nav{
-   width: 1440px;
+   width: 1280px;
    margin: 0 auto;
 }
 nav ul{
@@ -206,7 +220,7 @@ nav ul li{
 nav ul li.active a{
    font-weight: 600;
    color: #323f11;
-   border-bottom: 5px solid #323f11;
+   border-bottom: 5px solid #93b336;
    padding: 15px 0 10px;
 }
 nav ul li:hover{
@@ -265,16 +279,17 @@ ul.mainFloatingMenu li button{
 }
 .infoSec > div{
    margin: 0 auto;
-   width: 1440px;
+   width: 1280px;
    height: inherit;
    display: flex;
    align-items: center;
    color: #e3edc8;
-   font-size: 20px;
+   font-size: 16px;
 }
 .infoSec > div b{
    position: relative;
    margin-right: 23px;
+   font-size: 18px;
 }
 .infoSec > div b::after{
    content: "";
@@ -297,14 +312,14 @@ ul.mainFloatingMenu li button{
 .footerContainer{
    font-family: 'suit';
    margin: 0 auto;
-   width: 1440px;
+   width: 1280px;
    display: flex;
    align-items: flex-start;
 }
 .footerContainer h3{
-   font-family: 'Fugaz One', sans-serif;
+   font-family: fugaz;
    font-size: 24px;
-   color: #333;
+   color: #774f2f;
    margin-bottom: 35px;
 }
 .footerContainer p{
@@ -319,7 +334,7 @@ ul.mainFloatingMenu li button{
    margin-right: 20%;
 }
 .mainSec h2{
-   font-family: 'Fugaz One', sans-serif;
+   font-family: fugaz;
    line-height: 36px;
    font-size: 36px;
    color: #323f11;
