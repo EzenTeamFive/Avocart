@@ -32,4 +32,6 @@ public interface StoreBoardDAO {
 
 	int updateLikeCnt(@Param("lvo") LikeItemVO lvo, @Param("i") int i);
 
+	String getEmail(long bno);
+
 }

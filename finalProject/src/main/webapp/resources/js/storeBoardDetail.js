@@ -9,8 +9,8 @@ document.addEventListener('click', (e) => {
 })
 
 if(likeCnt==0) {
-    document.getElementById('likeCount').innerText
-    = '가장 먼저 좋아요를 남겨보세요.';
+    document.getElementById('likeCount').innerHTML
+    = `가장 먼저 좋아요를 남겨보세요. 조회 ${readCnt}`;
 }
 
 //좋아요 여부 체크
@@ -68,9 +68,9 @@ async function likeOrDislike(bno, user) {
         const likeCount = document.getElementById('likeCount');
 
         if (result>0) {
-            likeCount.innerText = result;
+            likeCount.innerHTML = `관심 ${result} 조회 ${readCnt}`;
         } else {
-            likeCount.innerText = '가장 먼저 좋아요를 남겨보세요.';
+            likeCount.innerHTML = `가장 먼저 좋아요를 남겨보세요. 조회 ${readCnt}`;
         }
     } catch (err) {
         console.error(err);

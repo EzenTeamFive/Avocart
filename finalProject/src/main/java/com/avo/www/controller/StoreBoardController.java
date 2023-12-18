@@ -36,6 +36,7 @@ import com.avo.www.handler.FileHandler;
 import com.avo.www.handler.PagingHandler;
 import com.avo.www.security.AuthMember;
 import com.avo.www.security.MemberVO;
+import com.avo.www.service.HmemberService;
 import com.avo.www.service.StoreBoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +47,9 @@ import lombok.extern.slf4j.Slf4j;
 public class StoreBoardController {
    @Inject
    private StoreBoardService ssv;
+   
+   @Inject 
+	private HmemberService hsv;
    
    @Inject
    private FileHandler fh;
@@ -95,10 +99,21 @@ public class StoreBoardController {
    
    @GetMapping({"/detail", "/modify"})
    public void detail(Model m, @RequestParam("bno")long bno, Principal principal) {      
-      if (principal != null) {
-         m.addAttribute("email", principal.getName());
-      }
+		//끌올, 수정 , 삭제 위한 유저 체크 
+		if (principal != null) {
+			m.addAttribute("email", principal.getName());
+		}
+		String email = ssv.getEmail(bno);
+		FileVO fvo = hsv.getProfile(email);
+		String mainSrc = null;
+		if(fvo!=null) {
+			mainSrc = "/upload/profile/" + fvo.getSaveDir().replace('\\', '/') + "/" + fvo.getUuid() + "_" + fvo.getFileName();
+		} else {
+			mainSrc = "../resources/image/기본 프로필.png";
+		}
+		
       m.addAttribute("sdto", ssv.getDetail(bno));
+      m.addAttribute("mainSrc", mainSrc);
    }
    
    @PostMapping("/modify")

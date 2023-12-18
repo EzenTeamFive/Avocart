@@ -212,4 +212,9 @@ public class StoreBoardServiceImpl implements StoreBoardService {
 		}
 	}
 
+	@Override
+	public String getEmail(long bno) {
+		return sdao.getEmail(bno);
+	}
+
 }

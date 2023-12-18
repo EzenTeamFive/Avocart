@@ -153,3 +153,26 @@ document.addEventListener('click', (e) => {
         document.querySelector('.menuZone').style.display = 'none';
     }
 });
+
+//cs register js
+let categoryField = document.getElementById('proMenu');
+let titleField = document.getElementById('proTitle');
+let contentField = document.getElementById('dynamicTextarea');
+let regButton = document.getElementById('regBtn');
+
+// 입력 필드에 대한 'input' 이벤트 리스너 추가
+categoryField.addEventListener('input', checkFields);
+titleField.addEventListener('input', checkFields);
+contentField.addEventListener('input', checkFields);
+
+function checkFields() {
+    let category = categoryField.value;
+    let title = titleField.value;
+    let content = contentField.value;
+
+    if (category === '선택' || title.trim() === '' || content.trim() === '') {
+        regButton.disabled = true;
+    } else {
+        regButton.disabled = false;
+    }
+}

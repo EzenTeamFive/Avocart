@@ -43,6 +43,9 @@
 	<update id="updateLikeCnt">
 		update product set pro_like_cnt = pro_like_cnt + #{i} where pro_bno = #{lvo.liBno}
 	</update>
+	<select id="getEmail" resultType="String">
+  		select pro_email from product where pro_bno = #{bno}
+  	</select>
 	
 	
 <sql id="search">

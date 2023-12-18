@@ -28,12 +28,13 @@
 	<input type="hidden" name="proCategory" value="store">
     <div class="form">
     	<p class="label">제목</p>
-		<input type="text" name="proTitle" id="title" class="titleInput" placeholder="제목을 입력해 주세요" required="required">
+		<input type="text" name="proTitle" id="proTitle" class="titleInput" placeholder="제목을 입력해 주세요" required="required">
 	</div>
 
 	<div class="form">
 		<p class="label">카테고리</p>
 		<select name="proMenu" id="proMenu" class="cmMenu">
+		   <option value="선택" selected style="display:none">선택</option>
 		   <option value="과외/클래스">과외/클래스</option>
 		   <option value="반려동물">반려동물</option>
 		   <option value="병원/약국">병원/약국</option>
@@ -53,7 +54,7 @@
     
 	<div class="form">
 		<p class="label">내용</p>
-		<textarea rows="3" cols="30" name="proContent" id="content" class="contentInput" placeholder="동네 이웃을 대상으로 우리 업체를 소개해 주세요"  required="required"></textarea>
+		<textarea id="dynamicTextarea" name="proContent" id="content" class="contentInput" placeholder="동네 이웃을 대상으로 우리 업체를 소개해 주세요"  required="required"></textarea>
 	</div>
 	
 	<!-- 지도 영역 -->
@@ -104,6 +105,8 @@
 	    
 	    //주소 값이 null이 아닌 경우에만 실행
 	    if (address) {
+	    	marker.setMap(null);
+	    	
 	        //주소로 좌표 검색
 	        geocoder.addressSearch(address, function(result, status) {
 	            //정상적으로 검색 완료됐으면 
@@ -153,7 +156,7 @@
 	
 	<div class="cmButtons">
 		<a href="/store/list"><button type="button" class="cancelBtn">취소</button></a>
-		<button type="submit" class="regBtn" id="regBtn">작성하기</button>
+		<button type="submit" class="regBtn" id="regBtn" disabled="disabled">작성하기</button>
 	</div>
 </form>
 </div>
@@ -175,5 +178,6 @@ document.getElementById('addr').addEventListener('click', ()=>{
 });
 </script>
 <script type="text/javascript" src="/resources/js/storeBoardRegister.js"></script>
+<script type="text/javascript" src="/resources/js/abjustTextareaRows.js"></script>
 </body>
 </html>

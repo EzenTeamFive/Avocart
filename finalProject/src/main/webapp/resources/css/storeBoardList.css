@@ -7,6 +7,8 @@
 
 .bodyContainer{
     font-family: 'suit';
+    width: 1280px;
+    border: 1px dashed black;
 }
 
 .allBtns{
@@ -47,12 +49,14 @@
     gap: 40px;
     padding: 0;
     margin-bottom: 15px;
-    padding-left: 150px;
+    /* padding-left: 150px; */
+    width: 1000px;
+    border: 1px solid black;
 }
 
 .listContainer ul li {
    /* 각 업체 목록 */
-    width: 550px;
+    width: 450px;
     height: 160px;
     background-color: white;
     border: 1px solid #ededed;
@@ -92,7 +96,7 @@
 .title {
    font-size: 20px;
    font-weight: bold;
-   width : 330px;
+   width : 265px;
    overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
@@ -110,7 +114,7 @@
 
 /* 게시글 내용 말줄임 */
 .content {
-   width : 330px;
+   width : 265px;
    overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
