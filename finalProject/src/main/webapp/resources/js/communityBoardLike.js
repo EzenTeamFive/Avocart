@@ -56,7 +56,6 @@ async function getProfileToServer(email){
 
 function communityProfile(email, id){
 	getProfileToServer(email).then(result =>{
-		console.log(result);
 		if(result != null){
 			document.getElementById(id).src = `/upload/profile/${result.saveDir.replace('\\','/')}/${result.uuid}_${result.fileName}`;
 		}

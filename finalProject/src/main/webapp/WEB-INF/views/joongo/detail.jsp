@@ -60,7 +60,7 @@
 		<div class="profileArea">
 			<c:choose>
 				<c:when test="${empty profile}">
-					<img src="../resources/image/logoimage.png" class="card-img-top" alt="기본 프로필 이미지">			
+					<img src="../resources/image/기본 프로필.png" class="card-img-top" alt="기본 프로필 이미지">			
 				</c:when>
 				<c:otherwise>
 					<img src="/upload/profile/${fn:replace(profile.saveDir,'\\','/')}/${profile.uuid}_th_${profile.fileName}" alt="프로필 이미지">
@@ -73,8 +73,8 @@
 			<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal.mvo.memEmail" var="authEmail"/>
 				<c:if test="${pbvo.proEmail ne authEmail}">
-					<!-- 글 작성자가 아닐 경우에만 띄울 버튼 -->
-					<button type="button">채팅 <i class="bi bi-chat-dots"></i></button>					
+					<!-- 글 작성자가 아닐 경우에만 띄울 채팅 버튼 -->
+					<button type="button" id="chatRoomBtn">채팅 <i class="bi bi-chat-dots"></i></button>					
 				</c:if>
 			</sec:authorize>
 		</div>
@@ -102,6 +102,7 @@
 <jsp:include page="../common/footer.jsp" />
 <script>
 const bnoVal = `<c:out value="${pbvo.proBno}" />`;
+const writerEmail = `<c:out value="${pbvo.proEmail}" />`;
 const userEmail = `<c:out value="${authEmail}" />`;
 
 // 가격 표기 변경
@@ -117,5 +118,6 @@ document.querySelector('.prodArea p:not(:last-child)').append(date);
 </script>
 <script src="/resources/js/abjustTextareaRows.js"></script>
 <script src="/resources/js/likeItem.js"></script>
+<script src="/resources/js/chatRoomCreate.js"></script>
 </body>
 </html>

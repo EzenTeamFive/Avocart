@@ -73,7 +73,7 @@
          <li><a href="/job/list">알바구인</a></li>
          <li><a href="/community/list">동네소식</a></li>
          <li><a href="#">공지사항</a></li>
-         <li><a href="#">FAQ</a></li>
+         <li><a href="/faq/list?faqCategory=전체">FAQ</a></li>
          
            <!-- 로그인 전 오픈되어야 할 메뉴 -->
          <sec:authorize access="isAnonymous()">

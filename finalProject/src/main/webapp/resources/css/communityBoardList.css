@@ -1,4 +1,4 @@
-@font-face {
+ @font-face {
     font-family: 'SUIT-Regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
     font-weight: normal;
@@ -40,7 +40,7 @@
 		background-color: rgba(213, 212, 212, 0.923);
 	}
 	.cmActive{
-		border: 2px solid #84a331;
+		border: 1px solid #84a331;
 		background-color: #84a331;	
 		color: white;
 	}
