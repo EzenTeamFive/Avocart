@@ -1,6 +1,7 @@
 package com.avo.www.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.avo.www.domain.FileVO;
 import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ReviewVO;
 import com.avo.www.handler.PagingHandler;
@@ -36,6 +38,7 @@ public class JobReviewController {
 	public ResponseEntity<String> post(@RequestBody ReviewVO rvo){
 		log.info(">>>> review post >> rvo>> "+rvo);
 		int isOk = jrsv.postReview(rvo);
+	    
 		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
 				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -46,10 +49,23 @@ public class JobReviewController {
 			@PathVariable("page")int page){
 		log.info(">>>> reBno / page >> "+reBno +" / "+page);
 		PagingVO pgvo = new PagingVO(page, 5);
+
+		
 		return new ResponseEntity<PagingHandler>(
 				jrsv.getList(reBno, pgvo), HttpStatus.OK);
 	}
 	
+	// 리뷰 프로필
+	@PostMapping(value = "/list/profile/{reWriter}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FileVO> getProfile(@PathVariable("reWriter")String reWriter){
+		
+		//이미지 가져와서 flist에 담기
+		FileVO fvo = jrsv.getProfileImg(reWriter);
+		log.info("getProfile >> fvo >> "+fvo);
+		
+		return new ResponseEntity<FileVO>(fvo, HttpStatus.OK);
+	}
+
 	// 리뷰 삭제
 	@DeleteMapping(value="/del/{reRno}/{reWriter}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> erase(@PathVariable("reRno")long reRno, @PathVariable("reWriter")String reWriter, 

@@ -34,7 +34,6 @@
 	.boardMenuName:hover{
 		text-decoration: underline;
 	}
-	
 	/* 사용자 정보 라인 */
 	.top_line>*, .top_line div>*, .under_line>*, .under_line div>* {
 		display: inline;
@@ -106,6 +105,7 @@
 		border-radius: 10px;
 		text-decoration: none;
 		padding: 5px;
+		font-size: 14px;
 	}
 	.chat:hover{
 		font-weight: 800;

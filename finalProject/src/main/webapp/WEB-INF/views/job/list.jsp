@@ -31,7 +31,7 @@
       
 	<!-- 인기 당근알바 출력 리스트 -->
 	<div class="titleLine">
-		<h3>우리동네 인기알바</h3>
+		<h3>인기 알바카도</h3>
 	</div>
 	<div class="brdListArea" id="hotJobList">
 	    <c:forEach items="${hotList}" var="jbdto" varStatus="loopStatus">
@@ -83,7 +83,7 @@
 			</div>
 			
 			<select id="sortSelect" class="sortSelect" name="sortSelect">
-			    <option value="newest" selected>최신순</option>
+			    <option value="newest" >최신순</option>
 			    <option value="oldest">오래된 순</option>
 			    <option value="hotest">인기순</option>
 			</select>

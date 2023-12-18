@@ -5,8 +5,8 @@
 <mapper namespace="com.avo.www.repository.JobBoardDAO">
 
 	<insert id="post" parameterType="pbvo">
-		insert into product(pro_title,pro_email,pro_nick_name,pro_content,pro_price,pro_category,pro_menu,pro_sido,pro_sigg,pro_emd)
-		values(#{proTitle},#{proEmail},#{proNickName},#{proContent},#{proPrice},'job',#{proMenu},#{proSido},#{proSigg},#{proEmd})
+		insert into product(pro_title,pro_email,pro_nick_name,pro_content,pro_payment,pro_price,pro_category,pro_menu,pro_sido,pro_sigg,pro_emd)
+		values(#{proTitle},#{proEmail},#{proNickName},#{proContent},#{proPayment},#{proPrice},'job',#{proMenu},#{proSido},#{proSigg},#{proEmd})
 	</insert>
 	
 	<select id="selectOneBno" resultType="long">
@@ -114,6 +114,9 @@
 				order by pro_read_cnt DESC
 			</when>
 		</choose>
+	</if>
+	<if test="sorted == 'undefined'">
+		order by pro_re_at DESC
 	</if>
 
 </sql>

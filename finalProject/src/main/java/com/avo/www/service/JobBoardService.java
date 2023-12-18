@@ -41,5 +41,7 @@ public interface JobBoardService {
 
 	List<FileVO> getThumb(long proBno);
 
+	FileVO getProfileImg(String proEmail);
+
 
 }

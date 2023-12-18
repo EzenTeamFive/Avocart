@@ -73,13 +73,33 @@ async function getReviewFromServer(reBno, page){
     }
 }
 
+
+// 리뷰 프로필 가져오는 함수
+async function getReProfile(reWriter){
+    try {
+        const url = `/jobReview/list/profile/` + reWriter;
+        const config = {
+            method : 'post'
+        };
+        const resp = await fetch(url,config);
+        const result = await resp.json();
+        return result;
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+
+}
+
+
 //리뷰 리스트 뿌리는 함수
-function spreadReviewList(reBno=proBnoVal, page=1){ //시작은 1페이지로 지정
+async function spreadReviewList(reBno=proBnoVal, page=1){ //시작은 1페이지로 지정
     getReviewFromServer(reBno, page).then(result =>{
         console.log("result>> " ,result); //ph 객체 pgvo, totalCount, jobReList
 
         if(result.jobReList.length > 0){
-            const ul = document.getElementById('reListArea');
+            let ul = document.getElementById('reListArea');
             //1page일 경우에만 기존 값 삭제 
             if(page==1){
                 ul.innerText="";
@@ -87,7 +107,30 @@ function spreadReviewList(reBno=proBnoVal, page=1){ //시작은 1페이지로 �
             for(let rvo of result.jobReList){
                 let li = `<li class="list-group-item">`;
                 li+= `<div class="mb-3 reWriterInfo">`;
-                li+= `<img class="frofileImg"  alt="frofile error" src="../resources/image/기본 프로필.png">`;
+                li += `<img class="frofileImg" alt="job image error" src="../resources/image/logoimage.png">`
+
+                    // if (getReProfile(rvo.reUserId)) {
+                    // let profile = getReProfile(rvo.reUserId);
+                    // console.log(profile);
+                    // getReProfile(rvo.reUserId).then(profile => {
+                    //         console.log("아이디 >> " + rvo.reUserId);
+                    //         console.log(profile.saveDir);
+                    //         if (profile) {
+                                
+                    //             li += `<img alt="review profile error" src="../upload/profile/${profile.saveDir.replaceAll('\\','/')}/${profile.uuid}_${profile.fileName}">`;
+                    //         } else {
+                    //             console.error("프로필을 가져오지 못했습니다.");
+                    //         }
+                            
+                    //         // li += `<img alt="review profile error" src="../upload/profile/${profile.saveDir.replaceAll('\\','/')}/${profile.uuid}_${profile.fileName}">`;
+                    //     })
+                    //     .catch(error => {
+                    //         console.error(error);
+                    //     });
+                    // } else {
+                    //     li += `<img alt="review profile error" src="../resources/image/기본프로필.png">`;
+                    // }
+
                 li+= `<strong><span class="reUserId">${rvo.reUserId}</span></strong>`;
                 
                 // li+= `<p class="badge rounded-pill text-bg-dark">구월동</p>`; 멤버 주소 가져올 수 있으면 차후 추가
@@ -267,3 +310,4 @@ async function editReviewToServer(reDataMod){
         console.log(err);
     }
 }
+
