@@ -214,7 +214,7 @@
 </div>
 	
 <div class="faqCategory">
-	<a href="/faq/list?faqCategory=전체" class="category faqActive">전체</a>
+	<a href="/faq/list" class="category faqActive">전체</a>
 	<a href="/faq/list?faqCategory=이용문의" class="category">이용문의</a>
 	<a href="/faq/list?faqCategory=거래문의" class="category">거래문의</a>
 	<a href="/faq/list?faqCategory=회원/계정" class="category">회원/계정</a>
@@ -243,15 +243,28 @@
 		</c:if>
 	</ul>
 </div>
+
+<sec:authorize access="isAuthenticated()">
 <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
-<div class="csButtons">
-	<a href="/cs/register">
-		<button type="button" class="csBtn1">1:1 문의</button>
-	</a>
-	<a href="/cs/list?csEmail=${authEmail }">
-		<button type="button" class="csBtn2">문의내역</button>
-	</a>
-</div>
+	<div class="csButtons">
+		<a href="/cs/register">
+			<button type="button" class="csBtn1">1:1 문의</button>
+		</a>
+		<a href="/cs/list?csEmail=${authEmail }">
+			<button type="button" class="csBtn2">문의내역</button>
+		</a>
+	</div>
+</sec:authorize>
+<sec:authorize access="isAnonymous()">
+	<div class="csButtons">
+		<a href="/member/login">
+			<button type="button" class="csBtn1">1:1 문의</button>
+		</a>
+		<a href="/member/login">
+			<button type="button" class="csBtn2">문의내역</button>
+		</a>
+	</div>
+</sec:authorize>
 	
 </div>
 <!-- 여기까지 bodyContainer -->
