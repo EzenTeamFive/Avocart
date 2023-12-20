@@ -21,30 +21,32 @@
 		justify-content: center;
 		flex-wrap: wrap;
 	}
+	.innerContainer{
+		width: 700px;
+	}
 	
 	/* 젤 위에 라인 */
 	.topLine{
 		margin-top: 60px;
-		width: 650px;
-		display: flex;
-		justify-content: center;
+		width: 100%;
+		text-align: center;
 		border-bottom: 1px solid black;
 	}
 	.pageName{
-		font-size: 23px;	    
+		font-size: 24px;	    
 		font-weight: 800;
 	}
 	
 	/* 문의리스트 */
 	.csBoardLine{
-	    width: 80%;
+	    width: 100%;
 	    display: flex;
 	    justify-content: center;
 	}
 	.csBoardUl{
 		margin: 0;
 	    padding: 0;
-	    width: 650px;
+	    width: 100%;
 	}
 	.csBoardUl a {
 		color: black;
@@ -89,16 +91,19 @@
 	
 	/* 버튼라인 */
 	.bottonLine{
-	    width: 80%;
+	    width: 100%;
 	    display: flex;
 	    justify-content: center;
 	}
+	.bottonLine a{
+		width: 100%;
+	}
 	.faqBtn{
-		width: 650px;
+		width: 100%;
 	    height: 45px;
 	    border: none;
 	    border-radius: 5px;
-	    margin: 20px;
+	    margin: 20px 0;
 	    color: white;
 	    background-color: #5d5d5d;
 	}
@@ -108,6 +113,7 @@
 <jsp:include page="../common/header.jsp" />
 <div class="bodyContainer">
 
+<div class="innerContainer">
 <div class="topLine">
 	<p class="pageName">문의내역</p>
 </div>
@@ -150,6 +156,8 @@
 </div>
 
 </div>
+</div>
+<!-- bodyContainer -->
 <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

@@ -32,7 +32,7 @@ document.getElementById('showPwBtn').addEventListener('click',(e)=>{
 
 //이메일 정규표현식&중복체크
 let emailVal = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-document.getElementById('email').addEventListener('change', ()=>{
+document.getElementById('email').addEventListener('input', ()=>{
     let email = document.getElementById('email').value;
     console.log(email);
     //정규표현식
@@ -50,11 +50,11 @@ document.getElementById('email').addEventListener('change', ()=>{
             }else{
                 document.getElementById('emailMsg2').style = "display:none";
                 document.getElementById('testBtn').disabled = false;
-                registerBtnAbled();
             }
         })
         
     }
+    registerBtnAbled();
 
     if(email !== ''){
         document.getElementById('emailMsg3').style = "display:none";
@@ -75,7 +75,7 @@ async function hasEmail(email){
 
 //비밀번호 정규표현식
 let pwVal = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
-document.getElementById('pw').addEventListener('change',()=>{
+document.getElementById('pw').addEventListener('input',()=>{
     let pw = document.getElementById('pw').value;
     console.log(pw);
 
@@ -89,14 +89,14 @@ document.getElementById('pw').addEventListener('change',()=>{
             document.getElementById('pwMsg').style = "display:inline-block";
         }else{
             document.getElementById('pwMsg').style = "display:none";
-            registerBtnAbled();
         }
     }
-
+    
+    registerBtnAbled();
 })
 
 //닉네임 중복체크
-document.getElementById('nick').addEventListener('change', async ()=>{
+document.getElementById('nick').addEventListener('input', async ()=>{
     let nick = document.getElementById('nick').value;
     console.log(nick);
     
@@ -105,8 +105,8 @@ document.getElementById('nick').addEventListener('change', async ()=>{
         document.getElementById('nickMsg').style = "display:inline-block";
     }else{
         document.getElementById('nickMsg').style = "display:none";
-        registerBtnAbled();
     }
+    registerBtnAbled();
 
 })
 //닉네임 전송 메서드
@@ -299,15 +299,15 @@ document.getElementById('testBtn').addEventListener('click',()=>{
     //이메일을 controller에 전송해서 해당 이메일로 인증번호 보내고 
     //인증번호를 result값으로 받아와 내가 input에 적은 인증번호와 같은지 확인
     mailTest(email).then(result => {
-        document.getElementById('testNum').addEventListener('change',()=>{
+        document.getElementById('testNum').addEventListener('input',()=>{
             if(result == document.getElementById('testNum').value){
                 document.getElementById('testO').style = "display:inline-block";
                 document.getElementById('testX').style = "display:none";
-                registerBtnAbled();
             }else{
                 document.getElementById('testO').style = "display:none";
                 document.getElementById('testX').style = "display:inline-block";
             }
+            registerBtnAbled();
         })
 
     });
@@ -323,7 +323,7 @@ async function mailTest(email){
         console.log(err);
     }
 }
-document.getElementById('testNum').addEventListener('change',()=>{
+document.getElementById('testNum').addEventListener('input',()=>{
     if(document.getElementById('email').value == ''){
         document.getElementById('emailMsg3').style = "display:inline-block";
     }else{

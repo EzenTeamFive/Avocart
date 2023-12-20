@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				 "/store/list", "/store/detail", "/store/page/**", "/job/list/**","/jobReview/**", "/job/detail","/job/about", "/resources/**", "/joongo/menuSelect",
 				"/upload/**", "/communityCmt/**", "/reCmt/**", "/member/register", "/member/login", "/member/test/**",
 				"/member/email/**", "/member/nick/**", "/common/search", 
-				"/faq/list").permitAll() //비회원일 때 허용되는 경로, permitAll=모두에게
+				"/faq/list", "/joongoList", "/thumb/**", "/storeList", "/joongoLikeList", "/communityList", "/communityLikeList").permitAll() //비회원일 때 허용되는 경로, permitAll=모두에게
 		.anyRequest().authenticated(); //나머지는 로그인한 사용자만 허용 처리 (글쓰기, 수정하기 등)
 		
 		//커스텀 로그인 페이지를 구성

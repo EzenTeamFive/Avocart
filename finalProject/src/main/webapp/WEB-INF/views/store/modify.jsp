@@ -38,7 +38,7 @@
    
    <div class="form">
       <p class="label">카테고리</p>
-      <select name="proMenu" class="cmMenu">
+      <select name="proMenu" id="proMenu" class="cmMenu">
       	<option value="unselect" disabled="disabled" selected="selected">선택</option>
 		<option value="과외/클래스" ${svo.proMenu eq '과외/클래스' ? 'selected' : '' }>과외/클래스</option>
 		<option value="반려동물" ${svo.proMenu eq '반려동물' ? 'selected' : '' }>반려동물</option>
@@ -59,7 +59,7 @@
     
    <div class="form">
       <p class="label">내용</p>
-      <textarea rows="3" cols="30" name="proContent" class="contentInput" required="required">${svo.proContent }</textarea>
+      <textarea id="dynamicTextarea" name="proContent" class="contentInput" required="required">${svo.proContent }</textarea>
    </div>
    	
 
@@ -99,13 +99,11 @@
 	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
 	    markerPosition = new kakao.maps.LatLng(37.450292, 126.702921); //마커 표시 위치(기본 위치)
 
-	//마커 생성
+	//마커 생성(전역 변수)
 	var marker = new kakao.maps.Marker({
 	    position: markerPosition, 
 	    image: markerImage //마커이미지 설정 
 	});
-	//지도 위 마커 표시
-	marker.setMap(map);  
 
 	//입력 주소-좌표 변환 객체 생성
 	var geocoder = new kakao.maps.services.Geocoder();
@@ -127,10 +125,10 @@
 
 	    map.setCenter(defaultCoords);
 
-	    var marker = new kakao.maps.Marker({
+	 	marker = new kakao.maps.Marker({
 	        position: defaultCoords,
 	        image: markerImage
-	    });
+	    }); 
 	    marker.setMap(map);
 	}
 
@@ -143,12 +141,12 @@
 	            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
 	            //결과값으로 받은 위치를 마커로 표시
-	            var marker = new kakao.maps.Marker({
+	 			marker = new kakao.maps.Marker({
 	                map: map,
 	                position: coords,
 	                image: markerImage
 	            });
-
+	            marker.setMap(map);
 	            //지도의 중심을 결과값으로 받은 위치로 이동
 	            map.setCenter(coords);
 	            document.getElementById('proFullAddr').style.width = '301.9px';
@@ -159,31 +157,37 @@
 	    });
 	}
 	
-	
-	//주소 수정 시, 기존 상세 주소 삭제
+	// 주소 수정 시, 기존 상세 주소 삭제
 	function searchAndDisplayByAddress(address) {
-	    // 주소로 좌표 검색
-	    geocoder.addressSearch(address, function (result, status) {
-	        // 정상적으로 검색 완료됐으면
-	        if (status === kakao.maps.services.Status.OK) {
-	            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-	            // 결과값으로 받은 위치를 마커로 표시
-	            var marker = new kakao.maps.Marker({
-	                map: map,
-	                position: coords,
-	                image: markerImage
-	            });
-
-	            // 지도의 중심을 결과값으로 받은 위치로 이동
-	            map.setCenter(coords);
-	            document.getElementById('proFullAddr').style.width = '301.9px';
-	            document.getElementById('proFullAddr').value = address;
-	            proDetailAddr.classList.remove('hidden');
-	            document.getElementById('proDetailAddr').value = '';
-	        }
-	    });
+	    // 주소 값이 null이 아닌 경우에만 실행
+	    if (address) {
+	    	//기존 마커 삭제
+	        marker.setMap(null);
+	        
+	        // 주소로 좌표 검색
+	        geocoder.addressSearch(address, function (result, status) {
+	            // 정상적으로 검색 완료됐으면
+	            if (status === kakao.maps.services.Status.OK) {
+	                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	                // 결과값으로 받은 위치를 마커로 표시
+					marker = new kakao.maps.Marker({
+					     map: map,
+					     position: coords,
+					     image: markerImage
+					 });
+	
+	                // 지도의 중심을 결과값으로 받은 위치로 이동
+	                map.setCenter(coords);
+	                document.getElementById('proFullAddr').style.width = '301.9px';
+	                document.getElementById('proFullAddr').value = address;
+	                proDetailAddr.classList.remove('hidden');
+	                document.getElementById('proDetailAddr').value = '';
+	            }
+	        });
+	    }
 	}
+
 	</script>
 	</div>
    	
@@ -274,5 +278,6 @@ let mlist = <c:out value="${mlist.size()}"></c:out>;
 </script>
 <script type="text/javascript" src="/resources/js/storeBoardRegister.js"></script>
 <script type="text/javascript" src="/resources/js/storeBoardModify.js"></script>
+<script type="text/javascript" src="/resources/js/abjustTextareaRows.js"></script>
 </body>
 </html>

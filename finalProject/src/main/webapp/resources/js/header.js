@@ -32,7 +32,8 @@ document.getElementById('my').addEventListener('click',()=>{
     if(myMenu != null){
         document.getElementById('myMenu').classList.toggle('off');
     }else{
-        alert('로그인이 필요한 서비스입니다');
+        //로그인 안 했을 시 누르면 로그인 화면으로 넘어가도록
+        window.location.href = '/member/login';
     }
 })
 
@@ -41,13 +42,28 @@ document.getElementById('my').addEventListener('click',()=>{
 document.getElementById('searchInput').addEventListener('input',(e)=>{
     // 검색어가 openMenu 창의 input에도 들어가도록 설정
     let keyword = document.getElementById('searchInput').value;
+    console.log(keyword);
     document.getElementById('keyword').value = keyword;
+    document.querySelector('.deleteInputText').classList.remove('deleteIconOff');
+    if(keyword == null || keyword == ''){
+        document.querySelector('.deleteInputText').classList.add('deleteIconOff');
+    }
 })
 
-// 검색 버튼을 눌렀을 때
-document.querySelector('.openMenu').addEventListener('click',()=>{
-    document.querySelector('.searchMenu').classList.toggle('off');
+//검색창 클릭시 검색메뉴 나오고, 그외 화면 아무데나 클릭시 사라짐
+document.addEventListener('click',(e)=>{
+    if(e.target.id == 'searchInput'){
+        document.getElementById('searchMenu').classList.remove('off');
+    }else{
+        document.getElementById('searchMenu').classList.add('off');
+    }
 })
+
+document.getElementById('textCancelBtn').addEventListener('click', ()=>{
+    document.getElementById('searchInput').value = '';
+    document.querySelector('.deleteInputText').classList.add('deleteIconOff');
+})
+
 
 // 검색 조건 가져오기
 function getSearchCondition(){

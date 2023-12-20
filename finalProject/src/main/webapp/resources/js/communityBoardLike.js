@@ -71,3 +71,13 @@ function onlyDate(date){
 	const extractedDate = `${year}-${month}-${day}`;
 	document.getElementById('onlyDate').innerText = extractedDate;
 }
+
+document.getElementById('linkBtn').addEventListener('click',()=>{
+	let url = window.location.href;
+
+    navigator.clipboard.writeText(url).then(() => {
+        alert("URL이 복사되었습니다.");
+    }).catch(err => {
+        console.error('클립보드에 복사 실패:', err);
+    });
+})

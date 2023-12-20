@@ -71,7 +71,7 @@
 	
 		</div>
 	
-		<div class="proBtnArea">
+		<div class="lastBtnArea">
 			<a href="/joongo/detail?proBno=${pbvo.proBno }"><button type="button" class="cancelBtn">취소</button></a>
 			<button type="submit" class="regBtn" id="regBtn">수정</button>
 		</div>

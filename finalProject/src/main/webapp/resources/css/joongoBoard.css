@@ -6,8 +6,14 @@
     display: none;
 } */
 /* joongo board list css start */
+.joongoBanner{
+    background: url(../image/joongo_banner.png) no-repeat center/cover;
+    width: 100%;
+    height: 300px;
+}
 .boardMenuArea{
-    padding: 90px 0 30px;
+    padding: 90px 140px 30px;
+    text-align: right;
 }
 .boardMenuArea p{
     display: inline-block;
@@ -29,13 +35,12 @@
 .boardListArea{
     display: flex;
     flex-wrap: wrap;
-    gap: 15px 15px;
-    margin-bottom: 15px;
+    gap: 20px 20px;
+    margin: 0 140px 15px;
     font-family: 'suit';
 }
 .boardListArea .oneList{
-    /* width: calc(25% - calc(45px / 1440px)); */
-    width: 24.218%;
+    width: 235px;
 }
 .boardListArea .oneList a{
     display: block;
@@ -52,7 +57,7 @@
 }
 .oneList a img{
     width: 100%;
-    height: 300px;
+    height: 230px;
     object-fit: cover;
     border-radius: 10px 10px 0 0;
 }
@@ -181,7 +186,7 @@ section.floatMenu button i.bi-heart-fill:not(.no-login){
 /* floatMenu end */
 .joongoDetailContainer{
     width: 700px;
-    margin: 70px auto 90px;
+    margin: 70px auto 110px;
     position: relative;
     font-family: 'suit';
 }
@@ -293,46 +298,46 @@ form > div:not(:last-child){
     background-color: #a1a1a1;
 }
 /* prodArea end */
-/* proBtnArea start */
-.proBtnArea{
+/* lastBtnArea start */
+.lastBtnArea{
     display: flex;
     justify-content: center;
 }
-.proBtnArea a:first-child{
+.lastBtnArea a:first-child{
     margin-right: 25px;
 }
-.proBtnArea button{
+.lastBtnArea button{
     background-color: #fff;
     font-size: 16px;
     width: 100px;
     height: 55px;
     border-radius: 28px;
 }
-.proBtnArea button[type=submit]:hover{
+.lastBtnArea button[type=submit]:hover{
     background-color: #84a331;
     color: #fff;
     transition: 0.2s;
 }
-.proBtnArea button[type=button]:hover{
+.lastBtnArea button[type=button]:hover{
     background-color: #aaa;
     color: #fff;
     transition: 0.2s;
 }
-.proBtnArea button[type=submit]{
+.lastBtnArea button[type=submit]{
     border: 2px solid #84a331;
     color: #84a331;
 }
-.proBtnArea button[type=button]{
+.lastBtnArea button[type=button]{
     border: 2px solid #aaa;
     color: #aaa;
 }
-.proBtnArea button:disabled,
-.proBtnArea button:disabled:hover{
+.lastBtnArea button:disabled,
+.lastBtnArea button:disabled:hover{
     background-color: #a43131;
     border-color: #a43131;
     color: #fff;
 }
-/* proBtnArea end */
+/* lastBtnArea end */
 /* joongo board detail end */
 
 /* joongo board register start */
@@ -472,6 +477,3 @@ form > div.form > textarea{
 	margin-right: 20px;
 }
 /* joongo board register end */
-/* joongo board modify start */
-
-/* joongo board modify end */

@@ -56,18 +56,14 @@ async function getMoreBoard(page = 1, menu) {
             }
 
             for (let bvo of result.cmList) {
-                let dateOnly = new Date(bvo.cmRegAt); 
-                const year = dateOnly.getFullYear();
-                const month = (dateOnly.getMonth() + 1).toString().padStart(2, '0');
-                const day = dateOnly.getDate().toString().padStart(2, '0');
-                const extractedDate = `${year}-${month}-${day}`;
+                let upDate = bvo.cmRegAt.substring(0,10);
 
                 let str = `<div class="oneBoard">`;
                 str += `<p class="boardMenuName">${bvo.cmMenu }</p>`;
                 str += `<div class="user_profile">
                             <img id="cmListProfile-${bvo.cmBno}" class="cmUserProfile" alt="" src="/resources/image/기본 프로필.png">
                             <b class="cmListNick">${bvo.cmNickName}</b>
-                            <p class="cmListDate">${extractedDate }</p>
+                            <p class="cmListDate">${upDate }</p>
                             <p class="cmListEmd"><i class="bi bi-geo-alt-fill cmWriterLocationIcon"></i>${bvo.cmEmd }</p>
                             </div>`;
 

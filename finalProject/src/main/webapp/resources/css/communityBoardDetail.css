@@ -99,12 +99,10 @@
 	.bi-chat-dots-fill{
 		margin: 0 3px;
 	}
-	.chat{
+	.linkBtn{
 		color: gray;
-		border: 1px solid #d3d3d3;
-		border-radius: 10px;
-		text-decoration: none;
-		padding: 5px;
+		border: none;
+		background: none;
 		font-size: 14px;
 	}
 	.chat:hover{

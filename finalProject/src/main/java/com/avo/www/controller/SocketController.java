@@ -12,6 +12,11 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
+import org.apache.tomcat.util.json.JSONParser;
+
+import com.avo.www.domain.ChatMessageVO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -26,9 +31,8 @@ public class SocketController {
 	
 	@OnOpen // socket 연결 시
 	public void onOpen(Session session, @PathParam("bno") long bno) { // @PathParam 은 웹소켓에서 사용하는 @PathVariables
-		
-		System.out.println("bno : "+bno);
 		System.out.println("open session : " + session.getId());
+		session.getUserProperties().put("chatBno", bno);
 		try {
 			final Basic basic = session.getBasicRemote();
 			basic.sendText("연결 완료");
@@ -41,20 +45,21 @@ public class SocketController {
 	@OnMessage
 	public void onMessage(Session session, String message) {
 		try {
-			// 메세지 보낸 사람에게 표시
-			final Basic basic = session.getBasicRemote();
-			basic.sendText("전송했습니다. >>");
-			basic.sendText(message);
+			ObjectMapper objectmapper = new ObjectMapper();
+			ChatMessageVO chatvo = objectmapper.readValue(message, ChatMessageVO.class);
+			log.info(">>>>>>>>>>>> "+chatvo);
+
+//			// 메세지 보낸 사람에게 표시
+//			final Basic basic = session.getBasicRemote();
+//			basic.sendText("전송했습니다. >>");
+//			basic.sendText(chatvo.getMsgContent());
 			
-			// 한 사람에게 메세지 보내기
-//			sendMsg(session, message);
+			// 같은 방에 들어간 사람들에게 메세지 보내기
+			sendMsg(session, message);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		// 다른 사람에게 메세지 보내기
-		sendAllSessionToMessage(session, message);
-		
 	}
 	
 	@OnError
@@ -68,31 +73,38 @@ public class SocketController {
 		sessionList.remove(session);
 	}
 	
-	private void sendAllSessionToMessage(Session self, String msg) { // 연결된 모든 사용자에게 메세지 전달
-		try {
-			for(Session s : SocketController.sessionList) {
-				if(!self.getId().equals(s.getId())) {
-					s.getBasicRemote().sendText(msg);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	// 연결된 모든 사용자에게 메세지 전달
+//	private void sendAllSessionToMessage(Session self, String msg) { 
+//		try {
+//			for(Session s : SocketController.sessionList) {
+//				if(!self.getId().equals(s.getId())) {
+//					s.getBasicRemote().sendText(msg);
+//				}
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
-//	//한명에게 메시지 전달
-//    private void sendMsg(Session senderSession, String msg) {
-//        try {
-//        	String userId = (String) senderSession.getUserProperties().get("userId");
-//        	for(Session s : sessionList) {
-//        		if(userId.equals(s.getUserProperties().get("userId"))) {
-//        			s.getBasicRemote().sendText(msg);
-//        			break;
-//        		}
-//        	}
-//        } catch (Exception e) {    
-//            e.printStackTrace();
-//        }
-//    }
-//    
+	// 같은 방에 들어간 사람들에게 메세지 전달
+    private void sendMsg(Session session, String msg) {
+        try {
+			ObjectMapper objectmapper = new ObjectMapper();
+			ChatMessageVO chatvo = objectmapper.readValue(msg, ChatMessageVO.class);
+			log.info(">>>>>>>>>>>> "+chatvo);
+			
+			String senderId = chatvo.getMsgSendUserId();
+			String message = chatvo.getMsgContent();
+			long bno = chatvo.getMsgRoomId();
+			
+        	for(Session s : sessionList) {
+        		if(bno == (long) s.getUserProperties().get("chatBno")) {
+        			s.getBasicRemote().sendText(senderId+","+message);
+        		}
+        	}
+        } catch (Exception e) {    
+            e.printStackTrace();
+        }
+    }
+ 
 }

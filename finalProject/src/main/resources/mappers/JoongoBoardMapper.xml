@@ -109,4 +109,18 @@
 			</otherwise>
 		</choose>
 	</sql>
+	
+	<!-- index용 -->
+	<select id="getJoongoList" resultType="com.avo.www.domain.ProductBoardVO">
+		select * from product 
+      	where pro_category = 'joongo' AND pro_is_del = 'N'
+      	order by pro_bno desc
+		limit 0, 5
+	</select>
+	<select id="getJoongoLikeList" resultType="com.avo.www.domain.ProductBoardVO">
+		select * from product 
+      	where pro_category = 'joongo' AND pro_is_del = 'N'
+      	order by pro_like_cnt desc
+		limit 0, 5
+	</select>
 </mapper>

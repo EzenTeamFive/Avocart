@@ -16,7 +16,7 @@ public class ChatMessageVO {
 	private long msgId;
 	private long msgRoomId;
 	private String msgSendUserId;
-	private String msgGetUserNick;
+	private String msgGetUserId;
 	private String msgContent;
 	private String msgIsRead;
 	private String msgRegAt;

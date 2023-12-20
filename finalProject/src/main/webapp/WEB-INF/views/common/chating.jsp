@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,23 +10,61 @@
 <title>Insert title here</title>
 <style type="text/css">
 	.chatingSec{
+		font-family: 'suit';
 		background-color: #f6f6f6;
 		display: flex;
 		justify-content: center;
 	}
 	.chatingSec > div{
 		background-color: #fff;
-		width: 520px;
+		width: 500px;
 		height: calc(100vh - 200px);
 		box-shadow: 0px 0px 1px rgba(80,80,80,0.2);
 		overflow: auto;
 		position: relative;
 	}
-	.chatingSec .messages{
+	.chatRoomList{
+		padding-top: 20px;
+	}
+	.chatRoomList h2{
+		margin-left: 15px;
+	}
+	.chatRoomList > div{
+		width: 100%;
+		height: 70px;
+		padding: 10px 15px;
+	}
+	.chatRoomList > div:hover{
+		background-color: #eee;
+	}
+	.chatRoomList > div img{
+		width: 50px;
+		height: 50px;
+		border-radius: 25px;
+	}
+	.messages{
 		overflow: auto;
 		height: calc(100% - 40px);
 	}
-	.chatingSec .inputArea{
+	.messages > div > div{
+		display: inline-block;
+		padding: 10px;
+		box-sizing: border-box;
+		margin: 0 5px 5px 5px;
+		border-radius: 5px;
+	}
+	.messages .left div{
+		margin-right: 50px;
+		box-shadow: 0 0 1px rgba(80,80,80,0.2);
+	}
+	.messages .right{
+		text-align: right;
+	}
+	.messages .right div{
+		background-color: #d3d3d3;
+		margin-left: 50px;
+	}
+	.inputArea{
 		position: absolute;
 		bottom: 0;
 		width: 100%;
@@ -36,14 +75,25 @@
 <jsp:include page="../common/header.jsp" />
 <body>
 <div class="chatingSec">
-	<div>
+	<div class="chatRoomList">
 		<h2>채팅 목록</h2>
-		<c:if test="${!empty chatList}">
-			<c:forEach items="${chatList}" var="list">
-		        <button type="button" onclick="openSocket(${list.chatRoomId});">${list.chatRoomId} 대화방 참여</button>				
+		<c:if test="${!empty chatdtoList}">
+			<c:forEach items="${chatdtoList}" var="list">
+		        <div class="chatListArea" data-getuser="${list.msgGetUserEmail }" data-chatroom="${list.crvo.chatRoomId}">
+		        	<!-- 프로필 이미지 -->
+		        	<c:choose>
+		        	<c:when test="${list.profileImage eq null}">
+		        		<img alt="기본 이미지" src="../resources/image/기본 프로필.png">
+		        	</c:when>
+		        	<c:otherwise>
+		        		<img src="/upload/profile/${fn: replace(list.profileImage.saveDir, '\\', '/')}/${list.profileImage.uuid}_${list.profileImage.fileName}" alt="프로필 이미지">
+		        	</c:otherwise>
+		        	</c:choose>
+		        	<b>${list.msgGetUserNick}</b>
+		        	
+		        </div>			
 			</c:forEach>
 		</c:if>
-        <button type="button" onclick="closeSocket();">대회방 나가기</button>
   		
     </div>
     <div>
@@ -59,7 +109,6 @@
 	        </sec:authorize>
 	        <input type="text" id="messageinput">
 	        <button type="button" onclick="send();">메세지 전송</button>
-	        <button type="button" onclick="javascript:clearText();">대화내용 지우기</button>
 	    </div>
     </div>
 </div>

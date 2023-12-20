@@ -50,14 +50,14 @@
 		</sec:authorize>
 		<c:if test="${bvo.cmNickName ne authNick }">
 			<div>
-				<a href="#" class="chat"><i class="bi bi-chat-dots-fill"></i>채팅</a>
+				<button class="linkBtn" id="linkBtn"><i class="bi bi-share"></i></button>
 			</div>
 		</c:if>
 	</div>
 	
 	<div class="middle_line">
 		<b class="cmTitle">${bvo.cmTitle }</b> <br>
-		<textarea class="cmContent" id="dynamicTextarea">${bvo.cmContent }</textarea>
+		<textarea class="cmContent" id="dynamicTextarea" readonly="readonly">${bvo.cmContent }</textarea>
 		<!-- 파일 -->
 		<c:set value="${bdto.flist }" var="flist" />
 		<c:if test="${flist.size() > 0 }">

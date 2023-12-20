@@ -26,5 +26,5 @@ document.getElementById('chatRoomBtn').addEventListener('click',()=>{
     insertChatRoomForServer(chatRoomData);
 
     // 링크 이동
-    // location.href = "/common/chating";
+    location.href = "/common/chating";
 })

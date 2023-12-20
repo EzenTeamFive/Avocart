@@ -6,8 +6,8 @@
 }
 
 @font-face {
-    font-family: 'JeonjuCraftGoR';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/JeonjuCraftGoR.woff2') format('woff2');
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
@@ -28,16 +28,17 @@ form{
 	font-weight: 800;
 	display: block;
 	color: #84a331;
-	font-family: 'Pretendard-Regular';
+	 font-family: 'SUIT-Regular';
 	margin-bottom: 30px;
 }
 
 .labels{
-	display: block;
-	font-weight: 800;
-	margin-bottom: 7px;
-	font-family: 'Pretendard-Regular';
-	color: #334010;
+   display: block;
+    font-weight: 800;
+    margin-bottom: 7px;
+    font-family: 'SUIT-Regular';
+    color: #334010;
+    font-size: 15px;
 }
 
 .inputDiv{
@@ -45,16 +46,17 @@ form{
 }
 
 .inputs{
-	width: 400px;
-	height: 40px;
-	padding-left: 10px;
-	border: 2px solid #84a331;
-	border-radius: 5px;
-	font-family: 'Pretendard-Regular';
+    width: 400px;
+    height: 40px;
+    padding-left: 10px;
+    border: 2px solid #84a331;
+    border-radius: 5px;
+    font-family: 'SUIT-Regular';
+    font-size: 14px;
 }
 
 .inputs::placeholder{
-    font-family: 'Pretendard-Regular';
+    font-family: 'SUIT-Regular';
 }
 
 .bi-eye-slash, .bi-eye{
@@ -67,12 +69,13 @@ form{
 }
 
 .msg{
-	margin: 0;
-	padding: 0;
-	font-size: 11px;
-    font-family: 'Pretendard-Regular';
-	font-weight: 800;
-	color: red;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: 'SUIT-Regular';
+    font-weight: 800;
+    margin-left: 5px;
+    color: red;
 }
 
 #pw2:disabled {
@@ -80,13 +83,18 @@ form{
 }
 
 .registerBtn{
-	margin-top: 30px;
-	width: 400px;
-	height: 50px;
-	
-	border: none;
-	background-color: #84a331;
-	color: white;
-	border-radius: 5px;
-    font-family: 'Pretendard-Regular';
-}	
+    margin-top: 30px;
+    width: 400px;
+    height: 50px;
+    font-size: 14px;
+    
+    border: none;
+    background-color: #84a331;
+    color: white;
+    border-radius: 5px;
+    font-family: 'SUIT-Regular';
+}
+.registerBtn:disabled {
+    background-color: #c6d1a8;
+    color: white;
+}
