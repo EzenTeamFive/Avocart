@@ -21,4 +21,6 @@ public interface MemberDAO {
 
 	MemberVO hasNick(String memNickName);
 
+	String getNickFromEmail(String msgGetUserEmail);
+
 }

@@ -1,5 +1,9 @@
 package com.avo.www.domain;
 
+import java.util.List;
+
+import com.avo.www.security.MemberVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,14 +15,13 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatMessageVO {
+public class ChatRoomDTO {
 	
-	private long msgId;
-	private long msgRoomId;
 	private String msgSendUserId;
-	private String msgGetUserId;
-	private String msgContent;
-	private String msgIsRead;
-	private String msgRegAt;
+	private String msgGetUserNick;
+	private String msgGetUserEmail;
+	private ChatRoomVO crvo;
+	private List<ChatMessageVO> msgList;
+	private FileVO profileImage;
 
 }

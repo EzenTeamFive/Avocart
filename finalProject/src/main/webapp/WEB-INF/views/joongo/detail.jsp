@@ -89,7 +89,7 @@
 		
 		<sec:authorize access="isAuthenticated()">
 			<c:if test="${pbvo.proEmail eq authEmail}">
-				<div class="proBtnArea">
+				<div class="lastBtnArea">
 					<!-- 글 작성자에게만 띄울 버튼 -->
 					<a href="/joongo/modify?proBno=${pbvo.proBno }"><button type="submit">수정</button></a>
 					<a href="/joongo/remove?proBno=${pbvo.proBno }"><button type="button">삭제</button></a>

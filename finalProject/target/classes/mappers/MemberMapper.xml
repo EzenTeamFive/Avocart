@@ -33,4 +33,9 @@
 		select * from member where mem_nick_name = #{memNickName}
 	</select>
 	
+	<!-- 이메일로 닉네임 호출 -->
+	<select id="getNickFromEmail" resultType="String">
+		select mem_nick_name from member where mem_email = #{msgGetUserEmail}
+	</select>
+	
 </mapper>

@@ -1,8 +1,12 @@
 package com.avo.www.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +19,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.avo.www.domain.ChatMessageVO;
+import com.avo.www.domain.ChatRoomDTO;
 import com.avo.www.domain.ChatRoomVO;
+import com.avo.www.domain.FileVO;
+import com.avo.www.domain.ProductBoardVO;
 import com.avo.www.security.AuthMember;
 import com.avo.www.service.ChatingService;
 
@@ -38,11 +46,24 @@ public class ChatingController {
         	//Principal => AuthMember 변환
         	AuthMember member = (AuthMember) authentication.getPrincipal();
         	log.info(">>>>>> member 확인 >>>>> "+member.getMvo());
-        	//주소 추출
+        	//사용자 아이디
         	userId = member.getMvo().getMemEmail();
         }
-		List<ChatRoomVO> chatList = chatsv.getChatingList(userId);
-		m.addAttribute("chatList", chatList);
+        
+        // 채팅방 정보 DTO 리스트
+        List<ChatRoomDTO> chatdtoList = new ArrayList<ChatRoomDTO>();
+        
+        // 로그인 한 유저의 채팅방 리스트
+        List<ChatRoomVO> chatList = chatsv.getChatList(userId);
+        if(chatList.size() > 0) {
+        	for(ChatRoomVO room : chatList) {
+        		ChatRoomDTO roomdto = chatsv.getChatRoomDTO(room, userId);
+        		roomdto.setCrvo(room);
+        		chatdtoList.add(roomdto);
+        	}
+        	log.info(">>>>>>>>>>> chatDTO List >>>>>>>>>> "+chatdtoList);
+        }
+		m.addAttribute("chatdtoList", chatdtoList);
 	}
 	
 	@PostMapping("/chating")
@@ -50,5 +71,20 @@ public class ChatingController {
 		log.info(">>>>> chatRoomData >>> "+roomvo);
 		int isOk = chatsv.createChatRoom(roomvo);
 		log.info("채팅방 생성 "+(isOk > 0 ? "OK" : "Fail"));
+	}
+	
+	@PostMapping("/chatmsg")
+	public void insertChatMsg(@RequestBody ChatMessageVO msgvo) {
+		log.info(">>>>> chatRoomData >>> "+msgvo);
+		int isOk = chatsv.insertChatMsg(msgvo);
+		log.info("등록 "+(isOk > 0 ? "OK" : "Fail"));
+	}
+	
+	@GetMapping(value = "/chatmsg/{bno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ChatMessageVO>> getChatMsg(@PathVariable("bno") long bno) {
+		log.info(">>>>> chatRoomData >>> "+bno);
+		List<ChatMessageVO> chatList = chatsv.selectChatMsg(bno);
+		log.info(">>>>>>>>> chatList >>>>>>>>> "+chatList);
+		return new ResponseEntity<List<ChatMessageVO>>(chatList, HttpStatus.OK);
 	}
 }
