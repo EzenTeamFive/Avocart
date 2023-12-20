@@ -21,36 +21,41 @@
 		justify-content: center;
 		flex-wrap: wrap;
 	}
+	.innerContainer{
+		width: 700px;
+	}
 	
 	/* 젤 위에 라인 */
 	.topLine{
 		margin-top: 60px;
-		width: 650px;
-		display: flex;
-		justify-content: center;
+		width: 100%;
+		text-align: center;
 		border-bottom: 1px solid black;
 	}
 	.pageName{
-		font-size: 23px;	    
+		font-size: 24px;	    
 		font-weight: 800;
 	}
 	
 	/* 검색라인 */
 	.searchLine{
-		width: 80%;
+		width: 100%;
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
 	}
+	.searchLine form{
+		width: 100%;
+	}
 	.faqT{
-		width: 650px;
+		width: 100%;
 		margin: 20px 0;
-	    font-size: 23px;
+	    font-size: 24px;
 	    font-weight: 800;
 	}
 	.searchBox{
 		display: inline-block;
-	    width: 650px;
+	    width: 100%;
 	    height: 40px;
 	    border-radius: 5px;
 	    background-color: #f1f4f6;
@@ -79,7 +84,7 @@
 	/* 카테고리 라인 */
 	.faqCategory{
 		margin: 30px 0;
-		width: 80%;
+		width: 100%;
 		display: flex;
 		justify-content: center;
 	    position: sticky;
@@ -105,21 +110,21 @@
 	
 	/* faq 게시글 라인 */
 	.faqBoardLine{
-		width: 80%;
+		width: 100%;
 		display: flex;
 		justify-content: center;
 	}
 	.faqBoards{
 		margin: 0;
 		padding: 0;
-		width: 650px;
+		width: 100%;
 		font-size: 0;
 	}
 	.faqLi{
 		font-size: 14px;
 	}
 	.questionBtn{
-		width: 650px;
+		width: 100%;
     	height: 70px;
     	display: flex;
     	justify-content: space-between;
@@ -142,7 +147,7 @@
 	    color: gray;
 	}
 	.answerArea{
-		width: 650px;
+		width: 100%;
 	    background-color: #f1f4f6;
 	    resize: none;
 	    border: none;
@@ -164,12 +169,12 @@
 	/* 문의버튼 라인 */
 	.csButtons{
 		margin: 30px 0 30px 0;
-		width: 80%;
+		width: 100%;
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 	}
 	.csBtn1, .csBtn2{
-	    width: 320px;
+	    width: 350px;
 	    height: 45px;
 	    background: none;
 	    border: 1px solid #d3d3d3;
@@ -195,6 +200,7 @@
 <jsp:include page="../common/header.jsp" />
 	
 <div class="bodyContainer">
+<div class="innerContainer">
 
 <div class="topLine">
 	<p class="pageName">고객센터</p>
@@ -265,7 +271,7 @@
 		</a>
 	</div>
 </sec:authorize>
-	
+</div>	
 </div>
 <!-- 여기까지 bodyContainer -->
 <div class="faqWriteBtn">

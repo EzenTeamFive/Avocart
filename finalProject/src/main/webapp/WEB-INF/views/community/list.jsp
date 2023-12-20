@@ -11,15 +11,15 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
-<div class="userLocation">
-	<p class="userLocationP"><i class="bi bi-people-fill"></i> 구월동 소식</p>
+<div class="cmBanner">
+	<div class="innerDiv">
+		<h3 class="cmBannerText1">이웃만 아는<br>동네 정보와 이야기</h3>
+		<p class="cmBannerText2">우리동네의 다양한 정보와 이야기를<br>공감과 댓글로 나누어요.</p>
+	</div>
 </div>
+
 <div class="bodyContainer">
 
-
-	<a href="/faq/list">
-		<button type="button">고객센터</button>
-	</a>
 <div class="CommunityCategory">
 	<a href="/community/list" class="menu cmActive">전체</a>
 	<a href="/community/list?cmMenu=일상" class="menu">일상</a>

@@ -34,4 +34,6 @@ public interface StoreBoardDAO {
 
 	String getEmail(long bno);
 
+	List<ProductBoardVO> getStoreList();
+
 }

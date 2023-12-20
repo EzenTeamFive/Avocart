@@ -112,4 +112,18 @@
 			</otherwise>
 		</choose>
 	</sql>
+	
+	<!-- index용 -->
+	<select id="getCommunityList" resultType="com.avo.www.domain.CommunityBoardVO">
+		select * from community 
+      	where cm_is_del = 'N'
+      	order by cm_bno desc
+		limit 0, 4
+	</select>
+	<select id="getCommunityLikeList" resultType="com.avo.www.domain.CommunityBoardVO">
+		select * from community 
+      	where cm_is_del = 'N'
+      	order by cm_like_cnt desc
+		limit 0, 4
+	</select>
 </mapper>

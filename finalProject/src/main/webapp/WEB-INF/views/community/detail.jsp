@@ -50,7 +50,7 @@
 		</sec:authorize>
 		<c:if test="${bvo.cmNickName ne authNick }">
 			<div>
-				<a href="#" class="chat"><i class="bi bi-chat-dots-fill"></i>채팅</a>
+				<button class="linkBtn" id="linkBtn"><i class="bi bi-share"></i></button>
 			</div>
 		</c:if>
 	</div>

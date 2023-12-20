@@ -40,13 +40,16 @@ document.addEventListener('DOMContentLoaded', function() {
 //현재 fullPath
 let fullPath = window.location.href;
 console.log(fullPath);
+let mappingPath = path.substring(path.lastIndexOf('/')+1);
+console.log(mappingPath);
 //div의 a 요소 가져오기
 let aList = document.querySelectorAll('.category');
 console.log(aList);
 
+
 for(let a of aList){
     // 이전 active 클래스 삭제
-    if(fullPath != "http://localhost:8088//faq/list"){
+    if(fullPath != `http://localhost:8088//faq/${mappingPath}`){
         a.classList.remove('faqActive');
     }
 

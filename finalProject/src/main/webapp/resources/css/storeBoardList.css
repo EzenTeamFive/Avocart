@@ -7,13 +7,19 @@
 
 .bodyContainer{
     font-family: 'suit';
+    margin: 0 auto;
     width: 1280px;
-    border: 1px dashed black;
+    padding-left: 140px;
+    padding-right: 140px;
+   /*  border: 1px dashed black; */
 }
 
 .allBtns{
-   padding: 90px 150px 30px;
-   font-family: 'suit';
+   /* padding: 90px 150px 30px; */
+    padding-top: 90px;
+    padding-bottom: 30px;
+    padding-left: 643px;
+    font-family: 'suit';
 }
 
 .allBtns p{
@@ -22,12 +28,12 @@
 }
 
 .allBtns Select {
-    width: 11%;
+   /*  width: 11%; */
     height: 40px;
     border-radius: 5px;
     border: solid 1px #e5e5e5;
     padding: 5px;
-    margin-right: 15px;
+  /*   margin-right: 15px; */
     outline: none;
 }
 
@@ -38,7 +44,6 @@
 .listContainer {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px 15px;
     margin-bottom: 15px;
     font-family: 'suit';
 }
@@ -46,17 +51,17 @@
 .listContainer ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 36px 36px;
     padding: 0;
     margin-bottom: 15px;
     /* padding-left: 150px; */
     width: 1000px;
-    border: 1px solid black;
+   /*  border: 1px solid black; */
 }
 
 .listContainer ul li {
    /* 각 업체 목록 */
-    width: 450px;
+    width: 480px;
     height: 160px;
     background-color: white;
     border: 1px solid #ededed;
@@ -123,13 +128,15 @@
    white-space: normal; 
    word-break: break-all;
    position: relative;
-    top: 18px;
+   top: 18px;
+   font-size: 15px;
 }
 
 .infoTexts{
     position: absolute;
     bottom: 20px;
     display: inline-block;
+    font-size: 14px;
 }
 
 .moreBtnContainer{

@@ -21,6 +21,7 @@ document.getElementById('calcDate').innerHTML = `<i class="bi bi-calendar"></i>�
 document.addEventListener('DOMContentLoaded', function() {
     if (mainSrc === "../resources/image/기본 프로필.png") {
         document.getElementById('delBtn').style.display = 'none';
+        document.querySelector('#editProfile ul li:nth-child(1)').style.borderBottom = 'none';
     }
 });
 

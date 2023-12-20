@@ -5,6 +5,13 @@
     font-style: normal;
 }
 
+@font-face {
+   font-family: 'SUIT-Regular';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+   font-weight: normal;
+   font-style: normal;
+}
+
 .bodyContainer{
 	display: flex;
 	justify-content: center;
@@ -18,7 +25,7 @@
 	display: block;
 	color: #84a331;
 	margin-bottom: 50px;
-  		font-family: 'Fugaz One', sans-serif;
+  	font-family: fugaz;
 }
 
 form{
@@ -29,8 +36,9 @@ form{
     display: block;
     font-weight: 800;
     margin-bottom: 7px;
-    font-family: 'Pretendard-Regular';
+    font-family: 'SUIT-Regular';
     color: #334010;
+	font-size: 14px;
 }
 
 .inputs{
@@ -39,11 +47,12 @@ form{
 	padding-left: 10px;
 	border: 2px solid #84a331;
 	border-radius: 5px;		
-    font-family: 'Pretendard-Regular';
+   font-family: 'SUIT-Regular';
+	font-size: 14px;
 }
 
 .inputs::placeholder{
-    font-family: 'Pretendard-Regular';
+    font-family: 'SUIT-Regular';
 }
 
 .emailInput{
@@ -55,7 +64,7 @@ form{
 	position : absolute;
     display: block;
 	margin-left: 367px;
-	margin-top: -33px;
+	margin-top: -32px;
 	color: #84a331;
 }
 
@@ -63,18 +72,20 @@ form{
 	color: red;
 	height: 30px;
 	font-weight: 800;
-	font-size: 13px;
+	font-size: 12px;
 	padding-top: 5px;
+    font-family: 'SUIT-Regular';
 }
 
 .checkBtn{
 	margin-top: 30px;
 	width: 400px;
 	height: 50px;
+	font-size: 14px;
 	
 	border: none;
 	background-color: #84a331;
 	color: white;
 	border-radius: 5px;
-    font-family: 'Pretendard-Regular';
+    font-family: 'SUIT-Regular';
 }
