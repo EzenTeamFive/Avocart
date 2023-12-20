@@ -8,6 +8,7 @@ import com.avo.www.domain.JobBoardDTO;
 import com.avo.www.domain.LikeItemVO;
 import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ProductBoardVO;
+import com.avo.www.security.MemberVO;
 
 public interface JobBoardDAO {
 
@@ -36,5 +37,7 @@ public interface JobBoardDAO {
 	List<ProductBoardVO> getHotList();
 
 	List<ProductBoardVO> getMoreList(PagingVO pgvo);
+
+	void updateFileCnt(int proFileCnt);
 
 }

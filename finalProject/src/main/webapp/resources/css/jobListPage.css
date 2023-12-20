@@ -2,22 +2,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0px 140px;
 }
 .titleLine {
-	width: 1080px;
+	margin: 100px 0px 30px;
+	width: 1000px;
+	height: 100px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 .titleLine h3 {
-	margin: 100px 0px 30px;
 	color: #606C38;
 	font-weight: bold;
-	float: right;
 }
 .titleLine section {
 	display: flex;
-	margin: 100px 0px 30px;
+	margin: 100px 0px;
 	justify-content: space-between;
 	width: 250px;
 }
@@ -27,7 +28,6 @@
 	min-width: 1440px;
     height: 360px;
     background-color: #e3edc8;
-    margin: 0px auto;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -47,13 +47,25 @@
 	font-weight: bold;
 }
 
-.jobListPart a button, #moreBtn {
+.jobListPart a button {
 	background: #84a331;
 	width: 160px;
 	height:37px;
 	border: none;
 	border-radius: 10px;
 	margin: 10px;
+	color: #fff;
+	font-size: 15px;
+	font-weight: bold;
+	transition: color 0.3s, background 0.3s;
+}
+#moreBtn {
+	background: #84a331;
+	width: 160px;
+	height:37px;
+	border: none;
+	border-radius: 10px;
+	margin: 50px 0px 100px 0px;
 	color: #fff;
 	font-size: 15px;
 	font-weight: bold;
@@ -85,7 +97,7 @@
 }
 
 .brdListArea {
-    width: 75%;
+    width: 100%;
 	display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -95,7 +107,7 @@
 .hotJobListContent, .jobListContent {
     align-items: center;
     width: 43%;
-    height: 280px;
+    height: 200px;
     margin-bottom: 20px;
     box-sizing: border-box;
     transition: 0.5s;

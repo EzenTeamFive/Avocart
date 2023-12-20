@@ -57,7 +57,7 @@
 	    <input type="text" class="form-control" name="proPrice" id="proPrice">
 
 		<label for="jobAddress" class="form-label">근무지역</label>
-	    <input type="text" class="form-control" name="address" id="proAddress">
+	    <input type="text" class="form-control" name="proFullAddr" id="proFullAddr">
 	    	<!-- 주소 받아오기 -->
 			<input type="hidden" class="form-control" name="proSido" id="proSido">
 			<input type="hidden" class="form-control" name="proSigg" id="proSigg">
@@ -70,11 +70,14 @@
 		<textarea class="form-control" name="proContent" id="proContent" rows="10" placeholder="자세한 근무 내용을 적어주세요. ex)근무요일, 근무시간, 우대사항"></textarea>
 	  </div>
 	  
-	  <div class="mb-3">
-	    <input type="file" class="form-control" id="files" name="files" style="display: none;" multiple="multiple">
+	  <!-- 파일 -->
+	<p class="label imgLabel">이미지</p>
+	<div class="form fileForm">
+		<input type="file" class="form-control" name="files" id="files" multiple="multiple" style="display:none;">
+		<input type="text" readonly="readonly" class="fileInput" placeholder="20MB 미만의 이미지를 업로드 해주세요"> 
 	    <!-- input type trigger 용도의 button -->
-	    <button type="button" id="trigger" class="trigger">사진 첨부</button>
-	  </div>
+		<button type="button" id="trigger" class="fileBtn trigger">사진 첨부</button>
+	</div>
 	  
 	  <div class="mb-3" id="fileZone">
 	  <!-- 첨부파일 표시 될 영역 -->
@@ -91,26 +94,6 @@
 
 <script type="text/javascript" src="/resources/js/jobBoardRegister.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript">
-
-//주소입력창 클릭시 카카오주소 연결
-document.getElementById('proAddress').addEventListener('click', ()=>{
- new daum.Postcode({
-     oncomplete: function(data) { //선택시 입력값 세팅
-         console.log(data);
-     	//input에 보여질 전체주소값 설정
-		    let address = data.sido + ' ' + data.sigungu + ' ' + data.bname;
-         document.getElementById('proAddress').value = address ;
-         //db에 넣을 주소값 설정
-         document.getElementById('proSido').value = data.sido;
-         document.getElementById('proSigg').value = data.sigungu;
-         document.getElementById('proEmd').value = data.bname;
-     }
- }).open();
-})
-
-
-</script>
 <jsp:include page="../common/footer.jsp" />
 
 </body>

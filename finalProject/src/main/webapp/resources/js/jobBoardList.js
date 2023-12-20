@@ -94,6 +94,7 @@ async function spreadJobFromServer(page = 1, menu, sort){
             for(let job of result.prodList){
                 let inner = `<div class="jobListContent">`;
                 inner += `<a href="/job/detail?proBno=${job.proBno}">`;
+                console.log("job.proFileCnt >> " + job.proFileCnt);
                 if (job.proFileCnt > 0) {
                     let thumb = await getThumbnailToServer(job.proBno);
                     inner += `<img alt="job image error" src="../upload/product/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}">`;
@@ -113,9 +114,6 @@ async function spreadJobFromServer(page = 1, menu, sort){
                 moreJobArea.innerHTML += inner;
             }
 
-            if(result.prodList.length <= 8 ){
-                document.getElementById('moreBtn').style.display = 'none';
-            }
 
             
         

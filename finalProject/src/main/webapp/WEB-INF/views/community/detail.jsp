@@ -57,7 +57,7 @@
 	
 	<div class="middle_line">
 		<b class="cmTitle">${bvo.cmTitle }</b> <br>
-		<textarea class="cmContent" id="dynamicTextarea" readonly="readonly">${bvo.cmContent }</textarea>
+		<textarea class="cmContent" id="dynamicTextarea">${bvo.cmContent }</textarea>
 		<!-- 파일 -->
 		<c:set value="${bdto.flist }" var="flist" />
 		<c:if test="${flist.size() > 0 }">

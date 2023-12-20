@@ -43,5 +43,7 @@ public interface JobBoardService {
 
 	FileVO getProfileImg(String proEmail);
 
+	int removeFile(String uuid);
+
 
 }

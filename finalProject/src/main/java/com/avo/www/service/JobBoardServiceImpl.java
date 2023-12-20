@@ -90,6 +90,10 @@ public class JobBoardServiceImpl implements JobBoardService {
 			long bno = jdao.selectOneBno(); // 가장 마지막에 등록된 bno 가져오기
 			log.info("getFlist >> max bno>> " + bno);
 			
+			int proFileCnt = jbdto.getFlist().size(); // proFileCnt 계산
+
+			log.info("profilecnt >>> " + proFileCnt);
+			jdao.updateFileCnt(proFileCnt);
 			for(FileVO fvo : jbdto.getFlist()) {
 				fvo.setBno(bno);
 				isUp *= fdao.insertFile(fvo);
@@ -103,8 +107,9 @@ public class JobBoardServiceImpl implements JobBoardService {
 	@Transactional
 	@Override
 	public int remove(long proBno) {
-		int isOk = fdao.removeFileAll(proBno);
-		return (isOk > 0)? jdao.delete(proBno) : 0;
+		fdao.removeFileAll(proBno);
+		
+		return jdao.delete(proBno);
 	}
 
 
@@ -224,6 +229,12 @@ public class JobBoardServiceImpl implements JobBoardService {
 	@Override
 	public FileVO getProfileImg(String proEmail) {
 		return fdao.getProfileImg(proEmail);
+	}
+
+
+	@Override
+	public int removeFile(String uuid) {
+		return fdao.removeFileOne(uuid);
 	}
 
 

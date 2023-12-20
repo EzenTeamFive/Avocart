@@ -14,6 +14,7 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
+<jsp:include page="../common/mainFloatingMenu.jsp"/>
    <div id="loading">
       <!-- 로딩페이지 -->
    </div>
@@ -23,6 +24,7 @@
 	<div class="jobListPartSub">
 		<h3>우리동네에서 찾는 알바카도</h3>
 		<a href="/job/register" ><button type="button" class="">공고 올리기</button></a>
+		<a href="/likeList/likeList"><button type="button" class="" >관심목록</button></a>
 		<a href="/job/about" ><button type="button" class="" >알바카도 활용법</button></a>
 	</div>
 </div>
@@ -35,7 +37,7 @@
 	</div>
 	<div class="brdListArea" id="hotJobList">
 	    <c:forEach items="${hotList}" var="jbdto" varStatus="loopStatus">
-	        <c:if test="${loopStatus.index < 8}">
+	        <c:if test="${loopStatus.index < 6}">
 	            <div class="hotJobListContent">
 	                <a href="/job/detail?proBno=${jbdto.pbvo.proBno}">
 	 				    <c:choose>

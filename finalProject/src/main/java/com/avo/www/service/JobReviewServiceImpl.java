@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.avo.www.controller.JobReviewController;
 import com.avo.www.domain.FileVO;
 import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ReviewVO;
@@ -63,7 +62,6 @@ public class JobReviewServiceImpl implements JobReviewService{
 
 	@Override
 	public FileVO getProfileImg(String reWriter) {
-		// TODO Auto-generated method stub
 		return fdao.getProfileImg(reWriter);
 	}
 }

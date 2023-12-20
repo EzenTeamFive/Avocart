@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import com.avo.www.domain.FileVO;
 import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ReviewVO;
 import com.avo.www.handler.PagingHandler;
+import com.avo.www.security.MemberVO;
 import com.avo.www.service.JobReviewService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -46,11 +48,10 @@ public class JobReviewController {
 	// 리뷰 리스트, 페이징
 	@GetMapping(value = "/{reBno}/{page}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PagingHandler> spread(@PathVariable("reBno")long reBno, 
-			@PathVariable("page")int page){
+			@PathVariable("page")int page , Model m){
 		log.info(">>>> reBno / page >> "+reBno +" / "+page);
 		PagingVO pgvo = new PagingVO(page, 5);
 
-		
 		return new ResponseEntity<PagingHandler>(
 				jrsv.getList(reBno, pgvo), HttpStatus.OK);
 	}

@@ -1,8 +1,102 @@
-@charset "UTF-8";
-.container{
-	margin-top: 50px;
+.innerContainer{
+	width: 700px;
+	margin: 50px auto;
 }
 
+#map {
+	width: 100%;
+	height: 300px;
+	margin-bottom: 50px;
+}
+.jobBtn {
+	margin-top:50px;
+	width: 40px;
+	height: 30px;
+	font-size: 12px;
+	border-radius: 10px;
+	margin: 2px;
+	color: #84a331;
+	background: #fff;
+	border: 2px solid #84a331;
+}
+
+
+.jobBtn-light {
+	width: 35px;
+    height: 30px;
+    font-size: 12px;
+    color: #000;
+    background: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+.jobBtn-light:hover {
+	color: #000;
+    background: #d3d4d5;
+    border: 1px solid #c6c7c8;
+	
+} 
+#rePostBtn {
+	width: 60px;
+	height: 48px;
+	top: -2px;
+    position: relative;
+}
+.moreBtnArea {
+	display: flex;
+	justify-content: center;
+}
+.moreBtn {
+	color: #84a331;
+	background: #fff;
+	border: 2px solid #84a331;
+	width: 100px;
+	height:37px;
+	border-radius: 10px;
+	margin: 50px auto;
+	font-size: 15px;
+	font-weight: bold;
+	transition: color 0.3s, background 0.3s;
+}
+.moreBtn:hover, .jobBtn:hover, #rePostBtn:hover {
+	background: #84a331;
+	border: none;
+	color: #fff;
+	transition: color 0.3s, background 0.2s;
+}
+
+/* 작성자 */
+.profileSecction {
+	padding: 27px 10px 10px 10px;
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+	
+}
+.userInfo {
+	display: flex;
+	justify-content: space-between;
+}
+.userInfo span {
+	font-size: 13px;
+	margin-left: 10px;
+}
+.userInfo span strong {
+	font-size: 16px;
+}
+
+/* 본문 */
+.jobTitleSecction h1 {
+	margin: 30px 0px 20px 0px;
+}
+.bi-thermometer-half, .bi-heart, .bi-heart-fill {
+	color: #f90000;
+}
+.bi-heart, .bi-heart-fill {
+	margin: 0px 5px 0px 10px;
+}
+/* 리뷰 */
 .rePost, .reWriterInfo {
 	display: flex;
     align-items: center;
@@ -16,10 +110,13 @@
     height: 50px;
     object-fit: cover;
     border-radius: 50%; 
-    border: 2px solid #ADC178;
+	border: 1px solid #d3d3d3;
     display: block;
 	overflow: hidden;
+	
 }
+
+/* 리뷰 별점 */
 #reContent {
 	border: 2px solid #ADC178;
 	border-radius:10px;
@@ -42,17 +139,23 @@
 	i:hover {
 		cursor: pointer;
 	}
-	
+	.reProfile{
+		width: 80px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-right: 10px;
+	}
 	/* 별점평가 부분 */
-	.myform fieldset, .myStar fieldset {
+	.myform fieldset, .myStar fieldset, .myformMini fieldset {
     display: inline-block;
     direction: rtl;
 	}
 
-	.myform input[type=radio], .myStar input[type=radio] {
+	.myform input[type=radio], .myStar input[type=radio], .myformMini input[type=radio] {
 	    display: none;
 	}
-	.myform label, .myStar label {
+	.myform label, .myStar label, .myformMini label {
 	    font-size: 30px;
 	    color: transparent;
 	    text-shadow: 0 0 0 #f0f0f0;
@@ -63,7 +166,7 @@
 	.myform label:hover ~ label {
 	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 	}
-	.myform input[type=radio]:checked ~ label, .myStar input[type=radio]:checked ~ label {
+	.myform input[type=radio]:checked ~ label, .myStar input[type=radio]:checked ~ label, .myformMini  input[type=radio]:checked ~ label{
 	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 	}
 	
@@ -74,5 +177,23 @@
 	label[for^="starEmpty"]{
 		color: #f0f0f0;
 	}
+	.myformMini label:hover{
+	text-shadow: ;
+		
+	}
+
+	.myformMini label{
+		font-size: 20px;
+	}
 	
+	.myformMini input {
+		border: none;
+		width: 390px;
+	}
 	
+
+#reListArea {
+	width: 90%;
+    margin: 2% auto;
+}
+

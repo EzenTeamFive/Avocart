@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -111,6 +112,13 @@ public class JobBoardController {
 			    if (checkLike > 0) {
 			        m.addAttribute("checkLike", checkLike);
 			    }
+			// 리뷰 작성자 프로필부분에 표시할 프로필가져오기
+			    FileVO memFvo = new FileVO();
+			    memFvo = jbsv.getProfileImg(memEmail);
+			    if(memFvo != null) {
+			    	m.addAttribute("memProfile",memFvo);
+			    	
+			    }
 	    }
 
 	    // 파일 내용도 포함해서 같이 가져가야 함
@@ -124,9 +132,10 @@ public class JobBoardController {
 	    fvo = jbsv.getProfileImg(jbdto.getPbvo().getProEmail());
 	    if(fvo != null) {
 	    	m.addAttribute("profile",fvo);
-	    	
 	    }
     	log.info(">>>>>>>>>> fvo >>>>>> "+fvo);
+    	
+
 	}
 
 	@PostMapping("/modify")
@@ -136,10 +145,11 @@ public class JobBoardController {
 		log.info(">>>>> pbvo >> files >> " + pbvo + " / " + files);
 		
 		List<FileVO>flist = null;
-
+		
+//		files 0번지의 값이 0보다 크다면 파일 有 flist에 담기
 		if(files[0].getSize() > 0) {
 			   flist = fh.uploadFiles(files,"product");
-		   }
+		}
 		
 		int isOk = jbsv.modify(new JobBoardDTO(pbvo,flist));
 		
@@ -204,7 +214,14 @@ public class JobBoardController {
 		
 		return new ResponseEntity<FileVO>(flist.get(0), HttpStatus.OK);
 	}
-
+	
+	//파일 삭제
+	@DeleteMapping(value = "/file/{uuid}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> removeFile(@PathVariable("uuid")String uuid){
+		int isOk = jbsv.removeFile(uuid); //DB에서만 삭제. 실제 파일 삭제X
+		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
+				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	 @GetMapping("/about")
 	 public void getAbout() {

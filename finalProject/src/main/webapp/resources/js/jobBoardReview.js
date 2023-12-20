@@ -10,6 +10,8 @@ document.getElementById("rePostBtn").addEventListener('click',()=>{
      // 선택된 라디오 버튼의 값 가져오기 값이 없다면 
      const ratingValue = selectedRating ? selectedRating.value : undefined;
  
+     const nickName = document.getElementById('reNickName').value;
+
     if (reContent == null || reContent =='') {
         alert('댓글 내용을 입력해주세요.');
         return false;
@@ -21,6 +23,7 @@ document.getElementById("rePostBtn").addEventListener('click',()=>{
         let reData ={
             reBno : proBnoVal,
             reUserId : memEmail,
+            reNickName : nickName,
             reContent : reContent,
             reScore: ratingValue
         };
@@ -94,9 +97,10 @@ async function getReProfile(reWriter){
 
 
 //리뷰 리스트 뿌리는 함수
-async function spreadReviewList(reBno=proBnoVal, page=1){ //시작은 1페이지로 지정
-    getReviewFromServer(reBno, page).then(result =>{
-        console.log("result>> " ,result); //ph 객체 pgvo, totalCount, jobReList
+async function spreadReviewList(reBno=proBnoVal, page=1){  //시작은 1페이지로 지정
+    try {
+        const result = await getReviewFromServer(reBno, page);
+        console.log("result>> ", result); //ph 객체 pgvo, totalCount, jobReList
 
         if(result.jobReList.length > 0){
             let ul = document.getElementById('reListArea');
@@ -107,75 +111,69 @@ async function spreadReviewList(reBno=proBnoVal, page=1){ //시작은 1페이지
             for(let rvo of result.jobReList){
                 let li = `<li class="list-group-item">`;
                 li+= `<div class="mb-3 reWriterInfo">`;
-                li += `<img class="frofileImg" alt="job image error" src="../resources/image/logoimage.png">`
+                if (getReProfile(rvo.reUserId)) {
+                    try {
+                        const profile = await getReProfile(rvo.reUserId);
+                        console.log("아이디 >> " + rvo.reUserId);
+                        console.log(profile.saveDir);
+                        // 이미지가 정상적으로 가져와진 경우에만 추가
+                        if (profile) {
+                            li += `<img class="frofileImg" alt="review profile error" src="../upload/profile/${profile.saveDir.replaceAll('\\','/')}/${profile.uuid}_th_${profile.fileName}">`;
+                        } else {
+                            console.error("프로필을 가져오지 못했습니다.");
+                        }
+                    } catch (error) {
+                        console.error("프로필 가져오기 오류:", error);
+                    }
+                } else {
+                    li += `<img alt="review profile error" src="../resources/image/기본프로필.png">`;
+                }
 
-                    // if (getReProfile(rvo.reUserId)) {
-                    // let profile = getReProfile(rvo.reUserId);
-                    // console.log(profile);
-                    // getReProfile(rvo.reUserId).then(profile => {
-                    //         console.log("아이디 >> " + rvo.reUserId);
-                    //         console.log(profile.saveDir);
-                    //         if (profile) {
-                                
-                    //             li += `<img alt="review profile error" src="../upload/profile/${profile.saveDir.replaceAll('\\','/')}/${profile.uuid}_${profile.fileName}">`;
-                    //         } else {
-                    //             console.error("프로필을 가져오지 못했습니다.");
-                    //         }
-                            
-                    //         // li += `<img alt="review profile error" src="../upload/profile/${profile.saveDir.replaceAll('\\','/')}/${profile.uuid}_${profile.fileName}">`;
-                    //     })
-                    //     .catch(error => {
-                    //         console.error(error);
-                    //     });
-                    // } else {
-                    //     li += `<img alt="review profile error" src="../resources/image/기본프로필.png">`;
-                    // }
-
-                li+= `<strong><span class="reUserId">${rvo.reUserId}</span></strong>`;
+                li+= `<strong><span class="reNickName">${rvo.reNickName}</span></strong>`;
                 
-                // li+= `<p class="badge rounded-pill text-bg-dark">구월동</p>`; 멤버 주소 가져올 수 있으면 차후 추가
-                li+= `<span class="badge rounded-pill text-bg-dark">${rvo.regAt}</span>`;
+                // li+= `<p class="badge rounded-pill text-bg-light">구월동</p>`; 멤버 주소 가져올 수 있으면 차후 추가
+                li+= `<span class="badge rounded-pill text-bg-light">${rvo.regAt}</span>`;
                 li+= `</div>`;
                 //별점 평가 표시
-                // 단순 표시 기능 구현 -> 23.12.11 별점 수정을 위해 radio로 변경함
+                // 단순 표시 기능 구현 -> 23.12.11 별점 수정을 위해 radio로 변경함 -> 23.12.19 수정버튼 눌렀을 떄만 radio로 바뀌게 변경
                 // for(let i = 1 ; i <= 5 ; i++){
-                    //     if(i<=rvo.reScore){
-                        //         li += `<label for="starFill${i}">★</label>`;
-                        //     }else{
-                            //         li += `<label for="starEmpty${i}">★</label>`;
-                            //     }
+                //         if(i<=rvo.reScore){
+                //                 li += `<label for="starFill${i}">★</label>`;
+                //             }else{
+                //                     li += `<label for="starEmpty${i}">★</label>`;
+                //                 }
                 // }
-                li += `<div class="mb-3">`;
+                li += `<div class="mb-3 myformMini">`;
                 li += `<fieldset>`;
                 // 1부터 5까지 반복하여 각 별 칸에 대해 체크 여부 확인
-                for (let i = 1; i <= 5; i++) {
-                    li += `<input type="radio" name="rating-${rvo.reRno}" value="${i}" id="rate${rvo.reRno}-${i}" ${i === rvo.reScore ? 'checked' : ''}>`;
+                for (let i = 5; i >= 1; i--) {
+                    li += `<input type="radio" name="rating-${rvo.reRno}" value="${i}" id="rate${rvo.reRno}-${i}" ${i === rvo.reScore ? 'checked' : ''} disabled >`;
                     li += `<label for="rate${rvo.reRno}-${i}">★</label>`;
                 }
                 li += `</fieldset>`;
-                li+= `</div>`;
                 li+= `<input type="text" value="${rvo.reContent}" class="reContent" readonly="readonly">`;
                 li+= `<input type="hidden" value="${rvo.reRno}" class="reRno">`;
+                li+= `<input type="hidden" value="${rvo.reUserId}" class="reUserId">`;
                 // 작성자와 로그인한 mem이 일치하는 경우에만 수정,삭제버튼 보이게 설정
                 if(rvo.reUserId == memEmail && memEmail!=""){
-                li+= `<button type="button" class="mod">수정</button>`;
-                li+= `<button type="button" class="del">삭제</button>`;
-                }
+                li+= `<button type="button" class="mod jobBtn-light">수정</button>`;
+                li+= `<button type="button" class="del jobBtn-light">삭제</button>`;
+                li+= `</div>`;
+            }
                 li+= `</li>`;
                 ul.innerHTML+=li;
             }
-				
-				
-            //댓글 페이징 코드
-            let moreBtn = document.getElementById('moreBtn');
-            console.log(moreBtn);
-            //db에서 pgvo + list 같이 가져와야 값을 줄 수 있음.
-            if(result.pgvo.pageNo < result.endPage){
-                moreBtn.style.visibility ='visible'; //버튼 표시
-                moreBtn.dataset.page = page + 1;
-            }else {
-                moreBtn.style.visibility = 'hidden'; //버튼 숨김
-            }
+            
+        //댓글 페이징 코드
+        let moreBtn = document.getElementById('moreBtn');
+        console.log(moreBtn);
+        //db에서 pgvo + list 같이 가져와야 값을 줄 수 있음.
+        if(result.pgvo.pageNo < result.endPage){
+            moreBtn.style.visibility ='visible'; //버튼 표시
+            moreBtn.dataset.page = page + 1;
+        }else {
+            moreBtn.style.visibility = 'hidden'; //버튼 숨김
+        }
 
         }else{
             // 임시로 적어둔 댓글내용 초기화
@@ -184,7 +182,6 @@ async function spreadReviewList(reBno=proBnoVal, page=1){ //시작은 1페이지
             let li = `<li class="list-group-item">후기가 없습니다. <br>첫 후기를 남겨주세요.</li>`;
             ul.innerHTML = li;
         }
-
 
         //별점 평균 구하여 표시
         // 별을 표시할 div 요소 선택
@@ -214,9 +211,12 @@ async function spreadReviewList(reBno=proBnoVal, page=1){ //시작은 1페이지
             // 리뷰가 없는 경우 기본 별점 표시
             userStarDiv.innerHTML = `<label for="starEmpty">★★★★★</label>`;
         }
-    })
-    
+
+    } catch (error) {
+        console.error("Error in spreadReviewList:", error);
+    }
 }
+
 
 
 //----------------------------------------------------------------------------
@@ -262,8 +262,16 @@ document.addEventListener('click',(e)=>{
         const reModContent = e.target.closest('li').querySelector('.reContent');
         reModContent.removeAttribute('readonly');
 
+        // radio 버튼 선택 허용
+        const radioButtons = e.target.closest('li').querySelectorAll(`input[name="rating-${rnoVal}"]`);
+        radioButtons.forEach(button => button.disabled = false);
+
         // mod버튼의 텍스트를 "확인"으로 변경
         e.target.textContent = '확인';
+
+        // myformMini 클래스에 myform 추가
+        e.target.closest('li').querySelector('.myformMini').classList.add('myform');
+
         
         // "확인" 버튼 클릭 시 이벤트 핸들러 추가
         e.target.addEventListener('click', function handleConfirmClick() {

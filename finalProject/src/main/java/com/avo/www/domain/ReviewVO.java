@@ -18,5 +18,6 @@ public class ReviewVO {
 	private String reContent;
 	private int reScore;
 	private String regAt;
+	private String reNickName;
 
 }

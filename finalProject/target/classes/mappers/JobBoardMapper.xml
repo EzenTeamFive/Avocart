@@ -5,8 +5,8 @@
 <mapper namespace="com.avo.www.repository.JobBoardDAO">
 
 	<insert id="post" parameterType="pbvo">
-		insert into product(pro_title,pro_email,pro_nick_name,pro_content,pro_payment,pro_price,pro_category,pro_menu,pro_sido,pro_sigg,pro_emd)
-		values(#{proTitle},#{proEmail},#{proNickName},#{proContent},#{proPayment},#{proPrice},'job',#{proMenu},#{proSido},#{proSigg},#{proEmd})
+		insert into product(pro_title,pro_email,pro_nick_name,pro_content,pro_payment,pro_price,pro_category,pro_menu,pro_sido,pro_sigg,pro_emd,proFullAddr)
+		values(#{proTitle},#{proEmail},#{proNickName},#{proContent},#{proPayment},#{proPrice},'job',#{proMenu},#{proSido},#{proSigg},#{proEmd},#{proFullAddr})
 	</insert>
 	
 	<select id="selectOneBno" resultType="long">
@@ -58,6 +58,10 @@
    <select id="getTotalCount" resultType="int">
 		select count(pro_bno) from product where pro_is_del = "N" and pro_category = 'job'
    </select>
+   
+   <update id="updateFileCnt" parameterType="int">
+		update product set pro_file_cnt = #{proFileCnt}
+   </update>
 	
 <!--
  	<select id="listPaging" resultType="pbvo">

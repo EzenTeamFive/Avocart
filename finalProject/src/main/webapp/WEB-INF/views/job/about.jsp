@@ -14,6 +14,7 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
+<jsp:include page="../common/mainFloatingMenu.jsp"/>
 
 <div class="info">
 	<div class="infoText">

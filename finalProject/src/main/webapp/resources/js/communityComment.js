@@ -2,6 +2,7 @@
 document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
     const cmtText = document.getElementById('cmtText').value;
     const cmtWriter = document.getElementById('cmtWriter').innerText; 
+    const cmtNickName = document.getElementById('reNickName').innerText; 
     const cmtEmail = document.getElementById('cmtEmail').value;
 
     if(cmtText == "" || cmtText == null){ //댓글을 안 적었을 때

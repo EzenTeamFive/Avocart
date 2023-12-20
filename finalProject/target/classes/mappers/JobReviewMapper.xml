@@ -5,8 +5,8 @@
 <mapper namespace="com.avo.www.repository.JobReviewDAO">
 	
   	<insert id="postReview">
-  		insert into review(re_bno,re_user_id,re_content,re_score)
-  		values(#{reBno},#{reUserId},#{reContent},#{reScore})
+  		insert into review(re_bno,re_user_id,re_content,re_score,re_nick_name )
+  		values(#{reBno},#{reUserId},#{reContent},#{reScore},#{reNickName})
   	</insert>
   	<select id="selectOntBnoTotalCount" resultType="int">
   		select count(re_rno) from review where re_bno = #{reBno}

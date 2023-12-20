@@ -109,7 +109,7 @@
 let adr1 = '<c:out value="${adr1}" />';
 let adr2 = '<c:out value="${adr2}" />';
 
-var mapContainer = document.getElementById('map'); //지도를 표시할 div 
+var mapContainer = document.getElementById('map'); //지도를 표시할 div ㅋ
 var mapOption = {
     center: new kakao.maps.LatLng(37.450292, 126.702921), //지도의 중심좌표
     level: 3 //지도의 확대 레벨

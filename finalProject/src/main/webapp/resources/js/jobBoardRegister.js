@@ -1,4 +1,19 @@
 console.log("boardRegister.js connect");
+//주소입력창 클릭시 카카오주소 연결
+document.getElementById('proFullAddr').addEventListener('click', ()=>{
+    new daum.Postcode({
+        oncomplete: function(data) { //선택시 입력값 세팅
+            console.log(data);
+   
+            //db에 넣을 주소값 설정
+            document.getElementById('proSido').value = data.sido;
+            document.getElementById('proSigg').value = data.sigungu;
+            document.getElementById('proEmd').value = data.bname;
+            document.getElementById('proFullAddr').value = data.address;
+        }
+    }).open();
+   })
+
 
 // 트리거 버튼 클릭 시 file 업로드 실행
 document.getElementById('trigger').addEventListener('click', () => {
@@ -39,10 +54,9 @@ document.addEventListener('change', (e) => {
             ul += `<div class="img">`;
             ul += `<img alt="첨부이미지영역" src="${imageUrl}" style="max-width: 75px; max-height: 75px;">`;
             ul += `</div>`;
-            ul += `<div class="ms-2 me-auto">`;
-            ul += `${validResult ? '<div class="fw-bold">업로드 가능</div>' : '<div class="fw-bold text-danger">업로드 불가능</div>'}`;
             ul += `${file.name}</div>`;
-            ul += `<span class="badge rounded-pill text-bg-${validResult ? 'success' : 'danger'}">${file.size} Bytes</span></li>`;
+            ul += `<span class="${validResult ? 'imgOk' : 'imgNo'}">${validResult ? '가능' : '불가능'}</span></div>`;
+            ul += `<button type="button" class="imageCancelBtn" data-filename="${file.name}">X</button></li>`;
         }
         ul += `</ul>`;
         div.innerHTML = ul;
@@ -54,6 +68,58 @@ document.addEventListener('change', (e) => {
     
 });
 
+document.addEventListener('click', (e) => {
+    const fileInput = document.getElementById('files');
+    const fileObj = fileInput.files;
+    let fileObjLength = fileObj.length;
+    console.log(" fileObjLength >> " , fileObjLength)
+
+    // 삭제버튼 눌렀을 때
+    if (e.target.classList.contains('imageCancelBtn')) {
+        const filename = e.target.dataset.filename;
+
+        if (filename) {
+            const liToRemove = e.target.closest('li');
+            liToRemove.remove();
+            fileObjLength--;
+            console.log(" liToRemove >> " , liToRemove)
+            console.log(" 삭제 후 fileObjLength >> " , fileObjLength)
+
+            // 새로운 FileList 생성
+            const newFileList = createFileListWithoutFileName(fileObj, filename);
+            console.log("newFileList >> " , newFileList);
+
+            // 새로운 FileList를 input에 설정
+            fileInput.files = newFileList;
+        }
+
+        if (fileObjLength == 0) {
+            document.getElementById('fileZone').style = "display:none";
+        }
+    }
+});
+
+function createFileListWithoutFileName(fileList, fileNameToRemove) {
+    const newFiles = [];
+
+    for (let i = 0; i < fileList.length; i++) {
+        if (fileList[i].name !== fileNameToRemove) {
+            newFiles.push(fileList[i]);
+        }
+    }
+    console.log(newFiles);
+    // 새로운 FileList 생성
+    const newFileList = new DataTransfer();
+
+    for (const file of newFiles) {
+        newFileList.items.add(file);
+    }
+
+    return newFileList.files;
+}
+
+
+
 // 파일제외 모든 항목에 input 발생시 regBtn 활성화 및 class 변경
 //각 항목 변수
 const regBtn = document.getElementById('regBtn');
@@ -61,7 +127,7 @@ const proTitle = document.getElementById('proTitle');
 const proMenu = document.getElementById('proMenu');
 const proPayment = document.getElementById('proPayment');
 const proPrice = document.getElementById('proPrice');
-const proAddress = document.getElementById('proAddress');
+const proFullAddr = document.getElementById('proFullAddr');
 const proContent = document.getElementById('proContent');
 const attention = document.getElementById('attention');
 
@@ -71,7 +137,7 @@ proTitle.addEventListener('input', checkFields);
 proMenu.addEventListener('input', checkFields);
 proPayment.addEventListener('input', checkFields);
 proPrice.addEventListener('input', checkFields);
-proAddress.addEventListener('input', checkFields);
+proFullAddr.addEventListener('input', checkFields);
 proContent.addEventListener('input', checkFields);
 
 function checkFields() {
@@ -79,10 +145,12 @@ function checkFields() {
     const proMenuValue = proMenu.value;
     const proPaymentValue = proPayment.value;
     const proPriceValue = proPrice.value;
-    const proAddressValue = proAddress.value;
+    const proFullAddrValue = proFullAddr.value;
     const proContentValue = proContent.value;
 
-    if (proTitleValue.trim() === '' || proMenuValue === '선택' ||proPaymentValue === '선택' || proPriceValue.trim() === '' || proAddressValue.trim() === '' || proContentValue.trim() === '') {
+    console.log("proTitleValue >> " + proTitleValue + " / proMenuValue >> " + proMenuValue + " / proPaymentValue >> " + proPaymentValue + " / proPriceValue >> " + proPriceValue + " / proFullAddrValue >> " + proFullAddrValue + " / proContentValue >> " + proContentValue)
+
+    if (proTitleValue.trim() === '' || proMenuValue === '선택' ||proPaymentValue === '선택' || proPriceValue.trim() === '' || proFullAddrValue.trim() === '' || proContentValue.trim() === '') {
         regBtn.disabled = true;
         attention.innerHTML="※ 빈 칸을 작성해주세요.";
     } else {

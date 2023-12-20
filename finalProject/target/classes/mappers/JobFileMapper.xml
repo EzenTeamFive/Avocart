@@ -22,7 +22,9 @@
   	</delete>
   	<select id="getProfileImg" parameterType="String" resultType="com.avo.www.domain.FileVO" >
   		select * from profile_file where pr_email = #{prEmail}
-  	
   	</select>
+  	<delete id="removeFileOne" parameterType="String">
+  		delete from product_file where uuid = #{uuid}
+  	</delete>
 
 </mapper>
