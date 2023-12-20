@@ -11,13 +11,30 @@
 		flex-wrap: wrap;
 	}
 
-	.userLocation{
+	.cmBanner{
 		background-color: #84a331;
-		height: 250px;
+		height: 300px;
+		font-family: 'SUIT-Regular';
+		display: flex;
+		justify-content: center;
 	}
-	.userLocationP{
+	.innerDiv{
+		padding-top: 60px;
+		width: 700px;
+		background-image: url(../image/avocartLogo.png);
+		background-repeat: no-repeat;
+		background-position: right;
+		background-size: contain;
+	}
+	.cmBannerText1{
 		margin: 0;
-		font-size: 20px;
+		font-size: 32px;
+		font-weight: 800;
+	}
+	.cmBannerText2{
+		margin: 10px 0 0 0;
+		font-size: 16px;
+
 	}
 
 	.CommunityCategory{

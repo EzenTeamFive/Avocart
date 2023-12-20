@@ -15,7 +15,7 @@ input:focus {outline: none;}
 }
 .headerContainer{
    font-family: 'suit';
-   border-bottom: 1px solid #eee;
+   box-shadow: 0 0 2px #cdcdcd;
 }
 .bodyContainer{
    font-family: 'suit';
@@ -77,24 +77,36 @@ header{
    width: 50%;
    position: relative;
 }
+.inputIcon{
+   position: absolute;
+   top: 16px;
+   left: 17px;
+   font-size: 14px;
+   color: #93b336;
+}
 .searchSec input[type='search']{
-   height: 40px;
+   height: 45px;
    width: 100%;
    border: 2px solid #93b336;
    border-radius: 5px;
-   padding: 0 20px 0 15px;
+   padding: 0 20px 0 40px;
    font-size: 14px;
 }
-.searchSec button{
+.deleteInputText{
    position: absolute;
-   right: 0px;
-   z-index: 10;
-   width: 50px;
-   height: 40px;
+   right: 16px;
+   top: 12px;
+   width: 20px;
+   height: 20px;
    border: 0;
-   border-radius: 20px;
-   background-color: transparent;
-   font-size: 14px;
+   border-radius: 100%;
+   color: white;
+   background-color: #a1a0a0;
+   font-size: 10px;
+   line-height: 20px;
+}
+.deleteIconOff{
+   display: none;
 }
 .searchSec .bi-person{
    font-size: 25px;
@@ -129,8 +141,14 @@ header{
    border-radius: 30px;
 }
 .searchSec .searchMenu button{
-   right: 20px;
-   color: #93b336;
+    color: #93b336;
+    position: absolute;
+    right: 15px;
+    width: 50px;
+    height: 40px;
+    border: 0;
+    background-color: transparent;
+    font-size: 14px;
 }
 .searchSec .searchMenu h3{
    font-size: 18px;
@@ -189,8 +207,8 @@ header{
    margin: 0;
    text-align: center;
 }
-#myMenu ul li:nth-child(1){
-   border-bottom: 1px solid #efefef;
+.logoutLi{
+   border-top: 1px solid #efefef;
 }
 #myMenu ul li a{
    text-decoration: none;

@@ -22,28 +22,30 @@
 		justify-content: center;
 		flex-wrap: wrap;
 	}
+	.innerContainer{
+		width: 700px;
+	}
 	
 	/* 젤 위에 라인 */
 	.topLine{
 		margin-top: 60px;
-		width: 650px;
-		display: flex;
-		justify-content: center;
+		width: 100%;
+		text-align: center;
 		border-bottom: 1px solid black;
 	}
 	.pageName{
-		font-size: 23px;	    
+		font-size: 24px;	    
 		font-weight: 800;
 	}
 	
 	/* detail 라인 */
 	.detailLine{
-		width: 80%;
+		width: 100%;
 	    display: flex;
 	    justify-content: center;
 	}
 	.detailBoard{
-		width: 650px;
+		width: 100%;
 		border-bottom: 1px solid lightgray;
 	}
 	.csMenu{
@@ -95,13 +97,13 @@
 
 	/* 답변 작성 라인 */
 	.commentWriteLine {
-		width: 80%;
+		width: 100%;
     	margin-top: 30px;
     	display: flex;
     	justify-content: center;
    	}
    	.commentWrite{
-    	width: 650px;
+    	width: 100%;
 		padding: 20px;
 		border: 1px solid #e4e4e4;
 		border-radius: 5px;
@@ -130,7 +132,7 @@
 	/* 답변 라인 */
 	.answerLine{
 		margin: 30px 0;
-		width: 650px;
+		width: 100%;
 	}
 	.A{
 		font-weight: 800;
@@ -153,12 +155,15 @@
 	}
 
 	.bottonLine{
-		width: 80%;
+		width: 100%;
 		display: flex;
 		justify-content: center;
 	}
+	.bottonLine a{
+		width: 100%;
+	}
 	.OkBtn{
-		width: 650px;
+		width: 100%;
 		border: none;
 		border-radius: 5px;
 		font-size: 14px;
@@ -174,6 +179,7 @@
 <c:set value="${bdto.flist }" var="flist" />
 <jsp:include page="../common/header.jsp" />
 <div class="bodyContainer">
+<div class="innerContainer">
 
 <div class="topLine">
 	<p class="pageName">문의내역 상세</p>
@@ -229,6 +235,7 @@
 	</a>
 </div>
 
+</div>
 </div>
 <!-- 여기까지 bodyContainer -->
 <jsp:include page="../common/footer.jsp" />

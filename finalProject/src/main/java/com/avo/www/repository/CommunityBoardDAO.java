@@ -43,4 +43,8 @@ public interface CommunityBoardDAO {
 
 	List<CommunityBoardVO> getSearchCommunityList(PagingVO pgvo);
 
+	List<CommunityBoardVO> getCommunityList();
+
+	List<CommunityBoardVO> getCommunityLikeList();
+
 }

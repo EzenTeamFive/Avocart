@@ -20,22 +20,24 @@
 		justify-content: center;
 		flex-wrap: wrap;
 	}
+	.innerContainer{
+		width: 700px;
+	}
 	
 	/* 젤 위에 라인 */
 	.topLine{
 		margin-top: 60px;
-		width: 650px;
-		display: flex;
-		justify-content: center;
+		width: 100%;
+		text-align: center;
 		border-bottom: 1px solid black;
 	}
 	.pageName{
-		font-size: 23px;	    
+		font-size: 24px;	    
 		font-weight: 800;
 	}
 	
 	.topLine2{
-		width: 80%;
+		width: 100%;
 		display: flex;
 		justify-content: center;
 		font-size: 14px;
@@ -49,7 +51,7 @@
 
 	/* 작성라인 */
 	.formLine{
-		width: 650px;
+		width: 100%;
 		display: flex;
 		justify-content: center;
 		margin: 40px 0;
@@ -206,6 +208,7 @@
 <sec:authentication property="principal.mvo.memNickName" var="authNick" />
 <jsp:include page="../common/header.jsp" />
 <div class="bodyContainer">
+<div class="innerContainer">
 
 <div class="topLine">
 	<p class="pageName">1:1 문의</p>
@@ -252,7 +255,7 @@
 </form>
 </div>
 
-
+</div>
 </div>
 <!-- 여기까지 bodyContainer -->
 <jsp:include page="../common/footer.jsp" />

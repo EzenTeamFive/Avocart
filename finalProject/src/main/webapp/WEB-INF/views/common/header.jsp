@@ -22,13 +22,12 @@
       </div>
       <div class="searchSec">
          <form action="/common/search" method="post">
+         	<i class="bi bi-search inputIcon"></i> 
             <input type="search" id="searchInput" placeholder="검색어를 입력해 주세요.">
-            <button type="button"><img width="24" height="24" src="https://img.icons8.com/plumpy/24/macos-close.png" alt="macos-close"/></button>
-            <button type="button" class="openMenu">
-               <i class="bi bi-search"></i>         
-            </button>
-            <div class="searchMenu off">
-               <h2>상품검색</h2>
+            <button type="button" class="deleteInputText deleteIconOff" id="textCancelBtn">X</button>
+
+            <div class="searchMenu off" id="searchMenu">
+               <h2>상품 검색</h2>
                <input type="search" id="keyword" name="keyword" placeholder="검색어를 입력해 주세요.">
                <button type="submit">
                   <i class="bi bi-search"></i>         
@@ -51,19 +50,35 @@
             </div>
          </form>
          <i id="my" class="bi bi-person"></i>
-         <!-- 로그인 후 오픈되어야 할 메뉴 -->
-         <sec:authorize access="isAuthenticated()">
-           <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
+         <!-- 회원 메뉴 -->
+         <sec:authorize access="hasAuthority('ROLE_USER')">
+         <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
             <div id="myMenu" class="off">
                <ul>
                   <li><a href="/hmember/detail?memEmail=${authEmail }">마이페이지</a></li>
-                  <li><a href="#" id="logoutLink">로그아웃</a></li>
+                  <li class="logoutLi"><a href="#" id="logoutLink">로그아웃</a></li>
                   <form action="/member/logout" method="post" id="logoutForm">
                        <input type="hidden" name="memEmail" value="${authEmail }">
                   </form>
                </ul>
             </div>
          </sec:authorize>
+         <!-- 관리자 메뉴 -->
+		<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+        <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
+		    <div id="myMenu" class="off">
+               <ul>
+                  <li><a href="#">1:1 문의 내역</a></li>
+                  <li><a href="#">공지사항 수정</a></li>
+                  <li><a href="/faq/adminList">FAQ 수정</a></li>
+                  <li><a href="#">회원리스트</a></li>
+                  <li class="logoutLi"><a href="#" id="logoutLink">로그아웃</a></li>
+                  <form action="/member/logout" method="post" id="logoutForm">
+                       <input type="hidden" name="memEmail" value="${authEmail }">
+                  </form>
+               </ul>
+            </div>
+		</sec:authorize>
       </div>
    </header>
    <nav>
@@ -73,7 +88,7 @@
          <li><a href="/job/list">알바구인</a></li>
          <li><a href="/community/list">동네소식</a></li>
          <li><a href="#">공지사항</a></li>
-         <li><a href="/faq/list?faqCategory=전체">FAQ</a></li>
+         <li><a href="/faq/list">고객센터</a></li>
          
            <!-- 로그인 전 오픈되어야 할 메뉴 -->
          <sec:authorize access="isAnonymous()">

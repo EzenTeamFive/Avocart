@@ -196,7 +196,7 @@
 </div>
 	
 <div class="faqCategory">
-	<a href="/faq/adminList?faqCategory=전체" class="category faqActive">전체</a>
+	<a href="/faq/adminList" class="category faqActive">전체</a>
 	<a href="/faq/adminList?faqCategory=이용문의" class="category">이용문의</a>
 	<a href="/faq/adminList?faqCategory=거래문의" class="category">거래문의</a>
 	<a href="/faq/adminList?faqCategory=회원/계정" class="category">회원/계정</a>
