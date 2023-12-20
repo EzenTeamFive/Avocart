@@ -14,7 +14,6 @@
 <div class="bodyContainer">
 
 <div class="allBtns">
-
 <p>카테고리</p>
 <select name="categorySelect" id="categorySelect">
     <option value="null" selected="selected">전체</option>
@@ -41,8 +40,6 @@
     <option value="likes">좋아요 순</option>
     <option value="views">조회수 순</option>
 </select>
-
-<a href="/store/register" class="regiBtn listBtns">작성하기</a>
 </div>
 
 <div id="loading">
@@ -81,6 +78,8 @@
 </div>
 
 </div>
+<!-- floatingMenu -->
+<jsp:include page="../common/mainFloatingMenu.jsp"/>
 
 <script src="/resources/js/storeBoardList.js"></script>
 <script type="text/javascript">

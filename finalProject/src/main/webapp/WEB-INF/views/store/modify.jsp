@@ -248,7 +248,7 @@
 
    <div class="cmButtons">
       <a href="/store/detail?bno=${svo.proBno }"><button type="button" class="cancelBtn">취소</button></a>
-      <button type="submit" class="regBtn" id="regBtn" disabled="disabled">수정하기</button>
+      <button type="submit" class="regBtn" id="regBtn">수정하기</button>
    </div>
 </form>
 </div>
