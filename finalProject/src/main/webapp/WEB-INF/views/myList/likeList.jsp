@@ -17,8 +17,8 @@
 <!-- 규격 표시 임시 div -->
 <div class="cover" style="width: 1280px; border: 2px solid green; margin: 50px; box-sizing: border-box;">
 	<div class="titleLine">
-		<h4>찜 <span style="color: red">d</span></h4>
-		${ph }
+		<h4>찜 <span style="color: red" id="likeCnt"></span></h4>
+
 
 		<section>
 			<div class="allMenu">
@@ -36,7 +36,9 @@
 		<!-- ... -->
 	</div>
 	
-	<button type="button" id="moreBtn" onclick="loadMore()"><i class="bi bi-caret-down-square"></i> 찜 더 보기</button>
+	<hr> 
+	
+	<button type="button" id="moreBtn" onclick="loadMore()"><i class="bi bi-plus-circle-fill"></i> 찜 더 보기</button>
 </div>
 
 
