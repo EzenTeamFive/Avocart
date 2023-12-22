@@ -206,6 +206,6 @@ public class StoreBoardController {
           new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);   
    }
 
-   @GetMapping("/mapTest")
-   public void mapTest() {}
+   @GetMapping("/prac")
+   public void prac() {}
 }

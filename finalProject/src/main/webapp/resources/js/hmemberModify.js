@@ -203,8 +203,13 @@ async function deleteMemBtn(email){
     }
 }
 
+// document.getElementById('deleteMemBtn').addEventListener('click',(e)=>{
+//     if (confirm('정말 탈퇴하시겠어요? \n작성한 댓글은 자동으로 삭제되지 않습니다.')) {
+//         deleteMemBtn(email);
+//     }
+// });
+
+
 document.getElementById('deleteMemBtn').addEventListener('click',(e)=>{
-    if (confirm('정말 탈퇴하시겠어요? \n작성한 댓글은 자동으로 삭제되지 않습니다.')) {
-        deleteMemBtn(email);
-    }
+    window.open('http://localhost:8088/hmember/dropOut', 'test', 'width=500, height=301, top=350, left=700');
 });

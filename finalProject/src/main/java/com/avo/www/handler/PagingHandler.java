@@ -30,11 +30,10 @@ public class PagingHandler {
    private List<ProductBoardVO> prodList;
    private List<CommunityCmtVO> cmtList;
    private List<CommunityReCmtVO> reCmtList;
-   
-   //1123 하연 추가
-   private List<FileVO> prodFileList;
-   
    private List<CommunityBoardVO> cmList;
+   
+   private List<FileVO> prodFileList;
+   private List<Integer> reviewCntList;
 
    //23.12.06 미수 추가 리뷰 페이징용
    private List<ReviewVO> jobReList;
@@ -69,13 +68,14 @@ public class PagingHandler {
       this.reCmtList = reCmtList;
    }
    
-   //1123 하연 추가
-   public PagingHandler(PagingVO pgvo, int totalCount, List<ProductBoardVO> prodList, List<FileVO> prodFileList) {
+   //업체 페이징용
+   public PagingHandler(PagingVO pgvo, int totalCount, List<ProductBoardVO> prodList, List<FileVO> prodFileList, List<Integer> reviewCntList) {
          this(pgvo, totalCount, 9);
          this.prodList = prodList;
          this.prodFileList =  prodFileList;
+         this.reviewCntList = reviewCntList;
       }
-
+   
    //커뮤니티 페이징용
    public PagingHandler(int totalCount, PagingVO pgvo, List<CommunityBoardVO> cmList) {
 	      this(pgvo, totalCount, 9);
