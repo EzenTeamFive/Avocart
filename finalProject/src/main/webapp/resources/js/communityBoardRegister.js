@@ -96,6 +96,7 @@ document.addEventListener('click', (e) => {
             document.getElementById('regBtn').disabled = true;
         }else{
             document.getElementById('regBtn').disabled = false;
+            checkFields();
         }
 
         console.log(fileObjLength);
