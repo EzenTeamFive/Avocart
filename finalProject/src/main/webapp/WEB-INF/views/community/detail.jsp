@@ -39,7 +39,7 @@
 		<c:if test="${bvo.cmNickName eq authNick }">
 			<div class="userDropdownMenu">
 				<button class="boardUserBtn" type="button" id="boardUserMenuBtn">
-					<i class="bi bi-three-dots"></i>
+					<i class="bi bi-three-dots" id="boardUserMenuBtn2"></i>
 				</button>
 				<ul class="boardUserMenu menu-off" id="boardUserMenu" style="display:none">
 					<li><a href="/community/modify?cmBno=${bvo.cmBno }">수정하기</a></li>

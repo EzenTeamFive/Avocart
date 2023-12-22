@@ -24,11 +24,9 @@
 	<update id="readCount">
   		update product set pro_read_cnt = pro_read_cnt + #{cnt} where pro_bno = #{proBno}
 	</update>
-<!-- 	
  	<select id="getList" resultType="pbvo">
 		select * from product where pro_is_del = 'N' and pro_category = 'job' order by pro_re_at DESC
 	</select>
-	 -->
  	<select id="getHotList" resultType="pbvo">
 		select * from product where pro_is_del = 'N' and pro_category = 'job' order by pro_read_cnt DESC
 	</select>
@@ -57,6 +55,7 @@
    
    <select id="getTotalCount" resultType="int">
 		select count(pro_bno) from product where pro_is_del = "N" and pro_category = 'job'
+		<include refid="count"></include>
    </select>
    
    <update id="updateFileCnt" parameterType="int">
@@ -72,7 +71,27 @@
   		order by pro_re_at DESC limit #{pageStart}, #{qty}
 	</select> 
 	-->
-
+<sql id="count">
+		<if test="type != 'undefined' and type != '전체'">
+		AND pro_menu = #{type}
+		</if>
+		<if test="sorted != null">
+			<choose>
+				<when test="sorted == 'newest'.toString()">
+					order by pro_re_at DESC
+				</when>
+				<when test="sorted == 'oldest'.toString()">
+					order by pro_re_at ASC
+				</when>
+				<when test="sorted == 'hotest'.toString()">
+					order by pro_read_cnt DESC
+				</when>
+			</choose>
+		</if>
+		<if test="sorted == 'undefined' ">
+			order by pro_re_at DESC
+		</if>
+</sql>
 <sql id="jobSelect">
 	<if test="type != null">
         <trim prefix="and (" suffix=")" prefixOverrides="OR">
@@ -124,8 +143,14 @@
 	</if>
 
 </sql>
-	
 
+<!-- index용 -->
+<select id="getJobList" resultType="com.avo.www.domain.ProductBoardVO">
+	select * from product 
+    where pro_category = 'job' AND pro_is_del = 'N'
+    order by pro_bno desc
+	limit 0, 6
+</select>
 
 
 </mapper>

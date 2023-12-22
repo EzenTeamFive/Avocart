@@ -31,10 +31,60 @@
 	border-bottom: 0;
 	font-weight: 700;
 }
+.tabContents{
+	padding-top: 40px;
+}
 .tabContents > div:not(.on) {
 	display: none;
 }
 
+.tabContents > div{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+.tabContents > div > .oneList{
+	width: 240px;
+	border: 1px solid #ededed;
+}
+.oneList a{
+	text-decoration: none;
+}
+.oneList img{
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+}
+.oneList .contentWrap{
+	color: #333;
+	padding: 12px 15px;
+}
+.oneList .contentWrap h3{
+	font-size: 16px;
+}
+.oneList .contentWrap b{
+	font-size: 18px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+.oneList .contentWrap small{
+	font-size: 12px;
+	font-weight: 300;
+}
+.oneList mark{
+	background-color: #fff;
+	color: #bbb;
+	display: block;
+	border-top: 1px solid #ededed;
+	line-height: 30px;
+	padding: 0 12px;
+	font-size: 14px;
+}
+.oneList mark i{
+	color: #93b336;
+	margin-right: 3px;
+}
 </style>
 
 </head>
@@ -50,7 +100,15 @@
 	<div class="tabContents">
 	    <div class="on" id="sellList">
 	    	<!-- 판매상품 탭 -->
-	    	tab menu1
+	    	<div class="oneList">
+	    		<img alt="" src="../resources/image/기본 프로필 배경.png">
+	    		<div class="contentWrap">
+		    		<h3>물건이름</h3>
+		    		<b>가격</b>
+		    		<small>날짜</small>
+	    		</div>
+		    	<mark><i class="bi bi-geo-alt"></i>장소</mark>
+	    	</div>
 	    </div>
 	
 	    <div>
@@ -59,7 +117,14 @@
 	
 	    <div id="buyList">
 	    	<!-- 구매내역 탭 -->
-	    	tab menu3
+	    	<div class="oneList">
+	    		<img alt="" src="../resources/image/기본 프로필 배경.png">
+	    		<div class="contentWrap">
+		    		<h3>물건이름</h3>
+		    		<b>가격</b>
+		    		<small>날짜</small>
+	    		</div>
+	    	</div>
 	    </div>
 	
 	    <div>

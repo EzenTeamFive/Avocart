@@ -104,7 +104,7 @@
     margin: 0 auto;
 }
 
-.hotJobListContent, .jobListContent {
+.jobListContent {
     align-items: center;
     width: 43%;
     height: 200px;
@@ -116,17 +116,17 @@
     border-radius: 10px;
 }
 
-.hotJobListContent:hover, .jobListContent:hover {
+.jobListContent:hover {
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-.hotJobListContent span, .jobListContent span {
+.jobListContent span {
     color: black;
 }
-.hotJobListContent a, .jobListContent a {
+.jobListContent a {
     text-decoration: none;
 }
-.hotJobListContent img, .jobListContent img {
+.jobListContent img {
 	width: 250px;
     height: 100%;
     object-fit: cover;

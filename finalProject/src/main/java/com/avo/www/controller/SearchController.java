@@ -1,8 +1,5 @@
 package com.avo.www.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
@@ -15,9 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.avo.www.domain.CommunityBoardVO;
 import com.avo.www.domain.PagingVO;
-import com.avo.www.domain.ProductBoardVO;
 import com.avo.www.handler.PagingHandler;
 import com.avo.www.service.SearchService;
 
@@ -92,6 +87,7 @@ public class SearchController {
 	@PostMapping("/search")
 	public void postSearch(PagingVO pgvo, Model m) {
 		this.pgvo = pgvo;
+		m.addAttribute("keyword", pgvo.getKeyword());
 	}
 	
 }

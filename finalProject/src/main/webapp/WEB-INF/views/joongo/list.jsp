@@ -14,8 +14,6 @@
 <jsp:include page="../common/mainFloatingMenu.jsp"/>
 <div class="joongoBanner"></div>
 <div class="bodyContainer">
-	<button type="button"><a href="/info/list">공지사항</a></button>
-	<button type="button"><a href="/info/register">공지작성</a></button>
 	<div class="boardMenuArea">
 		<h3>거래 물품 <b>0</b>개</h3>
 		<!-- menu 출력 공간 -->

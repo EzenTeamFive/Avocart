@@ -5,6 +5,15 @@
     font-style: normal;
 }
 
+.storeBanner {
+	background: url(../image/joongo_banner.png) no-repeat center/cover;
+    width: 100%;
+    height: 300px;
+}
+
+.totalCnt {
+	text-align: right;	
+}
 .bodyContainer{
     font-family: 'suit';
     margin: 0 auto;
@@ -18,25 +27,28 @@
    /* padding: 90px 150px 30px; */
     padding-top: 90px;
     padding-bottom: 30px;
-    padding-left: 643px;
+    padding-left: 669px;
     font-family: 'suit';
 }
 
 .allBtns p{
     display: inline-block;
-    margin-right: 5px;
+    margin-bottom: 1rem;
 }
 
 .allBtns Select {
-   /*  width: 11%; */
-    height: 40px;
+    padding: 5px 20px 5px 5px;
+    border: 1px solid #d3d3d3;
     border-radius: 5px;
-    border: solid 1px #e5e5e5;
-    padding: 5px;
-  /*   margin-right: 15px; */
+    background: url(../image/down_arrow.png) no-repeat 92% 50%/12px auto;
+    appearance: none;
     outline: none;
 }
 
+#categorySelect {
+	width: 121px;	
+	
+}
 .allBtns Select:focus {
     outline: none;
 }
@@ -51,7 +63,7 @@
 .listContainer ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 36px 36px;
+    gap: 40px 40px;
     padding: 0;
     margin-bottom: 15px;
     /* padding-left: 150px; */

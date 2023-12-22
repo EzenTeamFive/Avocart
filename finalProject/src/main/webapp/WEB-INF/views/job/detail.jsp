@@ -213,6 +213,7 @@
 <!-- 공통 -->
 <script type="text/javascript">
     const proBnoVal = `<c:out value="${jbdto.pbvo.proBno}"/>`;
+    const receiverEmail = `<c:out value="${jbdto.pbvo.proEmail}"/>`;
     const memEmail = `<c:out value="${memEmail}"/>`;
     const proFullAddr = `${jbdto.pbvo.proFullAddr}`;
     console.log(proFullAddr);

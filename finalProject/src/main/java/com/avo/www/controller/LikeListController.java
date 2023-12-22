@@ -1,36 +1,26 @@
 package com.avo.www.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.avo.www.domain.CommunityBoardVO;
 import com.avo.www.domain.FileVO;
-import com.avo.www.domain.ProductBoardVO;
-import com.avo.www.handler.FileHandler;
-import com.avo.www.security.AuthMember;
-import com.avo.www.security.MemberVO;
-import com.avo.www.service.HmemberService;
+import com.avo.www.domain.LikeItemVO;
+import com.avo.www.domain.PagingVO;
+import com.avo.www.handler.PagingHandler;
+import com.avo.www.service.JobBoardService;
+import com.avo.www.service.LikeListService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,34 +28,61 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/likeList/*")
 @Controller
 public class LikeListController {
+	
 	@Inject 
-	private HmemberService hsv;
+	private LikeListService lsv;
 
 	@Inject
-	private BCryptPasswordEncoder bcEncoder;
-
-	@Inject
-	private FileHandler fh;
+	private JobBoardService jbsv;
 	
 	@GetMapping("likeList")
 	public void likeList(Model m) {
-//		List<ProductBoardVO> liList= hsv.getLikeList();
-//		List<CommunityBoardVO> liComuList= hsv.getLikeComuList(email);
+		log.info(">>>>> like list page >> ");
 		
 	}
 	
-	/*
-	 * public void detail(Model m, @RequestParam("memEmail") String email) { FileVO
-	 * fvo = hsv.getProfile(email); String backSrc = null; String mainSrc = null;
-	 * if(fvo!=null) { backSrc = "/upload/profile/" + fvo.getSaveDir().replace('\\',
-	 * '/') + "/" + fvo.getUuid() + "_" + fvo.getFileName(); mainSrc =
-	 * "/upload/profile/" + fvo.getSaveDir().replace('\\', '/') + "/" +
-	 * fvo.getUuid() + "_" + fvo.getFileName(); } else { backSrc =
-	 * "../resources/image/기본 프로필 배경.png"; mainSrc =
-	 * "../resources/image/기본 프로필.png"; } m.addAttribute("mvo",
-	 * hsv.getDetail(email)); m.addAttribute("backSrc", backSrc);
-	 * m.addAttribute("mainSrc", mainSrc); }
-	 */
+//	리스트 페이징 매핑
+	@GetMapping(value = "/likeList/{page}/{category}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PagingHandler> spread(@PathVariable("page") int page, 
+	        @PathVariable("category") String category, Model m, 
+	        Principal principal) {
+	    log.info("page >> " + page + "/ category >> " + category );
+	    String liUserId = principal.getName();
+	    log.info("liUserId >> " + liUserId);
+	    
+	    // pgvo 생성하여 page, qty(보여줄 게시글 수) 설정
+	    PagingVO pgvo = new PagingVO(page, 8);
+	    pgvo.setType(category);
+	    // 페이징 할 전체 게시글 수
+	    int totalCount = lsv.getTotalCount(pgvo, liUserId);
+	    log.info("totalCount >>> " + totalCount);
+	    // 타입, 정렬 설정
+	    
+	    // like정보 담을 vo
+	    List<LikeItemVO> likeList = lsv.getLikeList(liUserId);
+	    		
+	    
+	    
+	    // pgvo,전체 게시글수, qty 담은 ph객체 생성
+	    PagingHandler ph = new PagingHandler(pgvo , totalCount, 8, likeList);
+	    
+//	    ph.setProdList(lsv.getMoreList(pgvo));
+	    ph.setProdList(lsv.getMoreList(pgvo, liUserId));
+	    
+	    log.info("ph >>> " + ph);
+	    m.addAttribute("ph", ph);
+	    
+	    return new ResponseEntity<PagingHandler>(ph, HttpStatus.OK);
+	}
 	
-
+//	리스트 썸네일
+	@PostMapping(value = "/likeList/thumb/{proBno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FileVO> getThumb(@PathVariable("proBno")long proBno){
+		
+		//썸네일 가져와서 flist에 담기
+		List<FileVO> flist = jbsv.getThumb(proBno);
+		log.info("thumbnail >>  flist >> "+flist);
+		
+		return new ResponseEntity<FileVO>(flist.get(0), HttpStatus.OK);
+	}
 }

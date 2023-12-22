@@ -186,7 +186,7 @@ public class JobBoardController {
 //	리스트 페이징 매핑
 	@GetMapping(value = "/list/{page}/{menu}/{sort}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PagingHandler> spread(@PathVariable("page") int page, 
-	        @PathVariable("menu") String menu, @PathVariable("sort") String sort, Model m) {
+	        @PathVariable("menu") String menu, @PathVariable("sort") String sort) {
 	    log.info("page >> " + page + "/ menu >> " + menu + " sort >> " + sort );
 	    // pgvo 생성하여 page, qty(보여줄 게시글 수) 설정
 	    PagingVO pgvo = new PagingVO(page, 8);

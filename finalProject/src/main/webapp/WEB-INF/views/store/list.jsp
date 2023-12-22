@@ -11,9 +11,11 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
+<div class="storeBanner"></div>
 <div class="bodyContainer">
-
 <div class="allBtns">
+<h3 class="totalCnt">등록 업체 <b>0</b>개</h3>
+
 <p>카테고리</p>
 <select name="categorySelect" id="categorySelect">
     <option value="null" selected="selected">전체</option>
@@ -33,7 +35,7 @@
     <option value="dessert">카페/디저트</option>
 </select>
 
-<p>정렬 기준</p>
+<p>정렬기준</p>
 <select name="sortSelect" id="sortSelect">
     <option value="latest" selected="selected">최신순</option>
     <option value="oldest">오래된 순</option>
@@ -62,7 +64,7 @@
                     <span class="content">${pvo.proContent }</span>
                   
                   <div class="infoTexts">
-                    <span class="gray infoTexts">${svo.proEmd } · ${svo.proMenu} · 후기 수정</span>
+                    <span class="gray infoTexts">${svo.proEmd } | ${svo.proMenu} | 후기</span>
                   </div>   
                   
                </div>   

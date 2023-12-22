@@ -29,29 +29,31 @@ function getStoreList(page = 1, type = null, sort = null) {
         console.log(result);
         const ul = document.getElementById('ulZone');
         const moreBtn = document.getElementById('moreBtn');
+        let cnt = result.totalCount;
+        document.querySelector('.totalCnt').innerHTML = `등록 업체 <b>${cnt}</b>개`;
 
         if (page === 1) {
             ul.innerHTML = "";
         }
 
         if (result.prodList.length > 0) {
-            for (let svo of result.prodList) {
-                //파일 리스트
-                console.log(result.prodFileList);
+            for (let i = 0; i < result.prodList.length; i++) {
+                let svo = result.prodList[i];
+                let reviewCnt = result.reviewCntList[i];  
 
-                 const matchingFvo = result.prodFileList.find(f => f.bno === svo.proBno);
+                const matchingFvo = result.prodFileList.find(f => f.bno === svo.proBno);
 
-                 let imgSrc = "";
-                 
-                 if (matchingFvo) {
-                     //matchingFvo가 존재할 경우 이미지 경로 설정
-                     imgSrc = `/upload/product/${matchingFvo.saveDir.replace('\\', '/')}/${matchingFvo.uuid}_${matchingFvo.fileName}`;
-                 } else {
-				    //matchingFvo가 없는 경우 기본 이미지 
-				    imgSrc = "../resources/image/logoimage.png";
-				}
-				
-                //li 생성
+                let imgSrc = "";
+                
+                if (matchingFvo) {
+                    // matchingFvo가 존재할 경우 이미지 경로 설정
+                    imgSrc = `/upload/product/${matchingFvo.saveDir.replace('\\', '/')}/${matchingFvo.uuid}_${matchingFvo.fileName}`;
+                } else {
+                    // matchingFvo가 없는 경우 기본 이미지 
+                    imgSrc = "../resources/image/logoimage.png";
+                }
+            
+                // li 생성
                 const li = document.createElement('li');
                 li.innerHTML = `
                     <a href="/store/detail?bno=${svo.proBno}">     
@@ -60,16 +62,16 @@ function getStoreList(page = 1, type = null, sort = null) {
                             </div>
 
                         <div class="textContainer">                          
-                        	<span class="title">${svo.proTitle}</span>                            
+                           <span class="title">${svo.proTitle}</span>                            
                             <span class="content">${svo.proContent}</span>
                             
                             <div class="infoTexts">
-                            	<span class="gray">${svo.proEmd } · ${svo.proMenu} · 후기 수정</span>
-                            </div>	
+                               <span class="gray">${svo.proEmd } | ${svo.proMenu} | 후기 ${reviewCnt}</span>
+                            </div>   
                         </div>
                     </a>
                 `;
-                //li 추가
+                // li 추가
                 ul.appendChild(li);
             }
 
@@ -88,6 +90,7 @@ function getStoreList(page = 1, type = null, sort = null) {
         }
     });
 }
+
 
 let cateType; 
 let sortType;
