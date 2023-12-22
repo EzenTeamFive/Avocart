@@ -74,3 +74,50 @@
     transform: translateX(-48%);
   }
 }
+
+/* 알바카도 소개 */
+.benefit {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.benefit .benefitImg {
+	width: 60%;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+.benefit .benefitImg img {
+	width:100%;
+	object-fit: cover;
+}
+.benefit .benefitText {
+	width: 40%;
+	box-sizing: border-box;
+}
+.benefit .benefitText .benefitTextMain h1{
+	font-size: 42px;
+	font-weight: bold;
+}
+.benefitTextSub {
+    display: flex;
+    width: 90%;
+    margin-top: 50px;
+}
+
+.benefitTextSubChild {
+    width: 25%;
+    align-items: center;
+    text-align: center; /* 텍스트를 가운데 정렬하기 위해 추가 */
+}
+
+.benefitTextSubChild i,
+.benefitTextSubChild i svg path {
+    color: #93b336;
+    font-size: 40px;
+    width: 40px;
+    border-radius: 10px;
+    background: #e3edc8;
+    padding: 5px 10px;
+    margin: auto;
+}

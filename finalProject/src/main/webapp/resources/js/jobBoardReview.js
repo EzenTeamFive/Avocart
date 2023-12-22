@@ -22,7 +22,8 @@ document.getElementById("rePostBtn").addEventListener('click',()=>{
         // 객체에 전송할 값 담기
         let reData ={
             reBno : proBnoVal,
-            reUserId : memEmail,
+            senderEmail : memEmail,
+            receiverEmail : receiverEmail,
             reNickName : nickName,
             reContent : reContent,
             reScore: ratingValue
@@ -111,10 +112,10 @@ async function spreadReviewList(reBno=proBnoVal, page=1){  //시작은 1페이�
             for(let rvo of result.jobReList){
                 let li = `<li class="list-group-item">`;
                 li+= `<div class="mb-3 reWriterInfo">`;
-                if (getReProfile(rvo.reUserId)) {
+                if (getReProfile(rvo.senderEmail)) {
                     try {
-                        const profile = await getReProfile(rvo.reUserId);
-                        console.log("아이디 >> " + rvo.reUserId);
+                        const profile = await getReProfile(rvo.senderEmail);
+                        console.log("아이디 >> " + rvo.senderEmail);
                         console.log(profile.saveDir);
                         // 이미지가 정상적으로 가져와진 경우에만 추가
                         if (profile) {
@@ -153,7 +154,8 @@ async function spreadReviewList(reBno=proBnoVal, page=1){  //시작은 1페이�
                 li += `</fieldset>`;
                 li+= `<input type="text" value="${rvo.reContent}" class="reContent" readonly="readonly">`;
                 li+= `<input type="hidden" value="${rvo.reRno}" class="reRno">`;
-                li+= `<input type="hidden" value="${rvo.reUserId}" class="reUserId">`;
+                li+= `<input type="hidden" value="${rvo.senderEmail}" class="senderEmail ">`;
+                li+= `<input type="hidden" value="${receiverEmail}" class="receiverEmail ">`;
                 // 작성자와 로그인한 mem이 일치하는 경우에만 수정,삭제버튼 보이게 설정
                 if(rvo.reUserId == memEmail && memEmail!=""){
                 li+= `<button type="button" class="mod jobBtn-light">수정</button>`;

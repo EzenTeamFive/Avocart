@@ -114,10 +114,6 @@ async function spreadJobFromServer(page = 1, menu, sort){
                 moreJobArea.innerHTML += inner;
             }
 
-
-            
-        
-
         }else {
             let inner = `게시글이 없습니다.`;
             moreJobArea.innerHTML = inner;

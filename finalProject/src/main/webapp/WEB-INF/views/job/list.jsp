@@ -15,23 +15,23 @@
 <body>
 <jsp:include page="../common/header.jsp" />
 <jsp:include page="../common/mainFloatingMenu.jsp"/>
-   <div id="loading">
-      <!-- 로딩페이지 -->
-   </div>
+
 <!-- 메인 이벤트 페이지 -->
 <div class="jobListPart">
 	<img alt="" src="../resources/image/albacado.png">
 	<div class="jobListPartSub">
 		<h3>우리동네에서 찾는 알바카도</h3>
 		<a href="/job/register" ><button type="button" class="">공고 올리기</button></a>
-		<a href="/likeList/likeList"><button type="button" class="" >관심목록</button></a>
 		<a href="/job/about" ><button type="button" class="" >알바카도 활용법</button></a>
 	</div>
 </div>
+   <div id="loading">
+      <!-- 로딩페이지 -->
+   </div>
 <div class="bodyContainer">
    	<!-- 검색라인 추가가능하면 추가 -->
       
-	<!-- 인기 당근알바 출력 리스트 -->
+<%-- 	<!-- 인기 당근알바 출력 리스트 -->
 	<div class="titleLine">
 		<h3>인기 알바카도</h3>
 	</div>
@@ -63,7 +63,7 @@
 	            </div>
 	        </c:if>
 	    </c:forEach>
-	</div>
+	</div> --%>
 	
  
 	<!-- 우리동네 알바 출력 리스트 -->
@@ -72,15 +72,15 @@
 	 	<section>
 			<div class="allMenu">
 				<select class="menuSelect" id="menuSelect" name="menuSelect">
-					<option ${pbvo.proMenu eq null ? "selected" : ""}>전체</option>
-					<option ${pbvo.proMenu eq "food" ? "selected" : ""} value="food">외식.음료</option>
-					<option ${pbvo.proMenu eq "shop" ? "selected" : ""} value="shop">매장관리.판매</option>
-					<option ${pbvo.proMenu eq "service" ? "selected" : ""} value="service">서비스</option>
-					<option ${pbvo.proMenu eq "office" ? "selected" : ""} value="office">사무직</option>
-					<option ${pbvo.proMenu eq "product" ? "selected" : ""} value="product">생산.건설</option>
-					<option ${pbvo.proMenu eq "driver" ? "selected" : ""} value="driver">운전.배달</option>
-					<option ${pbvo.proMenu eq "education" ? "selected" : ""} value="education">교육.강사</option>
-			        <option ${pbvo.proMenu eq "etc" ? "selected" : ""} value="etc">기타</option>
+					<option >전체</option>
+					<option value="food">외식.음료</option>
+					<option value="shop">매장관리.판매</option>
+					<option value="service">서비스</option>
+					<option value="office">사무직</option>
+					<option value="product">생산.건설</option>
+					<option value="driver">운전.배달</option>
+					<option value="education">교육.강사</option>
+			        <option value="etc">기타</option>
 				</select>
 			</div>
 			
@@ -91,38 +91,7 @@
 			</select>
 	 	</section>
 	</div>                                                                                                                                                                                                                                                                                                                                                                                                   
-	
-<%-- 
-	<div class="brdListArea" id="jobList">
-	    <c:forEach items="${list}" var="jbdto" varStatus="loopStatus">
-	        <c:if test="${loopStatus.index < 8}">
-	            <div class="jobListContent">
-	                <a href="/job/detail?proBno=${jbdto.pbvo.proBno}">
-	 				    <c:choose>
-					        <c:when test="${not empty jbdto.flist}">
-								<c:forEach items="${jbdto.flist}" var="flist">
-						            <img alt="job image error" src="/upload/product/${fn:replace(flist.saveDir,'\\','/')}/${flist.uuid}_${flist.fileName}">
-								</c:forEach>
-					        </c:when>
-					        <c:otherwise>
-					            <!-- 비어 있는 경우 기본 이미지 출력 -->
-					            <img alt="job image error" src="../resources/image/logoimage.png">
-					        </c:otherwise>
-					    </c:choose>
-	
-	                    <div class="jobInfoArea">
-	                        <span>${jbdto.pbvo.proTitle}</span>
-	                        <span class="d-inline-block text-truncate" style="max-width: 200px;">${jbdto.pbvo.proSido} ${jbdto.pbvo.proSigg} ${jbdto.pbvo.proEmd}</span>
-	                        <span>${jbdto.pbvo.proMenu}
-	                            <strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${jbdto.pbvo.proPrice}" />원</strong>
-	                        </span>
-	                    </div>
-	                </a>
-	            </div>
-	        </c:if>
-	    </c:forEach>
-	</div>
-	 --%>
+
 	<div class="brdListArea" id="moreJobArea">
 
 	</div>
