@@ -14,7 +14,7 @@
 .bodyContainer{
     display: flex;
     justify-content: center;
-    padding: 50px 0 150px 0;
+    padding: 90px 0 120px 0;
 }
 
 form{
@@ -25,17 +25,17 @@ form{
     font-size: 30px;
     font-weight: 800;
     display: block;
-    color: #84a331;
+    color: #323f11;
     font-family: 'SUIT-Regular';
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 .labels{
     display: block;
     font-weight: 800;
-    margin-bottom: 7px;
+    /* margin-bottom: 7px; */
     font-family: 'SUIT-Regular';
-    color: #334010;
+    color: #323f11;
     font-size: 15px;
 }
 .inputDiv1{
@@ -47,14 +47,19 @@ form{
 .inputs{
     width: 400px;
     height: 40px;
-    padding-left: 10px;
-    border: 2px solid #84a331;
-    border-radius: 5px;
+    padding-left: 3px;
+    border: none;
+    border-bottom: 1px solid #d7d7d7;
+    /* border-radius: 5px; */
     font-family: 'SUIT-Regular';
     font-size: 14px;
 }
 .inputs::placeholder{
     font-family: 'SUIT-Regular';
+    color: #cdcdcd;
+}
+.inputs:focus{
+    border-bottom: 2px solid #323f11;
 }
 /* 이메일 관련 */
 .emailInput{
@@ -84,7 +89,7 @@ form{
     display: block;
     margin-left: 367px;
     margin-top: -32px;
-    color: #84a331;
+    color: #323f11;
 }
 
 .msg, .mailTest{
@@ -93,13 +98,12 @@ form{
     font-size: 12px;
     font-family: 'SUIT-Regular';
     font-weight: 800;
-    margin-left: 5px;
 }
 .msg{
-    color: red;
+    color: #f15746;
 }
 .mailTest{
-    color: #84a331;
+    color: rgb(63, 63, 255);
 }
 
 .check_main{

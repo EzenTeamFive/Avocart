@@ -1,39 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FAQ Register</title>
+<title>FAQ Modify</title>
 <link rel="stylesheet" href="../resources/css/faqRegister.css">
 </head>
 <body>
-<sec:authentication property="principal.mvo.memEmail" var="authEmail" />
 <jsp:include page="../common/header.jsp" />
 <div class="bodyContainer">
 
 <div class="topLine">
-	<p class="pageName">[관리자] FAQ 작성</p>
+	<p class="pageName">[관리자] FAQ 수정</p>
 </div>
 
 <div class="formLine">
-<form action="/faq/register" method="post">
-	<input type="hidden" name="faqEmail" value="${authEmail }">
+<form action="/faq/modify" method="post">
+	<input type="hidden" name="faqBno" value="${bvo.faqBno }">
+	<input type="hidden" name="faqEmail" value="${bvo.faqEmail }">
 		
-	<input type="text" name="faqTitle" id="csTitle" class="titleInput" placeholder="제목을 입력해 주세요" required="required">
+	<input type="text" name="faqTitle" id="csTitle" class="titleInput" value="${bvo.faqTitle }">
 
 	<select name="faqCategory" class="csMenu" id="csMenu">
-		<option value="선택" selected style="display:none">선택</option>
-		<option value="이용문의">이용문의</option>
-		<option value="거래문의">거래문의</option>
-		<option value="회원/계정">회원/계정</option>
-		<option value="운영정책">운영정책</option>
-		<option value="기타">기타</option>
+		<option value="이용문의" ${bvo.faqCategory eq '이용문의' ? 'selected' : '' }>이용문의</option>
+		<option value="거래문의" ${bvo.faqCategory eq '거래문의' ? 'selected' : '' }>거래문의</option>
+		<option value="회원/계정" ${bvo.faqCategory eq '회원/계정' ? 'selected' : '' }>회원/계정</option>
+		<option value="운영정책" ${bvo.faqCategory eq '운영정책' ? 'selected' : '' }>운영정책</option>
+		<option value="기타" ${bvo.faqCategory eq '기타' ? 'selected' : '' }>기타</option>
 	</select>
 	
-	<textarea name="faqContent" id="dynamicTextarea" class="contentInput" placeholder="내용 입력" required="required"></textarea>
+	<textarea name="faqContent" id="dynamicTextarea" class="contentInput">${bvo.faqContent }</textarea>
 
 	<div class="cmButtons">
 		<a href="/faq/adminList"><button type="button" class="cancelBtn">취소</button></a>
@@ -68,6 +66,7 @@ function checkFields() {
         regButton.disabled = false;
     }
 }
+checkFields();
 </script>
 <script type="text/javascript" src="/resources/js/abjustTextareaRows.js"></script>
 </body>

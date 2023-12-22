@@ -13,4 +13,8 @@ public interface CSBoardService {
 
 	CSBoardDTO getDetailFile(long csBno);
 
+	List<CSBoardVO> getNoAnsList();
+
+	List<CSBoardVO> getMenuList(String csCategory);
+
 }

@@ -121,6 +121,39 @@ async function hasNick(nick){
     }
 }
 
+//전화번호 중복체크
+let regExp = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
+document.getElementById('phone').addEventListener('input', async ()=>{
+    let phone = document.getElementById('phone').value;
+    console.log(phone);
+    if(!regExp.test(phone)){
+        document.getElementById('phoneMsg1').style = "display:inline-block";
+        document.getElementById('phoneMsg2').style = "display:none";
+    }else{
+        document.getElementById('phoneMsg1').style = "display:none";
+
+        const result = await hasPhone(phone);
+        if(result == 1){
+            document.getElementById('phoneMsg2').style = "display:inline-block";
+        }else{
+            document.getElementById('phoneMsg2').style = "display:none";
+        }
+    }
+    registerBtnAbled();
+
+})
+//전화번호 전송 메서드
+async function hasPhone(phone){
+    try{
+        const resp = await fetch('/member/phone/'+phone);
+        const result = await resp.text();
+        return result;
+
+    }catch(err){
+        console.log(err);
+    }
+}
+
 //모든 조건 충족시 가입하기 버튼오픈
 function registerBtnAbled(){
     const emailMsg = document.getElementById('emailMsg');
@@ -129,9 +162,12 @@ function registerBtnAbled(){
     const pwMsg = document.getElementById('pwMsg');
     const pwMsg2 = document.getElementById('pwMsg2');
     const nickMsg = document.getElementById('nickMsg');
+    const phoneMsg1 = document.getElementById('phoneMsg1');
+    const phoneMsg2 = document.getElementById('phoneMsg2');
     const addrValue = document.getElementById('addr').value;
     const allCheckboxChecked = document.getElementById('all').checked;
     const nickValue = document.getElementById('nick').value;
+    const phoneValue = document.getElementById('phone').value;
 
     const emailMsgDisplay = window.getComputedStyle(emailMsg).getPropertyValue('display');
     const emailMsg2Display = window.getComputedStyle(emailMsg2).getPropertyValue('display');
@@ -139,9 +175,12 @@ function registerBtnAbled(){
     const pwMsgDisplay = window.getComputedStyle(pwMsg).getPropertyValue('display');
     const pwMsg2Display = window.getComputedStyle(pwMsg2).getPropertyValue('display');
     const nickMsgDisplay = window.getComputedStyle(nickMsg).getPropertyValue('display');
+    const phoneMsgDisplay1 = window.getComputedStyle(phoneMsg1).getPropertyValue('display');
+    const phoneMsgDisplay2 = window.getComputedStyle(phoneMsg2).getPropertyValue('display');
 
     if(emailMsgDisplay === 'none' && emailMsg2Display === 'none' && testDisplay === 'inline-block'
-     && pwMsgDisplay === 'none' && pwMsg2Display === 'none' && nickMsgDisplay === 'none' && addrValue !== '' && nickValue !== '' && allCheckboxChecked){
+     && pwMsgDisplay === 'none' && pwMsg2Display === 'none' && nickMsgDisplay === 'none' && phoneMsgDisplay1 === 'none' && phoneMsgDisplay2 === 'none'
+     && addrValue !== '' && nickValue !== '' && phoneValue !== '' && allCheckboxChecked){
         document.getElementById('regiBtn').disabled = false;
     } else {
         document.getElementById('regiBtn').disabled = true;

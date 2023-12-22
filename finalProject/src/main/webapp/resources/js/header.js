@@ -28,7 +28,7 @@ for(let li of liList){
 
 //프로필 버튼 클릭시 메뉴 나타나게(토글)
 document.addEventListener('click',(e)=>{
-    if(e.target.id == 'my'){
+    if(e.target.classList.contains('my')){
         let myMenu = document.getElementById('myMenu');
         if(myMenu != null){
             document.getElementById('myMenu').classList.toggle('off');
@@ -56,7 +56,8 @@ document.getElementById('searchInput').addEventListener('input',(e)=>{
 
 //검색창 클릭시 검색메뉴 나오고, 그외 화면 아무데나 클릭시 사라짐
 document.addEventListener('click',(e)=>{
-    if(e.target.id == 'searchInput'){
+    console.log("target >>"+e.target);
+    if(e.target.id == 'searchInput' || e.target.id == 'keyword' || e.target.closest('.searchLabel')){
         document.getElementById('searchMenu').classList.remove('off');
     }else{
         document.getElementById('searchMenu').classList.add('off');

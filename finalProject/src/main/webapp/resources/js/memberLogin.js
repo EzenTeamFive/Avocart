@@ -12,19 +12,21 @@ document.getElementById('showPwBtn').addEventListener('click',(e)=>{
     }
 })
 
-// document.getElementById('loginBtn').addEventListener('click',(e)=>{
-//     let emailInput = document.getElementById('email');
-//     let pwInput = document.getElementById('pw');
+let emailVal = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+document.addEventListener('input', () => {
+    let email = document.getElementById('email').value;
+    let pw = document.getElementById('pw').value;
 
-//     if(emailInput.value == null || emailInput.value == ''){
-//         emailInput.focus();
-//         document.getElementById('emailMsg').style = "display:inline-block";
-//         document.getElementById('pwMsg').style = "display:none";
-//         document.getElementById('pwMsg').style = "display:none";
-//     }else if(emailInput.value != null || emailInput.value != '' && pwInput.value == null || pwInput.value == ''){
-//         pwInput.focus();
-//         document.getElementById('pwMsg').style = "display:inline-block";
-//         document.getElementById('emailMsg').style = "display:none";
-//         document.getElementById('emailMsg').style = "display:none";
-//     }
-// })
+    if(emailVal.test(email)){
+        document.getElementById('emailMsg').style = "display:none";
+        if (pw) {
+            document.getElementById('loginBtn').disabled = false;
+        }else{
+            document.getElementById('loginBtn').disabled = true;
+        }
+    }else{
+        document.getElementById('emailMsg').style = "display:inline-block";
+        document.getElementById('loginBtn').disabled = true;
+    }
+
+})

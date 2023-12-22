@@ -25,4 +25,14 @@
 	<update id="updateIsAns">
 		update cs set cs_is_ans = 'Y' where cs_bno = #{csBno}
 	</update>
+	
+	<!-- 관리자 리스트 -->
+	<select id="getNoAnsList" resultType="com.avo.www.domain.CSBoardVO">
+		select * from cs where cs_is_ans = 'N'
+		order by cs_bno desc
+	</select>
+	<select id="getMenuList" resultType="com.avo.www.domain.CSBoardVO">
+		select * from cs where cs_is_ans = 'N' and cs_category = #{csCategory}
+		order by cs_bno desc
+	</select>
 </mapper>

@@ -19,7 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.avo.www.domain.CSBoardDTO;
 import com.avo.www.domain.CSBoardVO;
 import com.avo.www.domain.CommunityBoardDTO;
+import com.avo.www.domain.FaqBoardVO;
 import com.avo.www.domain.FileVO;
+import com.avo.www.domain.PagingVO;
 import com.avo.www.handler.FileHandler;
 import com.avo.www.security.AuthMember;
 import com.avo.www.service.CSBoardService;
@@ -75,4 +77,17 @@ public class CSBoardController {
 		m.addAttribute("bdto", bdto);
 	}
 	
+	//관리자 리스트
+	@GetMapping("/adminList")
+	public void adminList(@RequestParam(name = "csCategory", required = false)String csCategory, Model m) {
+		
+		List<CSBoardVO> list = null;
+		if("전체".equals(csCategory) || csCategory == null) {
+			list = csv.getNoAnsList();			
+		}else {
+			list = csv.getMenuList(csCategory);
+		}
+
+		m.addAttribute("list", list);
+	}
 }
