@@ -53,4 +53,18 @@ public class MemberServiceImpl implements MemberService {
 		
 		return isOk;
 	}
+
+	@Override
+	public int hasPhone(String memPhone) {
+		MemberVO mvo = mdao.hasPhone(memPhone);
+		
+		int isOk = -1;
+		if(mvo != null) { //존재하는 닉네임이면
+			isOk = 1;
+		}else {
+			isOk = 0;
+		}
+		
+		return isOk;
+	}
 }

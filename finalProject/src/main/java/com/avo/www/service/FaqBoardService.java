@@ -13,4 +13,10 @@ public interface FaqBoardService {
 
 	List<FaqBoardVO> getMenuList(String faqCategory);
 
+	FaqBoardVO getModifyBoard(long faqBno);
+
+	int modify(FaqBoardVO bvo);
+
+	int remove(long faqBno);
+
 }

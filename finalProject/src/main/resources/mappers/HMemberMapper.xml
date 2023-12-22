@@ -39,4 +39,7 @@
   	<delete id="mbDelete">
   		delete from member where mem_email = #{email}
   	</delete>
+  	<select id="selectBuyList" resultType="com.avo.www.domain.BuyItemVO">
+  		select * from buy_item where buy_user_email = #{userEmail}
+  	</select>
 </mapper>

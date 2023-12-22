@@ -118,12 +118,12 @@
 		select * from community 
       	where cm_is_del = 'N'
       	order by cm_bno desc
-		limit 0, 4
+		limit 0, 8
 	</select>
 	<select id="getCommunityLikeList" resultType="com.avo.www.domain.CommunityBoardVO">
 		select * from community 
       	where cm_is_del = 'N'
       	order by cm_like_cnt desc
-		limit 0, 4
+		limit 0, 8
 	</select>
 </mapper>

@@ -16,6 +16,7 @@ import lombok.ToString;
 public class ProductBoardDTO {
 	
 	private ProductBoardVO pbvo;
+	private BuyItemVO bivo;
 	private List<FileVO> pflist;
 
 }

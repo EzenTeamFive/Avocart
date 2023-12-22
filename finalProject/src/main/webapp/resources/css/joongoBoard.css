@@ -9,14 +9,23 @@
 .joongoBanner{
     background: url(../image/joongo_banner.png) no-repeat center/cover;
     width: 100%;
-    height: 300px;
+    height: 350px;
 }
 .boardMenuArea{
-    padding: 70px 0px 30px;
+    padding: 70px 0px 45px;
     text-align: right;
+    font-family: 'suit';
+}
+.boardMenuArea h3{
+    font-size: 22px;
+    margin-bottom: 10px;
 }
 .boardMenuArea p{
     display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 0;
+    color: #777;
+    font-size: 15px;
 }
 .boardMenuArea select{
     padding: 5px 20px 5px 5px;
@@ -25,6 +34,9 @@
     background: url(../image/down_arrow.png) no-repeat 92% 50%/12px auto;
     appearance: none;
     outline: none;
+}
+.boardMenuArea select:not(:last-child){
+    margin-right: 20px;
 }
 /* .boardMenuArea select option:checked,
 .boardMenuArea select option:hover{
@@ -36,7 +48,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px 20px;
-    margin: 0 0px 15px;
+    margin: 0 0px 40px;
     font-family: 'suit';
 }
 .boardListArea .oneList{
@@ -47,7 +59,6 @@
     width: 100%;
     text-decoration: none;
     color: #333;
-    margin-bottom: 20px;
     border: 1px solid #ededed;
     border-radius: 10px;
     transition: 0.5s;
@@ -122,6 +133,8 @@
 /* moreBtnArea start */
 .moreBtnArea{
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 .moreBtnArea .moreBtn{
     font-size: 16px;

@@ -33,5 +33,20 @@ public class FaqBoardServiceImpl implements FaqBoardService{
 	public List<FaqBoardVO> getMenuList(String faqCategory) {
 		return fbdao.getMenuList(faqCategory);
 	}
+
+	@Override
+	public FaqBoardVO getModifyBoard(long faqBno) {
+		return fbdao.getModifyBoard(faqBno);
+	}
+
+	@Override
+	public int modify(FaqBoardVO bvo) {
+		return fbdao.update(bvo);
+	}
+
+	@Override
+	public int remove(long faqBno) {
+		return fbdao.delete(faqBno);
+	}
 	
 }

@@ -8,10 +8,12 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.avo.www.domain.BuyItemVO;
 import com.avo.www.domain.FileVO;
+import com.avo.www.domain.ProductBoardDTO;
+import com.avo.www.domain.ProductBoardVO;
 import com.avo.www.handler.FileHandler;
 import com.avo.www.security.AuthMember;
 import com.avo.www.security.MemberVO;
@@ -159,4 +164,58 @@ public class HMemberController {
 	@GetMapping("/dropOut") 
 	public void dropOut() {
 	}
+	
+	@GetMapping(value = "/sell", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ProductBoardDTO>> sellList() {
+		String userEmail = "";
+		
+		// 사용자 객체 불러옴
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {        	
+        	//Principal => AuthMember 변환
+        	AuthMember member = (AuthMember) authentication.getPrincipal();
+        	log.info(">>>>>> member 확인 >>>>> "+member.getMvo());
+        	userEmail = member.getMvo().getMemEmail();
+        }
+        List<ProductBoardDTO> pdtoList = new ArrayList<ProductBoardDTO>();
+        List<ProductBoardVO> pblist = hsv.getSellList(userEmail);
+        for(ProductBoardVO pbvo : pblist) {
+        	ProductBoardDTO pdto = new ProductBoardDTO();
+        	pdto.setPbvo(pbvo);
+        	pdto.setPflist(hsv.getFileList(pbvo.getProBno()));
+           	pdtoList.add(pdto);
+        }
+        
+        return new ResponseEntity<List<ProductBoardDTO>>(pdtoList, HttpStatus.OK);
+        
+	}
+	
+	@GetMapping(value = "/buy", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ProductBoardDTO>> buyList() {
+		String userEmail = "";
+		
+		// 사용자 객체 불러옴
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {        	
+        	//Principal => AuthMember 변환
+        	AuthMember member = (AuthMember) authentication.getPrincipal();
+        	log.info(">>>>>> member 확인 >>>>> "+member.getMvo());
+        	userEmail = member.getMvo().getMemEmail();
+        }
+        log.info(">>>>>>>>> buyList userEmail >> "+userEmail);
+        List<ProductBoardDTO> pdtoList = new ArrayList<ProductBoardDTO>();
+        List<BuyItemVO> bilist = hsv.getBuyList(userEmail);
+        for(BuyItemVO bivo : bilist) {
+        	ProductBoardDTO pdto = new ProductBoardDTO();
+	        pdto.setBivo(bivo);
+	        pdto.setPflist(hsv.getFileList(bivo.getBuyProBno()));
+           	pdtoList.add(pdto);
+        }
+        
+        log.info(">>>>>>>>> buyList pdtoList >>>>>> "+pdtoList);
+        
+        return new ResponseEntity<List<ProductBoardDTO>>(pdtoList,HttpStatus.OK);
+        
+	}
+	
 }

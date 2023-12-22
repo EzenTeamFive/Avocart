@@ -8,171 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>CS Detail</title>
-<style type="text/css">
-	@font-face {
-	    font-family: 'SUIT-Regular';
-	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
-	    font-weight: normal;
-	    font-style: normal;
-	}	
-	
-	.bodyContainer{
-		font-family: 'SUIT-Regular';
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-	.innerContainer{
-		width: 700px;
-	}
-	
-	/* 젤 위에 라인 */
-	.topLine{
-		margin-top: 60px;
-		width: 100%;
-		text-align: center;
-		border-bottom: 1px solid black;
-	}
-	.pageName{
-		font-size: 24px;	    
-		font-weight: 800;
-	}
-	
-	/* detail 라인 */
-	.detailLine{
-		width: 100%;
-	    display: flex;
-	    justify-content: center;
-	}
-	.detailBoard{
-		width: 100%;
-		border-bottom: 1px solid lightgray;
-	}
-	.csMenu{
-		display: block;
-		background-color: #f1f4f6;
-	    width: 70px;
-	    text-align: center;
-	    border-radius: 50px;
-	    padding: 3px;
-	    font-size: 14px;
-	    margin: 30px 0 5px 0;
-	    color: gray;
-	}
-	.Q{
-		font-weight: 800;
-		font-size: 25px;
-	}
-	.csTitle{
-		display: inline;
-	}
-	.contentTitle{
-		margin: 10px 0 5px 0;
-	    font-size: 14px;
-	}
-	.csTextAreas{
-		resize: none;
-	    border: none;
-	    padding: 0;
-	    font-size: 14px;
-	    background: none;
-	    overflow: hidden;
-	    width: 100%;
-	}
-	.csTextAreas:focus {
-		outline: none;
-	}
-	.imgDiv{
-		margin: 20px 0;
-	}
-	.cs_imgs{
-		display: inline;
-		border-radius: 5px;
-	}
-	.csReg{
-		margin: 0 0 20px 0;
-	    font-size: 12px;
-	    color: gray;
-	}
-
-	/* 답변 작성 라인 */
-	.commentWriteLine {
-		width: 100%;
-    	margin-top: 30px;
-    	display: flex;
-    	justify-content: center;
-   	}
-   	.commentWrite{
-    	width: 100%;
-		padding: 20px;
-		border: 1px solid #e4e4e4;
-		border-radius: 5px;
-		position: relative;
-	}
-	.cmtText{
-		font-size: 14px;
-	    width: 100%;
-		border: none;
-		resize: none;    
-		overflow: hidden;
-	}
-	.cmtText:focus{
-	  	outline: none;
-	}
-	.cmtPostBtn{
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		border: none;
-	    background: none;
-	    margin: 0 15px 15px 0;
-		font-size: 14px;
-	}
-	
-	/* 답변 라인 */
-	.answerLine{
-		margin: 30px 0;
-		width: 100%;
-	}
-	.A{
-		font-weight: 800;
-		font-size: 25px;
-		margin: 0;
-	}
-	.answerDiv{
-		background-color: #f1f4f6;
-		border-radius: 5px;
-		padding: 20px;
-	}
-	.ansReg{
-		margin: 10px 0 0 0;
-	    font-size: 12px;
-	    color: gray;
-	}
-	.noAnsText{
-		font-size: 14px;
-		margin: 0;
-	}
-
-	.bottonLine{
-		width: 100%;
-		display: flex;
-		justify-content: center;
-	}
-	.bottonLine a{
-		width: 100%;
-	}
-	.OkBtn{
-		width: 100%;
-		border: none;
-		border-radius: 5px;
-		font-size: 14px;
-		height: 45px;
-		margin: 10px 0 20px 0;
-		background-color: #3b3b3b;
-		color: white;
-	}
-</style>
+<link rel="stylesheet" href="../resources/css/csDetail.css">
 </head>
 <body>
 <c:set value="${bdto.bvo}" var="bvo" />
@@ -217,7 +53,7 @@
 <div class="commentWriteLine">
 	<div class="commentWrite">
 		<input type="hidden" id="cmtEmail" value="${authEmail }">
-		<textarea class="cmtText csTextAreas" id="cmtText" placeholder="답변 작성"></textarea>
+		<textarea class="cmtText csTextAreas" id="cmtText" placeholder="답변 작성" required="required"></textarea>
 		<button type="button" id="cmtPostBtn" class="cmtPostBtn">등록</button>
 	</div>
 </div>
@@ -229,11 +65,20 @@
 
 </div>
 
-<div class="bottonLine">
-	<a href="/cs/list?csEmail=${authEmail }">
-		<button type="button" class="OkBtn">확인</button>
-	</a>
-</div>
+<sec:authorize access="hasAuthority('ROLE_USER')">
+	<div class="bottonLine">
+		<a href="/cs/list?csEmail=${authEmail }">
+			<button type="button" class="OkBtn">확인</button>
+		</a>
+	</div>
+</sec:authorize>
+<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+	<div class="bottonLine">
+		<a href="/cs/adminList">
+			<button type="button" class="OkBtn">확인</button>
+		</a>
+	</div>
+</sec:authorize>
 
 </div>
 </div>

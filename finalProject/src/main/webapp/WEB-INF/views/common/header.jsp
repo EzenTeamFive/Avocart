@@ -7,22 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	.logoSec a{
-		color: #323f11;
-	    display: flex;
-	    /* justify-content: flex-start; */
-	    align-items: center;
-	    text-decoration: none;
-	    font-family: fugaz;
-	}
-	.logoSec a h1{
-		margin: 0;
-	    display: inline;
-	    padding-left: 12px;
-	    padding-top: 10px;
-	}
-</style>
 <link rel="stylesheet" href="../resources/css/page.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -40,22 +24,22 @@
       </div>
       <div class="searchSec">
          <form action="/common/search" method="post">
-         	<i class="bi bi-search inputIcon"></i> 
-            <input type="search" id="searchInput" placeholder="검색어를 입력해 주세요.">
+            <label class="inputIconLabel" for="searchInput"><i class="bi bi-search inputIcon" id="inputIcon"></i></label>	
+            <input type="text" id="searchInput" placeholder="검색어를 입력해 주세요." autocomplete="off">
             <button type="button" class="deleteInputText deleteIconOff" id="textCancelBtn">X</button>
 
             <div class="searchMenu off" id="searchMenu">
                <h2>상품 검색</h2>
-               <input type="search" id="keyword" name="keyword" placeholder="검색어를 입력해 주세요.">
+               <input type="text" id="keyword" name="keyword" placeholder="검색어를 입력해 주세요." autocomplete="off">
                <button type="submit">
                   <i class="bi bi-search"></i>         
                </button>
                <h3>검색 기준</h3>
-               <ul>
-                  <li><input type="checkbox" name="srcCondit" id="ck_title" value="title"><label for="ck_title">제목</label></li>
-                  <li><input type="checkbox" name="srcCondit" id="ck_nickname" value="nickname"><label for="ck_nickname">닉네임</label></li>
-                  <li><input type="checkbox" name="srcCondit" id="ck_email" value="email"><label for="ck_email">이메일</label></li>
-                  <li><input type="checkbox" name="srcCondit" id="ck_content" value="content"><label for="ck_content">내용</label></li>
+               <ul class="searchLabel">
+                  <li class="searchLabel"><input type="checkbox" name="srcCondit" id="ck_title" value="title"><label for="ck_title" class="searchLabel">제목</label></li>
+                  <li class="searchLabel"><input type="checkbox" name="srcCondit" id="ck_nickname" value="nickname"><label for="ck_nickname" class="searchLabel">닉네임</label></li>
+                  <li class="searchLabel"><input type="checkbox" name="srcCondit" id="ck_email" value="email"><label for="ck_email" class="searchLabel">이메일</label></li>
+                  <li class="searchLabel"><input type="checkbox" name="srcCondit" id="ck_content" value="content"><label for="ck_content" class="searchLabel">내용</label></li>
                </ul>
                <!-- <h3>게시판 선택</h3>
                <ul>
@@ -67,7 +51,9 @@
                <!-- <button type="button" id="checkCondit">확인</button> -->
             </div>
          </form>
-         <i id="my" class="bi bi-person"></i>
+         <button class="myBtn my">
+	         <i id="my" class="bi bi-person my"></i>
+         </button>
          <!-- 회원 메뉴 -->
          <sec:authorize access="hasAuthority('ROLE_USER')">
          <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
@@ -82,21 +68,21 @@
             </div>
          </sec:authorize>
          <!-- 관리자 메뉴 -->
-		<sec:authorize access="hasAuthority('ROLE_ADMIN')">
-        <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
-		    <div id="myMenu" class="off">
-               <ul>
-                  <li><a href="#">1:1 문의 내역</a></li>
-                  <li><a href="#">공지사항 수정</a></li>
-                  <li><a href="/faq/adminList">FAQ 수정</a></li>
-                  <li><a href="#">회원리스트</a></li>
-                  <li class="logoutLi"><a href="#" id="logoutLink">로그아웃</a></li>
-                  <form action="/member/logout" method="post" id="logoutForm">
-                       <input type="hidden" name="memEmail" value="${authEmail }">
-                  </form>
-               </ul>
-            </div>
-		</sec:authorize>
+		 <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+         <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
+			 <div id="myMenu" class="off">
+		         <ul>
+			         <li><a href="/cs/adminList">1:1 문의 내역</a></li>
+			         <li><a href="/info/register">공지사항 작성</a></li>
+			         <li><a href="/faq/adminList">FAQ 수정</a></li>
+			         <li><a href="#">회원 관리</a></li>
+			         <li class="logoutLi"><a href="#" id="logoutLink">로그아웃</a></li>
+			         <form action="/member/logout" method="post" id="logoutForm">
+			         	<input type="hidden" name="memEmail" value="${authEmail }">
+			         </form>
+		         </ul>
+	         </div>
+		 </sec:authorize>
       </div>
    </header>
    <nav>
@@ -108,11 +94,11 @@
          <li><a href="/info/list">공지사항</a></li>
          <li><a href="/faq/list">고객센터</a></li>
          
-           <!-- 로그인 전 오픈되어야 할 메뉴 -->
+<%--            <!-- 로그인 전 오픈되어야 할 메뉴 -->
          <sec:authorize access="isAnonymous()">
             <li><a href="/member/register">회원가입</a></li>
             <li><a href="/member/login">로그인</a></li>
-         </sec:authorize>
+         </sec:authorize> --%>
       </ul>
    </nav>
 </div>

@@ -23,4 +23,6 @@ public interface MemberDAO {
 
 	String getNickFromEmail(String msgGetUserEmail);
 
+	MemberVO hasPhone(String memPhone);
+
 }

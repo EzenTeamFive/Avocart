@@ -59,14 +59,20 @@ async function getMoreSearchCommunityResultForServer(page){
     }
 }
 
-
+let checkJoongoFirstResult = false;
+let checkStoreFirstResult = false;
+let checkJobFirstResult = false;
+let checkCommunityFirstResult = false;
 // 서버에 요청한 joongo 데이터로 검색결과 출력
 function getMoreSearchJoongoResult(page = 1) {
     getMoreSearchJoongoResultForServer(page).then(result => {
         console.log(result);
         let boardListArea = document.querySelector('#joongo .boardListArea');
         let div = document.getElementById('joongo');
-        div.firstElementChild.innerText = '중고거래 검색결과 '+result.totalCount+'개';
+        if(!checkJoongoFirstResult){
+            div.firstElementChild.innerText += ' 검색결과 '+result.totalCount+'개';
+            checkJoongoFirstResult = true;
+        }
 
         if (result.prodList.length > 0) {
 
@@ -94,10 +100,10 @@ function getMoreSearchJoongoResult(page = 1) {
         let moreBtn = document.getElementById('moreJoongoBtn');
 
         if (result.pgvo.pageNo < result.endPage) {
-            moreBtn.style.visibility = 'visible';
+            moreBtn.style.display = 'block';
             moreBtn.dataset.page = page + 1;
         } else {
-            moreBtn.style.visibility = 'hidden';
+            moreBtn.style.display = 'none';
         }
     
     })
@@ -109,7 +115,10 @@ function getMoreSearchStoreResult(page = 1) {
         console.log(result);
         let boardListArea = document.querySelector('#store .boardListArea');
         let div = document.getElementById('store');
-        div.firstElementChild.innerText = '동네업체 검색결과 '+result.totalCount+'개';
+        if(!checkStoreFirstResult){
+            div.firstElementChild.innerText += ' 검색결과 '+result.totalCount+'개';
+            checkStoreFirstResult = false;
+        }
 
         if (result.prodList.length > 0) {
 
@@ -137,22 +146,25 @@ function getMoreSearchStoreResult(page = 1) {
         let moreBtn = document.getElementById('moreStoreBtn');
 
         if (result.pgvo.pageNo < result.endPage) {
-            moreBtn.style.visibility = 'visible';
+            moreBtn.style.display = 'block';
             moreBtn.dataset.page = page + 1;
         } else {
-            moreBtn.style.visibility = 'hidden';
+            moreBtn.style.display = 'none';
         }
     
     })
 }
-let title = document.getElementById('title')
+
 // 서버에 요청한 job 데이터로 검색결과 출력
 function getMoreSearchJobResult(page = 1) {
     getMoreSearchJobResultForServer(page).then(result => {
         console.log(result);
         let boardListArea = document.querySelector('#job .boardListArea');
         let div = document.getElementById('job');
-        div.firstElementChild.innerText = '구인공고 검색결과 '+result.totalCount+'개';
+        if(!checkJobFirstResult){
+            div.firstElementChild.innerText += ' 검색결과 '+result.totalCount+'개';
+            checkJobFirstResult = false;
+        }
 
         if (result.prodList.length > 0) {
 
@@ -180,10 +192,10 @@ function getMoreSearchJobResult(page = 1) {
         let moreBtn = document.getElementById('moreJobBtn');
 
         if (result.pgvo.pageNo < result.endPage) {
-            moreBtn.style.visibility = 'visible';
+            moreBtn.style.display = 'block';
             moreBtn.dataset.page = page + 1;
         } else {
-            moreBtn.style.visibility = 'hidden';
+            moreBtn.style.display = 'none';
         }
     
     })
@@ -195,7 +207,10 @@ function getMoreSearchCommunityResult(page = 1) {
         console.log(result);
         let boardListArea = document.querySelector('#community .boardListArea');
         let div = document.getElementById('community');
-        div.firstElementChild.innerText = '동네소식 검색결과 '+result.totalCount+'개';
+        if(!checkCommunityFirstResult){
+            div.firstElementChild.innerText += ' 검색결과 '+result.totalCount+'개';
+            checkCommunityFirstResult = false;
+        }
 
         if (result.cmList.length > 0) {
 
@@ -222,10 +237,10 @@ function getMoreSearchCommunityResult(page = 1) {
         let moreBtn = document.getElementById('moreCommunityBtn');
 
         if (result.pgvo.pageNo < result.endPage) {
-            moreBtn.style.visibility = 'visible';
+            moreBtn.style.display = 'block';
             moreBtn.dataset.page = page + 1;
         } else {
-            moreBtn.style.visibility = 'hidden';
+            moreBtn.style.display = 'none';
         }
     
     })

@@ -1,21 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CS List</title>
+<title>CS ADMIN List</title>
 <link rel="stylesheet" href="../resources/css/csList.css">
+<link rel="stylesheet" href="../resources/css/faqList.css">
+<style type="text/css">
+.csBoardLine{
+	margin-bottom: 100px;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
 <div class="bodyContainer">
-
 <div class="innerContainer">
+
 <div class="topLine">
-	<p class="pageName">문의내역</p>
+	<p class="pageName">[관리자] 1:1 문의내역</p>
+</div>
+
+<div class="faqCategory">
+	<a href="/cs/adminList" class="category faqActive">전체</a>
+	<a href="/cs/adminList?csCategory=이용문의" class="category">이용문의</a>
+	<a href="/cs/adminList?csCategory=거래문의" class="category">거래문의</a>
+	<a href="/cs/adminList?csCategory=회원/계정문의" class="category">회원/계정</a>
+	<a href="/cs/adminList?csCategory=신고접수" class="category">운영정책</a>
+	<a href="/cs/adminList?csCategory=기타" class="category">기타</a>
 </div>
 
 <div class="csBoardLine">
@@ -35,6 +49,7 @@
 						</div>
 						<div class="secondLine">
 							<span>${bvo.csCategory } | </span>
+							<span>${bvo.csNickName } | </span>
 							<span>${bvo.csRegAt }</span>
 						</div>
 					</div>
@@ -49,15 +64,11 @@
 		</c:if>
 	</ul>
 </div>
-<div class="bottonLine">
-	<a href="/faq/list">
-		<button type="button" class="faqBtn">FAQ</button>
-	</a>
-</div>
 
 </div>
 </div>
 <!-- bodyContainer -->
 <jsp:include page="../common/footer.jsp" />
+<script type="text/javascript" src="/resources/js/faqBoardList.js"></script>
 </body>
 </html>
