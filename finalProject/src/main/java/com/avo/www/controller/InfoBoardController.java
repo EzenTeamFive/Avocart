@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,6 +60,11 @@ public class InfoBoardController {
 		log.info(">>>>>>>> get prev AND next Info >>>>>>>"+prevIvo+", "+nextIvo);
 		m.addAttribute("prevIvo", prevIvo);
 		m.addAttribute("nextIvo", nextIvo);
+	}
+	
+	@GetMapping(value = "/slider", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<InfoBoardVO>> infoSlider(){
+		return new ResponseEntity<List<InfoBoardVO>>(isv.getAllInfo(), HttpStatus.OK);
 	}
 	
 }

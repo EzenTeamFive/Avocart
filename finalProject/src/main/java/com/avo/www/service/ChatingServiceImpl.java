@@ -69,7 +69,8 @@ public class ChatingServiceImpl implements ChatingService {
 			
 			
 		// 유저 프로필 이미지
-		FileVO userProfile = fdao.getProfile(msgGetNick);
+		FileVO userProfile = fdao.getProfile(msgGetUserEmail);
+		log.info(">>>>>>>> userProfile >>>>> "+userProfile);
 		chatdto.setProfileImage(userProfile);
 		
 		return chatdto;

@@ -1,12 +1,19 @@
 var ws;
-var messages = document.getElementById("messages");
+let messages = document.getElementById("messages");
 let getUser;
 let chatroom;
 let checkFirstEnter = true;
 
-let regAt = document.querySelector('.regAt').innerText;
-regAt = regAt.substring(0,10);
-document.getElementById('regAt').innerText = regAt;
+// 스크롤을 가장 아래로 내리는 함수
+function scrollDown() {
+    messages.scrollTop = messages.scrollHeight;
+}
+
+// 텀을 두고 scrollDown 함수 호출
+function prepareScroll() {
+    window.setTimeout(scrollDown, 50);
+}
+
 // DB에 채팅 기록 저장
 async function insertChatDataForServer(chatData){
     try {
@@ -45,6 +52,7 @@ async function handleSocketClick(e){
         if(checkFirstEnter == false){
             await closeSocket();
         }
+        messages.innerHTML = "";
         console.log('버튼클릭');
         getUser = e.target.dataset.getuser;
         chatroom = e.target.dataset.chatroom;
@@ -62,6 +70,7 @@ async function handleSocketClick(e){
         });
 
         openSocket(chatroom);
+        prepareScroll();
         if(checkFirstEnter == true){
             checkFirstEnter = false;
         }
@@ -101,17 +110,18 @@ function send(){
     // ws.send(text);
     // text = "";
     let userId = document.getElementById('senderEmail').value;
-    let msg = document.getElementById("messageinput").value;
+    let msg = document.getElementById("messageinput");
     let chatData = {
         msgRoomId : chatroom,
         msgSendUserId : userId,
         msgGetUserId: getUser,
-        msgContent : msg
+        msgContent : msg.value
     }
     console.log(chatData);
     insertChatDataForServer(chatData);
     ws.send(JSON.stringify(chatData));
-    msg.innerText = "";
+    msg.value = "";
+    prepareScroll();
 }
 
 function closeSocket(){

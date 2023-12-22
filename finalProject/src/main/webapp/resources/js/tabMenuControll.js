@@ -1,7 +1,7 @@
 
 document.addEventListener('click',(e)=>{
     // tabMenu li 요소 가져오기
-    let liList = document.querySelectorAll('.searchArea .tabMenu li');
+    let liList = document.querySelectorAll('.tabArea .tabMenu li');
     console.log(liList);
 
     // liList에서 클릭한 li의 index 번호 저장
@@ -21,7 +21,7 @@ document.addEventListener('click',(e)=>{
             }
         }
 
-        let contentDiv = document.querySelectorAll('.searchArea .tabContents > div');
+        let contentDiv = document.querySelectorAll('.tabArea .tabContents > div');
 
         for(let div of contentDiv){
             // 이전 on 클래스 삭제

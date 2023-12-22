@@ -24,7 +24,7 @@ input:focus {outline: none;}
 }
 #loading{
    width: 100%;
-   height: calc(100vh - 180px);
+   height: calc(100vh - 580px);
    display: block;
    background-image: url("../image/Spinner-5.gif");
    background-repeat: no-repeat;

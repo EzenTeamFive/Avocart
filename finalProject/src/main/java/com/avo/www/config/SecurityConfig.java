@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/member/list").hasRole("ADMIN") //멤버리스트는 admin만, ROLE_접두사 자동으로 추가됨.
 		.antMatchers("/", "/community/list", "/community/detail", "/community/page/**", "/community/thumb/**", "/community/profile/**",
-				"/joongo/list", "/joongo/detail", "/joongo/page/**", "/joongo/thumb/**",
+				"/joongo/list", "/joongo/detail", "/joongo/page/**", "/joongo/thumb/**", "/info/**",
 				 "/store/list", "/store/detail", "/store/page/**", "/job/list/**","/jobReview/**", "/job/detail","/job/about", "/resources/**", "/joongo/menuSelect",
 				"/upload/**", "/communityCmt/**", "/reCmt/**", "/member/register", "/member/login", "/member/test/**",
 				"/member/email/**", "/member/nick/**", "/common/search", 

@@ -12,7 +12,7 @@
     height: 300px;
 }
 .boardMenuArea{
-    padding: 90px 140px 30px;
+    padding: 70px 0px 30px;
     text-align: right;
 }
 .boardMenuArea p{
@@ -36,11 +36,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px 20px;
-    margin: 0 140px 15px;
+    margin: 0 0px 15px;
     font-family: 'suit';
 }
 .boardListArea .oneList{
-    width: 235px;
+    width: 305px;
 }
 .boardListArea .oneList a{
     display: block;
