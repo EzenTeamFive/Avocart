@@ -20,4 +20,6 @@ public interface HomeService {
 
 	List<CommunityBoardVO> getCommunityLikeList();
 
+	List<ProductBoardVO> getJobList();
+
 }

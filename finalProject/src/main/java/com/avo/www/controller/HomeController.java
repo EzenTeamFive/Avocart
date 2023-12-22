@@ -83,6 +83,13 @@ public class HomeController {
 		return new ResponseEntity<List<ProductBoardVO>>(list ,HttpStatus.OK);
 	}	
 	
+	//알바구인
+	@GetMapping(value = "/jobList", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ProductBoardVO>> jobList(){
+		List<ProductBoardVO> list = hsv.getJobList();
+		return new ResponseEntity<List<ProductBoardVO>>(list ,HttpStatus.OK);
+	}	
+	
 	//동네소식 최신순
 	@GetMapping(value = "/communityList", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<CommunityBoardVO>> communityList(){

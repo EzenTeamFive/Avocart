@@ -27,13 +27,17 @@ for(let li of liList){
 }
 
 //프로필 버튼 클릭시 메뉴 나타나게(토글)
-document.getElementById('my').addEventListener('click',()=>{
-    let myMenu = document.getElementById('myMenu');
-    if(myMenu != null){
-        document.getElementById('myMenu').classList.toggle('off');
+document.addEventListener('click',(e)=>{
+    if(e.target.id == 'my'){
+        let myMenu = document.getElementById('myMenu');
+        if(myMenu != null){
+            document.getElementById('myMenu').classList.toggle('off');
+        }else{
+            //로그인 안 했을 시 누르면 로그인 화면으로 넘어가도록
+            window.location.href = '/member/login';
+        }
     }else{
-        //로그인 안 했을 시 누르면 로그인 화면으로 넘어가도록
-        window.location.href = '/member/login';
+        document.getElementById('myMenu').classList.add('off');
     }
 })
 

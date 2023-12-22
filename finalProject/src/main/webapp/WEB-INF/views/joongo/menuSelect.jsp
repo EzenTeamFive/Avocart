@@ -16,6 +16,6 @@
 	<option ${pbvo.proMenu eq "식물" ? "selected" : ""} value="식물">식물</option>
 	<option ${pbvo.proMenu eq "반려동물용품" ? "selected" : ""} value="반려동물용품">반려동물용품</option>
 	<option ${pbvo.proMenu eq "도서" ? "selected" : ""} value="도서">도서</option>
-	<option ${pbvo.proMenu eq "기타 중고물품" ? "selected" : ""} value="기타 중고물품">기타 중고물품</option>
+	<option ${pbvo.proMenu eq "기타 중고물품" ? "selected" : ""} value="기타">기타 중고물품</option>
 	<option ${pbvo.proMenu eq "삽니다" ? "selected" : ""} value="삽니다">삽니다</option>
 </select>

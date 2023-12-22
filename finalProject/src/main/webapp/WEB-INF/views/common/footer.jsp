@@ -5,13 +5,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style>
+		
+	</style>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <script>
+	
+	</script>
 </head>
 <body>
 <footer>
+
 	<section class="infoSec">
 		<div>
 			<b>공지사항</b>
-			<a href="#">아보카트를 처음 이용하시는 고객님들께</a>
+			<div class="splide" role="group" aria-label="Splide Basic HTML Example">
+			  <div class="splide__track">
+					<ul class="splide__list" id="sliderUl">
+						<!-- <li class="splide__slide">Slide 01</li>
+						<li class="splide__slide">Slide 02</li>
+						<li class="splide__slide">Slide 03</li> -->
+					</ul>
+			  </div>
+			</div>
 		</div>
 	</section>
 	<div class="footerContainer">
@@ -39,5 +56,6 @@
 		</div>
 	</div>
 </footer>
+<script src="/resources/js/footerSlider.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import com.avo.www.domain.CommunityBoardVO;
 import com.avo.www.domain.FileVO;
 import com.avo.www.domain.ProductBoardVO;
 import com.avo.www.repository.CommunityBoardDAO;
+import com.avo.www.repository.JobBoardDAO;
 import com.avo.www.repository.JoongoBoardDAO;
 import com.avo.www.repository.ProductFileDAO;
 import com.avo.www.repository.StoreBoardDAO;
@@ -22,6 +23,9 @@ public class HomeServiceImpl implements HomeService {
 	
 	@Inject
 	private StoreBoardDAO sbdao;
+	
+	@Inject
+	private JobBoardDAO jobdao;
 	
 	@Inject
 	private ProductFileDAO pfdao;
@@ -58,6 +62,11 @@ public class HomeServiceImpl implements HomeService {
 	@Override
 	public List<CommunityBoardVO> getCommunityLikeList() {
 		return cbdao.getCommunityLikeList();
+	}
+
+	@Override
+	public List<ProductBoardVO> getJobList() {
+		return jobdao.getJobList();
 	}
 
 	
