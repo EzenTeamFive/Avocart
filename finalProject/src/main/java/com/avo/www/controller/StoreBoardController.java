@@ -206,6 +206,15 @@ public class StoreBoardController {
           new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);   
    }
 
-   @GetMapping("/prac")
-   public void prac() {}
+   @GetMapping("/reviews")
+   public void reviews() {}
+   
+   @GetMapping(value = "/reviewPage/{page}/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
+   public ResponseEntity<PagingHandler> reviewList(@PathVariable("page") int page, 
+	         @PathVariable("type") String type
+         ){
+      PagingVO pgvo = new PagingVO(page, 8, type);
+      return new ResponseEntity<PagingHandler>(
+            ssv.getReviewList(pgvo), HttpStatus.OK);
+   }
 }

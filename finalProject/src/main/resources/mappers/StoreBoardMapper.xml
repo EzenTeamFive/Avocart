@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.avo.www.repository.StoreBoardDAO">
 	<insert id="insert">
-		insert into product(pro_email, pro_nick_name, pro_sido, pro_sigg, pro_emd, pro_title, pro_content, pro_category, pro_menu, proFullAddr, proDetailAddr)
+		insert into product(pro_email, pro_nick_name, pro_sido, pro_sigg, pro_emd, pro_title, pro_content, pro_category, pro_menu, pro_full_addr, pro_detail_addr)
 		values (#{proEmail}, #{proNickName}, #{proSido}, #{proSigg}, #{proEmd}, #{proTitle}, #{proContent}, #{proCategory}, #{proMenu}, #{proFullAddr}, #{proDetailAddr})
 	</insert>  
 	<update id="readCount">
@@ -16,7 +16,7 @@
   	<!-- 회원 정보 수정 반영X -->
   	<update id="update">
   	  	update product set pro_menu = #{proMenu}, pro_title = #{proTitle}, pro_content = #{proContent}, pro_mod_at = now(), 
-  	  	proFullAddr = #{proFullAddr}, proDetailAddr = #{proDetailAddr} 
+  	  	pro_full_addr = #{proFullAddr}, pro_detail_addr = #{proDetailAddr} 
   		where pro_bno = #{proBno}
   	</update>
 	<update id="delete">
