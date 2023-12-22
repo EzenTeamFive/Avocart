@@ -40,4 +40,6 @@ public interface JobBoardDAO {
 
 	void updateFileCnt(int proFileCnt);
 
+	List<ProductBoardVO> getJobList();
+
 }

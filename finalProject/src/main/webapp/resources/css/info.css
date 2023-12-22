@@ -133,6 +133,7 @@
     align-items: center;
     color: #333;
     text-decoration: none;
+    font-size: 14px;
 }
 .infoList > a p{
     display: inline-block;

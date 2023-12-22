@@ -27,35 +27,47 @@
 		padding-top: 20px;
 	}
 	.chatRoomList h2{
+		font-weight: 700;
 		margin-left: 15px;
 	}
 	.chatRoomList > div{
 		width: 100%;
-		height: 70px;
-		padding: 10px 15px;
+		height: 80px;
+		padding: 15px 15px;
 	}
 	.chatRoomList > div:hover{
-		background-color: #eee;
+		background-color: #f9f9f9;
 	}
 	.chatRoomList > div img{
 		width: 50px;
 		height: 50px;
 		border-radius: 25px;
+		margin-right: 10px;
+		object-fit: cover;
+	}
+	.messageHeader{
+		height: 70px;
+		border-bottom: 1px solid #efefef;
+		padding: 10px 15px;
+	}
+	.messageHeader p{
+		margin-bottom: 0;
 	}
 	.messages{
 		overflow: auto;
-		height: calc(100% - 40px);
+		height: calc(100% - 120px);
+		padding: 15px;
 	}
 	.messages > div > div{
 		display: inline-block;
 		padding: 10px;
 		box-sizing: border-box;
-		margin: 0 5px 5px 5px;
+		margin-bottom: 10px;
 		border-radius: 5px;
 	}
 	.messages .left div{
 		margin-right: 50px;
-		box-shadow: 0 0 1px rgba(80,80,80,0.2);
+		box-shadow: 0 0 2px rgba(80,80,80,0.5);
 	}
 	.messages .right{
 		text-align: right;
@@ -63,10 +75,12 @@
 	.messages .right div{
 		background-color: #d3d3d3;
 		margin-left: 50px;
+		text-align: left;
 	}
 	.inputArea{
 		position: absolute;
 		bottom: 0;
+		height: 50px;
 		width: 100%;
 	}
 </style>
@@ -97,8 +111,11 @@
   		
     </div>
     <div>
+    	<div class="messageHeader">
+    		<p>닉네임</p>
+    		<small>글 제목</small>
+    	</div>
 	    <div id="messages" class="messages">
-	    	메세지
 	    </div>
 	    <div class="inputArea">
 			<sec:authorize access="isAuthenticated()">
@@ -108,7 +125,7 @@
 		        <input type="text" id="senderNick" value="${authNickName}" style="display: none;">
 	        </sec:authorize>
 	        <input type="text" id="messageinput">
-	        <button type="button" onclick="send();">메세지 전송</button>
+	        <button type="submit" onclick="send();">메세지 전송</button>
 	    </div>
     </div>
 </div>

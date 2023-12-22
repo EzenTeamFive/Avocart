@@ -7,6 +7,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.logoSec a{
+		color: #323f11;
+	    display: flex;
+	    /* justify-content: flex-start; */
+	    align-items: center;
+	    text-decoration: none;
+	    font-family: fugaz;
+	}
+	.logoSec a h1{
+		margin: 0;
+	    display: inline;
+	    padding-left: 12px;
+	    padding-top: 10px;
+	}
+</style>
 <link rel="stylesheet" href="../resources/css/page.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -17,8 +33,10 @@
 <div class="headerContainer">
    <header>
       <div class="logoSec">
-         <img alt="logo" src="../resources/image/avocartLogo.png">
-         <h1><a href="/">Avocart</a></h1>      
+      	 <a href="/">
+	         <img alt="logo" src="../resources/image/avocartLogo.png">
+	         <h1>Avocart</h1> 
+         </a>     
       </div>
       <div class="searchSec">
          <form action="/common/search" method="post">
@@ -87,7 +105,7 @@
          <li><a href="/store/list">동네업체</a></li>
          <li><a href="/job/list">알바구인</a></li>
          <li><a href="/community/list">동네소식</a></li>
-         <li><a href="#">공지사항</a></li>
+         <li><a href="/info/list">공지사항</a></li>
          <li><a href="/faq/list">고객센터</a></li>
          
            <!-- 로그인 전 오픈되어야 할 메뉴 -->

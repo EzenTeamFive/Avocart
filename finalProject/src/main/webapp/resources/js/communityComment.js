@@ -2,7 +2,6 @@
 document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
     const cmtText = document.getElementById('cmtText').value;
     const cmtWriter = document.getElementById('cmtWriter').innerText; 
-    const cmtNickName = document.getElementById('reNickName').innerText; 
     const cmtEmail = document.getElementById('cmtEmail').value;
 
     if(cmtText == "" || cmtText == null){ //댓글을 안 적었을 때
@@ -459,28 +458,38 @@ document.addEventListener('click', (e)=>{
     }
 })
 
-//게시글 삭제, 수정버튼 보이게하기
-document.getElementById('boardUserMenuBtn').addEventListener('click',()=>{
-    let userMenu = document.getElementById('boardUserMenu');
-    if(userMenu.classList.contains('menu-off')){
-        userMenu.classList.replace('menu-off', 'menu-on');
-        userMenu.style = "display:inline-block";
-    }else{
-        userMenu.classList.replace('menu-on', 'menu-off');
-        userMenu.style = "display:none";
-    }
 
-})
+document.addEventListener('click', (e) => {
+    // 게시글 삭제, 수정 버튼 보이게 하기
+    if (e.target.id === 'boardUserMenuBtn') {
+        let userMenu = document.getElementById('boardUserMenu');
+        userMenu.classList.toggle('menu-on', !userMenu.classList.contains('menu-on'));
+        userMenu.style.display = userMenu.classList.contains('menu-on') ? 'inline-block' : 'none';
 
-document.addEventListener('click', (e)=> {
-    if (e.target.classList.contains('cmtUserBtn')) {
+    }else if (e.target.id === 'boardUserMenuBtn2') {
+        let userMenu = document.getElementById('boardUserMenu');
+        userMenu.classList.toggle('menu-on', !userMenu.classList.contains('menu-on'));
+        userMenu.style.display = userMenu.classList.contains('menu-on') ? 'inline-block' : 'none';
+
+    // 댓글 수정, 삭제 버튼 보이게 하기
+    }else if (e.target.classList.contains('cmtUserBtn')) {
         const userMenu = e.target.closest('.cmtContainer').querySelector('.cmtUserMenu');
-        if(userMenu.classList.contains('menu-off')){
-            userMenu.classList.replace('menu-off', 'menu-on');
-            userMenu.style = "display:inline-block";
-        }else{
-            userMenu.classList.replace('menu-on', 'menu-off');
-            userMenu.style = "display:none";
+        userMenu.classList.toggle('menu-on', !userMenu.classList.contains('menu-on'));
+        userMenu.style.display = userMenu.classList.contains('menu-on') ? 'inline-block' : 'none';
+    
+    // 화면의 다른 부분을 클릭했을 때 메뉴 숨기기
+    }else {
+        const boardUserMenu = document.getElementById('boardUserMenu');
+        if (boardUserMenu && boardUserMenu.classList.contains('menu-on')) {
+            boardUserMenu.classList.replace('menu-on', 'menu-off');
+            boardUserMenu.style.display = 'none';
         }
+
+        document.querySelectorAll('.cmtUserMenu').forEach(menu => {
+            if (menu.classList.contains('menu-on')) {
+                menu.classList.replace('menu-on', 'menu-off');
+                menu.style.display = 'none';
+            }
+        });
     }
 });

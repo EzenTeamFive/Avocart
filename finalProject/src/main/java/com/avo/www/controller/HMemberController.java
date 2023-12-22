@@ -156,4 +156,7 @@ public class HMemberController {
 			 : new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	@GetMapping("/dropOut") 
+	public void dropOut() {
+	}
 }

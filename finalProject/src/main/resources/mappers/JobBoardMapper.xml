@@ -143,8 +143,14 @@
 	</if>
 
 </sql>
-	
 
+<!-- index용 -->
+<select id="getJobList" resultType="com.avo.www.domain.ProductBoardVO">
+	select * from product 
+    where pro_category = 'job' AND pro_is_del = 'N'
+    order by pro_bno desc
+	limit 0, 6
+</select>
 
 
 </mapper>

@@ -11,7 +11,7 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
-<section class="bodyContainer searchArea">
+<section class="bodyContainer tabArea">
 	<ul class="tabMenu">
 		<li class="active"><button type="button">중고거래</button></li>
 		<li><button type="button">동네업체</button></li>
@@ -71,7 +71,7 @@
 	</div>
 </section>
 <jsp:include page="../common/footer.jsp" />
-<script type="text/javascript" src="/resources/js/searchTab.js" ></script>
+<script type="text/javascript" src="/resources/js/tabMenuControll.js" ></script>
 <script type="text/javascript" src="/resources/js/searchResult.js" ></script>
 </body>
 </html>
