@@ -1,8 +1,7 @@
 @import url(../css/reset.css);
 @import url(../css/joongoBoard.css);
 /* search start */
-.searchArea{
-    width: 1440px;
+.tabArea{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -16,6 +15,7 @@ ul.tabMenu{
     border-radius: 48px;
     font-size: 0;
     overflow: hidden;
+    display: inline-block;
 }
 ul.tabMenu > li{
     display: inline-block;
@@ -41,7 +41,6 @@ ul.tabMenu > li > button{
 }
 .tabContents{
     width: 100%;
-    margin-bottom: 90px;
 }
 
 .tabContents > div:not(.on){
