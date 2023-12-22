@@ -17,4 +17,8 @@ public interface CSBoardDAO {
 
 	int updateIsAns(long cmtBno);
 
+	List<CSBoardVO> getNoAnsList();
+
+	List<CSBoardVO> getMenuList(String csCategory);
+
 }

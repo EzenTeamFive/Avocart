@@ -12,4 +12,6 @@ public interface MemberService {
 
 	int hasNick(String memNickName);
 
+	int hasPhone(String memPhone);
+
 }

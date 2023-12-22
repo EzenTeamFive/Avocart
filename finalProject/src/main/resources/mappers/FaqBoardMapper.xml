@@ -43,4 +43,18 @@
 			</trim>
 		</if>
 	</sql>
+	
+	<select id="getModifyBoard" resultType="com.avo.www.domain.FaqBoardVO">
+		select * from faq
+		where faq_bno = #{faqBno}
+	</select>
+	
+	<update id="update">
+		update faq set faq_title = #{faqTitle}, faq_content = #{faqContent}, faq_category = #{faqCategory}
+		where faq_bno = #{faqBno}
+	</update>
+	
+	<delete id="delete">
+		delete from faq where faq_bno = #{faqBno}
+	</delete>
 </mapper>

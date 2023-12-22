@@ -17,55 +17,44 @@
 		<li><button type="button">동네업체</button></li>
 		<li><button type="button">알바구인</button></li>
 		<li><button type="button">동네소식</button></li>
-		<li><button type="button">공지사항</button></li>
 	</ul>
 	<div class="tabContents">
 		<div class="on" id="joongo">
-			<h2>중고거래</h2>
+			<h2>'${keyword}'</h2>
 			<div class="boardListArea">
 				<!-- 리스트 출력 공간 -->
 			</div>
 			<div class="moreBtnArea">
-				<button class="moreBtn" type="button" id="moreJoongoBtn" data-page="1" style="visibility:hidden">더보기</button>
+				<button class="moreBtn" type="button" id="moreJoongoBtn" data-page="1" style="display:none">더보기</button>
 			</div>
 		</div>
 		<div id="store">
-			<h2>동네업체</h2>
+			<h2>'${keyword}'</h2>
 			<div class="boardListArea">
 				<!-- 리스트 출력 공간 -->
 			</div>
 			<div class="moreBtnArea">
-				<button class="moreBtn" type="button" id="moreStoreBtn" data-page="1" style="visibility:hidden">더보기</button>
+				<button class="moreBtn" type="button" id="moreStoreBtn" data-page="1" style="display:none">더보기</button>
 			</div>
 
 		</div>
 		<div id="job">
-			<h2>알바구인</h2>
+			<h2>'${keyword}'</h2>
 			<div class="boardListArea">
 				<!-- 리스트 출력 공간 -->
 			</div>
 			<div class="moreBtnArea">
-				<button class="moreBtn" type="button" id="moreJobBtn" data-page="1" style="visibility:hidden">더보기</button>
+				<button class="moreBtn" type="button" id="moreJobBtn" data-page="1" style="display:none">더보기</button>
 			</div>
 
 		</div>
 		<div id="community">
-			<h2>동네소식</h2>
+			<h2>'${keyword}'</h2>
 			<div class="boardListArea">
 				<!-- 리스트 출력 공간 -->
 			</div>
 			<div class="moreBtnArea">
-				<button class="moreBtn" type="button" id="moreCommunityBtn" data-page="1" style="visibility:hidden">더보기</button>
-			</div>
-		</div>
-		
-		<div id="info">
-			<h2>공지사항</h2>
-			<div class="boardListArea">
-				<!-- 리스트 출력 공간 -->
-			</div>
-			<div class="moreBtnArea">
-				<button class="moreBtn" type="button" id="moreCommunityBtn" data-page="1" style="visibility:hidden">더보기</button>
+				<button class="moreBtn" type="button" id="moreCommunityBtn" data-page="1" style="display:none">더보기</button>
 			</div>
 		</div>
 	</div>

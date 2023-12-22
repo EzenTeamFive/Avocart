@@ -13,4 +13,10 @@ public interface FaqBoardDAO {
 
 	List<FaqBoardVO> getMenuList(String faqCategory);
 
+	FaqBoardVO getModifyBoard(long faqBno);
+
+	int update(FaqBoardVO bvo);
+
+	int delete(long faqBno);
+
 }

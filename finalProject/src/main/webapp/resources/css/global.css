@@ -49,24 +49,25 @@ header{
 }
 .logoSec img{
    width: 30px;
-}
-.logoSec h1{
-   margin: 0;
-   padding-left: 12px;
-}
-.logoSec h1 a{
-   font-family: fugaz;
-   /* font-family: 'Fugaz One', sans-serif; */
-   line-height: 45px;
-   text-decoration: none;
-   font-size: 36px;
+}	
+.logoSec a{
    color: #323f11;
-   letter-spacing: -1px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-family: fugaz;
+}
+.logoSec a h1{
+   margin: 0;
+    display: inline;
+    padding-left: 12px;
+    padding-top: 10px;
 }
 /* logoSec end */
 /* searchSec start */
 .searchSec{
    width: 80%;
+   height: 100%;
    text-align: right;
    position: relative;
    display: flex;
@@ -77,14 +78,20 @@ header{
    width: 50%;
    position: relative;
 }
+.inputIconLabel{
+   display: inline;
+}
 .inputIcon{
-   position: absolute;
-   top: 16px;
-   left: 17px;
    font-size: 14px;
    color: #93b336;
+   position: absolute;
+   padding: 16px;
+   padding-bottom: 0;
 }
-.searchSec input[type='search']{
+#inputIcon{
+   vertical-align: 0;
+}
+.searchSec input[type='text']{
    height: 45px;
    width: 100%;
    border: 2px solid #93b336;
@@ -110,7 +117,7 @@ header{
 }
 .searchSec .bi-person{
    font-size: 25px;
-   margin-left: 15px;
+   padding-left: 15px;
    cursor: pointer;
 }
 .searchSec .searchMenu{
@@ -120,8 +127,8 @@ header{
    width: 100%;
    text-align: left;
    background-color: #fff;
-   box-shadow: 0 0 5px #cdcdcd;
-   border: 1px solid #d3d3d3;
+   box-shadow: 0 0 1px #cdcdcd;
+   /*border: 1px solid #d3d3d3;*/
    padding: 20px 15px;
    box-sizing: border-box;
    border-radius: 0 0 5px 5px;
@@ -136,7 +143,7 @@ header{
 }
 .searchSec .searchMenu input{
    margin-bottom: 15px;
-   border: 3px solid #93b336;
+   border: 2px solid #93b336;
    height: 40px;
    border-radius: 30px;
 }
@@ -189,10 +196,16 @@ header{
 }
 /* searchSec end */
 
+.myBtn{
+   border: none;
+   background: none;
+   padding: 0;
+   height: 45px;
+}
 #myMenu{
    display: block;
    position: absolute;
-   top: 45px;
+   top: 60px;
    z-index: 10;
    border: 1px solid #efefef;
    border-radius: 5px;

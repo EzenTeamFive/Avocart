@@ -22,8 +22,9 @@
 	<div class="jobListPartSub">
 		<h3>우리동네에서 찾는 알바카도</h3>
 		<a href="/job/register" ><button type="button" class="">공고 올리기</button></a>
-		<a href="/likeList/likeList" ><button type="button" class="">관심 목록</button></a>
 		<a href="/job/about" ><button type="button" class="" >알바카도 활용법</button></a>
+		<a href="/myList/likeList" ><button type="button" class="">관심 목록</button></a>
+		<a href="/myList/commuList" ><button type="button" class="">동네생활</button></a>
 	</div>
 </div>
    <div id="loading">

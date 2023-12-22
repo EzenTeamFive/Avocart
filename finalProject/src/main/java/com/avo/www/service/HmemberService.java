@@ -2,7 +2,9 @@ package com.avo.www.service;
 
 import java.util.List;
 
+import com.avo.www.domain.BuyItemVO;
 import com.avo.www.domain.FileVO;
+import com.avo.www.domain.ProductBoardVO;
 import com.avo.www.security.MemberVO;
 
 public interface HmemberService {
@@ -24,5 +26,11 @@ public interface HmemberService {
 	int proDelete(String email);
 
 	int memDelete(String email);
+
+	List<ProductBoardVO> getSellList(String userEmail);
+
+	List<BuyItemVO> getBuyList(String userEmail);
+
+	List<FileVO> getFileList(long proBno);
 
 }

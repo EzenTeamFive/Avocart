@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.avo.www.domain.BuyItemVO;
 import com.avo.www.domain.FileVO;
 import com.avo.www.domain.LikeItemVO;
 import com.avo.www.domain.PagingVO;
@@ -45,6 +46,8 @@ public interface JoongoBoardDAO {
    List<ProductBoardVO> getJoongoList();
 
    List<ProductBoardVO> getJoongoLikeList();
+
+   List<ProductBoardVO> selectSellList(String userEmail);
 
 
 }

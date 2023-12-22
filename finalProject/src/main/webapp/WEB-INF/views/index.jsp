@@ -55,7 +55,7 @@
 <div id="loading"></div>
 
 <!-- 중고라인 -->
-<div class="boardListLine">
+<div class="boardListLine firstJoongoLine">
 	<div class="ListLineTop">
 		<p>방금 등록된 상품</p>
 		<a href="/joongo/list">더보기</a>
@@ -202,7 +202,7 @@
 <!-- bodyContainer 2 -->
 <div class="bodyContainer">
 <!-- 동네업체 라인 -->
-<div class="boardListLine">
+<div class="boardListLine storeListLine">
 	<div class="ListLineTop">
 		<p>우리 동네 인기 업체</p>
 		<a href="/store/list">더보기</a>
@@ -224,7 +224,7 @@
 </div>
 
 <!-- 알바구인 라인 -->
-<div class="boardListLine">
+<div class="boardListLine jobNcmListTopMargin">
 	<div class="ListLineTop">
 		<p>우리 동네 인기 알바</p>
 		<a href="/job/list">더보기</a>
@@ -246,7 +246,7 @@
 </div>
 
 <!-- 동네소식 최신순 -->
-<div class="boardListLine">
+<div class="boardListLine jobNcmListTopMargin">
 	<div class="ListLineTop">
 		<p>최신 동네 소식</p>
 		<a href="/community/list">더보기</a>

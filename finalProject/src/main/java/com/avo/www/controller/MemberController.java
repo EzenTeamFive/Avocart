@@ -90,6 +90,16 @@ public class MemberController {
 				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	//전화번호 존재여부 확인
+	@GetMapping(value = "/phone/{memPhone}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> hasPhone(@PathVariable("memPhone")String memPhone){
+		log.info(">>>>> memPhone >>> "+memPhone);
+		int isOk = msv.hasPhone(memPhone);
+		
+		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
 	@GetMapping(value = "/test/{memEmail}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> mail(@PathVariable("memEmail")String memEmail, Model m){
 		log.info(">>>>> 인증 이메일 >>> "+memEmail);
@@ -124,5 +134,7 @@ public class MemberController {
 		return new ResponseEntity<String>(num, HttpStatus.OK);
 	}
 
+	@GetMapping("/findEmail")
+	public void findEmail() {}
 	
 }

@@ -60,4 +60,14 @@ public class CSBoardServiceImpl implements CSBoardService{
 				new CSBoardDTO(cbdao.getDetail(csBno), cfdao.getFileList(csBno));
 		return bdto;
 	}
+
+	@Override
+	public List<CSBoardVO> getNoAnsList() {
+		return cbdao.getNoAnsList();
+	}
+
+	@Override
+	public List<CSBoardVO> getMenuList(String csCategory) {
+		return cbdao.getMenuList(csCategory);
+	}
 }

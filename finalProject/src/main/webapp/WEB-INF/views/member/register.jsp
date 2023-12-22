@@ -28,7 +28,7 @@
 	
 	<div class="inputDiv">
 	  <label for="pw" class="labels">비밀번호</label>
-	  <input type="password" class="inputs" name="memPw" id="pw" placeholder="영문,숫자,특수문자 조합 8-16자">
+	  <input type="password" class="inputs" name="memPw" id="pw" placeholder="영문,숫자,특수문자 조합 8-16자" autocomplete="off">
 	  <i class="bi bi-eye-slash" id="showPwBtn"></i>
 	  <p class="msg" style="display:none" id="pwMsg">영문, 숫자, 특수문자를 조합하여 입력해주세요.</p>
 	  <p class="msg" style="display:none" id="pwMsg2">8-16자 사이로 입력해주세요.</p>
@@ -36,13 +36,20 @@
 	
 	<div class="inputDiv">
 	  <label for="nick" class="labels">닉네임</label>
-	  <input type="text" class="inputs" name="memNickName" id="nick" placeholder="닉네임을 입력하세요">
+	  <input type="text" class="inputs" name="memNickName" id="nick" placeholder="닉네임을 입력하세요" autocomplete="off">
 	  <p class="msg" style="display:none" id="nickMsg">이미 존재하는 닉네임입니다.</p>
+	</div>
+	
+	<div class="inputDiv">
+	  <label for="phone" class="labels">전화번호</label>
+	  <input type="text" class="inputs" name="memPhone" id="phone" placeholder="전화번호를 (-)를 제외하고 입력하세요" autocomplete="off">
+	  <p class="msg" style="display:none" id="phoneMsg1">번호를 올바르게 입력해주세요.</p>
+	  <p class="msg" style="display:none" id="phoneMsg2">이미 존재하는 번호입니다.</p>
 	</div>
 	
 	<div class="inputDiv">	
 	  <label for="addr" class="labels">주소</label>
-	  <input type="text" class="inputs" id="addr" placeholder="주소를 검색하세요">
+	  <input type="text" class="inputs" id="addr" placeholder="주소를 검색하세요" autocomplete="off">
 	</div>
 	<!-- 주소 전송용 인풋 -->
 	<input type="hidden" class="form-control" name="memSido" id="sido">

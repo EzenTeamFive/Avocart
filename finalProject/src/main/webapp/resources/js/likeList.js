@@ -27,7 +27,7 @@ async function loadMore() {
 // 서버에서 Like List랑 product List가져오기
 async function getLikeListForServer(page, category){
     try {
-        const resp = await fetch('/likeList/likeList/'+page+'/'+category);
+        const resp = await fetch('/myList/likeList/'+page+'/'+category);
         const result = await resp.json();
         console.log(result);
         return result;
@@ -41,7 +41,7 @@ async function getLikeListForServer(page, category){
 // 썸네일 가져오는 함수
 async function getThumbnailToServer(proBno){
     try {
-        const url = '/likeList/likeList/thumb/'+proBno;
+        const url = '/myList/likeList/thumb/'+proBno;
         const config = {
             method : 'post'
         };
@@ -79,6 +79,7 @@ async function spreadLikeListFromServer(page = 1, category){
             
             for(let like of result.prodList){
                 let inner = `<div class="likeListContent">`;
+                document.getElementById('likeCnt').innerText = `${result.totalCount}`;
                 inner += `<a href="/${like.proCategory}`;
                 if(like.proCategory == 'store'){
                     inner += `/detail?bno=${like.proBno}">`;

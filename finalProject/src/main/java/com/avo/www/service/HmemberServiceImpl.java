@@ -4,16 +4,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.avo.www.domain.BuyItemVO;
 import com.avo.www.domain.FileVO;
+import com.avo.www.domain.ProductBoardVO;
 import com.avo.www.repository.HmemberDAO;
+import com.avo.www.repository.JoongoBoardDAO;
+import com.avo.www.repository.ProductFileDAO;
 import com.avo.www.repository.ProfileFileDAO;
 import com.avo.www.security.MemberVO;
 
@@ -26,10 +25,16 @@ public class HmemberServiceImpl implements HmemberService {
 	private HmemberDAO hdao;
 	
 	@Inject
+	private JoongoBoardDAO jdao;
+	
+	@Inject
     private PasswordEncoder passwordEncoder;
 	
 	@Inject
 	private ProfileFileDAO pdao;
+	
+	@Inject
+	private ProductFileDAO fdao;
 	 
 	@Override
 	public MemberVO getDetail(String email) {
@@ -121,6 +126,21 @@ public class HmemberServiceImpl implements HmemberService {
 		//멤버 삭제
 		isDel = hdao.mbDelete(email);
 		return isDel;
+	}
+	
+	@Override
+	public List<ProductBoardVO> getSellList(String userEmail) {
+		return jdao.selectSellList(userEmail);
+	}
+
+	@Override
+	public List<BuyItemVO> getBuyList(String userEmail) {
+		return hdao.selectBuyList(userEmail);
+	}
+
+	@Override
+	public List<FileVO> getFileList(long proBno) {
+		return fdao.getFileList(proBno);
 	}
 
 }

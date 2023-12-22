@@ -32,6 +32,9 @@
 	<select id="hasNick" resultType="com.avo.www.security.MemberVO">
 		select * from member where mem_nick_name = #{memNickName}
 	</select>
+	<select id="hasPhone" resultType="com.avo.www.security.MemberVO">
+		select * from member where mem_phone = #{memPhone}
+	</select>
 	
 	<!-- 이메일로 닉네임 호출 -->
 	<select id="getNickFromEmail" resultType="String">
