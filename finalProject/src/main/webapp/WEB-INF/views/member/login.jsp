@@ -43,7 +43,7 @@
 <div class="links">
 	<a href="/member/register">회원가입</a>
 	<a href="/member/findEmail">이메일 찾기</a>
-	<a href="/member/findPw">비밀번호 찾기</a>
+	<a href="/member/register">비밀번호 찾기</a>
 </div>
 </div>
 
