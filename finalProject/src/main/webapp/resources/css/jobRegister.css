@@ -13,8 +13,12 @@
 
 .imgLine{
 	width: 100%;
-	height: 250px;
-	background-color: #dbdf80;
+	min-width: 1280px;
+    height: 350px;
+    background-color: #f9ffd1;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .formLine{
@@ -31,13 +35,14 @@
 	font-weight: 800;
 }
 
-.titleInput, .cmMenu, .fileInput{
+.titleInput, .jobMenu, .fileInput{
 	width: 100%;
 	height: 48px;	
 	padding: 10px 15px;
 	border-radius: 5px;
 	border: solid 1px #e5e5e5;
 	font-size: 14px;
+	margin-bottom: 40px
 }
 .cmMenu{
 	cursor: pointer;
@@ -56,6 +61,16 @@
 }
 .contentInput:focus{
 	outline: none;
+}
+.form-label {
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+.form-select {
+	margin-bottom: 40px
+}
+.form-control {
+	margin-bottom: 40px
 }
 
 /* 파일 */

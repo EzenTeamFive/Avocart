@@ -25,15 +25,15 @@
 
 .jobListPart {
 	width: 100%;
-	min-width: 1440px;
-    height: 360px;
-    background-color: #e3edc8;
+	min-width: 1280px;
+    height: 350px;
+    background-color: #f9ffd1;
     text-align: center;
     position: relative;
     overflow: hidden;
 }
 
-.jobListPart h3 {
+/* .jobListPart h3 {
 	color: #fff;
 	text-shadow: 
 	  0px 2px 1px #84a331, 
@@ -46,9 +46,9 @@
 	  2px -2px 1px #84a331;
 	font-weight: bold;
 }
-
+ */
 .jobListPart a button {
-	background: #84a331;
+	background: #69be47;
 	width: 160px;
 	height:37px;
 	border: none;
@@ -60,7 +60,8 @@
 	transition: color 0.3s, background 0.3s;
 }
 #moreBtn {
-	background: #84a331;
+/* 	background: #84a331; */
+	background: #69be47;
 	width: 160px;
 	height:37px;
 	border: none;
@@ -73,27 +74,18 @@
 }
 
 .jobListPart a button:hover , #moreBtn:hover {
-	color: #84a331;
+	color: #69be47;
 	background: #fff;
-	border: 2px solid #84a331;
+	border: 2px solid #69be47;
 	
 
 }
 
-.jobListPart img {
-	position: absolute;
-    width: 800px;
-    display: block;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-top: 150px;
-}
 
 .jobListPart .jobListPartSub{
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
+	position: absolute;
+    bottom: 15%;
+    left: 14%;
 }
 
 .brdListArea {
@@ -107,7 +99,7 @@
 .jobListContent {
     align-items: center;
     width: 43%;
-    height: 200px;
+    height: 170px;
     margin-bottom: 20px;
     box-sizing: border-box;
     transition: 0.5s;
@@ -127,7 +119,7 @@
     text-decoration: none;
 }
 .jobListContent img {
-	width: 250px;
+	width: 170px;
     height: 100%;
     object-fit: cover;
     margin-right: 10px;
@@ -136,7 +128,12 @@
     float: left;
     border-radius: 5px 0px 0px 5px;
 }
-
+.jobInfoArea {
+    padding: 20px;
+    left: 20px;
+    position: relative;
+	
+}
 .jobInfoArea a {
 	display: flex;
     justify-content: center;
@@ -146,6 +143,16 @@
 .jobInfoArea span {
     display: block; 
     margin-bottom: 5px;
+}
+.jobInfoArea .proTitle {
+	font-size: 17px;
+}
+.jobInfoArea .proAddr {
+	font-size: 14px;
+	color: #808080;
+}
+.jobInfoArea span .payment {
+	font-size: 20px;
 }
 section select {
 	border: 1px solid #d3d3d3;

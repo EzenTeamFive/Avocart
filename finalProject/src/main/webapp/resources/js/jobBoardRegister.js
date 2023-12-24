@@ -109,12 +109,12 @@ function createFileListWithoutFileName(fileList, fileNameToRemove) {
     }
     console.log(newFiles);
     // 새로운 FileList 생성
-    const newFileList = new DataTransfer();
+    let newFileList = new DataTransfer();
 
-    for (const file of newFiles) {
+    for (let file of newFiles) {
         newFileList.items.add(file);
     }
-
+    console.log("newfileList>>"+newFileList.files);
     return newFileList.files;
 }
 

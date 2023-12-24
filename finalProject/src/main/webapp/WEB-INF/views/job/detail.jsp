@@ -19,6 +19,11 @@
 <jsp:include page="../common/header.jsp" />
 
 <div class="bodyContainer" >
+
+		<div class="floatMenu">
+			<p><i class="bi bi-heart${checkLike > 0 ? '-fill' : '' }" id="likeBtn"></i>찜하기<span id="checkLikeCnt"></span></p> 
+			<p><i class="bi bi-clipboard"></i>링크복사</p>
+		</div> 
 	
 	<div class="innerContainer">
 	<!-- 로그인 한 회원 일 경우에만 principal 가져오기 -->
@@ -83,7 +88,36 @@
 	
 	<div class="jobTitleSecction">
 		<h1>${jbdto.pbvo.proTitle}</h1>
-		<p>${jbdto.pbvo.proReAt}</p>
+		<span>
+		    <c:choose>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'food'}">
+		            외식.음료
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'shop'}">
+		            매장관리.판매
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'service'}">
+		            서비스
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'office'}">
+		            사무직
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'product'}">
+		            생산.건설
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'driver'}">
+		            운전.배달
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'education'}">
+		            교육.강사
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'etc'}">
+		            기타
+		        </c:when>
+		    </c:choose>
+		</span>
+
+		<p id="proReAt">${jbdto.pbvo.proReAt}</p> 
 	</div>
 	
 	<div class="jobInfoSecction">
@@ -98,14 +132,13 @@
 		<div class="jobInfoDetail">
 			<p><strong><i class="bi bi-pencil"></i>상세내용<i class="bi bi-pencil"></i></strong></p>
 			<p>${jbdto.pbvo.proContent}</p>
-			<p>
-			조회수 ${jbdto.pbvo.proReadCnt} <i class="bi bi-heart${checkLike > 0 ? '-fill' : '' }" id="likeBtn"></i>찜 ${pbvo.proLikeCnt} <span id="checkLikeCnt">${checkLikeCnt }</span> 
-			</p>
+			
+			<p>관심</p><p id="likeCount checkLikeCnt">${jbdto.pbvo.proLikeCnt }</p>
+			<p>조회 ${jbdto.pbvo.proReadCnt }</p>
 		</div>
 		
-		<!-- 지도 넣으면 좋겠다. -->
 		<div id="map"></div>
-	</div>
+		</div>
 	
 	<sec:authorize access="isAuthenticated()">
 	    <c:if test="${memEmail eq jbdto.pbvo.proEmail}">
@@ -132,8 +165,8 @@
 					</c:otherwise>
 				</c:choose>
 			    
-			    <input type="hidden" id="reUserId" value="${memEmail }">
-			    <input type="hidden" id="reNickName" value="${memNickName }">
+			    <input type="hidden" id="memEmail" value="${memEmail }">
+			    <input type="hidden" id="memNickName" value="${memNickName }">
 			    <strong><span id="reWriter">${memNickName}</span></strong>
 		    </div>
 			<sec:authorize access="isAuthenticated()">
@@ -215,8 +248,17 @@
     const proBnoVal = `<c:out value="${jbdto.pbvo.proBno}"/>`;
     const receiverEmail = `<c:out value="${jbdto.pbvo.proEmail}"/>`;
     const memEmail = `<c:out value="${memEmail}"/>`;
+    const memNickName = `<c:out value="${memNickName}"/>`;
     const proFullAddr = `${jbdto.pbvo.proFullAddr}`;
+    const checkLikeCntDetail = `${jbdto.pbvo.proLikeCnt }`;
     console.log(proFullAddr);
+    
+    // 날짜 시간부분 자르기
+    const proReAtValue = `<c:out value="${jbdto.pbvo.proReAt }"/>`;
+    const formattedDate = proReAtValue.substring(0, 10);
+    //변경된 값을 HTML에 출력
+    document.getElementById('proReAt').innerText = formattedDate;
+    
 </script>
 <!-- 좋아요 -->
 <script type="text/javascript" src="/resources/js/jobLike.js"></script>

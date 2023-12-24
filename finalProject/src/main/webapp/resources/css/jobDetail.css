@@ -8,6 +8,39 @@
 	height: 300px;
 	margin-bottom: 50px;
 }
+/* floatMenu start */
+.floatMenu{
+    position: fixed;
+    z-index: 100;
+    top: 20%;
+    right: 5%;
+    padding: 20px 0;
+    width: 80px;
+    height: 180px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 40px;
+    display: flex;q
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'suit';
+}
+.floatMenu p {
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.floatMenu i {
+	font-size: 20px;
+}
+
+    /* 글씨는font-size: 12px; */
+/*     i는 20pxfont-size: 20px; */
+/* floatMenu end */
 .jobBtn {
 	margin-top:50px;
 	width: 40px;
@@ -90,11 +123,21 @@
 .jobTitleSecction h1 {
 	margin: 30px 0px 20px 0px;
 }
-.bi-thermometer-half, .bi-heart, .bi-heart-fill {
-	color: #f90000;
+.jobTitleSecction span {
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: #85a331;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 8px;
+    margin-right: 10px;
+    margin-bottom: 5px;
 }
-.bi-heart, .bi-heart-fill {
-	margin: 0px 5px 0px 10px;
+.bi-heart, .bi-clipboard {
+	color: #d3d3d3;
+}
+.bi-thermometer-half, .bi-heart-fill {
+	color: #a33131;
 }
 /* 리뷰 */
 .rePost, .reWriterInfo {

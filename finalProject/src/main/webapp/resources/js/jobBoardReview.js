@@ -10,8 +10,6 @@ document.getElementById("rePostBtn").addEventListener('click',()=>{
      // 선택된 라디오 버튼의 값 가져오기 값이 없다면 
      const ratingValue = selectedRating ? selectedRating.value : undefined;
  
-     const nickName = document.getElementById('reNickName').value;
-
     if (reContent == null || reContent =='') {
         alert('댓글 내용을 입력해주세요.');
         return false;
@@ -22,11 +20,12 @@ document.getElementById("rePostBtn").addEventListener('click',()=>{
         // 객체에 전송할 값 담기
         let reData ={
             reBno : proBnoVal,
-            senderEmail : memEmail,
             receiverEmail : receiverEmail,
-            reNickName : nickName,
+            senderEmail : memEmail,
             reContent : reContent,
-            reScore: ratingValue
+            reScore: ratingValue,
+            reCategory: 'job',
+            reSenderNick : memNickName,
         };
         console.log("redata  >> " , reData);
 
@@ -130,7 +129,7 @@ async function spreadReviewList(reBno=proBnoVal, page=1){  //시작은 1페이�
                     li += `<img alt="review profile error" src="../resources/image/기본프로필.png">`;
                 }
 
-                li+= `<strong><span class="reNickName">${rvo.reNickName}</span></strong>`;
+                li+= `<strong><span class="reSenderNick">${rvo.reSenderNick}</span></strong>`;
                 
                 // li+= `<p class="badge rounded-pill text-bg-light">구월동</p>`; 멤버 주소 가져올 수 있으면 차후 추가
                 li+= `<span class="badge rounded-pill text-bg-light">${rvo.regAt}</span>`;

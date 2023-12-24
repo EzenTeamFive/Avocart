@@ -32,10 +32,10 @@
 	<select id="getCommuTotalCount" resultType="int">
 		<if test="pgvo.type != 'undefined'">
 			<choose>
-				<when test="pgvo.type == '작성글'.toString()">
+				<when test="pgvo.type == 'commuWriterList'.toString()">
 					SELECT COUNT(*) FROM community WHERE cm_email = #{liUserId} AND cm_is_del = 'N'
 				</when>
-				<when test="pgvo.type == '관심글'.toString()">
+				<when test="pgvo.type == 'commuLikeList'.toString()">
 					 SELECT COUNT(*) FROM community_like WHERE lk_email = #{liUserId}
 				</when>
 			</choose>
@@ -51,10 +51,10 @@
    <select id="getMoreCommuList" resultType="com.avo.www.domain.CommunityBoardVO">
  		<if test="pgvo.type != 'undefined'">
 			<choose>
-				<when test="pgvo.type == '작성글'.toString()">
+				<when test="pgvo.type == 'commuWriterList'.toString()">
 					SELECT * FROM community where cm_email = #{liUserId} AND cm_is_del = 'N'
 				</when>
-				<when test="pgvo.type == '관심글'.toString()">
+				<when test="pgvo.type == 'commuLikeList'.toString()">
 					SELECT c.*
 					FROM community c
 					JOIN community_like cl ON c.cm_bno = cl.lk_bno

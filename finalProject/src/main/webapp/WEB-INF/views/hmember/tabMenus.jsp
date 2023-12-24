@@ -127,12 +127,12 @@
 	    	</div>
 	    </div>
 	
-	    <div>
-	    	tab menu4
+	    <div id="commuList">
+	    	<jsp:include page="../myList/commuList.jsp" />
 	    </div>
 	    
-		<div>
-			tab menu5
+		<div id="likeList">
+			<jsp:include page="../myList/likeList.jsp" />
 		</div>
 	</div>
 </div>
