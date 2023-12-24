@@ -33,13 +33,13 @@ getBuyList();
 
 function getSellList(){
     getSellListFromServer().then(result => {
-        let sellListDiv = document.getElementById('sellList');
         if(result.length > 0){
+            let sellListDiv = document.getElementById('sellList');
             let sellList = "";
             for(let r of result){
                 let price = r.pbvo.proPrice.toLocaleString('ko-KR');
                 let upDate = r.pbvo.proReAt.substring(0,10);
-                sellList += `<div class="oneList"><a href="/joongo/detail?proBno=${r.pbvo.proBno}">`;
+                sellList += `<div class="oneList"><a href="/product/detail?proBno=${r.pbvo.proBno}">`;
                 if(r.pflist.length > 0){
                     console.log(r.pflist[0].saveDir);
                     sellList += `<img alt="" src="/upload/product/${r.pflist[0].saveDir.replaceAll('\\','/')}/${r.pflist[0].uuid}_${r.pflist[0].fileName}">`;
@@ -50,8 +50,6 @@ function getSellList(){
                 sellList += `</div><mark><i class="bi bi-geo-alt"></i>${r.pbvo.proFullAddr}</mark></a></div>`;
             }
             sellListDiv.innerHTML = sellList;
-        }else{
-            sellListDiv.innerHTML = "<p>게시글이 없습니다.</p>";
         }
     })
 }
@@ -59,8 +57,8 @@ function getSellList(){
 function getBuyList(){
     getBuyListFromServer().then(result => {
         console.log("buyList : "+result);
-        let buyListDiv = document.getElementById('buyList');
         if(result.length > 0){
+            let buyListDiv = document.getElementById('buyList');
             let buyList = "";
             for(let r of result){
                 let price = r.bivo.buyPrice.toLocaleString('ko-KR');
@@ -68,7 +66,7 @@ function getBuyList(){
                 buyList += `<div class="oneList">`;
                 if(r.pflist.length > 0){
                     console.log(r.pflist[0].saveDir);
-                    buyList += `<img alt="" src="/upload/joongo/${r.pflist[0].saveDir.replaceAll('\\','/')}/${r.pflist[0].uuid}_${r.pflist[0].fileName}">`;
+                    buyList += `<img alt="" src="/upload/product/${r.pflist[0].saveDir.replaceAll('\\','/')}/${r.pflist[0].uuid}_${r.pflist[0].fileName}">`;
                 }else{
                     buyList += `<img alt="" src="../resources/image/기본 프로필 배경.png">`;
                 }
@@ -76,8 +74,6 @@ function getBuyList(){
                 buyList += `</div><mark><i class="bi bi-geo-alt"></i>${r.bivo.buyFullAddr}</mark></div>`;
             }
             buyListDiv.innerHTML = buyList;
-        }else{
-            buyListDiv.innerHTML = "<p>게시글이 없습니다.</p>";
         }
     })
 }

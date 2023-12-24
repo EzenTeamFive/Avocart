@@ -94,7 +94,7 @@
 	<div class="commentWrite">
 		<input type="hidden" id="cmtEmail" value="${authEmail }">
 		<span class="cmtWriter" id="cmtWriter">${authNick }</span>
-		<textarea rows="1" class="cmtText" id="cmtText" placeholder="댓글을 남겨주세요"></textarea>
+		<textarea rows="1" cols="25" class="cmtText" id="cmtText" placeholder="댓글을 남겨주세요" spellcheck="false"></textarea>
 <!-- 		<input type="text" class="cmtText" id="cmtText" placeholder="댓글을 남겨주세요"> -->
 		<button type="button" id="cmtPostBtn" class="cmtPostBtn">등록</button>
 	</div>

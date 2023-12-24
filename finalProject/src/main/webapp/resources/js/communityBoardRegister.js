@@ -63,16 +63,16 @@ document.addEventListener('change', (e) => {
             });
             promises.push(promise);
         }
-        checkFields();
-
+        
         //모든 Promise가 완료될 때까지 대기 후 ul 조작
         Promise.all(promises).then(() => {
             ul += `</ul>`;
             div.innerHTML = ul;
-
+            
             if (isOk == 0) { //첨부 불가능한 파일이 있다면
                 document.getElementById('regBtn').disabled = true;
             }
+            checkFields();
         });
     }
 });

@@ -13,8 +13,6 @@
 <jsp:include page="../common/header.jsp" />
 <div class="cmBanner">
 	<div class="innerDiv">
-		<h3 class="cmBannerText1">이웃만 아는<br>동네 정보와 이야기</h3>
-		<p class="cmBannerText2">우리동네의 다양한 정보와 이야기를<br>공감과 댓글로 나누어요.</p>
 	</div>
 </div>
 
