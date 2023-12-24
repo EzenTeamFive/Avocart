@@ -7,10 +7,11 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.avo.www.controller.JobReviewController;
+import com.avo.www.domain.FileVO;
 import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ReviewVO;
 import com.avo.www.handler.PagingHandler;
+import com.avo.www.repository.JobFileDAO;
 import com.avo.www.repository.JobReviewDAO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,9 @@ public class JobReviewServiceImpl implements JobReviewService{
 	
 	@Inject
 	private JobReviewDAO jrdao;
+	
+	@Inject
+	private JobFileDAO fdao;
 
 	@Override
 	public int postReview(ReviewVO rvo) {
@@ -48,5 +52,16 @@ public class JobReviewServiceImpl implements JobReviewService{
 	@Override
 	public int remove(long reRno) {
 		return jrdao.delete(reRno);
+	}
+
+	@Override
+	public int modify(ReviewVO rvo) {
+		return jrdao.modify(rvo);
+	}
+
+
+	@Override
+	public FileVO getProfileImg(String reWriter) {
+		return fdao.getProfileImg(reWriter);
 	}
 }

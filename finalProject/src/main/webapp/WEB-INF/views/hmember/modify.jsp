@@ -31,7 +31,7 @@
 	  <input type="password" class="inputs" name="memPw" id="pw2" placeholder="영문, 숫자, 특수문자 조합 8-16자">
 	  <i class="bi bi-eye-slash" id="showPwBtn2"></i>
 	  <p class="msg" style="display:none" id="pwMsg1_2">비밀번호가 일치하지 않습니다.</p>
-	  <p class="msg" style="display:none" id="pwMsg2_2">비밀번호를 입력해 주세요.</p>
+<!--   	  <p class="msg" style="display:none" id="pwMsg2_2">비밀번호를 입력해 주세요.</p> -->
 	</div>
 	
 	<div class="inputDiv">

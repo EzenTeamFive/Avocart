@@ -33,7 +33,7 @@ Joongo list에서 추가하는 구조
 
 // 페이지가 다 로드되면 로딩화면 삭제
 window.onload = function() {
-    setTimeout(()=> document.getElementById('loading').style.display = 'none', 500);
+    setTimeout(()=> document.getElementById('loading').style.display = 'none', 200);
 };
 
 // 현재 페이지 링크 복사
@@ -162,5 +162,33 @@ async function getMoreBoard(category, page = 1, proMenu = menu, proSort = sorted
     }
 }
 
-// board 선언
-getMoreBoard(category);
+
+// 중고 페이지에서 로컬 스토리지의 카테고리 사용 및 초기화
+document.addEventListener('DOMContentLoaded', () => {
+    const selectedCategory = localStorage.getItem('selectedCategory');
+
+    if (selectedCategory) {
+        // 카테고리를 사용하여 필요한 작업 수행
+        console.log(selectedCategory);
+        let selectElement = document.getElementById('menu');
+        let options = selectElement.options;
+
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].value === selectedCategory) {
+                options[i].selected = true;
+                break;
+            }
+        }
+        getMoreBoard(category,1,selectedCategory,sortedBy);
+    }else{
+        // board 선언
+        getMoreBoard(category);
+    }
+    document.getElementById('loading').style.display = 'block';
+    setTimeout(()=> document.getElementById('loading').style.display = 'none', 200);
+});
+
+// 페이지 언로드 시 로컬 스토리지에서 카테고리 삭제
+window.onunload = function() {
+    localStorage.removeItem('selectedCategory');
+};

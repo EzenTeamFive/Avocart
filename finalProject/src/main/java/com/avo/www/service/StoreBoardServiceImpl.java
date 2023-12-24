@@ -1,5 +1,6 @@
 package com.avo.www.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,12 +13,14 @@ import com.avo.www.domain.FileVO;
 import com.avo.www.domain.LikeItemVO;
 import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ProductBoardVO;
+import com.avo.www.domain.ReviewVO;
 import com.avo.www.domain.StoreBoardDTO;
 import com.avo.www.domain.StoreMenuVO;
 import com.avo.www.handler.PagingHandler;
 import com.avo.www.repository.StoreFileDAO;
 import com.avo.www.repository.StoreLikeDAO;
 import com.avo.www.repository.StoreMenuDAO;
+import com.avo.www.repository.StoreReviewDAO;
 import com.avo.www.security.MemberVO;
 import com.avo.www.repository.MemberDAO;
 import com.avo.www.repository.StoreBoardDAO;
@@ -42,6 +45,9 @@ public class StoreBoardServiceImpl implements StoreBoardService {
 	@Inject
 	private StoreLikeDAO sldao;
 
+	@Inject
+	private StoreReviewDAO srdao;
+	
 	@Transactional
 	@Override
 	public int insert(StoreBoardDTO sdto, String email) {
@@ -91,7 +97,7 @@ public class StoreBoardServiceImpl implements StoreBoardService {
 	public int modify(StoreBoardDTO sdto, String email) {
 		sdao.readCount(sdto.getPvo().getProBno(), -2);
 		
-	    //이메일을 기반 회원 정보 가져오기
+	    //이메일 기반 회원 정보 가져오기
         MemberVO member = mdao.selectEmail(email);
         
 		sdto.getPvo().setProNickName(member.getMemNickName());	
@@ -137,19 +143,31 @@ public class StoreBoardServiceImpl implements StoreBoardService {
 	@Transactional
 	@Override
 	public PagingHandler getList(PagingVO pgvo) {
-		int totalCount = sdao.getTotalCount(pgvo);
-		List<ProductBoardVO> list = sdao.SelectListPaging(pgvo);
-		
-		//list에서 proBno 값 추출
-	    List<Long> bnoList = list.stream()
-                .map(ProductBoardVO::getProBno)
-                .collect(Collectors.toList());
+	    int totalCount = sdao.getTotalCount(pgvo);
+	    List<ProductBoardVO> list = sdao.SelectListPaging(pgvo);
+	    List<FileVO> fileList = new ArrayList<>();
+	    List<Integer> reviewCntList = new ArrayList<>(); 
 	    
-	    //proBnoList로 file 테이블에서 파일 데이터 가져오기
-	    List<FileVO> fileList = sfdao.getAllFileList(bnoList);
-	    
-		PagingHandler ph = new PagingHandler(pgvo, totalCount, list, fileList);
-		return ph;
+	    if (!list.isEmpty()) {
+	        //list에서 proBno 값 추출
+	        List<Long> bnoList = list.stream()
+	                .map(ProductBoardVO::getProBno)
+	                .collect(Collectors.toList());
+
+	        //bnoList로 file 테이블에서 파일 데이터 가져오기
+	        fileList = sfdao.getAllFileList(bnoList);
+
+	        //list에서 proEmail 값 추출
+	        List<String> emailList = list.stream()
+	                .map(ProductBoardVO::getProEmail)
+	                .collect(Collectors.toList());
+
+	        //emailList로 review 테이블에서 리뷰 데이터 가져오기
+	        reviewCntList = srdao.getAllReviewCnt(emailList);
+	    }
+
+	    PagingHandler ph = new PagingHandler(pgvo, totalCount, list, fileList, reviewCntList);
+	    return ph;
 	}
 
 	@Override
@@ -210,6 +228,24 @@ public class StoreBoardServiceImpl implements StoreBoardService {
 				return sldao.countTotalLikes(lvo); 
 			}
 		}
+	}
+
+	@Override
+	public String getEmail(long bno) {
+		return sdao.getEmail(bno);
+	}
+	
+	@Transactional
+	@Override
+	public PagingHandler getReviewList(PagingVO pgvo) {
+		//리뷰 총 개수
+	    int totalCount = srdao.getTotalCount(pgvo);
+	    
+	    //리뷰 리스트
+	    List<ReviewVO> reviewList = srdao.SelectReviewPaging(pgvo);
+
+	    PagingHandler ph = new PagingHandler(totalCount, reviewList, pgvo);
+	    return ph;
 	}
 
 }

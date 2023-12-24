@@ -18,7 +18,9 @@
 <body>
 <jsp:include page="../common/header.jsp" />
 
-<div class="bodyContainer">
+<div class="bodyContainer" >
+	
+	<div class="innerContainer">
 	<!-- 로그인 한 회원 일 경우에만 principal 가져오기 -->
 	<sec:authorize access="isAuthenticated()">
 		<!-- 작성자와 현재 로그인한 mem의 memEmail여부 일치 확인용 -->
@@ -57,29 +59,37 @@
 		</button>
 	</div>
 	
-	
 	<div class="profileSecction">
 		<div class="userInfo">
-			<span><img class="frofileImg" alt="frofile error" src="../resources/image/기본 프로필.png"></i>${jbdto.pbvo.proNickName}</span>
+				<c:choose>
+					<c:when test="${empty profile}">
+						<img class="frofileImg" alt="frofile error" src="../resources/image/기본 프로필.png">			
+					</c:when>
+					<c:otherwise>
+						<img class="frofileImg" alt="frofile error" src="/upload/profile/${fn:replace(profile.saveDir,'\\','/')}/${profile.uuid}_th_${profile.fileName}">
+					</c:otherwise>
+				</c:choose>
+				<span><strong>${jbdto.pbvo.proNickName}</strong><br>${jbdto.pbvo.proEmd}</span>
+				
 		</div>
 		<div class="userScore">
 			<i class="bi bi-thermometer-half"></i>매너온도
 			<div class="userStar">
 			</div>
-			
 		</div>
 	</div>
+	
 	<hr>
 	
 	<div class="jobTitleSecction">
 		<h1>${jbdto.pbvo.proTitle}</h1>
-		<p>${jbdto.pbvo.proNickName } / ${jbdto.pbvo.proModAt }</p>
+		<p>${jbdto.pbvo.proReAt}</p>
 	</div>
 	
 	<div class="jobInfoSecction">
-		<p><strong><i class="bi bi-coin"></i>${jbdto.pbvo.proMenu}
+		<p><strong>${jbdto.pbvo.proPayment}
 		<fmt:formatNumber type="number" maxFractionDigits="3" value="${jbdto.pbvo.proPrice}" />원</strong></p>
-		<p><i class="bi bi-geo-alt"></i>근무지 <br> ${jbdto.pbvo.proSido} ${jbdto.pbvo.proSigg} ${jbdto.pbvo.proEmd}</p>
+		<p><i class="bi bi-geo-alt"></i>근무지 <br> ${jbdto.pbvo.proFullAddr}</p>
 <!--
  		<p><i class="bi bi-calendar-check"></i>근무요일</p>
 		<p><i class="bi bi-clock"></i>근무시간</p> 
@@ -89,21 +99,22 @@
 			<p><strong><i class="bi bi-pencil"></i>상세내용<i class="bi bi-pencil"></i></strong></p>
 			<p>${jbdto.pbvo.proContent}</p>
 			<p>
-			조회수 ${jbdto.pbvo.proReadCnt} <i class="bi bi-heart${checkLike > 0 ? '-fill' : '' }" id="likeBtn"></i>찜하기 ${pbvo.proLikeCnt} <span id="checkLikeCnt">${checkLikeCnt }</span> 
+			조회수 ${jbdto.pbvo.proReadCnt} <i class="bi bi-heart${checkLike > 0 ? '-fill' : '' }" id="likeBtn"></i>찜 ${pbvo.proLikeCnt} <span id="checkLikeCnt">${checkLikeCnt }</span> 
 			</p>
 		</div>
 		
 		<!-- 지도 넣으면 좋겠다. -->
+		<div id="map"></div>
 	</div>
 	
 	<sec:authorize access="isAuthenticated()">
 	    <c:if test="${memEmail eq jbdto.pbvo.proEmail}">
-			<a href="/job/modify?proBno=${jbdto.pbvo.proBno}"><button class="btn btn-success">수정</button></a>
-			<a href="/job/remove?proBno=${jbdto.pbvo.proBno}"><button class="btn btn-success">삭제</button></a>
+			<a href="/job/modify?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn">수정</button></a>
+			<a href="/job/remove?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn">삭제</button></a>
 		</c:if>
 	</sec:authorize>
-	 
-	
+		
+	<hr>
 	
 	<!-- 후기 라인 -->
 	<div class="container">
@@ -111,9 +122,20 @@
 	<span><strong>후기</strong></span>
 		<!-- 후기 등록 라인 -->
 		<div class="rePost">
-		    <img class="frofileImg"  alt="frofile error" src="../resources/image/기본 프로필.png">
-		    <input type="hidden" id="reUserId" value="${memEmail }">
-		    <strong><span id="reWriter">${memNickName}</span></strong>
+			<div class="reProfile">
+				<c:choose>
+					<c:when test="${empty memProfile}">
+						<img class="frofileImg" alt="frofile error" src="../resources/image/기본 프로필.png">			
+					</c:when>
+					<c:otherwise>
+						<img class="frofileImg" alt="frofile error" src="/upload/profile/${fn:replace(memProfile.saveDir,'\\','/')}/${memProfile.uuid}_th_${memProfile.fileName}">
+					</c:otherwise>
+				</c:choose>
+			    
+			    <input type="hidden" id="reUserId" value="${memEmail }">
+			    <input type="hidden" id="reNickName" value="${memNickName }">
+			    <strong><span id="reWriter">${memNickName}</span></strong>
+		    </div>
 			<sec:authorize access="isAuthenticated()">
 			<div class="mb-3 myform">
 				<fieldset>
@@ -134,41 +156,39 @@
 				</fieldset>
 				
 				<input type="text" placeholder="후기를 작성해주세요." id="reContent">
+			    <button type="button" class="jobBtn" id="rePostBtn">등록</button>
 			</div>
 				
 
-			    <button type="button" class="btn btn-success" id="rePostBtn">등록</button>
 			</sec:authorize>
 			<sec:authorize access="isAnonymous()">
 				<input type="text" placeholder="로그인 해주세요" id="reContent">
-			    <button type="button" class="btn btn-success" id="rePostBtn" disabled="disabled">등록</button>
+			    <button type="button" class="jobBtn" id="rePostBtn" disabled="disabled">등록</button>
 			</sec:authorize>
 		    
 		</div>
 		
 		<!-- 후기 표시 라인 -->
 		<ul class="list-group list-group-flush" id="reListArea">
-		  <li class="list-group-item">
-		  	<div class="mb-3 reWriterInfo">
-			  	<img class="frofileImg"  alt="frofile error" src="../resources/image/기본 프로필.png">
-				<span><strong>reUserId</strong></span>
-				<p class="badge rounded-pill text-bg-dark">구월동</p>
-				<p class="badge rounded-pill text-bg-dark">regAt</p>
-		  	</div>
-		  	<span>여기서 일하지마세요 ㅋㅋ </span>
-		  </li>
+
 		</ul>
 		<!-- 후기 페이징 라인 -->
-		<div>
+		<div class="moreBtnArea">
 			<button type="button" id="moreBtn" data-page="1" 
-			 class="btn btn-outline-dark" style="visibility:hidden">더보기</button>
+			 class="moreBtn jobBtn" style="visibility:hidden">더보기</button>
 		</div>
 		
 	</div>
 
 
 	
+	</div>
 </div>
+
+<!-- pro_emd와 같은 주소인 list 뿌려주기 -->
+
+
+
 
 <!-- <script type="text/javascript">
 
@@ -193,13 +213,17 @@
 <!-- 공통 -->
 <script type="text/javascript">
     const proBnoVal = `<c:out value="${jbdto.pbvo.proBno}"/>`;
+    const receiverEmail = `<c:out value="${jbdto.pbvo.proEmail}"/>`;
     const memEmail = `<c:out value="${memEmail}"/>`;
-    
+    const proFullAddr = `${jbdto.pbvo.proFullAddr}`;
+    console.log(proFullAddr);
 </script>
 <!-- 좋아요 -->
 <script type="text/javascript" src="/resources/js/jobLike.js"></script>
 <!-- 후기 -->
 <script type="text/javascript" src="/resources/js/jobBoardReview.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=be76d3271661514aa93cd9bfa688b659&libraries=services"></script>
+<script type="text/javascript" src="/resources/js/jobMap.js"></script>
 <script type="text/javascript">
 	spreadReviewList();
 </script>

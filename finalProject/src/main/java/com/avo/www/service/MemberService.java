@@ -12,4 +12,10 @@ public interface MemberService {
 
 	int hasNick(String memNickName);
 
+	int hasPhone(String memPhone);
+
+	MemberVO fineEmail(String memPhone);
+
+	int findPw(String memEmail, String secretPw);
+
 }

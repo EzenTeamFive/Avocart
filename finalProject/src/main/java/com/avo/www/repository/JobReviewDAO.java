@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.avo.www.domain.FileVO;
 import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ReviewVO;
 
@@ -16,5 +17,7 @@ public interface JobReviewDAO {
 	List<ReviewVO> selectListPaging(@Param("reBno")long reBno, @Param("pgvo") PagingVO pgvo);
 
 	int delete(long reRno);
+
+	int modify(ReviewVO rvo);
 
 }

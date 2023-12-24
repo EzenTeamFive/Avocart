@@ -18,6 +18,7 @@ public class ProductBoardVO {
    private String proTitle;
    private String proContent;
    
+   private String proPayment;
    private int proPrice;
    private String proCategory;
    private String proMenu;
@@ -36,4 +37,7 @@ public class ProductBoardVO {
    private String proEmd;
    
    private String proIsDel;	
+   
+   private String proFullAddr; //업체 주소
+   private String proDetailAddr; //업체 상세 주소
 }

@@ -7,8 +7,12 @@ import javax.inject.Inject;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.avo.www.domain.BuyItemVO;
 import com.avo.www.domain.FileVO;
+import com.avo.www.domain.ProductBoardVO;
 import com.avo.www.repository.HmemberDAO;
+import com.avo.www.repository.JoongoBoardDAO;
+import com.avo.www.repository.ProductFileDAO;
 import com.avo.www.repository.ProfileFileDAO;
 import com.avo.www.security.MemberVO;
 
@@ -21,11 +25,17 @@ public class HmemberServiceImpl implements HmemberService {
 	private HmemberDAO hdao;
 	
 	@Inject
+	private JoongoBoardDAO jdao;
+	
+	@Inject
     private PasswordEncoder passwordEncoder;
 	
 	@Inject
 	private ProfileFileDAO pdao;
 	
+	@Inject
+	private ProductFileDAO fdao;
+	 
 	@Override
 	public MemberVO getDetail(String email) {
 		MemberVO mvo = hdao.getDeail(email);
@@ -53,12 +63,33 @@ public class HmemberServiceImpl implements HmemberService {
 
 	@Override
 	public int modifyPwEmpty(MemberVO mvo) {
-		return hdao.modifyPwEmpty(mvo);
+		int isOk = hdao.modifyPwEmpty(mvo);
+		
+		//중고, 알바, 업체 게시글 닉네임 변경
+		hdao.jjsModify(mvo);
+		//동네 게시글 닉네임 변경
+		hdao.cmModify(mvo);
+		//동네 댓글 닉네임 변경
+		hdao.cmCmtModify(mvo);
+		//동네 대댓글 닉네임 변경
+		hdao.cmReCmtModify(mvo);
+
+		return isOk;
 	}
 
 	@Override
 	public int modify(MemberVO mvo) {
-		return hdao.modify(mvo);
+		int isOk =  hdao.modify(mvo);
+		//중고, 알바, 업체 게시글 닉네임 변경
+		hdao.jjsModify(mvo);
+		//동네 게시글 닉네임 변경
+		hdao.cmModify(mvo);
+		//동네 댓글 닉네임 변경
+		hdao.cmCmtModify(mvo);
+		//동네 대댓글 닉네임 변경
+		hdao.cmReCmtModify(mvo);
+		
+		return isOk;
 	}
 
 	@Override
@@ -95,6 +126,21 @@ public class HmemberServiceImpl implements HmemberService {
 		//멤버 삭제
 		isDel = hdao.mbDelete(email);
 		return isDel;
+	}
+	
+	@Override
+	public List<ProductBoardVO> getSellList(String userEmail) {
+		return jdao.selectSellList(userEmail);
+	}
+
+	@Override
+	public List<BuyItemVO> getBuyList(String userEmail) {
+		return hdao.selectBuyList(userEmail);
+	}
+
+	@Override
+	public List<FileVO> getFileList(long proBno) {
+		return fdao.getFileList(proBno);
 	}
 
 }

@@ -32,4 +32,8 @@ public interface StoreBoardService {
 
 	int updateLike(LikeItemVO lvo);
 
+	String getEmail(long bno);
+
+	PagingHandler getReviewList(PagingVO pgvo);
+
 }

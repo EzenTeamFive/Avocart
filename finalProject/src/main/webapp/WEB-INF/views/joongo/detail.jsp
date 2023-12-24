@@ -12,14 +12,6 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
-	<div class="prodArea">
-		<div class="wrap">
-			<span>${pbvo.proMenu }</span>
-			<h3>${pbvo.proTitle }</h3>
-			<h2><!-- 가격란 --></h2>
-			<p>${pbvo.proRegAt } | 조회 ${pbvo.proReadCnt }</p>
-		</div>
-	</div>
 	<div class="bodyContainer">
 		<section class="floatMenu">
 			<!-- 찜 (북마크) -->
@@ -65,11 +57,15 @@
 			    <span class="visually-hidden">Next</span>
 			  </button>
 			</div>
-			<div class="contentArea">
-				<textarea id="dynamicTextarea" cols="30" rows="10" readonly>${pbvo.proContent}</textarea>
-			</div>
 		<div class="profileArea">
-			<img src="../resources/image/logoimage.png" class="card-img-top" alt="프로필 이미지">
+			<c:choose>
+				<c:when test="${empty profile}">
+					<img src="../resources/image/기본 프로필.png" class="card-img-top" alt="기본 프로필 이미지">			
+				</c:when>
+				<c:otherwise>
+					<img src="/upload/profile/${fn:replace(profile.saveDir,'\\','/')}/${profile.uuid}_th_${profile.fileName}" alt="프로필 이미지">
+				</c:otherwise>
+			</c:choose>
 			<div class="writerInfo">
 				<b>${pbvo.proNickName } 님</b>
 				<p>${pbvo.proEmd }</p>
@@ -77,15 +73,23 @@
 			<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal.mvo.memEmail" var="authEmail"/>
 				<c:if test="${pbvo.proEmail ne authEmail}">
-					<!-- 글 작성자가 아닐 경우에만 띄울 버튼 -->
-					<button type="button">채팅 <i class="bi bi-chat-dots"></i></button>					
+					<!-- 글 작성자가 아닐 경우에만 띄울 채팅 버튼 -->
+					<button type="button" id="chatRoomBtn">채팅 <i class="bi bi-chat-dots"></i></button>					
 				</c:if>
 			</sec:authorize>
 		</div>
 		
+		<div class="prodArea">
+			<h3>${pbvo.proTitle }</h3>
+			<span>${pbvo.proMenu }</span><p><!-- 날짜 --></p>
+			<h2><!-- 가격란 --></h2>
+			<textarea id="dynamicTextarea" cols="30" rows="10" readonly>${pbvo.proContent}</textarea>
+			<p id="likeCnt">관심 ${pbvo.proLikeCnt }</p><p>조회 ${pbvo.proReadCnt }</p>
+		</div>
+		
 		<sec:authorize access="isAuthenticated()">
 			<c:if test="${pbvo.proEmail eq authEmail}">
-				<div class="writerBtnArea">
+				<div class="lastBtnArea">
 					<!-- 글 작성자에게만 띄울 버튼 -->
 					<a href="/joongo/modify?proBno=${pbvo.proBno }"><button type="submit">수정</button></a>
 					<a href="/joongo/remove?proBno=${pbvo.proBno }"><button type="button">삭제</button></a>
@@ -98,13 +102,22 @@
 <jsp:include page="../common/footer.jsp" />
 <script>
 const bnoVal = `<c:out value="${pbvo.proBno}" />`;
+const writerEmail = `<c:out value="${pbvo.proEmail}" />`;
 const userEmail = `<c:out value="${authEmail}" />`;
+
+// 가격 표기 변경
 let price = `<c:out value="${pbvo.proPrice}" />`;
 price = parseInt(price).toLocaleString('ko-KR');
-document.querySelector('.prodArea .wrap h2').append(price+'원');
+document.querySelector('.prodArea h2').append(price+'원');
+
+// 날짜 표기 변경
+let date = `<c:out value="${pbvo.proReAt}" />`;
+date = date.substring(0,10);
+document.querySelector('.prodArea p:not(:last-child)').append(date);
 
 </script>
 <script src="/resources/js/abjustTextareaRows.js"></script>
 <script src="/resources/js/likeItem.js"></script>
+<script src="/resources/js/chatRoomCreate.js"></script>
 </body>
 </html>

@@ -1,5 +1,8 @@
 package com.avo.www.repository;
 
+import java.util.List;
+
+import com.avo.www.domain.BuyItemVO;
 import com.avo.www.security.MemberVO;
 
 public interface HmemberDAO {
@@ -7,6 +10,15 @@ public interface HmemberDAO {
 	MemberVO getDeail(String email);
 
 	String getPw(String email);
+	
+	//수정 관련
+	int jjsModify(MemberVO mvo);
+	
+	int cmModify(MemberVO mvo);
+	
+	int cmCmtModify(MemberVO mvo);
+	
+	int cmReCmtModify(MemberVO mvo);
 
 	int modifyPwEmpty(MemberVO mvo);
 
@@ -20,5 +32,8 @@ public interface HmemberDAO {
 	int amDelte(String email);
 
 	int mbDelete(String email);
+
+	// 멤버 페이지 리스트 출력
+	List<BuyItemVO> selectBuyList(String userEmail);	
 
 }

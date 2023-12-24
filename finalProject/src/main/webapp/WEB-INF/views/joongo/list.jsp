@@ -11,6 +11,8 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
+<jsp:include page="../common/mainFloatingMenu.jsp"/>
+<div class="joongoBanner"></div>
 <div class="bodyContainer">
 	<div class="boardMenuArea">
 		<h3>거래 물품 <b>0</b>개</h3>
@@ -31,7 +33,6 @@
 		</c:if> --%>
 	</div>
 	
-	<a href="/joongo/register"><button type="button" class="btn btn-success">register</button></a>
 	<div id="loading">
 		<!-- 로딩페이지 -->
 	</div>

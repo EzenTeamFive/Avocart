@@ -38,5 +38,13 @@ public interface CommunityBoardDAO {
 	List<CommunityBoardVO> getMenuList(@Param("pgvo")PagingVO pgvo, @Param("cmMenu")String cmMenu);
 
 	int communityMenuTotal(String cmMenu);
+	
+	int getSearchCommunityTotalCount(PagingVO pgvo);
+
+	List<CommunityBoardVO> getSearchCommunityList(PagingVO pgvo);
+
+	List<CommunityBoardVO> getCommunityList();
+
+	List<CommunityBoardVO> getCommunityLikeList();
 
 }

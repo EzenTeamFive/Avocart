@@ -81,7 +81,7 @@ public class JoongoBoardController {
         }
         log.info(">>>>>>>>>>>> pbvo 확인 >>>>>>>> "+pbvo);
         
-		int isOk = jbsv.register(new ProductBoardDTO(pbvo, flist));
+		int isOk = jbsv.register(new ProductBoardDTO(pbvo, null, flist));
 		log.info("등록 "+(isOk > 0 ? "성공" : "실패"));
 		
 		return "redirect:/joongo/list";
@@ -105,6 +105,14 @@ public class JoongoBoardController {
 		
 		m.addAttribute("pbvo", pbdto.getPbvo());
 		m.addAttribute("flist", pbdto.getPflist());
+    	
+    	// 프로필 사진 가져오기
+    	FileVO fvo = new FileVO();
+    	if(jbsv.getProfileImage(pbvo.getProEmail()) != null) {
+    		fvo = jbsv.getProfileImage(pbvo.getProEmail());
+    		m.addAttribute("profile", fvo);
+    	}
+    	log.info(">>>>>>>>>> fvo >>>>>> "+fvo);
 		
 		//사용자 객체 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -122,6 +130,7 @@ public class JoongoBoardController {
         	if(checkLike > 0) {
         		m.addAttribute("checkLike", checkLike);
         	}
+        	
         }
 		
 	}
@@ -144,7 +153,7 @@ public class JoongoBoardController {
 			flist = fh.uploadFiles(files, "product");
 		}
 		
-		int isMod = jbsv.modify(new ProductBoardDTO(pbvo, flist));
+		int isMod = jbsv.modify(new ProductBoardDTO(pbvo, null, flist));
 		log.info("수정 "+(isMod > 0 ? "성공" : "실패"));
 		
 		return "redirect:/joongo/detail?proBno="+pbvo.getProBno();
@@ -180,7 +189,7 @@ public class JoongoBoardController {
 		int isOk = jbsv.insertOrUpdate(livo);
 		log.info("찜 "+(isOk > 0 ? "성공" : "실패"));
 		
-		return new ResponseEntity<String>("", HttpStatus.OK);
+		return new ResponseEntity<String>(""+jbsv.selectAllLikeCnt(livo.getLiBno()), HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/file/{uuid}", produces = MediaType.TEXT_PLAIN_VALUE)

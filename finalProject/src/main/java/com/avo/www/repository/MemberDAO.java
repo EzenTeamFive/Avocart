@@ -2,6 +2,8 @@ package com.avo.www.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.avo.www.security.AuthVO;
 import com.avo.www.security.MemberVO;
 
@@ -20,5 +22,13 @@ public interface MemberDAO {
 	MemberVO hasEmail(String memEmail);
 
 	MemberVO hasNick(String memNickName);
+
+	String getNickFromEmail(String msgGetUserEmail);
+
+	MemberVO hasPhone(String memPhone);
+
+	MemberVO findEmail(String memPhone);
+
+	int findPw(@Param("memEmail")String memEmail, @Param("memPw")String memPw);
 
 }

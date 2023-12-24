@@ -9,6 +9,18 @@
 	<select id="getPw" resultType="String">
 		select mem_pw from member where mem_email = #{email}
 	</select>
+	<update id="jjsModify">
+		update product set pro_nick_name = #{memNickName} where pro_email = #{memEmail}
+	</update>
+	<update id="cmModify">
+		update community set cm_nick_name = #{memNickName} where cm_email = #{memEmail}
+	</update>
+	<update id="cmCmtModify">
+		update community_cmt set cmt_nick_name = #{memNickName} where cmt_email = #{memEmail}
+	</update>
+	<update id="cmReCmtModify">
+		update community_re_cmt set re_nick_name = #{memNickName} where re_email = #{memEmail}
+	</update>
 	<update id="modifyPwEmpty">
 		update member set mem_nick_name = #{memNickName}, mem_sido = #{memSido}, mem_sigg = #{memSigg}, mem_emd = #{memEmd}, mem_mod_at = now() where mem_email = #{memEmail}
   	</update>
@@ -27,4 +39,7 @@
   	<delete id="mbDelete">
   		delete from member where mem_email = #{email}
   	</delete>
+  	<select id="selectBuyList" resultType="com.avo.www.domain.BuyItemVO">
+  		select * from buy_item where buy_user_email = #{userEmail}
+  	</select>
 </mapper>

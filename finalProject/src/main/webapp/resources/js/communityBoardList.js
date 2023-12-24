@@ -56,22 +56,18 @@ async function getMoreBoard(page = 1, menu) {
             }
 
             for (let bvo of result.cmList) {
-                let dateOnly = new Date(bvo.cmRegAt); 
-                const year = dateOnly.getFullYear();
-                const month = (dateOnly.getMonth() + 1).toString().padStart(2, '0');
-                const day = dateOnly.getDate().toString().padStart(2, '0');
-                const extractedDate = `${year}-${month}-${day}`;
+                let upDate = bvo.cmRegAt.substring(0,10);
 
                 let str = `<div class="oneBoard">`;
                 str += `<p class="boardMenuName">${bvo.cmMenu }</p>`;
                 str += `<div class="user_profile">
-                            <i class="bi bi-person-circle"></i>
-                            <b>${bvo.cmNickName}</b>
-                            <p>${extractedDate }</p>
-                            <p><i class="bi bi-geo-alt-fill"></i>${bvo.cmEmd }</p>
-                        </div>`;
+                            <img id="cmListProfile-${bvo.cmBno}" class="cmUserProfile" alt="" src="/resources/image/기본 프로필.png">
+                            <b class="cmListNick">${bvo.cmNickName}</b>
+                            <p class="cmListDate">${upDate }</p>
+                            <p class="cmListEmd"><i class="bi bi-geo-alt-fill cmWriterLocationIcon"></i>${bvo.cmEmd }</p>
+                            </div>`;
 
-                str += `<div class="communityContentLine"><a class="communityContentLine" href="/community/detail?cmBno=${bvo.cmBno }">`;
+                str += `<div class="communityContentLine"><a class="contentAtag" href="/community/detail?cmBno=${bvo.cmBno }">`;
                 str += `<p>${bvo.cmTitle }</p>`;
                 if (bvo.cmFileCnt > 0) {
                     let thumb = await getThumbnailToServer(bvo.cmBno);
@@ -82,7 +78,7 @@ async function getMoreBoard(page = 1, menu) {
                 str += `<div class="item-info">
                             <div>
                                 <i class="bi bi-eye"></i>
-                                <span>${bvo.cmReadCnt }</span>
+                                <span>${bvo.cmReadCnt } </span>
                                 <i class="bi bi-heart"></i>
                                 <span>${bvo.cmLikeCnt } </span>
                             </div>
@@ -92,11 +88,11 @@ async function getMoreBoard(page = 1, menu) {
                             </div>
                         </div>`;
                 str += `</div>`;
+	            communityProfile(bvo.cmEmail, `cmListProfile-${bvo.cmBno}`);
                 cmBoard.innerHTML += str;
             }
-            
         } else {
-            let str = `<div>게시글이 존재하지 않습니다.</div>`;
+            let str = `<div class="noBoard">게시글이 존재하지 않습니다.</div>`;
             cmBoard.innerHTML = str;
         }
 
@@ -118,18 +114,21 @@ window.onload = function() {
     setTimeout(()=> document.getElementById('loading').style.display = 'none', 500);
 };
 
+//현재 fullPath
+let fullPath = window.location.href;
+console.log(fullPath);
 //div의 a 요소 가져오기
 let aList = document.querySelectorAll('.CommunityCategory a');
 console.log(aList);
 
 for(let a of aList){
     // 이전 active 클래스 삭제
-    if(path != "http://localhost:8089/community/list"){
+    if(fullPath != "http://localhost:8088//community/list"){
         a.classList.remove('cmActive');
     }
 
     //현재 링크와 a태그의 링크가 동일하면 active 클래스 적용
-    if(a.href == path){
+    if(a.href == fullPath){
         a.classList.add('cmActive');
     }
 }
