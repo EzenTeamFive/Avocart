@@ -1,0 +1,158 @@
+.bodyContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 140px;
+}
+.titleLine {
+	margin: 100px 0px 30px;
+	width: 1000px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.titleLine h3 {
+	color: #606C38;
+	font-weight: bold;
+}
+.titleLine section {
+	display: flex;
+	margin: 100px 0px;
+	justify-content: space-between;
+	width: 250px;
+}
+
+.jobListPart {
+	width: 100%;
+	min-width: 1440px;
+    height: 360px;
+    background-color: #e3edc8;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.jobListPart h3 {
+	color: #fff;
+	text-shadow: 
+	  0px 2px 1px #84a331, 
+	  0px -2px 1px #84a331, 
+	  2px 0px 1px #84a331, 
+	  -2px 0px 1px #84a331,
+	  2px 2px 1px #84a331,
+	  -2px -2px 1px #84a331,
+	  -2px 2px 1px #84a331,
+	  2px -2px 1px #84a331;
+	font-weight: bold;
+}
+
+.jobListPart a button {
+	background: #84a331;
+	width: 160px;
+	height:37px;
+	border: none;
+	border-radius: 10px;
+	margin: 10px;
+	color: #fff;
+	font-size: 15px;
+	font-weight: bold;
+	transition: color 0.3s, background 0.3s;
+}
+#moreBtn {
+	background: #84a331;
+	width: 160px;
+	height:37px;
+	border: none;
+	border-radius: 10px;
+	margin: 50px 0px 100px 0px;
+	color: #fff;
+	font-size: 15px;
+	font-weight: bold;
+	transition: color 0.3s, background 0.3s;
+}
+
+.jobListPart a button:hover , #moreBtn:hover {
+	color: #84a331;
+	background: #fff;
+	border: 2px solid #84a331;
+	
+
+}
+
+.jobListPart img {
+	position: absolute;
+    width: 800px;
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 150px;
+}
+
+.jobListPart .jobListPartSub{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.brdListArea {
+    width: 100%;
+	display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.jobListContent {
+    align-items: center;
+    width: 43%;
+    height: 200px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    background-color: white;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+}
+
+.jobListContent:hover {
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.jobListContent span {
+    color: black;
+}
+.jobListContent a {
+    text-decoration: none;
+}
+.jobListContent img {
+	width: 250px;
+    height: 100%;
+    object-fit: cover;
+    margin-right: 10px;
+	float:left;
+	object-fit: cover;
+    float: left;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.jobInfoArea a {
+	display: flex;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.jobInfoArea span {
+    display: block; 
+    margin-bottom: 5px;
+}
+section select {
+	border: 1px solid #d3d3d3;
+	padding: 6px;
+	border-radius: 10px;
+	
+}
+section select:hover {
+	cursor: pointer;
+}
