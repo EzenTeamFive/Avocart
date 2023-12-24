@@ -1,0 +1,17 @@
+package com.avo.www.repository;
+
+import java.util.List;
+
+import com.avo.www.domain.FileVO;
+
+public interface ProfileFileDAO {
+
+	int proInsert(FileVO fvo);
+
+	FileVO getProfile(String email);
+
+	int proDelete(String email);
+
+	List<FileVO> getProfileList(List<String> emailList);
+
+}

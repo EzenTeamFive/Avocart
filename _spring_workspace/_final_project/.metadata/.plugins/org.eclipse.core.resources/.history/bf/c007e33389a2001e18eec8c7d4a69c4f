@@ -1,0 +1,9 @@
+package com.avo.www.domain;
+
+public class Snippet {
+	public static void main(String[] args) {
+		package com.avo.www.domain;
+		
+	}
+}
+

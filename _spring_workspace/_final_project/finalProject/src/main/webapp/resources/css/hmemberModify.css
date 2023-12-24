@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.bodyContainer{
+	display: flex;
+	justify-content: center;
+	padding: 50px 0 150px 0;
+}
+
+form{
+	width: 400px;
+}
+
+.siteTitle{
+	text-align: center;
+	font-size: 30px;
+	font-weight: 800;
+	display: block;
+	color: #84a331;
+	 font-family: 'SUIT-Regular';
+	margin-bottom: 30px;
+}
+
+.labels{
+   display: block;
+    font-weight: 800;
+    margin-bottom: 7px;
+    font-family: 'SUIT-Regular';
+    color: #334010;
+    font-size: 15px;
+}
+
+.inputDiv{
+	height: 115px;
+}
+
+.inputs{
+    width: 400px;
+    height: 40px;
+    padding-left: 10px;
+    border: 2px solid #84a331;
+    border-radius: 5px;
+    font-family: 'SUIT-Regular';
+    font-size: 14px;
+}
+
+.inputs::placeholder{
+    font-family: 'SUIT-Regular';
+}
+
+.bi-eye-slash, .bi-eye{
+	cursor: pointer;
+	position : absolute;
+    display: block;
+	margin-left: 367px;
+	margin-top: -33px;
+	color: #84a331;
+}
+
+.msg{
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: 'SUIT-Regular';
+    font-weight: 800;
+    margin-left: 5px;
+    color: red;
+}
+
+#pw2:disabled {
+    background: #ffffff;
+}
+
+.registerBtn{
+    margin-top: 30px;
+    width: 400px;
+    height: 50px;
+    font-size: 14px;
+    
+    border: none;
+    background-color: #84a331;
+    color: white;
+    border-radius: 5px;
+    font-family: 'SUIT-Regular';
+}
+.registerBtn:disabled {
+    background-color: #c6d1a8;
+    color: white;
+}

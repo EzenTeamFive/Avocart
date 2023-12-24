@@ -1,0 +1,99 @@
+let h3 = document.getElementById('reviewSize');
+let starScore =  document.getElementById('starScore');
+
+async function spreadReviewFromServer(type){
+    try{
+        const resp = await fetch('/hmember/reviewPage/'+type);
+        const result = await resp.json();
+        return result;
+    }catch(err){
+        console.log(err);
+    }
+}
+
+// 스타 레이팅을 동적으로 계산하는 함수
+function setStarRating(rating) {
+    var fillStars = document.getElementById('fillStars');
+    var widthPercentage = (rating / 5) * 100; // 5점 만점 기준으로 비율 계산
+    fillStars.style.width = widthPercentage + '%';
+}
+
+
+//페이지가 처음 로드될 때 전체 리뷰 표시
+function getReviewList(type = 'joongo') {
+    spreadReviewFromServer(type).then(result => {
+        console.log(result);
+        const ul = document.getElementById('ulZone');
+        // let naming = '';
+
+        // if(type==='store') {
+        //     naming = '업체'
+        // } else if(type==='job') {
+        //     naming = '구인'
+        // } else {
+        //     naming ='거래'
+        // }
+        
+    	// let reviewData = result;       
+    	
+        // //리뷰 점수 합산
+        // let totalScore = reviewData.reduce((sum, review) => sum + review.reScore, 0);
+        // console.log("총합" + totalScore);
+    	
+    	// //리뷰 개수
+    	// let reviewCount = reviewData.length;
+        // h3.innerHTML = `${naming}후기 <b>${reviewCount}</b>`;
+        // console.log("개수"+reviewCount);
+
+    	// //리뷰 평균
+    	// let averageScore = reviewCount > 0 ? totalScore / reviewCount : 0;
+        // console.log("평균"+averageScore);
+        // starScore.innerHTML = `${averageScore % 1 !== 0 ? averageScore.toFixed(1) : averageScore}`;
+        // setStarRating(averageScore);
+        
+        ul.innerHTML = '';
+
+        if(result.length>0) {
+            for(let i = 0; i < result.length; i++) {
+                let rvo = result[i];
+                // reContent :  "This is a review."
+                // reScore :   5
+                // regAt:"2023-12-24 19:05:02"
+                // senderEmail:  "sender@example.com"
+                //snederNick;
+                const li = document.createElement('li');
+                li.innerHTML = `
+                <a href="">     
+                        <div class="profileContainer">
+                            <img class="profile" src="" alt="프사자리">
+                        </div>
+                        <span class="title">${rvo.snederNick}</span> 
+                </a>
+                    <div class="textContainer">                                                     
+                        <span class="content">${rvo.reContent}</span>
+                        
+                        <div class="infoTexts">
+                           <span class="gray">${rvo.regAt }</span>
+                        </div>   
+                    </div>
+            `;
+            // li 추가
+            ul.appendChild(li);
+                
+            }
+        } else {
+            const noResultMessage = document.createElement('div');
+            noResultMessage.innerText = '작성된 후기가 없습니다.';
+            ul.appendChild(noResultMessage);
+        }
+
+      
+    });
+}
+
+document.addEventListener('change', (e) => {
+    if (e.target.name === 'categorySelect') {
+        let cateType = e.target.value;
+        getReviewList(cateType);
+    }
+});
