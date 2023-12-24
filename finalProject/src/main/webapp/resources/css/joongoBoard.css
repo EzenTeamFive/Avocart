@@ -6,13 +6,16 @@
     display: none;
 } */
 /* joongo board list css start */
+.bodyContainer > div:last-child{
+    margin-bottom: 90px;
+}
 .joongoBanner{
     background: url(../image/joongo_banner.png) no-repeat center/cover;
     width: 100%;
     height: 350px;
 }
 .boardMenuArea{
-    padding: 70px 0px 45px;
+    padding: 70px 80px 45px;
     text-align: right;
     font-family: 'suit';
 }
@@ -48,11 +51,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px 20px;
-    margin: 0 0px 40px;
+    margin: 0 80px 40px;
     font-family: 'suit';
 }
 .boardListArea .oneList{
-    width: 305px;
+    width: 265px;
 }
 .boardListArea .oneList a{
     display: block;
@@ -146,7 +149,6 @@
     border-radius: 25px;
     background: url(../image/down_arrow.png) no-repeat 80% 50% / 10px auto;
     box-shadow: 0 0 5px rgba(110, 110, 110, 0.2);
-    margin-bottom: 90px;
     transition: 0.2s;
 }
 .moreBtnArea .moreBtn:hover{
@@ -310,6 +312,45 @@ form > div:not(:last-child){
     height: 8px;
     background-color: #a1a1a1;
 }
+/* map start */
+.mapContainer {
+    font-size: inherit;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    position: relative;
+}
+.bi-geo-alt {
+  font-size: 20px;
+  color: #85a331;
+  top: 0px;
+  position: absolute;
+}
+.geoNext {
+	margin-left: 29px;
+}
+.roadAdr{
+	color: #606060;
+	font-size: 14px;
+	padding-left: 30px;
+	margin-bottom: 8px;
+}
+.zoomIn {
+	position: absolute;
+	top: 65px;
+	left: 15px;
+	z-index: 1;
+	border: 1px solid black;
+	border-bottom: 1px solid #606060;
+} 
+.zoomOut {
+	position: absolute;
+	top: 93px;
+	left: 15px;
+	z-index: 1;
+	border: 1px solid black;
+	border-top: none;
+}
+/* mapContainser end */
 /* prodArea end */
 /* lastBtnArea start */
 .lastBtnArea{
@@ -387,7 +428,15 @@ form > div.form > textarea{
 	margin: 40px 0;
 	width: 720px;
 } */
-
+#proFullAddr{
+    width: 306px;
+}
+#proDetailAddr{
+	border-left: none;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	width: 301.9px;
+}
 .bodyContainer form label{
 	margin-bottom: 15px;
 	font-weight: 800;

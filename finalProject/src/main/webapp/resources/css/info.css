@@ -17,10 +17,11 @@
 .infoContainer .headerSection{
     background-color: #fafafa;
     border-bottom: 1px solid #ebebeb;
-    height: 70px;
+    height: 60px;
     text-align: center;
     display: flex;
     align-items: center;
+    padding: 0 15px;
 }
 .infoContainer .headerSection p{
     margin: 0;

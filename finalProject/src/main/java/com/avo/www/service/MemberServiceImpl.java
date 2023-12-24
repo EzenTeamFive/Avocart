@@ -67,4 +67,14 @@ public class MemberServiceImpl implements MemberService {
 		
 		return isOk;
 	}
+
+	@Override
+	public MemberVO fineEmail(String memPhone) {
+		return mdao.findEmail(memPhone);
+	}
+
+	@Override
+	public int findPw(String memEmail, String secretPw) {
+		return mdao.findPw(memEmail, secretPw);
+	}
 }

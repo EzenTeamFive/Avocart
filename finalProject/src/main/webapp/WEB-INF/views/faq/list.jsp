@@ -63,7 +63,7 @@
 	</ul>
 </div>
 
-<sec:authorize access="isAuthenticated()">
+<sec:authorize access="hasAuthority('ROLE_USER')">
 <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
 	<div class="csButtons">
 		<a href="/cs/register">

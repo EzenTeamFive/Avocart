@@ -209,7 +209,8 @@ async function deleteMemBtn(email){
 //     }
 // });
 
-
 document.getElementById('deleteMemBtn').addEventListener('click',(e)=>{
-    window.open('http://localhost:8088/hmember/dropOut', 'test', 'width=500, height=301, top=350, left=700');
+ const delEmail = email;
+    const url = `http://localhost:8088/hmember/dropOut?delEmail=${encodeURIComponent(email)}`;
+    window.open(url, 'dropOut', 'width=370, height=451, top=350, left=700');
 });

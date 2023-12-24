@@ -35,6 +35,7 @@ public class PagingHandler {
    
    private List<FileVO> prodFileList;
    private List<Integer> reviewCntList;
+   private List<ReviewVO> reviewList;
 
    //23.12.06 미수 추가 리뷰 페이징용
    private List<ReviewVO> jobReList;
@@ -78,6 +79,12 @@ public class PagingHandler {
          this.prodList = prodList;
          this.prodFileList =  prodFileList;
          this.reviewCntList = reviewCntList;
+      }
+   
+   //리뷰 페이징용
+   public PagingHandler(int totalCount, List<ReviewVO> reviewList, PagingVO pgvo) {
+         this(pgvo, totalCount, 9);
+         this.reviewList = reviewList;
       }
    
    //커뮤니티 페이징용

@@ -127,6 +127,7 @@
 	    	</div>
 	    </div>
 	
+	<!-- 1225 미수 추가 -->
 	    <div id="commuList">
 	    	<jsp:include page="../myList/commuList.jsp" />
 	    </div>
@@ -134,6 +135,7 @@
 		<div id="likeList">
 			<jsp:include page="../myList/likeList.jsp" />
 		</div>
+	<!-- 1225 미수 추가 끝 -->
 	</div>
 </div>
 <script type="text/javascript" src="/resources/js/tabMenuControll.js" ></script>

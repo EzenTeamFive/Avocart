@@ -12,18 +12,17 @@
 	}
 
 	.cmBanner{
-		background-color: #84a331;
+		background-color: #f9ffd1;
 		height: 350px;
 		font-family: 'SUIT-Regular';
 		display: flex;
 		justify-content: center;
 	}
 	.innerDiv{
-		padding-top: 60px;
-		width: 700px;
-		background-image: url(../image/avocartLogo.png);
+		width: 1280px;
+		background-image: url(../image/알바배너.jpg);
 		background-repeat: no-repeat;
-		background-position: right;
+		background-position: center;
 		background-size: contain;
 	}
 	.cmBannerText1{
@@ -38,7 +37,7 @@
 	}
 
 	.CommunityCategory{
-		margin: 40px 0 20px 0;
+		margin: 70px 0 20px 0;
 		width: 80%;
 		
 		display: flex;
@@ -131,7 +130,7 @@
 	}
 	.communityContentLine a p{
 		margin: 0;
-		padding-left: 5px;
+		padding: 10px 0 10px 3px;
 		font-size: 15px;
 	}
 	.thumbImg{
@@ -143,15 +142,22 @@
 	.item-info{
 	    display: flex;
 	    justify-content: space-between;
-		font-size: 13px;
+		font-size: 14px;
 	    height: 40px;
-	    margin: 5px 20px;
+	    margin: 10px 20px;
 	}
 	.item-info>*{
 		line-height: 40px;
 	}
 	.item-info i{
 		color: gray;
+		font-size: 13px;
+	}
+	.item-info span{
+		margin-right: 2px;
+	}
+	.readCount{
+		margin-left: 2px;
 	}
 	
 	.moreBtn{

@@ -13,6 +13,8 @@
 <jsp:include page="../common/header.jsp" />
 <div class="storeBanner"></div>
 <div class="bodyContainer">
+<a href="/store/reviews">rr</a>
+
 <div class="allBtns">
 <h3 class="totalCnt">등록 업체 <b>0</b>개</h3>
 

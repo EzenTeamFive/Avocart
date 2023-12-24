@@ -56,9 +56,17 @@
 .ListLineMiddle{
     width: 100%;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     text-decoration: none;
+}
+.firstM{
+    gap: 0px 28.25px;
+}
+.secondM{
+    gap: 17.25px 17.25px;
+}
+.thirdM{
+    gap: 13.25px 13.25px;
 }
 
 /* 중고거래 라인 */
@@ -112,7 +120,6 @@
 .store_item{
     width: 415px;
     height: 160px;
-    margin-bottom: 20px;
     border: 1px solid #ededed;
     border-radius: 5px;
 }
@@ -224,7 +231,6 @@
     border: 1px solid #ededed;
     border-radius: 5px;
     padding: 15px;
-    margin-bottom: 20px;
 }
 .community_list a{
     color: black;
@@ -261,11 +267,11 @@
     color: gray;
 }
 .cm_second span:not(:nth-child(5)) {
-    margin-right: 5px;
+    margin-right: 7px;
 }
 .cm_second i{
     font-size: 12px;
-    margin-right: 2px;
+    margin-right: 4px;
 }
 .cmLikeListLine{
     margin-bottom: 130px;
@@ -275,7 +281,7 @@
 /* 앱스토어 배너 */
 .appStoreLine{
     width: 100%;
-    height: 400px;
+    height: 500px;
     background-color: green;
     font-family: 'suit';
     display: flex;
@@ -306,6 +312,13 @@
 
 
 /* 중고 카테고리 버튼 */
+.joongoMenuMiddle{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    text-decoration: none;
+}
 .joongoMenuBtn{
     width: 245px;
     height: 100px;
@@ -320,4 +333,10 @@
     text-align: center;
     font-size: 14px;
     margin-top: 5px;
+}
+#sofa{
+    height: 40%;
+}
+#sunglasses{
+    height: 35%;
 }

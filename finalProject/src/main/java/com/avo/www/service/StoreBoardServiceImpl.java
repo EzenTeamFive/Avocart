@@ -13,6 +13,7 @@ import com.avo.www.domain.FileVO;
 import com.avo.www.domain.LikeItemVO;
 import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ProductBoardVO;
+import com.avo.www.domain.ReviewVO;
 import com.avo.www.domain.StoreBoardDTO;
 import com.avo.www.domain.StoreMenuVO;
 import com.avo.www.handler.PagingHandler;
@@ -232,6 +233,19 @@ public class StoreBoardServiceImpl implements StoreBoardService {
 	@Override
 	public String getEmail(long bno) {
 		return sdao.getEmail(bno);
+	}
+	
+	@Transactional
+	@Override
+	public PagingHandler getReviewList(PagingVO pgvo) {
+		//리뷰 총 개수
+	    int totalCount = srdao.getTotalCount(pgvo);
+	    
+	    //리뷰 리스트
+	    List<ReviewVO> reviewList = srdao.SelectReviewPaging(pgvo);
+
+	    PagingHandler ph = new PagingHandler(totalCount, reviewList, pgvo);
+	    return ph;
 	}
 
 }

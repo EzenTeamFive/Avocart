@@ -1,6 +1,7 @@
 package com.avo.www.controller;
 
 import java.util.Random;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.avo.www.domain.CommunityCmtVO;
+import com.avo.www.handler.PagingHandler;
 import com.avo.www.security.MemberVO;
 import com.avo.www.service.MemberService;
 
@@ -111,7 +113,7 @@ public class MemberController {
 		
 		//이메일 전송 내용
 		String setFrom = "ezenfinal@gmail.com"; //발신 이메일
-		String toMail = memEmail;         //받는 이메일
+		String toMail = memEmail; //받는 이메일
 		String title = "Avocart 회원가입 인증 이메일입니다.";
 		String content = 
 						"인증번호는 " + "<b style='color:blue'>" + checkNum + "</b>" + "입니다.<br>"  
@@ -137,4 +139,54 @@ public class MemberController {
 	@GetMapping("/findEmail")
 	public void findEmail() {}
 	
+	@GetMapping(value = "/findEmail/{memPhone}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<MemberVO> findEmail(@PathVariable("memPhone")String memPhone) {
+		log.info(">>>>> 전화번호 >>> "+memPhone);
+		
+		MemberVO mvo = msv.fineEmail(memPhone);
+		
+		return new ResponseEntity<MemberVO>(mvo ,HttpStatus.OK);
+	}
+	
+	@GetMapping("/findPw")
+	public void findPw() {}
+	
+	@GetMapping(value = "/findPw/{memEmail}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> findPw(@PathVariable("memEmail")String memEmail){
+		log.info(">>>>> 인증 이메일 >>> "+memEmail);
+		
+		//임시 비밀번호 생성(UUID이용)
+		String tempPw= UUID.randomUUID().toString().replace("-", "");//-를 제거
+		tempPw = tempPw.substring(0,10);//tempPw를 앞에서부터 10자리 잘라줌
+		log.info("인증번호 >>> "+tempPw);
+		
+		//비밀번호 임시 비밀번호로 업데이트
+		String secretPw = bcEncoder.encode(tempPw);
+		int isOk = msv.findPw(memEmail, secretPw);
+		log.info(">>>>> 임시 비번 업뎃 >> "+(isOk>0? "성공":"실패"));
+		
+		//이메일 전송 내용
+		String setFrom = "ezenfinal@gmail.com"; //발신 이메일
+		String toMail = memEmail; //받는 이메일
+		String title = "Avocart 임시 비밀번호입니다.";
+		String content = 
+						"임시 비밀번호는 " + "<b style='color:blue'>" + tempPw + "</b>" + "입니다.<br>"  
+								+ "해당 비밀번호로 로그인 후 안전한 비밀번호로 변경 바랍니다.";
+		
+		//이메일 전송 코드
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			helper.setText(content,true);
+			mailSender.send(message);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }

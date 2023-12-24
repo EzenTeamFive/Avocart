@@ -41,4 +41,13 @@
 		select mem_nick_name from member where mem_email = #{msgGetUserEmail}
 	</select>
 	
+	<!-- 이메일 찾기 -->
+	<select id="findEmail" resultType="com.avo.www.security.MemberVO">
+		select * from member where mem_phone = #{memPhone}
+	</select>
+	
+	<!-- 비밀번호 임시 비밀번호로 변경 -->
+	<update id="findPw">	
+		update member set mem_pw = #{memPw} where mem_email = #{memEmail}
+	</update>
 </mapper>
