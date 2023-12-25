@@ -1,10 +1,15 @@
 package com.avo.www.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.avo.www.domain.BuyItemVO;
 import com.avo.www.domain.FileVO;
+import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ProductBoardVO;
+import com.avo.www.domain.ReviewDTO;
+import com.avo.www.domain.ReviewVO;
+import com.avo.www.handler.PagingHandler;
 import com.avo.www.security.MemberVO;
 
 public interface HmemberService {
@@ -32,5 +37,9 @@ public interface HmemberService {
 	List<BuyItemVO> getBuyList(String userEmail);
 
 	List<FileVO> getFileList(long proBno);
+
+	BigDecimal getTemp(String email);
+	
+	ReviewDTO getReviewList(String type, String userEmail);
 
 }

@@ -102,10 +102,10 @@ async function spreadJobFromServer(page = 1, menu, sort){
                     inner += `<img alt="job image error" src="../resources/image/logoimage.png">`
                 }
                 inner += `<div class="jobInfoArea">`;
-                inner += `<span>${job.proTitle}</span>`;
-                inner += `<span class="d-inline-block text-truncate" style="max-width: 200px;">${job.proSido} ${job.proSigg} ${job.proEmd}</span>`;
-                inner += `<span>${job.proPayment} `;
-                inner += `<strong>${formatCurrency(job.proPrice).replace('₩', '')}원</strong>`;
+                inner += `<span class="proTitle">${job.proTitle}</span>`;
+                inner += `<span class="d-inline-block text-truncate proAddr" style="max-width: 200px;">${job.proSido} ${job.proSigg} ${job.proEmd}</span>`;
+                inner += `<span > `;
+                inner += `<strong class="payment">${job.proPayment} ${formatCurrency(job.proPrice).replace('₩', '')}원</strong>`;
                 inner += `</span>`;
                 inner += `</div>`;
                 inner += `</a>`;

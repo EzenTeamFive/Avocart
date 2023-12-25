@@ -34,8 +34,8 @@ public class SocketController {
 		System.out.println("open session : " + session.getId());
 		session.getUserProperties().put("chatBno", bno);
 		try {
-			final Basic basic = session.getBasicRemote();
-			basic.sendText("연결 완료");
+//			final Basic basic = session.getBasicRemote();
+//			basic.sendText("연결 완료");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

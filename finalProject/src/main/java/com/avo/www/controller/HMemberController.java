@@ -1,5 +1,6 @@
 package com.avo.www.controller;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +29,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.avo.www.domain.BuyItemVO;
 import com.avo.www.domain.FileVO;
+import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ProductBoardDTO;
 import com.avo.www.domain.ProductBoardVO;
+import com.avo.www.domain.ReviewDTO;
+import com.avo.www.domain.ReviewVO;
 import com.avo.www.handler.FileHandler;
+import com.avo.www.handler.PagingHandler;
 import com.avo.www.security.AuthMember;
 import com.avo.www.security.MemberVO;
 import com.avo.www.service.HmemberService;
@@ -53,6 +58,12 @@ public class HMemberController {
 	@GetMapping({"/detail", "/modify"})
 	public void detail(Model m, @RequestParam("memEmail") String email)  {
 		FileVO fvo = hsv.getProfile(email);
+		BigDecimal temp = hsv.getTemp(email);
+		
+		if (temp == null) {
+		    temp = new BigDecimal("36.5");
+		}
+		
 		String backSrc = null;
 		String mainSrc = null;
 		if(fvo!=null) {
@@ -63,6 +74,7 @@ public class HMemberController {
 			mainSrc = "../resources/image/기본 프로필.png";
 		}
 		m.addAttribute("mvo", hsv.getDetail(email));
+		m.addAttribute("temp", temp);
 		m.addAttribute("backSrc", backSrc);
 		m.addAttribute("mainSrc", mainSrc);
 	}
@@ -217,5 +229,20 @@ public class HMemberController {
         return new ResponseEntity<List<ProductBoardDTO>>(pdtoList,HttpStatus.OK);
         
 	}
+	
+	   @GetMapping(value = "/reviewPage/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
+	   public ResponseEntity<ReviewDTO> reviewList( @PathVariable("type") String type){		   
+			String userEmail = "";
+			
+			// 사용자 객체 불러옴
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {        	
+	        	//Principal => AuthMember 변환
+	        	AuthMember member = (AuthMember) authentication.getPrincipal();
+	        	log.info(">>>>>> member 확인 >>>>> "+member.getMvo());
+	        	userEmail = member.getMvo().getMemEmail();
+	        }
+	      return new ResponseEntity<ReviewDTO>(hsv.getReviewList(type, userEmail), HttpStatus.OK);
+	   }
 	
 }

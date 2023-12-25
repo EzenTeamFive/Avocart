@@ -2,6 +2,7 @@ var ws;
 let messages = document.getElementById("messages");
 let getUser;
 let chatroom;
+let boardTitle;
 let checkFirstEnter = true;
 
 // 스크롤을 가장 아래로 내리는 함수
@@ -54,8 +55,12 @@ async function handleSocketClick(e){
         }
         messages.innerHTML = "";
         console.log('버튼클릭');
-        getUser = e.target.dataset.getuser;
+        getUser = e.target.children[0].value;
         chatroom = e.target.dataset.chatroom;
+        let nickName = document.querySelector('.messageHeader p');
+        let BTitle = document.querySelector('.messageHeader small');
+        nickName.innerText = e.target.children[1].value;
+        BTitle.innerText = e.target.children[2].value;
         await selectChatMsgForServer(chatroom).then(result=>{
             if(result.length > 0){
                 for(let re of result){
@@ -90,7 +95,7 @@ function openSocket(chatRoomId){
         if(event.data === undefined){
       		return;
         }
-        writeResponse(event.data);
+        console.log(event.data);
     };
     
     ws.onmessage = function(event){
@@ -100,7 +105,7 @@ function openSocket(chatRoomId){
     };
     
     ws.onclose = function(event){
-        writeResponse("대화 종료");
+        console.log('대화 종료');
     }
     
 }
@@ -118,10 +123,12 @@ function send(){
         msgContent : msg.value
     }
     console.log(chatData);
-    insertChatDataForServer(chatData);
-    ws.send(JSON.stringify(chatData));
-    msg.value = "";
-    prepareScroll();
+    if(msg.value != ""){
+        insertChatDataForServer(chatData);
+        ws.send(JSON.stringify(chatData));
+        msg.value = "";
+        prepareScroll();
+    }
 }
 
 function closeSocket(){

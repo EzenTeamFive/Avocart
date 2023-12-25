@@ -12,6 +12,7 @@ import com.avo.www.domain.ChatRoomDTO;
 import com.avo.www.domain.ChatRoomVO;
 import com.avo.www.domain.FileVO;
 import com.avo.www.repository.ChatingDAO;
+import com.avo.www.repository.JoongoBoardDAO;
 import com.avo.www.repository.MemberDAO;
 import com.avo.www.repository.ProfileFileDAO;
 
@@ -26,6 +27,9 @@ public class ChatingServiceImpl implements ChatingService {
 	
 	@Inject
 	private MemberDAO mdao;
+	
+	@Inject
+	private JoongoBoardDAO jbdao;
 	
 	@Inject
 	private ProfileFileDAO fdao;
@@ -51,13 +55,17 @@ public class ChatingServiceImpl implements ChatingService {
 		ChatRoomDTO chatdto = new ChatRoomDTO();
 		chatdto.setMsgSendUserId(userId);
 		
+		// 글 제목
+		String boardTitle = jbdao.getDetail(crvo.getChatBno()).getProTitle();
+		chatdto.setBoardTitle(boardTitle);
+		
 		// 채팅방 번호
 		long chatBno = chatdao.selectChatRoomBno(crvo.getChatBno());
 		log.info(">>>>>>>>>>> ChatRoomDTO chatBno >>>>>> "+chatBno);
-		// 메시지 리스트 세팅
-		chatdto.setMsgList(chatdao.getMsgList(chatBno));
+		// 마지막 메시지 세팅
+		chatdto.setLastMsg(chatdao.getLastMsg(chatBno));
 			
-		// 메시지 받는 유저 이메일
+		// 메시지 받는 유저 정보
 		String msgGetUserEmail = chatdao.selectEmailFromBno(chatBno);
 		if(msgGetUserEmail.equals(userId)) {
 			msgGetUserEmail = chatdao.selectOtherEmailFromBno(chatBno);
@@ -66,8 +74,7 @@ public class ChatingServiceImpl implements ChatingService {
 			
 		String msgGetNick = mdao.getNickFromEmail(msgGetUserEmail);
 		chatdto.setMsgGetUserNick(msgGetNick);
-			
-			
+		
 		// 유저 프로필 이미지
 		FileVO userProfile = fdao.getProfile(msgGetUserEmail);
 		log.info(">>>>>>>> userProfile >>>>> "+userProfile);

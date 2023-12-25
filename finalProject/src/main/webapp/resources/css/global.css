@@ -284,12 +284,18 @@ ul.mainFloatingMenu{
    align-items: center;
    font-family: 'suit';
    font-size: 14px;
+   z-index: 10;
 }
 ul.mainFloatingMenu li{
    display: inline-block;
 }
 ul.mainFloatingMenu li:not(:last-child){
    margin-bottom: 10px;
+}
+ul.mainFloatingMenu li button:hover{
+   background-color: #80a800;
+   border: 1px solid #fff;
+   color: #fff;
 }
 ul.mainFloatingMenu li button{
    border: 0;

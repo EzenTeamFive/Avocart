@@ -12,8 +12,7 @@
 <jsp:include page="../common/header.jsp" />
 <sec:authentication property="principal.mvo.memEmail" var="authEmail"/>
 <sec:authentication property="principal.mvo.memNickName" var="authNick"/>
-<div class="banner">
-</div>
+<div class="joongoBanner"></div>
 <div class="bodyContainer">
 	<form action="/joongo/register" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="proEmail" value="${authEmail}">
@@ -27,7 +26,8 @@
 		
 		<div class="form">
 			<label for="price">가격</label>
-			<input type="number" min="0" id="price" name="proPrice" placeholder="가격을 입력해 주세요" required="required">
+			<input type="text" id="price" placeholder="가격을 입력해 주세요" required="required">
+			<input type="hidden" id="numPrice" name="proPrice">
 		</div>
 	
 		<div class="form">
@@ -45,7 +45,7 @@
 		<label>지도</label>
 		<div class="form fileForm">
 			<input type="text" name="proFullAddr" id="proFullAddr" readonly="readonly" class="fileInput" placeholder="거래 장소를 등록해 주세요"> 
-			<input name="proDetailAddr" id="proDetailAddr" class="fileInput" style="display:none" placeholder="상세 주소"> 
+			<input name="proDetailAddr" id="proDetailAddr" class="fileInput" placeholder="상세 주소"> 
 			<button type="button" id="addr" class="fileBtn">주소추가</button>
 		</div>
 		
@@ -152,6 +152,7 @@ document.getElementById('addr').addEventListener('click', ()=>{
 });
 </script>
 <script type="text/javascript" src="/resources/js/productFile.js"></script>
+<script type="text/javascript" src="/resources/js/addCommaIntoPrice.js"></script>
 <script type="text/javascript" src="/resources/js/abjustTextareaRows.js"></script>
 <script type="text/javascript" src="/resources/js/checkFormBlank.js"></script>
 </body>

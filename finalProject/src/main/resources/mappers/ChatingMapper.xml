@@ -37,4 +37,7 @@
 	<select id="getMsgList" resultType="com.avo.www.domain.ChatMessageVO">
 		select * from message where msg_room_id = #{chatBno}
 	</select>
+	<select id="getLastMsg" resultType="String">
+		select msg_content from message where msg_room_id = #{chatBno} order by msg_id desc limit 0,1
+	</select>
 </mapper>

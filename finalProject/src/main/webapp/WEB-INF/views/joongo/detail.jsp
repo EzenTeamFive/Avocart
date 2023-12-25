@@ -12,6 +12,7 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
+	<div class="joongoBanner"></div>
 	<div class="bodyContainer">
 		<section class="floatMenu">
 			<!-- 찜 (북마크) -->
@@ -84,6 +85,86 @@
 			<span>${pbvo.proMenu }</span><p><!-- 날짜 --></p>
 			<h2><!-- 가격란 --></h2>
 			<textarea id="dynamicTextarea" cols="30" rows="10" readonly>${pbvo.proContent}</textarea>
+			
+			<!--지도 -->
+			<c:set value="${pbvo.proFullAddr }" var="adr1"></c:set>
+			<c:set value="${pbvo.proDetailAddr }" var="adr2"></c:set>
+			<c:if test="${not empty adr1}">
+			<div class="mapContainer">
+			<c:set value="${pbvo.proFullAddr }" var="adr1"></c:set>
+			<c:set value="${pbvo.proDetailAddr }" var="adr2"></c:set>
+			<i class="bi bi-geo-alt"></i><div class="geoNext">${adr1} ${adr2}</div>
+			<div class="roadAdr" id="roadAdr"></div>
+			<div id="map" style="width:100%;height:250px;border-radius:8px"></div>
+			<img alt="+" src="../resources/image/zoomIn.png" width="28" height="28" class="zoomIn" id="zoomIn">
+			<img alt="-" src="../resources/image/zoomOut.png" width="28" height="28" class="zoomOut" id="zoomOut"> 
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d0bcf962e4604f2fbb0f443f01d101a4&libraries=services"></script>
+			<script>
+			let adr1 = '<c:out value="${adr1}" />';
+			let adr2 = '<c:out value="${adr2}" />';
+			
+			var mapContainer = document.getElementById('map'); //지도를 표시할 div 
+			var mapOption = {
+			    center: new kakao.maps.LatLng(37.450292, 126.702921), //지도의 중심좌표
+			    level: 3 //지도의 확대 레벨
+			};  
+			
+			//지도 생성
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			
+			//지도 확대, 축소
+			var zoomIn = document.getElementById('zoomIn');
+			var zoomOut = document.getElementById('zoomOut');
+			
+			zoomIn.addEventListener('click', function () {
+			    map.setLevel(map.getLevel() - 1);
+			    map.setLevel(level, { anchor: map.getCenter() });
+			});
+			
+			zoomOut.addEventListener('click', function () {
+			    map.setLevel(map.getLevel() + 1);
+			    map.setLevel(level, { anchor: map.getCenter() });
+			});
+			
+			kakao.maps.event.addListener(map, 'zoom_changed', function () {
+			    var level = map.getLevel();
+			});
+			
+			//기본 마커 변경
+			var imageSrc = '/resources/image/marker.png';
+			var imageSize = new kakao.maps.Size(50, 55);
+			var imageOption = {offset: new kakao.maps.Point(23, 55)};
+			
+			//마커 이미지 생성
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+			
+			//입력 주소-좌표 변환 객체 생성
+			var geocoder = new kakao.maps.services.Geocoder();
+			
+			    //주소로 좌표 검색
+			    geocoder.addressSearch(adr1, function (result, status) {
+			        //정상적으로 검색 완료됐으면
+			        if (status === kakao.maps.services.Status.OK) {
+			        	//도로명 주소 => 지번 주소 
+			        	document.getElementById('roadAdr').innerText = result[0].address.address_name + ' ' + adr2;
+			
+			            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			
+			            //결과값으로 받은 위치를 마커로 표시
+			            var marker = new kakao.maps.Marker({
+			                map: map,
+			                position: coords,
+			                image: markerImage
+			            });
+			
+			            //지도의 중심을 결과값으로 받은 위치로 이동
+			            map.setCenter(coords);
+			        }
+			    });
+			
+			</script>
+			</div>
+			</c:if>
 			<p id="likeCnt">관심 ${pbvo.proLikeCnt }</p><p>조회 ${pbvo.proReadCnt }</p>
 		</div>
 		

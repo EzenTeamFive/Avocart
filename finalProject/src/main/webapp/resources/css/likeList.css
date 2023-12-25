@@ -65,8 +65,28 @@
 .likeListContent span:nth-last-child(){
     color: gray;
 }
+.likeListContent .likeInfoArea {
+    padding: 20px;
+    left: 20px;
+    position: relative;
+}
+.likeListContent .likeInfoArea span {
+    display: block; 
+    margin-bottom: 10px;
+}
+.likeListContent .likeInfoArea .proTitle {
+	font-size: 17px;
+}
+.likeListContent .likeInfoArea .proAddr {
+	font-size: 14px;
+	color: #808080;
+}
+.likeListContent .likeInfoArea .payment {
+	font-size: 18px;
+	font-weight: bold;
+}
 .likeListContent i{
-    color: #bfbfbf;
+    color: #93b336;
     font-size: 20px;
 }
 .likeListContent a {
@@ -90,7 +110,7 @@
 	width: calc(100% - 150px);
     border-top: 1px solid #ededed;
     padding: 5px;
-    font-size: 12px;
+    font-size: 14px;
 }
 .likeInfoAddr span{
     color: gray;
@@ -102,7 +122,8 @@
 }
 
 .likeHeart {
-    bottom: 38px;
+	
+/*     bottom: 38px; */
     padding: 5px;
     position: relative;
     float: right;

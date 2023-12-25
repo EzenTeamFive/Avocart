@@ -55,7 +55,7 @@
 	}
 	.messages{
 		overflow: auto;
-		height: calc(100% - 120px);
+		height: calc(100% - 130px);
 		padding: 15px;
 	}
 	.messages > div > div{
@@ -79,9 +79,35 @@
 	}
 	.inputArea{
 		position: absolute;
-		bottom: 0;
-		height: 50px;
-		width: 100%;
+	    bottom: 0;
+	    height: 60px;
+	    width: 100%;
+	    display: flex;
+	    align-content: center;
+	    flex-wrap: wrap;
+	    border-top: 1px solid #f5f5f5;
+	    justify-content: center;
+	}
+	.inputArea > input{
+		width: 480px;
+	    height: 50px;
+	    border-radius: 25px;
+	    border: 0;
+	    background-color: #fafafa;
+	    font-size: 14px;
+	    padding: 0 15px;
+	    box-sizing: border-box;
+	}
+	.inputArea > button{
+		position: absolute;
+	    right: 20px;
+	    top: 12.5px;
+		width: 40px;
+		height: 40px;
+		border: 0;
+	    border-radius: 20px;
+	    background-color: #93b336;
+	    color: #fff;
 	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -93,7 +119,10 @@
 		<h2>채팅 목록</h2>
 		<c:if test="${!empty chatdtoList}">
 			<c:forEach items="${chatdtoList}" var="list">
-		        <div class="chatListArea" data-getuser="${list.msgGetUserEmail }" data-chatroom="${list.crvo.chatRoomId}">
+		        <div class="chatListArea" data-chatroom="${list.crvo.chatRoomId}">
+		        	<input type="hidden" value="${list.msgGetUserEmail}">
+		        	<input type="hidden" value="${list.msgGetUserNick}">
+		        	<input type="hidden" value="${list.boardTitle}">
 		        	<!-- 프로필 이미지 -->
 		        	<c:choose>
 		        	<c:when test="${list.profileImage eq null}">
@@ -104,7 +133,7 @@
 		        	</c:otherwise>
 		        	</c:choose>
 		        	<b>${list.msgGetUserNick}</b>
-		        	
+		        	<p>${list.lastMsg }</p>
 		        </div>			
 			</c:forEach>
 		</c:if>
@@ -124,8 +153,8 @@
 		        <input type="text" id="senderEmail" value="${authEmail}" style="display: none;">
 		        <input type="text" id="senderNick" value="${authNickName}" style="display: none;">
 	        </sec:authorize>
-	        <input type="text" id="messageinput">
-	        <button type="submit" onclick="send();">메세지 전송</button>
+	        <input type="text" id="messageinput" placeholder="메시지를 입력하세요" onkeyup="if(event.keyCode==13){send();}" required="required">
+	        <button type="button" onclick="send();"><i class="bi bi-send"></i></button>
 	    </div>
     </div>
 </div>
