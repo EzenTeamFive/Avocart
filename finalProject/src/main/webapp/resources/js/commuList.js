@@ -36,22 +36,16 @@ async function getCommuListForServer(page, commuListcategory){
 }
 
 
-// // 썸네일 가져오는 함수
-// async function getThumbnailToServer(proBno){
-//     try {
-//         const url = '/myList/likeList/thumb/'+proBno;
-//         const config = {
-//             method : 'post'
-//         };
-//         const resp = await fetch(url, config);
-//         const result = await resp.json();
-//         return result;
-
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-
+//특정 게시글 thumbnail 가져오는 함수
+async function getThumbnailToServer(bno){
+    try {
+        const resp = await fetch('/community/thumb/'+bno);
+        const result = await resp.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 // 서버에서 받은 list 뿌리기
 async function spreadCommuListFromServer(page = 1, commuListcategory){
@@ -67,20 +61,32 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
                 // 1page에서 초기화
                 moreCommuListArea.innerHTML = "";
             }
-            let inner = ""; // 변경된 부분
+            let inner = "";
 
             for(let cm of result.cmList){
+                // cmRegAt 날짜만 가져오기
+                let upDate = cm.cmRegAt.substring(0,10);
                 console.log("타입 " + result.pgvo.type + "으로 진입");
+                inner += `<a href="/community/detail?cmBno=${cm.cmBno}">`;
                 inner += `<div class="commuListContent">`;
                 document.getElementById('commuListCnt').innerText = `${result.totalCount}`;
-                inner += `<img alt="" src="../resources/image/기본 프로필 배경.png">`;
+
+                let cmBno = cm.cmBno;
+                if (cm.cmFileCnt > 0) {
+                    let thumb = await getThumbnailToServer(cmBno);
+                    str += `<img class="thumbImg" src="/upload/community/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}"  alt="...">`;
+                }else{
+                     inner += `<img alt="commuList image error" src="../resources/image/logoimage.png">`
+                }
                 inner += `<div class="contentWrap">`;
                 inner += `<h3>${cm.cmTitle}</h3>`;
                 inner += `<b>${cm.cmContent}</b>`;
-                inner += `<small>날짜</small>`;
+                inner += `<small>${upDate}</small>`;
                 inner += `</div>`;
-                inner += `<mark><i class="bi bi-geo-alt"></i>장소</mark>`;
+                inner += `<mark><i class="bi bi-geo-alt"></i>${cm.cmSido}${cm.cmSigg}${cm.cmEmd}</mark>`;
                 inner += `</div>`;
+                inner += `</a>`;
+
 
                 moreCommuListArea.innerHTML = inner;
             }

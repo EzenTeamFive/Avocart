@@ -9,6 +9,58 @@
 <meta charset="UTF-8">
 <title>Community List page</title>
 <link rel="stylesheet" href="/resources/css/page.css">
+<style type="text/css">
+.moreCommuListArea {
+	display: flex;
+	width: 1280px;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.moreCommuListArea a{
+	text-decoration: none;
+	width: 22%
+}
+.moreCommuListArea a .commuListContent{
+	width: 100%;
+	border: 1px solid #ededed;
+}
+.commuListContent img{
+	width: 100%;
+	height: 280px;
+	object-fit: cover;
+}
+.commuListContent .contentWrap{
+	color: #333;
+	padding: 12px 15px;
+}
+.commuListContent .contentWrap h3{
+	font-size: 18px;
+    font-weight: 700;
+}
+.commuListContent .contentWrap b{
+	font-size: 16px;
+	display: flex;
+	align-items: flex-end;
+	margin: 10px 0px;
+}
+.commuListContent .contentWrap small{
+	font-size: 12px;
+	font-weight: 300;
+}
+.commuListContent mark{
+	background-color: #fff;
+	color: #bbb;
+	display: block;
+	border-top: 1px solid #ededed;
+	line-height: 30px;
+	padding: 0 12px;
+	font-size: 14px;
+}
+.commuListContent mark i{
+	color: #93b336;
+	margin-right: 3px;
+}
+</style>
 </head>
 <body>
 	<div class="titleLine">
@@ -25,16 +77,18 @@
 	</div>
 
 	<div class="moreCommuListArea" id="moreCommuListArea">
-		<div class="commuListContent">
-	    	<!-- 판매상품 탭 -->
-	    		<img alt="" src="../resources/image/기본 프로필 배경.png">
-	    		<div class="contentWrap">
-		    		<h3>물건이름</h3>
-		    		<b>가격</b>
-		    		<small>날짜</small>
-	    		</div>
-		    	<mark><i class="bi bi-geo-alt"></i>장소</mark>
-	    </div>
+		<a href="#">
+			<div class="commuListContent">
+		    	<!-- 판매상품 탭 -->
+		    		<img alt="" src="../resources/image/기본 프로필 배경.png">
+		    		<div class="contentWrap">
+			    		<h3>물건이름</h3>
+			    		<b>가격</b>
+			    		<small>날짜</small>
+		    		</div>
+			    	<mark><i class="bi bi-geo-alt"></i>장소</mark>
+			</div>
+		</a>
 	</div>
 	
 	<button type="button" id="commuListmoreBtn" data-page="1" style="visibility: hidden"><i class="bi bi-plus-circle-fill"></i> 게시글 더 보기</button>
