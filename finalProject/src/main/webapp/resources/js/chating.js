@@ -66,9 +66,9 @@ async function handleSocketClick(e){
                 for(let re of result){
                     console.log(re);
                     if(re.msgSendUserId != getUser){
-                        messages.innerHTML += "<div class='right'><div>"+re.msgContent+"</div></div>";
+                        messages.innerHTML += "<div class='right'><span>"+dateFormater(re.msgRegAt)+"</span><div>"+re.msgContent+"</div></div>";
                     }else{
-                        messages.innerHTML += "<div class='left'><div>"+re.msgContent+"</div></div>";
+                        messages.innerHTML += "<div class='left'><div>"+re.msgContent+"</div><span>"+dateFormater(re.msgRegAt)+"</span></div>";
                     }
                 }
             }
@@ -78,6 +78,7 @@ async function handleSocketClick(e){
         prepareScroll();
         if(checkFirstEnter == true){
             checkFirstEnter = false;
+            document.querySelector('.waitingPage').style.display = "none";
         }
     }
 }
@@ -116,11 +117,29 @@ function send(){
     // text = "";
     let userId = document.getElementById('senderEmail').value;
     let msg = document.getElementById("messageinput");
+
+    // 날짜 받아오기
+    let today = new Date();
+    let year = today.getFullYear();
+    let month = ('0' + (today.getMonth() + 1)).slice(-2);
+    let day = ('0' + today.getDate()).slice(-2);
+    let dateString = year + '-' + month  + '-' + day;
+    let hours = ('0' + today.getHours()).slice(-2); 
+    let minutes = ('0' + today.getMinutes()).slice(-2);
+    let seconds = ('0' + today.getSeconds()).slice(-2); 
+    let timeString = hours + ':' + minutes  + ':' + seconds;
+
+    console.log(dateString);
+    console.log(timeString);
+
+    let date = dateString+" "+timeString;
+
     let chatData = {
         msgRoomId : chatroom,
         msgSendUserId : userId,
         msgGetUserId: getUser,
-        msgContent : msg.value
+        msgContent : msg.value,
+        msgRegAt : date
     }
     console.log(chatData);
     if(msg.value != ""){
@@ -145,11 +164,15 @@ function closeSocket(){
 }
 
 function writeResponse(text){
+	console.log("전송받은 메시지 : "+text);
     let msgSendUser = text.substring(0,text.indexOf(','));
-    let sendMsg = text.substring(text.indexOf(',')+1);
+    let sendMsg = text.substring(text.indexOf(',')+1,text.lastIndexOf(','));
+    let sendDate = text.substring(text.lastIndexOf(',')+1);
+    let dateFormat = dateFormater(sendDate);
+
     console.log(msgSendUser);
     if(msgSendUser == document.getElementById('senderEmail').value){
-        messages.innerHTML += "<div class='right'><div>"+sendMsg+"</div></div>";
+        messages.innerHTML += "<div class='right'><span>"+dateFormat+"</span><div>"+sendMsg+"</div></div>";
     }else{
         messages.innerHTML += "<div class='left'><div>"+sendMsg+"</div></div>";
     }
@@ -158,4 +181,11 @@ function writeResponse(text){
 function clearText(){
     console.log(messages.parentNode);
     messages.parentNode.removeChild(messages)
+}
+
+function dateFormater(sendDate){
+    let date = new Date(sendDate);
+    let dateFormat = (date.getMonth()+1)+"/"+date.getDate()+" "
+        +(date.getHours() < 12 ? "오전 "+date.getHours() : "오후 "+(date.getHours()-12))+":"+date.getMinutes();
+    return dateFormat
 }

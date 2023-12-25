@@ -20,7 +20,8 @@ document.getElementById('pwFindBtn').addEventListener('click',()=>{
             document.getElementById('inner2').classList.remove("off");
 
         }else{ //전송 실패시
-            alert('일치하는 사용자 정보를 찾을 수 없습니다.');
+            //alert('일치하는 사용자 정보를 찾을 수 없습니다.');
+            swal.fire("", "일치하는 사용자 정보를 찾을 수 없습니다.", "error");
         }
     })
 })

@@ -13,9 +13,10 @@
 }
 
 .imgLine{
-	width: 100%;
-	height: 250px;
-	background-color: #dbdf80;
+    width: 100%;
+    height: 350px;
+    background-color: #fff3e5;
+    text-align: center;
 }
 
 .formLine{

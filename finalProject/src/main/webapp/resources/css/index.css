@@ -24,10 +24,11 @@
 	margin-top: 100px;
     width: 100%;
     height: 350px;
-    background-color: greenyellow;
+    background-color: #fffcdb;
+    text-align: center;
 }
 .secondBanner img{
-    width: 100%;
+    width: 1280px;
     height: 100%;
 }
 
@@ -281,16 +282,15 @@
 /* 앱스토어 배너 */
 .appStoreLine{
     width: 100%;
-    height: 500px;
-    background-color: green;
+    height: 400px;
+    background-color: #d5efd4;
     font-family: 'suit';
     display: flex;
     justify-content: center;
 }
 .appStoreInner{
-    padding-top: 60px;
-    width: 900px;
-    background-image: url(../image/avocartLogo.png);
+    width: 1280px;
+    background-image: url(../image/앱배너.jpg);
     background-repeat: no-repeat;
     background-position: right;
     background-size: contain;
@@ -303,11 +303,19 @@
     font-size: 20px;
     margin-bottom: 50px;
 }
+.appBtns{
+    margin: 275px 165px;
+}
+.appBtns a{
+    text-decoration: none;
+}
 .appStoreInner button{
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
     margin-right: 10px;
+    background-color: #bee7bd;
+    color: #2b4d31;
 }
 
 
@@ -335,8 +343,20 @@
     margin-top: 5px;
 }
 #sofa{
-    height: 40%;
+    height: 45%;
 }
 #sunglasses{
-    height: 35%;
+    height: 30%;
+}
+#mac{
+    height: 60%;
+}
+#macc{
+    height: 45%;
+}
+#snack{
+    height: 58%;
+}
+.bi-three-dots{
+    font-size: 20px;
 }
