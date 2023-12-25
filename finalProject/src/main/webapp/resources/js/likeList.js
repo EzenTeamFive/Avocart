@@ -76,9 +76,10 @@ async function spreadLikeListFromServer(page = 1, likeListcategory){
                 // 1page에서 초기화
                 moreLikeArea.innerHTML = "";
             }
-            
+            let inner = "";
+
             for(let like of result.prodList){
-                let inner = `<div class="likeListContent">`;
+                inner += `<div class="likeListContent">`;
                 document.getElementById('likeCnt').innerHTML = `${result.totalCount}`;
                 inner += `<a href="/${like.proCategory}`;
                 if(like.proCategory == 'store'){
@@ -153,7 +154,7 @@ async function spreadLikeListFromServer(page = 1, likeListcategory){
                 inner += `</div>`;
                 inner += `</div>`;
 
-                moreLikeArea.innerHTML += inner;
+                moreLikeArea.innerHTML = inner;
             }
 
         }else {
@@ -179,7 +180,6 @@ async function spreadLikeListFromServer(page = 1, likeListcategory){
 
 // 찜하기버튼 클릭시 발생
 document.addEventListener('click',(e)=>{
-    console.log("찜클릭 " ,e.target);
 
     // 찜버튼 클릭시 state값 -1, 버튼의 class값 바꿔서 빈 하트로 변경
     if (e.target.classList.contains('likeBtn')) {

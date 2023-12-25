@@ -13,8 +13,8 @@
 .moreCommuListArea {
 	display: flex;
 	width: 1280px;
-	justify-content: space-between;
 	flex-wrap: wrap;
+	gap: 51px;
 }
 .moreCommuListArea a{
 	text-decoration: none;

@@ -37,7 +37,7 @@ async function getCommuListForServer(page, commuListcategory){
 
 
 //특정 게시글 thumbnail 가져오는 함수
-async function getThumbnailToServer(bno){
+async function getCommuThumbnailToServer(bno){
     try {
         const resp = await fetch('/community/thumb/'+bno);
         const result = await resp.json();
@@ -73,8 +73,8 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
 
                 let cmBno = cm.cmBno;
                 if (cm.cmFileCnt > 0) {
-                    let thumb = await getThumbnailToServer(cmBno);
-                    str += `<img class="thumbImg" src="/upload/community/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}"  alt="...">`;
+                    let thumb = await getCommuThumbnailToServer(cmBno);
+                    inner += `<img class="thumbImg" src="/upload/community/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}"  alt="...">`;
                 }else{
                      inner += `<img alt="commuList image error" src="../resources/image/logoimage.png">`
                 }
@@ -84,6 +84,12 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
                 inner += `<small>${upDate}</small>`;
                 inner += `</div>`;
                 inner += `<mark><i class="bi bi-geo-alt"></i>${cm.cmSido}${cm.cmSigg}${cm.cmEmd}</mark>`;
+                inner += `<input type="hidden" value="${cm.proBno}" class="proBno">`;
+                inner += `<input type="hidden" value="${cm.cmEmail}" class="cmUserId">`;
+                // inner += `<div>`;
+                // inner += `<p id="cmLikeCnt">${bvo.cmLikeCnt }</p>`;
+                // inner += `<i class="bi bi${checkLike > 0 ? '-heart-fill' : '-heart' }" id="likeBtn"></i><span> ${like.proLikeCnt}</span>`;
+                // inner += `</div>`;
                 inner += `</div>`;
                 inner += `</a>`;
 
@@ -117,44 +123,48 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
     }
 }
 
-// // 찜하기버튼 클릭시 발생
-// document.addEventListener('click',(e)=>{
-//     console.log("찜클릭 " ,e.target);
+// //좋아요 버튼 클릭시
+// document.getElementById('likeBtn').addEventListener('click', ()=>{
+// 	let currentLikeCount = parseInt(document.getElementById('cmLikeCnt').innerText);
+//     let bnoVal = likeBtn.querySelector('.proBno').value;
+//     let userEmail = likeBtn.querySelector('.liUserId').value;
+//     console.log(bnoVal + "/" + userEmail);
 
-//     // 찜버튼 클릭시 state값 -1, 버튼의 class값 바꿔서 빈 하트로 변경
-//     if (e.target.classList.contains('likeBtn')) {
-//         let likeBtn = e.target.closest('.likeHeart');
-//         let proBnoVal = likeBtn.querySelector('.proBno').value;
-//         let liUserId = likeBtn.querySelector('.liUserId').value;
-//         console.log(proBnoVal + "/" + liUserId);
-//         likeToServer(proBnoVal, liUserId, -1); 
+// 	if(!(userEmail)){
+// 		alert('로그인을 해주세요.');
+// 	}
 
-//         spreadCommuListFromServer();
-//     }
+// 	if(userEmail){
+// 	    if(document.getElementById('likeBtn').classList.contains('bi-heart')){ //안 누른 상태면
+// 	        console.log("좋아요 등록");
+// 	        document.getElementById('likeBtn').classList.replace('bi-heart', 'bi-heart-fill');
+// 			document.getElementById('cmLikeCnt').innerText = currentLikeCount + 1;
+// 	        likeToServer(bnoVal, userEmail);
+// 	    }else if(document.getElementById('likeBtn').classList.contains('bi-heart-fill')){ //이미 누른 상태면
+// 	        console.log("좋아요 취소"); 
+// 	        document.getElementById('likeBtn').classList.replace('bi-heart-fill', 'bi-heart');
+// 			document.getElementById('cmLikeCnt').innerText = currentLikeCount - 1;
+// 	        likeToServer(bnoVal, userEmail);
 
+// 	    }
+// 	}    
 // })
 
+//좋아요 정보 보내주기
+async function likeToServer(bno, email){ 
+    try{
+        const url = '/community/'+bno+'/'+email;
+        const config = {
+            method : "post"
+        };
+        const resp = await fetch(url, config);
+        const result = await resp.text();
+        return result; 
+        
+    }catch(err){
+        console.log(err);
+    }
+}
 
-// async function likeToServer(proBnoVal, memEmail, state) { 
-//     try {
-//         const url = "/job/list/like";
-//         const config = {
-//             method: "post",
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify({
-//                 liBno: proBnoVal,
-//                 liUserId: memEmail,
-//                 liStatus: state
-//             })
-//         };
-//         const resp = await fetch(url, config);
-//         const result = await resp.text();
-//         return result; 
-//     } catch (err) {
-//         console.log(err);
-//     }
-// }
 spreadCommuListFromServer();
 
