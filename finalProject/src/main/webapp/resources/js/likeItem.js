@@ -59,7 +59,7 @@ let detailPageUrl = window.location.href;
 function clip(){ 
 	//detailPageUrl 변수에 담긴 주소를
   	navigator.clipboard.writeText(detailPageUrl).then(res=>{
-        Swal.fire({
+        swal.fire({
             text: "주소가 복사되었습니다!",
             icon: "success",
             showConfirmButton: false,

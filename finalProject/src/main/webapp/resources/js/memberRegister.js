@@ -320,14 +320,6 @@ document.getElementById('testBtn').addEventListener('click',()=>{
     const emailMsg2 = document.getElementById('emailMsg2');
     const emailMsgDisplay = window.getComputedStyle(emailMsg).getPropertyValue('display');
     const emailMsg2Display = window.getComputedStyle(emailMsg2).getPropertyValue('display');
-    //인증번호 input 보이게 해주기
-    // if(emailMsgDisplay === 'none' && emailMsg2Display === 'none' && email !== ''){
-    //     document.getElementById('emailMsg3').style = "display:none";
-    //     document.getElementById('testNum').style = "display:inline-block";
-    // }else{
-    //     document.getElementById('emailMsg3').style = "display:inline-block";
-    //     document.getElementById('testNum').style = "display:none";
-    // }
     
     if(emailMsgDisplay === 'inline-block' || emailMsg2Display === 'inline-block'){
         document.getElementById('emailMsg3').style = "display:none";

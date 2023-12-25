@@ -66,6 +66,7 @@ document.addEventListener('click',(e)=>{
 
 document.getElementById('textCancelBtn').addEventListener('click', ()=>{
     document.getElementById('searchInput').value = '';
+    document.getElementById('keyword').value = '';
     document.querySelector('.deleteInputText').classList.add('deleteIconOff');
 })
 

@@ -150,7 +150,7 @@ function spreadCommentList(bno){
                             str += `<div class="cmtUserLine">
                                     <div><img id="reCmtProfile-${cvo.reCno}" class="cmUserProfile" alt="" src="/resources/image/기본 프로필.png"> <p class="cmtNickName">${cvo.reNickName}</p> `;
                                     communityProfile(cvo.reEmail, `reCmtProfile-${cvo.reCno}`);
-                            if(cvo.reEmail == userEmail){
+                            if(cvo.reEmail == boardWriterEmail){
                                 str += `<span class="boardWriterSpan">작성자</span>`; 
                             } 
                             str += `<span class="cmtDate"> ${cvo.reModAt}</span></div>`;
