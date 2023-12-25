@@ -10,7 +10,7 @@
     margin-bottom: 90px;
 }
 .joongoBanner{
-    background: url(../image/joongo_banner.png) no-repeat center/cover;
+    background: url(../image/joongo_banner.jpg) no-repeat center #fffde8;
     width: 100%;
     height: 350px;
 }

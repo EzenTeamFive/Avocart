@@ -14,8 +14,9 @@
 		background-color: #f6f6f6;
 		display: flex;
 		justify-content: center;
+		position: relative;
 	}
-	.chatingSec > div{
+	.chatingSec > div:not(:nth-child(2)){
 		background-color: #fff;
 		width: 500px;
 		height: calc(100vh - 200px);
@@ -24,26 +25,52 @@
 		position: relative;
 	}
 	.chatRoomList{
-		padding-top: 20px;
+		padding-top: 25px;
 	}
 	.chatRoomList h2{
 		font-weight: 700;
-		margin-left: 15px;
+		margin-left: 20px;
 	}
-	.chatRoomList > div{
+	.chatListArea{
 		width: 100%;
 		height: 80px;
 		padding: 15px 15px;
+	    display: grid;
+	    justify-content: start;
 	}
-	.chatRoomList > div:hover{
+	.chatListArea:hover{
 		background-color: #f9f9f9;
 	}
-	.chatRoomList > div img{
+	.chatListArea img{
 		width: 50px;
 		height: 50px;
 		border-radius: 25px;
 		margin-right: 10px;
 		object-fit: cover;
+		grid-row: 1/3;
+	}
+	.chatListArea b{
+    	grid-column: 2;
+    }
+	.chatListArea p{
+	    margin: 0;
+	    color: #ccc;
+	    font-size: 14px;
+    }
+	.waitingPage{
+		position: absolute;
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	    width: 500px;
+	    height: 100%;
+	    z-index: 10;
+	    left: 50%;
+	    background-color: #fff;
+	}
+	.waitingPage img{
+		opacity: 0.2;
 	}
 	.messageHeader{
 		height: 70px;
@@ -100,8 +127,8 @@
 	}
 	.inputArea > button{
 		position: absolute;
-	    right: 20px;
-	    top: 12.5px;
+	    right: 15px;
+	    top: 10px;
 		width: 40px;
 		height: 40px;
 		border: 0;
@@ -134,10 +161,13 @@
 		        	</c:choose>
 		        	<b>${list.msgGetUserNick}</b>
 		        	<p>${list.lastMsg }</p>
-		        </div>			
+		        </div>
 			</c:forEach>
 		</c:if>
-  		
+    </div>
+    <div class="waitingPage">
+		<img alt="채팅이미지" src="../resources/image/chat_icon.png">
+		<p>여기에서 채팅을 시작해보세요</p>
     </div>
     <div>
     	<div class="messageHeader">

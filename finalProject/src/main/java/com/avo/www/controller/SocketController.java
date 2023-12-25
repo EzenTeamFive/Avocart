@@ -95,11 +95,12 @@ public class SocketController {
 			
 			String senderId = chatvo.getMsgSendUserId();
 			String message = chatvo.getMsgContent();
+			String sendDate = chatvo.getMsgRegAt();
 			long bno = chatvo.getMsgRoomId();
 			
         	for(Session s : sessionList) {
         		if(bno == (long) s.getUserProperties().get("chatBno")) {
-        			s.getBasicRemote().sendText(senderId+","+message);
+        			s.getBasicRemote().sendText(senderId+","+message+","+sendDate);
         		}
         	}
         } catch (Exception e) {    
