@@ -13,18 +13,40 @@
 	display: none;
 }
 
-#proDetailAddr{
+#proDetailAddr {
 	border-left: none;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 	width: 301.9px;
+}
+
+.regBtn {
+    background-color: #fff;
+    font-size: 16px;
+    width: 100px;
+    height: 55px;
+    border-radius: 28px;
+    border-color:  #84a331;
+    
+}
+.regBtn:hover {
+    background-color: #84a331;
+    color: #fff;
+    transition: 0.2s;
+}
+.cmButtons button[type=button]:hover {
+    background-color: #aaa;
+    color: #fff;
+    transition: 0.2s;
 }
 </style>
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
 <c:set value="${sdto.pvo }" var="svo" />
-<div class="imgLine"></div>
+<div class="storeBanner">
+     <div class="innerDiv"></div>
+</div>
 <div class="bodyContainer">
 <div class="formLine">
 <form action="/store/modify" method="post" enctype="multipart/form-data">
@@ -248,7 +270,7 @@
 
    <div class="cmButtons">
       <a href="/store/detail?bno=${svo.proBno }"><button type="button" class="cancelBtn">취소</button></a>
-      <button type="submit" class="regBtn" id="regBtn">수정하기</button>
+      <button type="submit" class="regBtn" id="regBtn">수정</button>
    </div>
 </form>
 </div>

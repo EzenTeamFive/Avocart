@@ -54,7 +54,6 @@
    position: absolute;
    border: 1px solid #efefef;
    background-color: #fff;
-   box-shadow: 0 0 5px #cdcdcd;
    z-index: 3;
    border-radius: 5px;
 }
@@ -101,7 +100,7 @@
 
 .modBtn{
 	width: 125px;
-	border: 3px solid #84a331;
+	border: 2px solid #84a331;
 	background-color: white;
 	border-radius: 38px;
 	position: relative;
@@ -114,6 +113,7 @@
 .modBtn:hover{
 	background-color: #84a331;
 	color: white;
+	transition: 0.2s;
 }
 
 .forBorder {

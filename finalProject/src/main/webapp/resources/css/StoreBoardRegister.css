@@ -7,7 +7,9 @@
 
 .storeBanner {
     width: 100%;
-   background-color: #effedf;
+    background-color: #effedf;
+    justify-content: center;
+    display: flex;
 }
 
 .innerDiv {
@@ -25,6 +27,7 @@
 
 .formLine{
 	margin: 40px 0;
+	margin-bottom: 90px;
 	width: 720px;
 }
 
@@ -134,32 +137,36 @@
 .cmButtons{
 	display: flex;
 	justify-content: center;
-	margin-top: 80px;
+	margin-top: 30px;
 }
 .cancelBtn{
-	width: 105px;
-	height: 60px;
-	padding: 18px 35px;
-	font-size: 14px;
-	margin-right: 13px;
-	border-radius: 38px;
-	border: 3px solid #999;
+	 width: 100px;
+    height: 55px;
+	font-size: 16px;
+	margin-right: 25px;
+	border-radius: 28px;
+	border: 2px solid #aaa;
 	background: none;
-	color: #999;
+	color: #aaa;
 }
 .cancelBtn:hover{
-	background-color: #999;
-	color: white;
+    background-color: #aaa;
+    color: #fff;
+    transition: 0.2s;
 }
 .regBtn{
-	width: 130px;
-	height: 60px;
+/* 	width: 100px;
+	height: 55px;
 	padding: 18px 33px;
 	font-size: 14px;
 	border-radius: 38px;
 	border: 3px solid #84a331;
 	background: none;
-	color: #84a331;
+	color: #84a331; */
+	font-size: 16px;
+    width: 100px;
+    height: 55px;
+    border-radius: 28px;
 }
 .regBtn:hover:not(:disabled){
 	background-color: #84a331;

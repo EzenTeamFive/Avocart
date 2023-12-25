@@ -1,6 +1,7 @@
 let h3 = document.getElementById('reviewSize');
 let starScore =  document.getElementById('starScore');
 let star = '★';
+let percentText = document.getElementById('percentText');
 
 async function spreadReviewFromServer(type){
     try{
@@ -21,6 +22,7 @@ function setStarRating(rating) {
 //페이지 처음 로드될 때 
 function getReviewList(type = 'joongo') {
     spreadReviewFromServer(type).then(result => {
+        console.log(result);
         const plist = result.plist;
         const rlist = result.rlist;
         const ul = document.getElementById('ulZone');
@@ -46,8 +48,12 @@ function getReviewList(type = 'joongo') {
     	//리뷰 평균
     	let averageScore = reviewCount > 0 ? totalScore / reviewCount : 0;
         starScore.innerHTML = `${averageScore % 1 !== 0 ? averageScore.toFixed(1) : averageScore}`;
-        setStarRating(averageScore);
+               
+        let percent = `${Math.round(averageScore * 20)}`;
+        percentText.innerText = percent+"%";
         
+        setStarRating(averageScore);
+
         ul.innerHTML = '';
         if(rlist.length>0) {
             for(let i = 0; i < rlist.length; i++) {
@@ -105,3 +111,6 @@ document.addEventListener('change', (e) => {
         getReviewList(cateType);
     }
 });
+
+
+

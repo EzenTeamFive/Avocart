@@ -159,7 +159,7 @@
 	
 	<div class="cmButtons">
 		<a href="/store/list"><button type="button" class="cancelBtn">취소</button></a>
-		<button type="submit" class="regBtn" id="regBtn" disabled="disabled">작성하기</button>
+		<button type="submit" class="regBtn" id="regBtn" disabled="disabled">작성</button>
 	</div>
 </form>
 </div>

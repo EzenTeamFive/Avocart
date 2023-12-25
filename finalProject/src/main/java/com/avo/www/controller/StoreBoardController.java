@@ -205,8 +205,5 @@ public class StoreBoardController {
       return updateLike > 0? new ResponseEntity<String>(String.valueOf(updateLike), HttpStatus.OK) :
           new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);   
    }
-
-   @GetMapping("/myPageC")
-   public void myPageC() {}
    
 }

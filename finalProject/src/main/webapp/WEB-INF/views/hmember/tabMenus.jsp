@@ -103,6 +103,20 @@
     width: 95px;
 }
 
+.selectContainer Select:hover {
+	cursor: pointer;
+}
+
+.myreview {
+    font-size: 16px;
+    color: #888888;
+    font-weight: bold;
+  	position: relative;
+}
+
+.myreview:hover {
+	cursor: pointer;
+}
 .reviewSize {
     font-size: 20px;
     margin-bottom: 0;
@@ -118,7 +132,7 @@
     border: 1px solid #eee;
     border-radius: 5px;
     padding: 16px;
-    padding-left: 480px;
+    padding-left: 464px;
     margin-top: 10px;
     margin-bottom: 40px;
     display: -webkit-box;
@@ -166,7 +180,14 @@
     font-size: 14px;
     font-weight: bold;
     color: #888888;
+    margin-top: 5px;
 }
+
+.reviewContainer {
+    border-top: 1px solid #eee;
+    padding-top: 40px;
+}
+
 .reviewLi {
 	border-bottom: 1px solid #eee;
     padding-bottom: 30px;
@@ -185,11 +206,12 @@
 }
 
 .reviewDate {
-    padding-left: 1040px;
+	padding-left: 1095px;
 }
 
 .reviewNick{
-    margin-top: -22px;
+    margin-top: -15px;
+    margin-bottom: 10px;
 }
 
 .innerSender {
@@ -199,7 +221,8 @@
 }
 
 .starContainer {
-	margin-left: -2px;
+	margin-left: -3px;
+    font-size: 17px;
 }
 
 
@@ -224,6 +247,31 @@ a{
 
 .goldStar {
 	 color: gold;
+}
+
+.userDropdownMenu{
+	display: flex;
+	justify-content: center;
+}
+.boardUserBtn{
+	border: none;
+	background: none;
+	font-size: 15px;
+	color: gray;
+}
+
+.cmtUserMenu{
+z-index: 10;
+position: absolute;
+border: 1px solid #e4e4e4;
+  	border-radius: 5px;
+background-color: #fff;
+   margin-left: -100px;
+   margin-top: 25px;
+   padding: 15px;
+   text-align: center;
+   width: 95px;
+   font-size: 14px;
 }
 /* 수정 끝  */
 </style>
@@ -258,7 +306,7 @@ a{
 		
 		<div class="selectContainer">   
 		   	<h3 class="reviewSize" id="reviewSize">거래후기 <b>0</b></h3>
-
+		
 			<select name="categorySelect" id="categorySelect">
 				<option value="joongo">중고거래</option>
 				<option value="store">동네업체</option>
@@ -279,18 +327,16 @@ a{
 				</div>
 				
 				<div class="satisContainer">
-					<div class="percentText">100%</div>
+					<div class="percentText" id="percentText">100%</div>
 					<div class="satisText">만족 후기</div>
 				</div>
 			</div>
 			
-	    	<div id="reviewContainer">
+	    	<div class="reviewContainer" id="reviewContainer">
 	    	<!-- list 시작 -->
 			   <ul id="ulZone">
 			   </ul>
-
-	    	</div>
-	    	
+	    	</div>	    	
 	    	
 	    	</div>
 	    </div>

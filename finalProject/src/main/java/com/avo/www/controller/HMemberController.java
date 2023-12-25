@@ -239,7 +239,7 @@ public class HMemberController {
 	        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {        	
 	        	//Principal => AuthMember 변환
 	        	AuthMember member = (AuthMember) authentication.getPrincipal();
-	        	log.info(">>>>>> member 확인 >>>>> "+member.getMvo());
+	        	log.info(">>>>>>review 확인 >>>>> "+member.getMvo());
 	        	userEmail = member.getMvo().getMemEmail();
 	        }
 	      return new ResponseEntity<ReviewDTO>(hsv.getReviewList(type, userEmail), HttpStatus.OK);

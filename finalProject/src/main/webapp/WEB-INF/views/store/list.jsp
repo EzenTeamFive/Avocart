@@ -15,7 +15,6 @@
      <div class="innerDiv"></div>
 </div>
 <div class="bodyContainer">
-<a href="/store/myPageC">c</a>
 
 <div class="allBtns">
 <h3 class="totalCnt">등록 업체 <b>0</b>개</h3>
