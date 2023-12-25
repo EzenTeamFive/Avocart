@@ -35,7 +35,7 @@
    
    <div class="form">
       <p class="label">카테고리</p>
-      <select name="cmMenu" class="cmMenu">
+      <select name="cmMenu" class="cmMenu" id="csMenu">
           <option value="일상" ${bvo.cmMenu eq '일상' ? 'selected' : '' }>일상</option>
           <option value="모임" ${bvo.cmMenu eq '모임' ? 'selected' : '' }>모임</option>
           <option value="질문" ${bvo.cmMenu eq '질문' ? 'selected' : '' }>질문</option>

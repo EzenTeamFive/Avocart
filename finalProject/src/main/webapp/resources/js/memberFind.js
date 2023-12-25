@@ -22,7 +22,7 @@ document.getElementById('findBtn').addEventListener('click',()=>{
             document.getElementById('findedEmail').innerHTML = result.memEmail;
 
         }else{ //가입 안된 번호면
-            alert('일치하는 사용자 정보를 찾을 수 없습니다.');
+            swal.fire("", "일치하는 사용자 정보를 찾을 수 없습니다.", "error");
         }
     })
 
