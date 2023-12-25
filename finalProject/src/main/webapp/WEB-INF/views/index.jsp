@@ -12,7 +12,7 @@
 	text-align: center;
 }
 #firstB{
-
+	background-color: #fffde8;
 }
 #secondB{
 	background-color: #ebffdc;
@@ -21,11 +21,14 @@
 	background-color: #f9ffd1;
 }
 #fourthB{
-
+	background-color: #fff3e5;
 }
 .carousel-item a{
 	display: inline-block;
 	width: 1280px;
+}
+.appBtns{
+
 }
 </style>
 </head>
@@ -38,7 +41,7 @@
   	<!-- 1 -->
     <div class="carousel-item active" id="firstB">
     <a href="/joongo/list">
-      <img src="/resources/image/KakaoTalk_20231224_012210284.jpg" class="d-block w-100 bannerImgs" alt="..." id="slideBannerImg">
+      <img src="/resources/image/중고배너.jpg" class="d-block w-100 bannerImgs" alt="..." id="slideBannerImg">
     </a>
     </div>
   	<!-- 2 -->
@@ -56,7 +59,7 @@
   	<!-- 4 -->
     <div class="carousel-item" id="fourthB">
     <a href="/community/list">
-      <img src="/resources/image/KakaoTalk_20231224_012210284_03.jpg" class="d-block w-100 bannerImgs" alt="...">
+      <img src="/resources/image/소식배너.jpg" class="d-block w-100 bannerImgs" alt="...">
     </a>
     </div>
   </div>
@@ -122,37 +125,37 @@
 	<div class="joongoMenuMiddle">
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/macbook.png" class="menuBtn">
+				<img alt="" src="/resources/image/macbook.png" class="menuBtn" id="mac">
 			</button>
 			<p>디지털기기</p>
 		</div>
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/sofa.png" class="menuBtn" id="sofa">
+				<img alt="" src="/resources/image/소파.png" class="menuBtn" id="sofa">
 			</button>
 			<p>가구</p>
 		</div>
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/baby_shark.png" class="menuBtn">
+				<img alt="" src="/resources/image/유아동.png" class="menuBtn">
 			</button>
 			<p>유아동</p>
 		</div>
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/woman.png" class="menuBtn">
+				<img alt="" src="/resources/image/여성의류.png" class="menuBtn">
 			</button>
 			<p>여성의류</p>
 		</div>
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/man.png" class="menuBtn">
+				<img alt="" src="/resources/image/남성의류.png" class="menuBtn">
 			</button>
 			<p>남성의류</p>
 		</div>
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/iron.png" class="menuBtn">
+				<img alt="" src="/resources/image/생활가전.png" class="menuBtn" id="macc">
 			</button>
 			<p>생활가전</p>
 		</div>
@@ -164,19 +167,19 @@
 		</div>
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/cookie.png" class="menuBtn">
+				<img alt="" src="/resources/image/가공식품.png" class="menuBtn" id="snack">
 			</button>
 			<p>가공식품</p>
 		</div>
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/sunglasses.png" class="menuBtn" id="sunglasses">
+				<img alt="" src="/resources/image/스포츠.png" class="menuBtn" id="sunglasses">
 			</button>
 			<p>스포츠|레저</p>
 		</div>
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/joystick.png" class="menuBtn">
+				<img alt="" src="/resources/image/게임.png" class="menuBtn">
 			</button>
 			<p>취미|게임|음반</p>
 		</div>
@@ -188,7 +191,7 @@
 		</div>
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/green_leaves.png" class="menuBtn">
+				<img alt="" src="/resources/image/식물.png" class="menuBtn">
 			</button>
 			<p>식물</p>
 		</div>
@@ -200,13 +203,13 @@
 		</div>
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/book.png" class="menuBtn">
+				<img alt="" src="/resources/image/book2.png" class="menuBtn">
 			</button>
 			<p>도서</p>
 		</div>
 		<div class="joongoMenuBox">
 			<button class="joongoMenuBtn menuBtn">
-				<img alt="" src="/resources/image/avocartLogo.png" class="menuBtn">
+				<i class="bi bi-three-dots" class="menuBtn"></i>
 			</button>
 			<p>기타</p>
 		</div>
@@ -217,7 +220,7 @@
 
 <!-- 중간 배너 -->
 <div class="secondBanner">
-	<img alt="" src="/resources/image/bannerTest1.jpg">
+	<img alt="" src="/resources/image/중간배너.jpg">
 </div>
 
 <!-- bodyContainer 2 -->
@@ -321,14 +324,14 @@
 <!-- 앱스토어 배너 -->
 <div class="appStoreLine">
 	<div class="appStoreInner">
-		<p>당신 근처의 <br> 지역 생활 커뮤니티 </p>
-		<p>동네라서 가능한 모든 것<br> 아보카트에서 가까운 이웃과 함께해요.</p>
-		<a href="https://play.google.com/store/apps?hl=ko-KR">
-			<button type="button"><i class="bi bi-google-play"></i> Google Play</button>
-		</a>
-		<a href="https://apps.apple.com/kr/charts/iphone">
-			<button type="button"><i class="bi bi-apple"></i> App Store</button>
-		</a>
+		<div class="appBtns">
+			<a href="https://play.google.com/store/apps?hl=ko-KR">
+				<button type="button"><i class="bi bi-google-play"></i> Google Play</button>
+			</a>
+			<a href="https://apps.apple.com/kr/charts/iphone">
+				<button type="button"><i class="bi bi-apple"></i> App Store</button>
+			</a>
+		</div>
 	</div>
 </div>
 <jsp:include page="./common/footer.jsp" />

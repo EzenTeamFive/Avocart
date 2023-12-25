@@ -16,7 +16,9 @@
 <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
 <sec:authentication property="principal.mvo.memNickName" var="authNick" />
 
-<div class="imgLine"></div>
+<div class="imgLine">
+	<img alt="" src="../resources/image/소식배너.jpg">
+</div>
 
 <div class="bodyContainer">
 
@@ -28,7 +30,7 @@
     
     <div class="form">
        <p class="label">제목</p>
-      <input type="text" name="cmTitle" class="titleInput" value="${bvo.cmTitle }">
+      <input type="text" name="cmTitle" id="csTitle" class="titleInput" value="${bvo.cmTitle }">
    </div>
    
    <div class="form">

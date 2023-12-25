@@ -17,7 +17,9 @@
 <sec:authentication property="principal.mvo.memEmd" var="authEmd" />
 <jsp:include page="../common/header.jsp" />
 
-<div class="imgLine"></div>
+<div class="imgLine">
+	<img alt="" src="../resources/image/소식배너.jpg">
+</div>
 
 <div class="bodyContainer">
 

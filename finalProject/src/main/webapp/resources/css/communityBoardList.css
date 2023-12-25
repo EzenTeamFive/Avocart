@@ -12,7 +12,7 @@
 	}
 
 	.cmBanner{
-		background-color: #f9ffd1;
+		background-color: #fff3e5;
 		height: 350px;
 		font-family: 'SUIT-Regular';
 		display: flex;
@@ -20,7 +20,7 @@
 	}
 	.innerDiv{
 		width: 1280px;
-		background-image: url(../image/알바배너.jpg);
+		background-image: url(../image/소식배너.jpg);
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: contain;
