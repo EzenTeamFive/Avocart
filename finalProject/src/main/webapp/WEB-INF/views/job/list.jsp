@@ -19,13 +19,13 @@
 <!-- 메인 이벤트 페이지 -->
 <div class="jobListPart">
 	<img alt="" src="../resources/image/albaBanner.jpg">
-	<div class="jobListPartSub">
-<!-- 		<h3>우리동네에서 찾는 알바카도</h3> -->
+<!-- 	<div class="jobListPartSub">
+		<h3>우리동네에서 찾는 알바카도</h3>
 		<a href="/job/register" ><button type="button" class="">공고 올리기</button></a>
 		<a href="/job/about" ><button type="button" class="" >알바카도 활용법</button></a>
-<!-- 		<a href="/myList/likeList" ><button type="button" class="">관심 목록</button></a>
-		<a href="/myList/commuList" ><button type="button" class="">동네생활</button></a> -->
-	</div>
+		<a href="/myList/likeList" ><button type="button" class="">관심 목록</button></a>
+		<a href="/myList/commuList" ><button type="button" class="">동네생활</button></a>
+	</div> -->
 </div>
    <div id="loading">
       <!-- 로딩페이지 -->
@@ -70,8 +70,11 @@
  
 	<!-- 우리동네 알바 출력 리스트 -->
 	<div class="titleLine">
-	<h3>우리동네 알바</h3>
+<!-- 	<h3>우리동네 알바</h3> -->
 	 	<section>
+			<h3>동네 알바 <b>0</b>개</h3>
+			<div class="titleLineSub">
+			<p>카테고리</p>
 			<div class="allMenu">
 				<select class="menuSelect" id="menuSelect" name="menuSelect">
 					<option >전체</option>
@@ -86,11 +89,13 @@
 				</select>
 			</div>
 			
+			<p>정렬기준</p>
 			<select id="sortSelect" class="sortSelect" name="sortSelect">
 			    <option value="newest" >최신순</option>
 			    <option value="oldest">오래된 순</option>
 			    <option value="hotest">인기순</option>
 			</select>
+			</div>
 	 	</section>
 	</div>                                                                                                                                                                                                                                                                                                                                                                                                   
 

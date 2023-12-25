@@ -2,6 +2,9 @@
 	width: 700px;
 	margin: 50px auto;
 }
+.innerContainer i{
+    color: #85a331;
+}
 
 #map {
 	width: 100%;
@@ -41,6 +44,66 @@
     /* 글씨는font-size: 12px; */
 /*     i는 20pxfont-size: 20px; */
 /* floatMenu end */
+.cntArea {
+	border-bottom: 1px solid #efefef;
+	padding-bottom: 20px;
+}    
+.cntArea p {
+    position: relative;
+    margin-bottom: 0;
+    display: inline-block;
+    font-size: 14px;
+    color: #606060;
+    letter-spacing: -0.2px;
+}    
+.cntArea p:last-child::after{
+    content: "";
+    position: absolute;
+    top: calc(50% - 4px);
+    left: -5px;
+    width: 1px;
+    height: 8px;
+    background-color: #a1a1a1;
+}
+.lastBtnArea{
+    display: flex;
+    justify-content: center;
+    margin: 30px 0px;
+}
+.lastBtnArea a:first-child{
+    margin-right: 25px;
+}
+.lastBtnArea button{
+    background-color: #fff;
+    font-size: 16px;
+    width: 100px;
+    height: 55px;
+    border-radius: 28px;
+}
+.lastBtnArea button[type=submit]:hover{
+    background-color: #84a331;
+    color: #fff;
+    transition: 0.2s;
+}
+.lastBtnArea .jobDelBtn:hover{
+    background-color: #aaa;
+    color: #fff;
+    transition: 0.2s;
+}
+.lastBtnArea button[type=submit]{
+    border: 2px solid #84a331;
+    color: #84a331;
+}
+.lastBtnArea .jobDelBtn{
+    border: 2px solid #aaa;
+    color: #aaa;
+}
+.lastBtnArea button:disabled,
+.lastBtnArea button:disabled:hover{
+    background-color: #a43131;
+    border-color: #a43131;
+    color: #fff;
+}
 .jobBtn {
 	margin-top:50px;
 	width: 40px;
@@ -158,10 +221,19 @@
 	overflow: hidden;
 	
 }
+.container {
+    background: #fafafa;
+    border-top: 1px solid lightgray;
+    padding-top: 20px;
+}
+.list-group .list-group-item {
+    background: none;
+}
 
+	
 /* 리뷰 별점 */
 #reContent {
-	border: 2px solid #ADC178;
+	border: 2px solid lightgray;
 	border-radius:10px;
 	width: 500px;
 	padding: 10px; 
@@ -232,6 +304,7 @@
 	.myformMini input {
 		border: none;
 		width: 390px;
+		background: none;
 	}
 	
 

@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>job register page</title>
+<title>job detail page</title>
 
 
 <link rel="stylesheet" href="/resources/css/page.css">
@@ -128,27 +128,27 @@
  		<p><i class="bi bi-calendar-check"></i>근무요일</p>
 		<p><i class="bi bi-clock"></i>근무시간</p> 
 -->
-		
 		<div class="jobInfoDetail">
 			<p><strong><i class="bi bi-pencil"></i>상세내용<i class="bi bi-pencil"></i></strong></p>
 			<p>${jbdto.pbvo.proContent}</p>
-			
-			<p>관심</p><p id="likeCount checkLikeCnt">${jbdto.pbvo.proLikeCnt }</p>
-			<p>조회 ${jbdto.pbvo.proReadCnt }</p>
 		</div>
 		
 		<div id="map"></div>
 		</div>
-	
+
+		<div class="cntArea">
+			<p>관심 </p><p id="likeCount checkLikeCnt">${jbdto.pbvo.proLikeCnt }</p>
+			<p>조회 ${jbdto.pbvo.proReadCnt }</p>
+		</div>
 	<sec:authorize access="isAuthenticated()">
+	<div class="lastBtnArea">
 	    <c:if test="${memEmail eq jbdto.pbvo.proEmail}">
 			<a href="/job/modify?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn">수정</button></a>
-			<a href="/job/remove?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn">삭제</button></a>
+			<a href="/job/remove?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn jobDelBtn">삭제</button></a>
 		</c:if>
+	</div>
 	</sec:authorize>
-		
-	<hr>
-	
+		 
 	<!-- 후기 라인 -->
 	<div class="container">
 	<!-- 평가 -->

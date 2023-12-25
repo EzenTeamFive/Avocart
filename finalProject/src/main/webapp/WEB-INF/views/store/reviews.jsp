@@ -30,6 +30,23 @@
   z-index: 0;
   padding: 0;
 }
+
+.star-container {
+    display: flex;
+}
+
+.star {
+    font-size: 20px; /* 스타일링에 따라 조절하세요. */
+    margin-right: 2px; /* 각 별 사이의 간격을 조절하세요. */
+}
+
+.yellow {
+    color: gold; /* 노란 별의 색상을 조절하세요. */
+}
+
+.grey {
+    color: grey; /* 회색 별의 색상을 조절하세요. */
+}
 </style>
 </head>
 <body>

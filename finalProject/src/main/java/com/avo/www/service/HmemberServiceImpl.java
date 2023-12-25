@@ -1,15 +1,24 @@
 package com.avo.www.service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.avo.www.domain.BuyItemVO;
 import com.avo.www.domain.FileVO;
+import com.avo.www.domain.PagingVO;
 import com.avo.www.domain.ProductBoardVO;
+import com.avo.www.domain.ReviewDTO;
+import com.avo.www.domain.ReviewVO;
+import com.avo.www.domain.StoreBoardDTO;
+import com.avo.www.handler.PagingHandler;
 import com.avo.www.repository.HmemberDAO;
 import com.avo.www.repository.JoongoBoardDAO;
 import com.avo.www.repository.ProductFileDAO;
@@ -141,6 +150,30 @@ public class HmemberServiceImpl implements HmemberService {
 	@Override
 	public List<FileVO> getFileList(long proBno) {
 		return fdao.getFileList(proBno);
+	}
+
+	@Override
+	public BigDecimal getTemp(String email) {
+		return hdao.getTemp(email);
+	}
+	
+	
+	@Override
+	public ReviewDTO getReviewList(String type, String userEmail) {	    
+	    //리뷰 리스트
+	    List<ReviewVO> reviewList = hdao.SelectReviewPaging(type, userEmail);
+	    List<FileVO> fileList = new ArrayList<>();
+	    if (!reviewList.isEmpty()) {
+	        //list에서 proEmail 값 추출
+	        List<String> emailList = reviewList.stream()
+	                .map(ReviewVO::getSenderEmail)
+	                .collect(Collectors.toList());
+
+	        //emailList로 review 테이블에서 리뷰 데이터 가져오기
+	        fileList = pdao.getProfileList(emailList);
+	    }
+	    ReviewDTO rdto = new ReviewDTO(fileList, reviewList);
+	    return rdto;
 	}
 
 }

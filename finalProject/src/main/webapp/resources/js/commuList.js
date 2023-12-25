@@ -13,10 +13,10 @@ document.getElementById('commuListSelect').addEventListener('change', ()=>{
 });
 
 // more 버튼 클릭 시 호출될 함수
-async function loadMore() {
+async function loadMoreCommuList() {
     console.log("더보기 클릭");
-    console.log(document.getElementById('commuList').dataset.page);
-    const currentPage = parseInt(document.getElementById('commuList').dataset.page);
+    console.log(document.getElementById('commuListmoreBtn').dataset.page);
+    const currentPage = parseInt(document.getElementById('commuListmoreBtn').dataset.page);
     console.log("currentPage >> " + currentPage);
 
     spreadCommuListFromServer(currentPage, commuListcategory);
@@ -67,8 +67,8 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
                 // cmRegAt 날짜만 가져오기
                 let upDate = cm.cmRegAt.substring(0,10);
                 console.log("타입 " + result.pgvo.type + "으로 진입");
-                inner += `<a href="/community/detail?cmBno=${cm.cmBno}">`;
                 inner += `<div class="commuListContent">`;
+                inner += `<a href="/community/detail?cmBno=${cm.cmBno}">`;
                 document.getElementById('commuListCnt').innerText = `${result.totalCount}`;
 
                 let cmBno = cm.cmBno;
@@ -83,19 +83,23 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
                 inner += `<b>${cm.cmContent}</b>`;
                 inner += `<small>${upDate}</small>`;
                 inner += `</div>`;
-                inner += `<mark><i class="bi bi-geo-alt"></i>${cm.cmSido}${cm.cmSigg}${cm.cmEmd}</mark>`;
-                inner += `<input type="hidden" value="${cm.proBno}" class="proBno">`;
+                inner += `<mark><i class="bi bi-geo-alt"></i>${cm.cmSido} ${cm.cmSigg} ${cm.cmEmd}</mark>`;
+                inner += `<input type="hidden" value="${cm.cmBno}" class="cmBno">`;
                 inner += `<input type="hidden" value="${cm.cmEmail}" class="cmUserId">`;
-                // inner += `<div>`;
-                // inner += `<p id="cmLikeCnt">${bvo.cmLikeCnt }</p>`;
-                // inner += `<i class="bi bi${checkLike > 0 ? '-heart-fill' : '-heart' }" id="likeBtn"></i><span> ${like.proLikeCnt}</span>`;
-                // inner += `</div>`;
-                inner += `</div>`;
+                console.log("result.pgvo.type >> " + result.pgvo.type);
+                console.log("result >> ", result);
                 inner += `</a>`;
+                // if(result.pgvo.type == 'commuLikeList'){
+                //     console.log("commu type like list");
+                //     inner += `<div class="likeHeart">`;
+                //     inner += `<i class="bi bi-heart-fill commulikeBtn" id="commulikeBtn"></i><span id="cmLikeCnt"> ${cm.cmLikeCnt}</span>`;
+                //     inner += `</div>`;
+                // }
+                inner += `</div>`;
+                
 
-
-                moreCommuListArea.innerHTML = inner;
             }
+            moreCommuListArea.innerHTML += inner;
 
         }else {
             if(commuListcategory='commuLikeList'){
@@ -107,14 +111,14 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
             }
         }
 
-        let moreBtn = document.getElementById('commuListmoreBtn');
+        let commuListmoreBtn = document.getElementById('commuListmoreBtn');
 
         
         if (result.pgvo.pageNo < result.endPage) {
-            moreBtn.style.visibility = 'visible';
-            moreBtn.dataset.page = page + 1;
+            commuListmoreBtn.style.visibility = 'visible';
+            commuListmoreBtn.dataset.page = page + 1;
         } else {
-            moreBtn.style.visibility = 'hidden';
+            commuListmoreBtn.style.visibility = 'hidden';
         }
 
     } catch (error) {
@@ -123,32 +127,21 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
     }
 }
 
-// //좋아요 버튼 클릭시
-// document.getElementById('likeBtn').addEventListener('click', ()=>{
-// 	let currentLikeCount = parseInt(document.getElementById('cmLikeCnt').innerText);
-//     let bnoVal = likeBtn.querySelector('.proBno').value;
-//     let userEmail = likeBtn.querySelector('.liUserId').value;
-//     console.log(bnoVal + "/" + userEmail);
+//좋아요 버튼 클릭시 취소처리
+if(commuListcategory == 'commuLikeList'){
+    console.log("commu List 좋아요 취소!");
 
-// 	if(!(userEmail)){
-// 		alert('로그인을 해주세요.');
-// 	}
+    document.getElementById('commulikeBtn').addEventListener('click', ()=>{
+        let currentLikeCount = parseInt(document.getElementById('cmLikeCnt').innerText);
+        let bnoVal = likeBtn.querySelector('.cmBno').value;
+        let userEmail = likeBtn.querySelector('.cmUserId').value;
+        console.log(bnoVal + "/" + userEmail);
 
-// 	if(userEmail){
-// 	    if(document.getElementById('likeBtn').classList.contains('bi-heart')){ //안 누른 상태면
-// 	        console.log("좋아요 등록");
-// 	        document.getElementById('likeBtn').classList.replace('bi-heart', 'bi-heart-fill');
-// 			document.getElementById('cmLikeCnt').innerText = currentLikeCount + 1;
-// 	        likeToServer(bnoVal, userEmail);
-// 	    }else if(document.getElementById('likeBtn').classList.contains('bi-heart-fill')){ //이미 누른 상태면
-// 	        console.log("좋아요 취소"); 
-// 	        document.getElementById('likeBtn').classList.replace('bi-heart-fill', 'bi-heart');
-// 			document.getElementById('cmLikeCnt').innerText = currentLikeCount - 1;
-// 	        likeToServer(bnoVal, userEmail);
-
-// 	    }
-// 	}    
-// })
+	        console.log("좋아요 취소"); 
+			document.getElementById('cmLikeCnt').innerText = currentLikeCount - 1;
+	        likeToServer(bnoVal, userEmail);
+})
+}
 
 //좋아요 정보 보내주기
 async function likeToServer(bno, email){ 

@@ -34,6 +34,4 @@ public interface StoreBoardService {
 
 	String getEmail(long bno);
 
-	PagingHandler getReviewList(PagingVO pgvo);
-
 }

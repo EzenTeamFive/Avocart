@@ -16,13 +16,12 @@
 	flex-wrap: wrap;
 	gap: 51px;
 }
-.moreCommuListArea a{
-	text-decoration: none;
-	width: 22%
-}
-.moreCommuListArea a .commuListContent{
-	width: 100%;
+.moreCommuListArea .commuListContent{
+	width: 22%;
 	border: 1px solid #ededed;
+}
+.moreCommuListArea .commuListContent a{
+	text-decoration: none;
 }
 .commuListContent img{
 	width: 100%;
@@ -36,12 +35,18 @@
 .commuListContent .contentWrap h3{
 	font-size: 18px;
     font-weight: 700;
+    display: block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .commuListContent .contentWrap b{
 	font-size: 16px;
-	display: flex;
-	align-items: flex-end;
 	margin: 10px 0px;
+	display: block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .commuListContent .contentWrap small{
 	font-size: 12px;
@@ -59,6 +64,24 @@
 .commuListContent mark i{
 	color: #93b336;
 	margin-right: 3px;
+}
+.likeHeart {
+    padding: 5px;
+    position: relative;
+    float: right;
+    display: flex;
+    align-items: center;
+}
+.likeHeart i {
+    color: red;
+    transition: 0.2s;
+}
+.likeHeart i:hover {
+	cursor: pointer;
+	color: #ffb7b7;
+}
+.likeHeart span {
+    color: lightgray;
 }
 </style>
 </head>
@@ -91,7 +114,7 @@
 		</a>
 	</div>
 	
-	<button type="button" id="commuListmoreBtn" data-page="1" style="visibility: hidden"><i class="bi bi-plus-circle-fill"></i> 게시글 더 보기</button>
+	<button type="button" id="commuListmoreBtn" onclick="loadMoreCommuList()" ><i class="bi bi-plus-circle-fill"></i> 게시글 더 보기</button>
 	
 
 <script type="text/javascript" src="/resources/js/commuList.js"></script>

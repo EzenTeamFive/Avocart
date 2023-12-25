@@ -11,7 +11,4 @@ public interface StoreReviewDAO {
 
 	List<Integer> getAllReviewCnt(@Param("emailList") List<String> emailList);
 
-	int getTotalCount(PagingVO pgvo);
-
-	List<ReviewVO> SelectReviewPaging(PagingVO pgvo);
 }
