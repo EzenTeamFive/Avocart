@@ -5,17 +5,22 @@
     font-style: normal;
 }
 
+.storeBanner {
+    width: 100%;
+   background-color: #effedf;
+}
+
+.innerDiv {
+	background-image: url(../image/storeImg.jpeg);
+ 	width: 1280px;
+ 	height: 350px;
+}
+
 .bodyContainer{
     font-family: 'SUIT-Regular';
     display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-}
-
-.imgLine{
-	width: 100%;
-	height: 250px;
-	background-color: #dbdf80;
 }
 
 .formLine{

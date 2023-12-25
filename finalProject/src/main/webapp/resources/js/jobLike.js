@@ -5,7 +5,21 @@ let likeBtn = document.getElementById('likeBtn');
 //like 여부 지정하는 변수
 let state = 0;
 
-
+async function likeOrDislike(proBnoVal, memEmail) {
+    let likeData = {
+        liBno : proBnoVal,
+        liUserId : memEmail
+    };
+    
+    try {
+        const result = await updateLike(likeData);
+        const likeCount = document.getElementById('likeCount');
+        likeCount.innerHTML =  `관심 ${result }`;
+        
+    } catch (err) {
+        console.error(err);
+    }
+}
 
 // 찜하기
 likeBtn.addEventListener('click', () => {
@@ -34,12 +48,13 @@ likeBtn.addEventListener('click', () => {
         }
         
         // 보여지는 cnt 숫자조정
+        checkLikeCnt = checkLikeCnt+state;
         if(checkLikeCnt > 0){
-            document.getElementById('checkLikeCnt').innerText = checkLikeCnt = checkLikeCnt+state;
+            document.getElementById('checkLikeCnt').innerText = checkLikeCnt ;
         }
          
         likeToServer(proBnoVal, memEmail, state);
-            
+        window.location.reload();   
         console.log("proBnoVal>>" + proBnoVal + "/ memEmail>>" + memEmail + "/ state>>" + state);
 
     }

@@ -43,9 +43,9 @@ public class MyListController {
 	}
 	
 //	관심목록 리스트 페이징 매핑
-	@GetMapping(value = "/likeList/{page}/{category}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/likeList/{page}/{likeListcategory}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PagingHandler> spread(@PathVariable("page") int page, 
-	        @PathVariable("category") String category, Model m, 
+	        @PathVariable("likeListcategory") String category, Model m, 
 	        Principal principal) {
 	    log.info("page >> " + page + "/ category >> " + category );
 	    String liUserId = principal.getName();
@@ -99,9 +99,9 @@ public class MyListController {
 	}
 	
 //	동네생활 리스트 페이징 매핑 
-	@GetMapping(value = "/commuList/{page}/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/commuList/{page}/{commuListcategory}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PagingHandler> spreadCommu(@PathVariable("page") int page, 
-	        @PathVariable("type") String type, Model m, 
+	        @PathVariable("commuListcategory") String type, Model m, 
 	        Principal principal) {
 	    log.info("page >> " + page + "/ type >> " + type );
 	    

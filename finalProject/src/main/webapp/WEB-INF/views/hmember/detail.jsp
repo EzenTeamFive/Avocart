@@ -14,6 +14,7 @@
 <c:set value="${mvo }" var="mvo"></c:set>
 <c:set value="${backSrc }" var="backSrc"></c:set>
 <c:set value="${mainSrc }" var="mainSrc"></c:set>
+<c:set value="${temp }" var="temp"></c:set>
 <div class="bodyContainer">
 <form action="/hmember/checkPw" method="get">
 	<div class="profileContainer">
@@ -52,7 +53,7 @@
 		<span class="memMsg1"><i class="bi bi-lock-fill"></i>본인인증<span class="black">완료</span></span>
 		<span class="memMsg2" id="userAddr"><i class="bi bi-geo-alt-fill"></i>주소<span class="black">완료</span></span>
 		<span class="memMsg3" id="calcDate"><i class="bi bi-calendar"></i>아보카트 가입일 일 전</span>
-		<span class="memMsg4"><i class="bi bi-thermometer-half"></i>회원 온도<span class="black">수정</span></span>
+		<span class="memMsg4"><i class="bi bi-thermometer-half"></i>회원 온도<span class="black">${temp}°C</span></span>
 		</div>
 		</div>		
 	</div>

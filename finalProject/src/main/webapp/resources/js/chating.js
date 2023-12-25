@@ -66,9 +66,9 @@ async function handleSocketClick(e){
                 for(let re of result){
                     console.log(re);
                     if(re.msgSendUserId != getUser){
-                        messages.innerHTML += "<div class='right'><span>"+re.msgRegAt+"</span><div>"+re.msgContent+"</div></div>";
+                        messages.innerHTML += "<div class='right'><span>"+dateFormater(re.msgRegAt)+"</span><div>"+re.msgContent+"</div></div>";
                     }else{
-                        messages.innerHTML += "<div class='left'><div>"+re.msgContent+"</div><span>"+re.msgRegAt+"</span></div>";
+                        messages.innerHTML += "<div class='left'><div>"+re.msgContent+"</div><span>"+dateFormater(re.msgRegAt)+"</span></div>";
                     }
                 }
             }
@@ -168,9 +168,11 @@ function writeResponse(text){
     let msgSendUser = text.substring(0,text.indexOf(','));
     let sendMsg = text.substring(text.indexOf(',')+1,text.lastIndexOf(','));
     let sendDate = text.substring(text.lastIndexOf(',')+1);
+    let dateFormat = dateFormater(sendDate);
+
     console.log(msgSendUser);
     if(msgSendUser == document.getElementById('senderEmail').value){
-        messages.innerHTML += "<div class='right'><span>"+sendDate+"</span><div>"+sendMsg+"</div></div>";
+        messages.innerHTML += "<div class='right'><span>"+dateFormat+"</span><div>"+sendMsg+"</div></div>";
     }else{
         messages.innerHTML += "<div class='left'><div>"+sendMsg+"</div></div>";
     }
@@ -179,4 +181,11 @@ function writeResponse(text){
 function clearText(){
     console.log(messages.parentNode);
     messages.parentNode.removeChild(messages)
+}
+
+function dateFormater(sendDate){
+    let date = new Date(sendDate);
+    let dateFormat = (date.getMonth()+1)+"/"+date.getDate()+" "
+        +(date.getHours() < 12 ? "오전 "+date.getHours() : "오후 "+(date.getHours()-12))+":"+date.getMinutes();
+    return dateFormat
 }

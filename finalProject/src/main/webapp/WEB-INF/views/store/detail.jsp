@@ -63,14 +63,7 @@
 			  </button>
 			</div>
 		<div class="profileArea">
-			<c:choose>
-				<c:when test="${empty profile}">
-					<img src="../resources/image/기본 프로필.png" class="card-img-top" alt="기본 프로필 이미지">			
-				</c:when>
-				<c:otherwise>
-					<img src="/upload/profile/${fn:replace(profile.saveDir,'\\','/')}/${profile.uuid}_th_${profile.fileName}" alt="프로필 이미지">
-				</c:otherwise>
-			</c:choose>
+					<img src="${mainSrc }" class="card-img-top" alt="기본 프로필 이미지">			
 			<div class="writerInfo">
 				<b>${svo.proNickName } 님</b>
 				<p>${svo.proEmd }</p>
@@ -88,8 +81,7 @@
 			<h3>${svo.proTitle }</h3>
 			<span>${svo.proMenu }</span><p><!-- 날짜 --></p>
 			<h2><!-- 가격란 --></h2>
-			<%-- <textarea id="dynamicTextarea" readonly>${svo.proContent}</textarea> --%>
-			<div>${svo.proContent}</div>
+			<textarea id="dynamicTextarea" readonly>${svo.proContent}</textarea> 
 									
 			<!--지도 -->
 			<c:set value="${svo.proFullAddr }" var="adr1"></c:set>

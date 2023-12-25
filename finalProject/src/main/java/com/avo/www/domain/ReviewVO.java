@@ -22,8 +22,9 @@ public class ReviewVO {
 	private String reCategory; //카테고리(중고, 업체, 구인)
 	private String regAt;
 	private BigDecimal reTemp; //회원 온도
+	private String reSenderNick;
+	private long reBno;
 	//private String reUserId;
-	//private long reBno;
 	//private String reNickName;
 
 }

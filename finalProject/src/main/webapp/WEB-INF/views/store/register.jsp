@@ -21,7 +21,9 @@
 </head>
 <body>        
 <jsp:include page="../common/header.jsp" />
-<div class="imgLine"></div>
+<div class="storeBanner">
+     <div class="innerDiv"></div>
+</div>
 <div class="bodyContainer">
 <div class="formLine">
 <form action="/store/register" method="post" enctype="multipart/form-data">
@@ -92,6 +94,7 @@
 	    position: markerPosition, 
 	    image: markerImage //마커이미지 설정 
 	});
+	
 	//지도 위 마커 표시
 	marker.setMap(map);  	
 	
@@ -114,7 +117,7 @@
 	                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 	
 	                //결과값으로 받은 위치를 마커로 표시
-	                var marker = new kakao.maps.Marker({
+	                marker = new kakao.maps.Marker({
 	                    map: map,
 	                    position: coords,
 	                    image: markerImage
@@ -164,18 +167,22 @@
 <jsp:include page="../common/footer.jsp" />
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
+let selectedAddress = '';
 //지도 api
 document.getElementById('addr').addEventListener('click', ()=>{
     //카카오 지도 발생
     new daum.Postcode({
         oncomplete: function(data) { //선택시 입력값 세팅
             console.log(data.address);
+            selectedAddress = data.address;
             document.getElementById('addr').value = data.address;
             // 주소가 설정되자마자 검색 함수 호출
             searchAndDisplay();
+            checkFields();
         }
     }).open();
 });
+
 </script>
 <script type="text/javascript" src="/resources/js/storeBoardRegister.js"></script>
 <script type="text/javascript" src="/resources/js/abjustTextareaRows.js"></script>

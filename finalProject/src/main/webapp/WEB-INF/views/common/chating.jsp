@@ -85,24 +85,37 @@
 		height: calc(100% - 130px);
 		padding: 15px;
 	}
+	.messages > div{
+	    display: flex;
+	    align-items: flex-end;
+    }
+	.messages .left{
+		justify-content: flex-Start;
+	}
+	.messages .right{
+		justify-content: flex-end;
+	}
 	.messages > div > div{
 		display: inline-block;
 		padding: 10px;
 		box-sizing: border-box;
 		margin-bottom: 10px;
 		border-radius: 5px;
+		max-width: 360px;
 	}
 	.messages .left div{
-		margin-right: 50px;
+		margin-right: 10px;
 		box-shadow: 0 0 2px rgba(80,80,80,0.5);
-	}
-	.messages .right{
-		text-align: right;
 	}
 	.messages .right div{
 		background-color: #d3d3d3;
-		margin-left: 50px;
+		margin-left: 10px;
 		text-align: left;
+	}
+	.messages > div > span{
+		margin-bottom: 10px;
+		font-size: 12px;
+		color: #dfdfdf;
 	}
 	.inputArea{
 		position: absolute;
@@ -135,6 +148,55 @@
 	    border-radius: 20px;
 	    background-color: #93b336;
 	    color: #fff;
+	}
+	
+	/* 별점평가 부분 */
+	.myform fieldset, .myStar fieldset, .myformMini fieldset {
+    display: inline-block;
+    direction: rtl;
+	}
+
+	.myform input[type=radio], .myStar input[type=radio], .myformMini input[type=radio] {
+	    display: none;
+	}
+	.myform label, .myStar label, .myformMini label {
+	    font-size: 30px;
+	    color: transparent;
+	    text-shadow: 0 0 0 #f0f0f0;
+	}
+	.myform label:hover {
+	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+	}
+	.myform label:hover ~ label {
+	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+	}
+	.myform input[type=radio]:checked ~ label, .myStar input[type=radio]:checked ~ label, .myformMini  input[type=radio]:checked ~ label{
+	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+	}
+	
+	label[for^="starFill"]{
+		color: rgba(250, 208, 0, 0.99);
+	}
+	
+	label[for^="starEmpty"]{
+		color: #f0f0f0;
+	}
+	.myformMini label:hover{
+	text-shadow: ;
+		
+	}
+
+	.myformMini label{
+		font-size: 20px;
+	}
+	
+	.myformMini input {
+		border: none;
+		width: 390px;
+	}
+	#reListArea {
+		width: 90%;
+	    margin: 2% auto;
 	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -173,6 +235,7 @@
     	<div class="messageHeader">
     		<p>닉네임</p>
     		<small>글 제목</small>
+    		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">구매확정</button>
     	</div>
 	    <div id="messages" class="messages">
 	    </div>
@@ -187,6 +250,43 @@
 	        <button type="button" onclick="send();"><i class="bi bi-send"></i></button>
 	    </div>
     </div>
+</div>
+
+<!-- 리뷰 모달창 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">거래는 어떠셨나요?</h1>
+      </div>
+      <div class="modal-body">
+      			<div class="mb-3 myform">
+				<fieldset>
+					<input type="radio" name="rating" value="5" id="rate1">
+					<label for="rate1">★</label>
+					
+					<input type="radio" name="rating" value="4" id="rate2">
+					<label for="rate2">★</label>
+					
+					<input type="radio" name="rating" value="3" id="rate3">
+					<label for="rate3">★</label>
+					
+					<input type="radio" name="rating" value="2" id="rate4">
+					<label for="rate4">★</label>
+					
+					<input type="radio" name="rating" value="1" id="rate5">
+					<label for="rate5">★</label>
+				</fieldset>
+				
+				<input type="text" placeholder="후기를 작성해주세요." id="reContent">
+			</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 </body>
 <jsp:include page="../common/footer.jsp" />
