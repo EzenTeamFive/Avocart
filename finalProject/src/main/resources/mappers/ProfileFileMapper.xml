@@ -13,4 +13,13 @@
 	<delete id="proDelete">
 		delete from profile_file where pr_email = #{email};
 	</delete>
+	<select id="getProfileList" parameterType="java.util.List" resultType="com.avo.www.domain.FileVO">
+  		select * from profile_file 
+  		<if test="emailList != null and emailList.size() > 0">
+	    where pr_email IN
+	    <foreach collection="emailList" item="email" open="(" separator="," close=")">
+	      #{email}
+	    </foreach>
+	  </if>
+  	</select>
 </mapper>

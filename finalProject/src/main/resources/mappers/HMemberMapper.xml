@@ -42,4 +42,13 @@
   	<select id="selectBuyList" resultType="com.avo.www.domain.BuyItemVO">
   		select * from buy_item where buy_user_email = #{userEmail}
   	</select>
+  	<select id="getTemp" resultType="java.math.BigDecimal">
+  		select re_temp from review where receiver_email = #{email}
+  		order by reg_at desc limit 1;
+  	</select>
+	<select id="SelectReviewPaging" resultType="com.avo.www.domain.ReviewVO">
+  		select * from review 		
+  		where re_category = #{type} and receiver_email = #{userEmail}
+  		order by reg_at desc
+  	</select>
 </mapper>

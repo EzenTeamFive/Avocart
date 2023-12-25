@@ -46,6 +46,9 @@ document.addEventListener('change', (e) => {
             //Promise를 생성하고 배열에 추가
             const promise = new Promise((resolve) => {
                 var reader = new FileReader();
+                console.log('FileReader onload 이벤트 발생');
+                console.log('파일 이름:', file.name);
+                console.log('파일 크기:', file.size);
                 reader.onload = function (e) {
                     ul += `<li class="imageLi ${i === fileObj.length - 1 ? 'last-file' : ''}" id="${file.name}">`;
                     ul += `<div class="oneImg">`; // 마지막 파일일 때 클래스 추가
@@ -59,7 +62,6 @@ document.addEventListener('change', (e) => {
             });
             promises.push(promise);
         }
-		checkFields();
         //모든 Promise가 완료될 때까지 대기 후 ul 조작
         Promise.all(promises).then(() => {
             ul += `</ul>`;
@@ -68,34 +70,55 @@ document.addEventListener('change', (e) => {
             if (isOk == 0) { //첨부 불가능한 파일이 있다면
                 document.getElementById('regBtn').disabled = true;
             }
+            checkFields();
         });
     }
 });
 
 
+
 //파일 삭제버튼 메서드
 document.addEventListener('click', (e) => {
-    const fileInput = document.getElementById('files');
-    const fileObj = fileInput.files;
+    let fileInput = document.getElementById('files');
+    let fileObj = fileInput.files;
     let fileObjLength = fileObj.length;
+    let isOk = 1;
+    let newFileList;
 
     if (e.target.classList.contains('imageCancelBtn')) {
-        const filename = e.target.dataset.filename;
-        const liToRemove = document.getElementById(filename);
+        let filename = e.target.dataset.filename;
+        let liToRemove = document.getElementById(filename);
 
         if (liToRemove) {
             fileObjLength--;
             liToRemove.remove();
 
             // 새로운 FileList 생성
-            const newFileList = createFileListWithoutFileName(fileObj, filename);
+            newFileList = createFileListWithoutFileName(fileObj, filename);
 
             // 새로운 FileList를 input에 설정
             fileInput.files = newFileList;
         }
 
-        console.log(fileObjLength);
+        if (newFileList && newFileList.length > 0) {
+            for (let i = 0; i < newFileList.length; i++) {
+                let file = newFileList[i];
+                let validResult = fileValidation(file.name, file.size); // 0 or 1로 리턴
+                isOk *= validResult;
+            }
+        }else{
+            // 남아 있는 파일이 없으면 isOk를 1로 설정
+            isOk = 1;
+        }
+        //첨부 불가능한 파일이 있을 시
+        if(isOk == 0){
+            document.getElementById('regBtn').disabled = true;
+        }else{
+            document.getElementById('regBtn').disabled = false;
+            checkFields();
+        }
 
+        console.log(fileObjLength);
         if (fileObjLength == 0) {
             document.getElementById('fileZone').style = "display:none";
         }
@@ -127,32 +150,82 @@ function areMenusEmpty() {
     return menuList.length === 0;
 }
 
+let isRegister = false;
+
 //메뉴 추가, 삭제 버튼
 document.addEventListener('click', (e) => {
     let div = document.getElementById("menuZone");
-
     if (e.target.id === 'addMenu') {
+        isRegister = true;
         document.getElementById('menuZone').style = "display:block";
         // li 생성
         let li = document.createElement('li');
         li.className = "menuLi"; // class를 추가하는 부분
         li.innerHTML = `
-            메뉴<input type="text" name="menus" required="required">
-            가격<input type="text" name="prices" required="required"> 
-            설명<input type="text" name="explains" required="required"> 
+            메뉴<input type="text" name="menus" class="ms" data-status="new" required="required">
+            가격<input type="text" name="prices" class="ps" data-status="new" required="required"> 
+            설명<input type="text" name="explains" class="es" data-status="new" required="required"> 
             <button type="button" class="imageCancelBtn delMenu">X</button>
         `;
         // li 추가
         div.appendChild(li);
+        checkFields();
     } else if (e.target.classList.contains('delMenu')) {
         // li 삭제
         e.target.closest('li').remove();
+        checkFields();
     }
     
      if (areMenusEmpty()) {
         document.querySelector('.menuZone').style.display = 'none';
     }
+
 });
+
+// 각 메뉴의 input 값을 가져오는 함수
+function mInputs() {
+    let menuFields = document.querySelectorAll('.ms');
+    let menuInputs = [];
+
+    menuFields.forEach((input) => {
+        menuInputs.push(input.value);
+    });
+
+    return menuInputs;
+}
+
+function pInputs() {
+    let priceFields = document.querySelectorAll('.ps');
+    let priceInputs = [];
+
+    priceFields.forEach((input) => {
+        priceInputs.push(input.value);
+    });
+
+    return priceInputs;
+}
+
+function eInputs() {
+    let explainFields = document.querySelectorAll('.es');
+    let explainInputs = [];
+
+    explainFields.forEach((input) => {
+        explainInputs.push(input.value);
+    });
+
+    return explainInputs;
+}
+
+// 'input' 이벤트 리스너 내부
+document.addEventListener('input', (e) => {
+    if (e.target.classList.contains('ms') || e.target.classList.contains('ps') || e.target.classList.contains('es')) {
+        if (e.target.value.trim() !== '') {
+            e.target.dataset.status = 'edited';
+        }
+        checkFields();
+    }
+});
+
 
 //cs register js
 let categoryField = document.getElementById('proMenu');
@@ -170,7 +243,24 @@ function checkFields() {
     let title = titleField.value;
     let content = contentField.value;
 
-    if (category === '선택' || title.trim() === '' || content.trim() === '') {
+    let menuFields = document.querySelectorAll('.ms');
+    let priceFields = document.querySelectorAll('.ps');
+    let explainFields = document.querySelectorAll('.es');
+
+    let areMenuInputsValid = menuFields.length === 0 || Array.from(menuFields).some(menu => menu.value.trim() === '' || menu.dataset.status === 'new');
+    let arePriceInputsValid = priceFields.length === 0 || Array.from(priceFields).some(price => price.value.trim() === '' || price.dataset.status === 'new');
+    let areExplainInputsValid = explainFields.length === 0 ||  Array.from(explainFields).some(expain => expain.value.trim() === '' || expain.dataset.status === 'new');
+
+    if (
+        category === '선택' ||
+        title.trim() === '' ||
+        content.trim() === '' ||
+        selectedAddress.trim() === '' ||
+        areMenuInputsValid ||
+        arePriceInputsValid ||
+        areExplainInputsValid ||
+        isRegister === false 
+    ) {
         regButton.disabled = true;
     } else {
         regButton.disabled = false;

@@ -6,9 +6,14 @@
 }
 
 .storeBanner {
-	background: url(../image/joongo_banner.png) no-repeat center/cover;
     width: 100%;
-    height: 300px;
+   background-color: #effedf;
+}
+
+.innerDiv {
+	background-image: url(../image/storeImg.jpeg);
+ 	width: 1280px;
+ 	height: 350px;
 }
 
 .totalCnt {

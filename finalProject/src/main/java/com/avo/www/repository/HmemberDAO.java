@@ -1,8 +1,13 @@
 package com.avo.www.repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.avo.www.domain.BuyItemVO;
+import com.avo.www.domain.PagingVO;
+import com.avo.www.domain.ReviewVO;
 import com.avo.www.security.MemberVO;
 
 public interface HmemberDAO {
@@ -34,6 +39,11 @@ public interface HmemberDAO {
 	int mbDelete(String email);
 
 	// 멤버 페이지 리스트 출력
-	List<BuyItemVO> selectBuyList(String userEmail);	
+	List<BuyItemVO> selectBuyList(String userEmail);
+	
+	//회원 온도 
+	BigDecimal getTemp(String email);
+
+	List<ReviewVO> SelectReviewPaging(@Param("type")String type, @Param("userEmail")String userEmail);
 
 }
