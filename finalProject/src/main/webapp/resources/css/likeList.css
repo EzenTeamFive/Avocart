@@ -66,7 +66,7 @@
     color: gray;
 }
 .likeListContent .likeInfoArea {
-    padding: 20px;
+    padding: 20px 40px 20px 20px;
     left: 20px;
     position: relative;
 }
@@ -101,12 +101,10 @@
 	object-fit: cover;
     border-radius: 5px 0px 0px 5px;
 }
-
-
 .likeInfoAddr {
 	position: absolute;
 	bottom: 0px;
-	left: 150px;
+	left: 169px;
 	width: calc(100% - 150px);
     border-top: 1px solid #ededed;
     padding: 5px;
@@ -119,6 +117,12 @@
 .likeInfoArea span {
     display: block; 
     margin: auto;
+}
+.likeInfoArea .proTitle{
+    display: block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .likeHeart {
@@ -141,6 +145,7 @@
 .likeHeart span {
     color: lightgray;
 }
+
 section select {
 	border: 1px solid #d3d3d3;
 	padding: 6px;

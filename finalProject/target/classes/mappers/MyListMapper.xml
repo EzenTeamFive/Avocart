@@ -65,6 +65,7 @@
 		<if test="pgvo.type == 'undefined'">
 			SELECT * FROM community where cm_email = #{liUserId} AND cm_is_del = 'N'
 		</if>
+		limit #{pgvo.pageStart}, #{pgvo.qty}
 	</select>
 
 

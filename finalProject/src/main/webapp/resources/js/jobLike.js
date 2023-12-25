@@ -54,7 +54,6 @@ likeBtn.addEventListener('click', () => {
         }
          
         likeToServer(proBnoVal, memEmail, state);
-        window.location.reload();   
         console.log("proBnoVal>>" + proBnoVal + "/ memEmail>>" + memEmail + "/ state>>" + state);
 
     }

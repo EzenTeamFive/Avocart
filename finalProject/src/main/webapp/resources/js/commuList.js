@@ -13,10 +13,10 @@ document.getElementById('commuListSelect').addEventListener('change', ()=>{
 });
 
 // more 버튼 클릭 시 호출될 함수
-async function loadMore() {
+async function loadMoreCommuList() {
     console.log("더보기 클릭");
-    console.log(document.getElementById('commuList').dataset.page);
-    const currentPage = parseInt(document.getElementById('commuList').dataset.page);
+    console.log(document.getElementById('commuListmoreBtn').dataset.page);
+    const currentPage = parseInt(document.getElementById('commuListmoreBtn').dataset.page);
     console.log("currentPage >> " + currentPage);
 
     spreadCommuListFromServer(currentPage, commuListcategory);
@@ -37,7 +37,7 @@ async function getCommuListForServer(page, commuListcategory){
 
 
 //특정 게시글 thumbnail 가져오는 함수
-async function getThumbnailToServer(bno){
+async function getCommuThumbnailToServer(bno){
     try {
         const resp = await fetch('/community/thumb/'+bno);
         const result = await resp.json();
@@ -67,14 +67,14 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
                 // cmRegAt 날짜만 가져오기
                 let upDate = cm.cmRegAt.substring(0,10);
                 console.log("타입 " + result.pgvo.type + "으로 진입");
-                inner += `<a href="/community/detail?cmBno=${cm.cmBno}">`;
                 inner += `<div class="commuListContent">`;
+                inner += `<a href="/community/detail?cmBno=${cm.cmBno}">`;
                 document.getElementById('commuListCnt').innerText = `${result.totalCount}`;
 
                 let cmBno = cm.cmBno;
                 if (cm.cmFileCnt > 0) {
-                    let thumb = await getThumbnailToServer(cmBno);
-                    str += `<img class="thumbImg" src="/upload/community/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}"  alt="...">`;
+                    let thumb = await getCommuThumbnailToServer(cmBno);
+                    inner += `<img class="thumbImg" src="/upload/community/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}"  alt="...">`;
                 }else{
                      inner += `<img alt="commuList image error" src="../resources/image/logoimage.png">`
                 }
@@ -83,13 +83,23 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
                 inner += `<b>${cm.cmContent}</b>`;
                 inner += `<small>${upDate}</small>`;
                 inner += `</div>`;
-                inner += `<mark><i class="bi bi-geo-alt"></i>${cm.cmSido}${cm.cmSigg}${cm.cmEmd}</mark>`;
-                inner += `</div>`;
+                inner += `<mark><i class="bi bi-geo-alt"></i>${cm.cmSido} ${cm.cmSigg} ${cm.cmEmd}</mark>`;
+                inner += `<input type="hidden" value="${cm.cmBno}" class="cmBno">`;
+                inner += `<input type="hidden" value="${cm.cmEmail}" class="cmUserId">`;
+                console.log("result.pgvo.type >> " + result.pgvo.type);
+                console.log("result >> ", result);
                 inner += `</a>`;
+                // if(result.pgvo.type == 'commuLikeList'){
+                //     console.log("commu type like list");
+                //     inner += `<div class="likeHeart">`;
+                //     inner += `<i class="bi bi-heart-fill commulikeBtn" id="commulikeBtn"></i><span id="cmLikeCnt"> ${cm.cmLikeCnt}</span>`;
+                //     inner += `</div>`;
+                // }
+                inner += `</div>`;
+                
 
-
-                moreCommuListArea.innerHTML = inner;
             }
+            moreCommuListArea.innerHTML += inner;
 
         }else {
             if(commuListcategory='commuLikeList'){
@@ -101,14 +111,14 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
             }
         }
 
-        let moreBtn = document.getElementById('commuListmoreBtn');
+        let commuListmoreBtn = document.getElementById('commuListmoreBtn');
 
         
         if (result.pgvo.pageNo < result.endPage) {
-            moreBtn.style.visibility = 'visible';
-            moreBtn.dataset.page = page + 1;
+            commuListmoreBtn.style.visibility = 'visible';
+            commuListmoreBtn.dataset.page = page + 1;
         } else {
-            moreBtn.style.visibility = 'hidden';
+            commuListmoreBtn.style.visibility = 'hidden';
         }
 
     } catch (error) {
@@ -117,44 +127,37 @@ async function spreadCommuListFromServer(page = 1, commuListcategory){
     }
 }
 
-// // 찜하기버튼 클릭시 발생
-// document.addEventListener('click',(e)=>{
-//     console.log("찜클릭 " ,e.target);
+//좋아요 버튼 클릭시 취소처리
+if(commuListcategory == 'commuLikeList'){
+    console.log("commu List 좋아요 취소!");
 
-//     // 찜버튼 클릭시 state값 -1, 버튼의 class값 바꿔서 빈 하트로 변경
-//     if (e.target.classList.contains('likeBtn')) {
-//         let likeBtn = e.target.closest('.likeHeart');
-//         let proBnoVal = likeBtn.querySelector('.proBno').value;
-//         let liUserId = likeBtn.querySelector('.liUserId').value;
-//         console.log(proBnoVal + "/" + liUserId);
-//         likeToServer(proBnoVal, liUserId, -1); 
+    document.getElementById('commulikeBtn').addEventListener('click', ()=>{
+        let currentLikeCount = parseInt(document.getElementById('cmLikeCnt').innerText);
+        let bnoVal = likeBtn.querySelector('.cmBno').value;
+        let userEmail = likeBtn.querySelector('.cmUserId').value;
+        console.log(bnoVal + "/" + userEmail);
 
-//         spreadCommuListFromServer();
-//     }
+	        console.log("좋아요 취소"); 
+			document.getElementById('cmLikeCnt').innerText = currentLikeCount - 1;
+	        likeToServer(bnoVal, userEmail);
+})
+}
 
-// })
+//좋아요 정보 보내주기
+async function likeToServer(bno, email){ 
+    try{
+        const url = '/community/'+bno+'/'+email;
+        const config = {
+            method : "post"
+        };
+        const resp = await fetch(url, config);
+        const result = await resp.text();
+        return result; 
+        
+    }catch(err){
+        console.log(err);
+    }
+}
 
-
-// async function likeToServer(proBnoVal, memEmail, state) { 
-//     try {
-//         const url = "/job/list/like";
-//         const config = {
-//             method: "post",
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify({
-//                 liBno: proBnoVal,
-//                 liUserId: memEmail,
-//                 liStatus: state
-//             })
-//         };
-//         const resp = await fetch(url, config);
-//         const result = await resp.text();
-//         return result; 
-//     } catch (err) {
-//         console.log(err);
-//     }
-// }
 spreadCommuListFromServer();
 

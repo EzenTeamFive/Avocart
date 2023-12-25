@@ -76,7 +76,13 @@ document.getElementById('linkBtn').addEventListener('click',()=>{
 	let url = window.location.href;
 
     navigator.clipboard.writeText(url).then(() => {
-        alert("URL이 복사되었습니다.");
+		swal.fire({
+            text: "주소가 복사되었습니다!",
+            icon: "success",
+            showConfirmButton: false,
+            width: 400,
+            timer: 1000
+        });
     }).catch(err => {
         console.error('클립보드에 복사 실패:', err);
     });

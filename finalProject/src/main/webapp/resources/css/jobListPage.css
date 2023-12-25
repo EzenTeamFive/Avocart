@@ -2,25 +2,46 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px 140px;
+  padding: 0px 80px;
 }
 .titleLine {
-	margin: 100px 0px 30px;
-	width: 1000px;
-	height: 100px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	margin: 70px 0px 45px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 .titleLine h3 {
-	color: #606C38;
-	font-weight: bold;
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: end;
 }
-.titleLine section {
+.titleLineSub {
 	display: flex;
-	margin: 100px 0px;
-	justify-content: space-between;
-	width: 250px;
+    justify-content: end;
+    align-items: center;
+}
+.titleLineSub p {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 0;
+    color: #777;
+    font-size: 15px;
+
+}
+
+.titleLineSub select {
+	padding: 5px 20px 5px 5px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    background: url(../image/down_arrow.png) no-repeat 92% 50%/12px auto;
+    appearance: none;
+    outline: none;
+}
+.allMenu .menuSelect {
+    margin-right: 20px;
 }
 
 .jobListPart {
@@ -60,20 +81,23 @@
 	transition: color 0.3s, background 0.3s;
 }
 #moreBtn {
-/* 	background: #84a331; */
-	background: #69be47;
-	width: 160px;
-	height:37px;
-	border: none;
-	border-radius: 10px;
-	margin: 50px 0px 100px 0px;
-	color: #fff;
-	font-size: 15px;
-	font-weight: bold;
-	transition: color 0.3s, background 0.3s;
+    font-size: 16px;
+    width: 120px;
+    height: 50px;
+    padding-right: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    background: url(../image/down_arrow.png) no-repeat 80% 50% / 10px auto;
+    box-shadow: 0 0 5px rgba(110, 110, 110, 0.2);
+    transition: 0.2s;
+    margin: 40px 0px 88px 0px;
+}
+#moreBtn:hover {
+    background-color: #eee;
 }
 
-.jobListPart a button:hover , #moreBtn:hover {
+.jobListPart a button:hover {
 	color: #69be47;
 	background: #fff;
 	border: 2px solid #69be47;
@@ -84,8 +108,8 @@
 
 .jobListPart .jobListPartSub{
 	position: absolute;
-    bottom: 15%;
-    left: 14%;
+    top: 65%;
+    left: 20%;
 }
 
 .brdListArea {

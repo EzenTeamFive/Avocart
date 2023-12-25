@@ -10,7 +10,7 @@
     margin-bottom: 90px;
 }
 .joongoBanner{
-    background: url(../image/joongo_banner.png) no-repeat center/cover;
+    background: url(../image/joongo_banner.jpg) no-repeat center #fffde8;
     width: 100%;
     height: 350px;
 }
@@ -87,6 +87,9 @@
     font-size: 18px;
     font-weight: 300;
     margin-bottom: 15px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 .itemInfo b{
     font-size: 20px;
@@ -210,7 +213,7 @@ section.floatMenu button i.bi-heart-fill:not(.no-login){
 }
 .joongoDetailContainer > div:not(:last-child),
 form > div:not(:last-child){
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 .carousel-inner img {
     width: 100%;
@@ -362,10 +365,10 @@ form > div:not(:last-child){
 }
 .lastBtnArea button{
     background-color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     width: 100px;
-    height: 55px;
-    border-radius: 28px;
+    height: 60px;
+    border-radius: 30px;
 }
 .lastBtnArea button[type=submit]:hover{
     background-color: #84a331;
@@ -373,7 +376,7 @@ form > div:not(:last-child){
     transition: 0.2s;
 }
 .lastBtnArea button[type=button]:hover{
-    background-color: #aaa;
+    background-color: #999;
     color: #fff;
     transition: 0.2s;
 }
@@ -382,14 +385,14 @@ form > div:not(:last-child){
     color: #84a331;
 }
 .lastBtnArea button[type=button]{
-    border: 2px solid #aaa;
-    color: #aaa;
+    border: 2px solid #999;
+    color: #999;
 }
 .lastBtnArea button:disabled,
 .lastBtnArea button:disabled:hover{
-    background-color: #a43131;
-    border-color: #a43131;
-    color: #fff;
+    background-color: #fff;
+    border-color: indianred;
+    color: indianred;
 }
 /* lastBtnArea end */
 /* joongo board detail end */
@@ -402,7 +405,7 @@ form > div:not(:last-child){
     margin-bottom: 70px;
 }
 .bodyContainer > form{
-    width: 720px;
+    width: 700px;
     margin: 70px auto 90px;
 }
 
@@ -411,23 +414,6 @@ form > div.form > textarea{
     box-sizing: border-box;
     outline: none;
 }
-.bodyContainer > form > div.form > textarea:focus,
-.bodyContainer > form > div.form > select:focus,
-.bodyContainer > form > div.form > input:focus{
-    border: 2px solid #84a331;
-    outline: 0;
-}
-
-/* .imgLine{
-	width: 100%;
-	height: 250px;
-	background-color: #dbdf80;
-}
-
-.formLine{
-	margin: 40px 0;
-	width: 720px;
-} */
 #proFullAddr{
     width: 306px;
 }
@@ -440,7 +426,7 @@ form > div.form > textarea{
 .bodyContainer form label{
 	margin-bottom: 15px;
 	font-weight: 800;
-	font-size: 18px;
+	font-size: 16px;
 }
 
 .form > input, .form > select{
