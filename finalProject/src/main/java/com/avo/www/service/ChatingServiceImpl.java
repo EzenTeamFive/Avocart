@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +21,7 @@ import com.avo.www.repository.JobReviewDAO;
 import com.avo.www.repository.JoongoBoardDAO;
 import com.avo.www.repository.MemberDAO;
 import com.avo.www.repository.ProfileFileDAO;
+import com.avo.www.security.AuthMember;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -105,6 +109,10 @@ public class ChatingServiceImpl implements ChatingService {
 		ChatRoomVO crvo = chatdao.getOneChatRoom(chatBno);
 		rvo.setReceiverEmail(crvo.getChatGetUserId());
 		rvo.setSenderEmail(crvo.getChatSendUserId());
+
+        String msgSendNick = mdao.getNickFromEmail(crvo.getChatSendUserId());
+        rvo.setReSenderNick(msgSendNick);
+        log.info(">>>>>>>>>>>>>>>> msgSendNick >>>>>>> "+msgSendNick);
 		
 		// pbvo 정보 불러와서 rvo에 설정
 		ProductBoardVO pbvo = jbdao.getDetail(crvo.getChatBno());
