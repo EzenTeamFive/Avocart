@@ -5,12 +5,52 @@ let likeBtn = document.getElementById('likeBtn');
 //like 여부 지정하는 변수
 let state = 0;
 
+async function likeOrDislike(proBnoVal, memEmail) {
+    let likeData = {
+        liBno : proBnoVal,
+        liUserId : memEmail
+    };
+    
+    try {
+        const result = await updateLike(likeData);
+        
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+// //좋아요 버튼 클릭시
+// document.getElementById('likeBtn').addEventListener('click', ()=>{
+// 	let currentLikeCount = parseInt(document.getElementById('checkJobLikeCnt').innerText);
+
+// 	if(!(userEmail)){
+// 		alert('로그인을 해주세요.');
+// 	}
+
+// 	if(userEmail){
+// 	    if(document.getElementById('likeBtn').classList.contains('bi-heart')){ //안 누른 상태면
+// 	        console.log("좋아요 등록");
+//             state = 1;
+// 	        document.getElementById('likeBtn').classList.replace('bi-heart', 'bi-heart-fill');
+// 			document.getElementById('checkJobLikeCnt').innerText = currentLikeCount + 1;
+// 	        likeToServer(proBnoVal, memEmail, state);
+// 	    }else if(document.getElementById('likeBtn').classList.contains('bi-heart-fill')){ //이미 누른 상태면
+// 	        console.log("좋아요 취소"); 
+//             state = -1;
+// 	        document.getElementById('likeBtn').classList.replace('bi-heart-fill', 'bi-heart');
+// 			document.getElementById('checkJobLikeCnt').innerText = currentLikeCount - 1;
+//             likeToServer(proBnoVal, memEmail, state);
+
+// 	    }
+// 	}    
+// })
 
 
 // 찜하기
 likeBtn.addEventListener('click', () => {
-    let checkLikeCntElement = document.getElementById('checkLikeCnt');
-    let checkLikeCnt = parseInt(checkLikeCntElement.innerText); // 또는 innerHTML
+    let checkLikeCntElement = document.getElementById('checkJobLikeCnt');
+    let checkLikeCnt = parseInt(checkLikeCntElement.innerText);
+    
     
     console.log("checkLikeCnt>>" + checkLikeCnt);
     
@@ -27,19 +67,15 @@ likeBtn.addEventListener('click', () => {
             // 취소 시 status -1 변경
             state = -1;
             document.getElementById('likeBtn').classList.replace('bi-heart-fill', 'bi-heart');
-
+            document.getElementById('checkJobLikeCnt').innerText = checkLikeCnt - 1;
+            
         } else {
             state = 1;
             document.getElementById('likeBtn').classList.replace('bi-heart', 'bi-heart-fill');
+            document.getElementById('checkJobLikeCnt').innerText = checkLikeCnt + 1;
         }
         
-        // 보여지는 cnt 숫자조정
-        if(checkLikeCnt > 0){
-            document.getElementById('checkLikeCnt').innerText = checkLikeCnt = checkLikeCnt+state;
-        }
-         
         likeToServer(proBnoVal, memEmail, state);
-            
         console.log("proBnoVal>>" + proBnoVal + "/ memEmail>>" + memEmail + "/ state>>" + state);
 
     }

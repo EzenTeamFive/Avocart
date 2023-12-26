@@ -14,6 +14,7 @@
 <c:set value="${mvo }" var="mvo"></c:set>
 <c:set value="${backSrc }" var="backSrc"></c:set>
 <c:set value="${mainSrc }" var="mainSrc"></c:set>
+<c:set value="${temp }" var="temp"></c:set>
 <div class="bodyContainer">
 <form action="/hmember/checkPw" method="get">
 	<div class="profileContainer">
@@ -25,18 +26,18 @@
 		</div>
 		
       <!-- 페이지 유저와 로그인 유저가 일치해야만 수정, 삭제 -->
-      <sec:authorize access="isAuthenticated()">
+    <%--   <sec:authorize access="isAuthenticated()">
       <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
       <sec:authentication property="principal.mvo.memNickName" var="authNick" />
-      <c:if test="${mvo.memNickName eq authNick }">
+      <c:if test="${mvo.memNickName eq authNick }"> --%>
       <div id="editProfile">
          <ul id="btnContainer">
             <li><a id="editBtn">프로필 수정</a></li>
             <li><a id="delBtn">프로필 삭제</a></li>
          </ul>
       </div>      
-      </c:if>
-      </sec:authorize>		
+     <%--  </c:if>
+      </sec:authorize>	 --%>	
 		
       <div class="aboutMember">
       <span class="bold nick">${mvo.memNickName}</span>
@@ -52,7 +53,7 @@
 		<span class="memMsg1"><i class="bi bi-lock-fill"></i>본인인증<span class="black">완료</span></span>
 		<span class="memMsg2" id="userAddr"><i class="bi bi-geo-alt-fill"></i>주소<span class="black">완료</span></span>
 		<span class="memMsg3" id="calcDate"><i class="bi bi-calendar"></i>아보카트 가입일 일 전</span>
-		<span class="memMsg4"><i class="bi bi-thermometer-half"></i>회원 온도<span class="black">수정</span></span>
+		<span class="memMsg4"><i class="bi bi-thermometer-half"></i>회원 온도<span class="black">${temp}°C</span></span>
 		</div>
 		</div>		
 	</div>

@@ -15,7 +15,9 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
-<div class="imgLine"></div>
+<div class="imgLine">
+	<img alt="imgLine error" src="../resources/image/albaBanner.jpg">
+</div>
 
 <div class="bodyContainer">
 <div class="formLine">

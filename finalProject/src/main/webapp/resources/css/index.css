@@ -24,10 +24,11 @@
 	margin-top: 100px;
     width: 100%;
     height: 350px;
-    background-color: greenyellow;
+    background-color: #fffcdb;
+    text-align: center;
 }
 .secondBanner img{
-    width: 100%;
+    width: 1280px;
     height: 100%;
 }
 
@@ -56,9 +57,17 @@
 .ListLineMiddle{
     width: 100%;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     text-decoration: none;
+}
+.firstM{
+    gap: 0px 28.25px;
+}
+.secondM{
+    gap: 17.25px 17.25px;
+}
+.thirdM{
+    gap: 13.25px 13.25px;
 }
 
 /* 중고거래 라인 */
@@ -75,7 +84,6 @@
     text-decoration: none;
 }
 .joongo_item img{
-    background-color: green;
     width: 100%;
     height: 233px;
     border-radius: 5px 5px 0 0;
@@ -83,10 +91,6 @@
 }
 .joongo_item_detail{
     padding: 15px;
-   /* display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;*/
 }
 .joongo_item_detail p{
     margin: 0;
@@ -94,6 +98,11 @@
 .joongo_item_detail p:nth-child(1){
     font-size: 14px;
     margin-bottom: 5px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
 }
 .joongo_item_detail p:nth-child(2){
     font-size: 18px;
@@ -112,7 +121,6 @@
 .store_item{
     width: 415px;
     height: 160px;
-    margin-bottom: 20px;
     border: 1px solid #ededed;
     border-radius: 5px;
 }
@@ -155,17 +163,11 @@
 .store_item_detail p:nth-child(2){
     font-size: 14px;
     margin-bottom: 5px;
-    /* width: 265px; */
     overflow: hidden;
-    /* text-overflow: ellipsis; */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    /* white-space: normal; */
     word-break: break-all;
-    /* position: relative; */
-    /* top: 18px; */
-    /* font-size: 15px;*/
 }
 .store_item_detail p:nth-child(3){
     font-size: 12px;
@@ -204,6 +206,11 @@
 .job_item_detail p:nth-child(1){
     font-size: 14px;
     margin-bottom: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
 }
 .job_item_detail p:nth-child(2){
     font-size: 18px;
@@ -224,7 +231,6 @@
     border: 1px solid #ededed;
     border-radius: 5px;
     padding: 15px;
-    margin-bottom: 20px;
 }
 .community_list a{
     color: black;
@@ -232,17 +238,10 @@
 }
 .cm_first{
     margin-bottom: 5px;
-    /* width: 265px; */
     overflow: hidden;
-    /* text-overflow: ellipsis; */
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    /* white-space: normal; */
-    /* word-break: break-all; */
-    /* position: relative; */
-    /* top: 18px; */
-    /* font-size: 15px;*/
 }
 .cm_first span{
     color: green;
@@ -261,11 +260,11 @@
     color: gray;
 }
 .cm_second span:not(:nth-child(5)) {
-    margin-right: 5px;
+    margin-right: 7px;
 }
 .cm_second i{
     font-size: 12px;
-    margin-right: 2px;
+    margin-right: 4px;
 }
 .cmLikeListLine{
     margin-bottom: 130px;
@@ -276,15 +275,14 @@
 .appStoreLine{
     width: 100%;
     height: 400px;
-    background-color: green;
+    background-color: #d5efd4;
     font-family: 'suit';
     display: flex;
     justify-content: center;
 }
 .appStoreInner{
-    padding-top: 60px;
-    width: 900px;
-    background-image: url(../image/avocartLogo.png);
+    width: 1280px;
+    background-image: url(../image/앱배너.jpg);
     background-repeat: no-repeat;
     background-position: right;
     background-size: contain;
@@ -297,15 +295,30 @@
     font-size: 20px;
     margin-bottom: 50px;
 }
+.appBtns{
+    margin: 275px 165px;
+}
+.appBtns a{
+    text-decoration: none;
+}
 .appStoreInner button{
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
     margin-right: 10px;
+    background-color: #bee7bd;
+    color: #2b4d31;
 }
 
 
 /* 중고 카테고리 버튼 */
+.joongoMenuMiddle{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    text-decoration: none;
+}
 .joongoMenuBtn{
     width: 245px;
     height: 100px;
@@ -320,4 +333,22 @@
     text-align: center;
     font-size: 14px;
     margin-top: 5px;
+}
+#sofa{
+    height: 45%;
+}
+#sunglasses{
+    height: 30%;
+}
+#mac{
+    height: 60%;
+}
+#macc{
+    height: 45%;
+}
+#snack{
+    height: 58%;
+}
+.bi-three-dots{
+    font-size: 20px;
 }

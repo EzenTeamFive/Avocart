@@ -42,7 +42,7 @@ section.floatMenu button i.bi-heart-fill:not(.no-login){
 /* floatMenu end */
 .joongoDetailContainer{
     width: 700px;
-    margin: 70px auto 90px;
+    margin: 70px auto 100px;
     position: relative;
     font-family: 'suit';
 }
@@ -51,7 +51,7 @@ section.floatMenu button i.bi-heart-fill:not(.no-login){
 }
 .joongoDetailContainer > div:not(:last-child),
 form > div:not(:last-child){
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 .carousel-inner img {
     width: 100%;
@@ -67,7 +67,7 @@ form > div:not(:last-child){
     flex-wrap: wrap;
     align-items: center;
 }
-.profileArea > img{
+.profileArea > a > img{
     width: 50px;
     height: 50px;
     margin-right: 20px;
@@ -210,7 +210,7 @@ form > div:not(:last-child){
     background-color: #fff;
     font-size: 16px;
     width: 100px;
-    height: 55px;
+    height: 60px;
     border-radius: 28px;
 }
 .proBtnArea button[type=submit]:hover{

@@ -34,8 +34,8 @@ public class SocketController {
 		System.out.println("open session : " + session.getId());
 		session.getUserProperties().put("chatBno", bno);
 		try {
-			final Basic basic = session.getBasicRemote();
-			basic.sendText("연결 완료");
+//			final Basic basic = session.getBasicRemote();
+//			basic.sendText("연결 완료");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -95,11 +95,12 @@ public class SocketController {
 			
 			String senderId = chatvo.getMsgSendUserId();
 			String message = chatvo.getMsgContent();
+			String sendDate = chatvo.getMsgRegAt();
 			long bno = chatvo.getMsgRoomId();
 			
         	for(Session s : sessionList) {
         		if(bno == (long) s.getUserProperties().get("chatBno")) {
-        			s.getBasicRemote().sendText(senderId+","+message);
+        			s.getBasicRemote().sendText(senderId+","+message+","+sendDate);
         		}
         	}
         } catch (Exception e) {    

@@ -13,7 +13,9 @@
 <body>
 <jsp:include page="../common/header.jsp" />
 
-<div class="imgLine"></div>
+<div class="imgLine">
+	<img alt="imgLine error" src="../resources/image/albaBanner.jpg">
+</div>
 
 <div class="bodyContainer">
 
@@ -27,7 +29,7 @@
 	<input type="hidden" class="form-control" id="proNickName" name="proNickName" value="${authMvo.memNickName }">
 	  <div class="mb-3">
 	    <label for="proTitle" class="form-label">제목</label>
-	    <input type="text" class="form-control" name="proTitle" id="proTitle">
+	    <input type="text" class="titleInput" name="proTitle" id="proTitle" placeholder="제목을 입력해주세요.">
 	  </div>
 	  <div class="mb-3">
 	  <label for="jobMenu" class="form-label">카테고리</label>
@@ -83,7 +85,7 @@
 	  <!-- 첨부파일 표시 될 영역 -->
 	  </div>
   
-	  <p id="attention">※ 빈 칸을 작성해주세요.</p>
+	  
 	  <button type="reset" class="cancelBtn">취소</button>
 	  <button type="submit" class="regBtn" id="regBtn">작성</button>
 	</form>
@@ -92,8 +94,8 @@
 </div>
 
 
-<script type="text/javascript" src="/resources/js/jobBoardRegister.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="/resources/js/jobBoardRegister.js"></script>
 <jsp:include page="../common/footer.jsp" />
 
 </body>

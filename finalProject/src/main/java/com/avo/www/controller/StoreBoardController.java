@@ -205,16 +205,5 @@ public class StoreBoardController {
       return updateLike > 0? new ResponseEntity<String>(String.valueOf(updateLike), HttpStatus.OK) :
           new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);   
    }
-
-   @GetMapping("/reviews")
-   public void reviews() {}
    
-   @GetMapping(value = "/reviewPage/{page}/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
-   public ResponseEntity<PagingHandler> reviewList(@PathVariable("page") int page, 
-	         @PathVariable("type") String type
-         ){
-      PagingVO pgvo = new PagingVO(page, 8, type);
-      return new ResponseEntity<PagingHandler>(
-            ssv.getReviewList(pgvo), HttpStatus.OK);
-   }
 }

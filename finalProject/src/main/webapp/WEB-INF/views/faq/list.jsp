@@ -25,7 +25,7 @@
 		<input type="hidden" name="type" value="tc" autocomplete="off">
 		<label for="searchBox" class="searchBox">
 			<i class="bi bi-search searchIcon"></i>
-			<input type="text" name="keyword" id="searchBox" class="searchInput" placeholder="궁금하신 점을 검색해 주세요.">
+			<input type="text" name="keyword" id="searchBox" class="searchInput" placeholder="궁금하신 점을 검색해 주세요." autocomplete="off">
 		</label> 
 			
 		<button type="submit" class="searchBtn" style="display:none"></button>
@@ -63,7 +63,7 @@
 	</ul>
 </div>
 
-<sec:authorize access="isAuthenticated()">
+<sec:authorize access="hasAuthority('ROLE_USER')">
 <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
 	<div class="csButtons">
 		<a href="/cs/register">

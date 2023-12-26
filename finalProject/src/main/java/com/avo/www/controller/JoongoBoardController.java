@@ -81,7 +81,7 @@ public class JoongoBoardController {
         }
         log.info(">>>>>>>>>>>> pbvo 확인 >>>>>>>> "+pbvo);
         
-		int isOk = jbsv.register(new ProductBoardDTO(pbvo, null, flist));
+		int isOk = jbsv.register(new ProductBoardDTO(pbvo, null, flist, null));
 		log.info("등록 "+(isOk > 0 ? "성공" : "실패"));
 		
 		return "redirect:/joongo/list";
@@ -153,7 +153,7 @@ public class JoongoBoardController {
 			flist = fh.uploadFiles(files, "product");
 		}
 		
-		int isMod = jbsv.modify(new ProductBoardDTO(pbvo, null, flist));
+		int isMod = jbsv.modify(new ProductBoardDTO(pbvo, null, flist, null));
 		log.info("수정 "+(isMod > 0 ? "성공" : "실패"));
 		
 		return "redirect:/joongo/detail?proBno="+pbvo.getProBno();

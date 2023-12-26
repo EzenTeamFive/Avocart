@@ -14,4 +14,8 @@ public interface MemberService {
 
 	int hasPhone(String memPhone);
 
+	MemberVO fineEmail(String memPhone);
+
+	int findPw(String memEmail, String secretPw);
+
 }

@@ -18,7 +18,6 @@ document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
         //전송 function
         postCommentToServer(cmtData).then(result => {
             if(result == 1){
-                alert("답글 등록 성공");
                 window.location.reload();
             }
 
@@ -26,6 +25,20 @@ document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
         })
     }//if문
 })
+
+let cmtField = document.getElementById('cmtText');
+cmtField.addEventListener('input', cmtBtnDisabled);
+
+function cmtBtnDisabled(){
+    const cmtText = document.getElementById('cmtText').value;
+    const cmtPostBtn = document.getElementById('cmtPostBtn');
+
+    if(cmtText == "" || cmtText == null){
+        cmtPostBtn.disabled = true;
+    }else{
+        cmtPostBtn.disabled = false;  
+    }
+}
 
 //댓글 전송 메서드
 async function postCommentToServer(cmtData){

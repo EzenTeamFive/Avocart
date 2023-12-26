@@ -14,8 +14,9 @@
 <jsp:include page="../common/header.jsp" />
 <c:set value="${bdto.bvo}" var="bvo" />
 
+<a href="/community/modify?cmBno=${bvo.cmBno }">수정하기</a>
+<a href="/community/remove?cmBno=${bvo.cmBno }">삭제하기</a>
 <div class="bodyContainer" id="cmDetailContainer">
-
 <!-- 게시판 라인 -->
 <div class="boardLine">
 	<div class="boardMenuNameDiv">
@@ -24,10 +25,14 @@
 	<div class="top_line">
 		<div class="top_line_user">
 			<div class="userLeft">
-				<img id="cmUserProfile" class="cmUserProfile" alt="" src="/resources/image/기본 프로필.png">
+				<a href="/hmember/detail?memEmail=${bvo.cmEmail }">
+					<img id="cmUserProfile" class="cmUserProfile" alt="" src="/resources/image/기본 프로필.png">
+				</a>
 			</div>
 			<div class="userRight">
-				<b class="cmDetailNick">${bvo.cmNickName}</b>
+				<a href="/hmember/detail?memEmail=${bvo.cmEmail }">
+					<b class="cmDetailNick">${bvo.cmNickName}</b>
+				</a>
 				<p class="boardRegAt" id="onlyDate"></p>
 				<p class="userlocation"><i class="bi bi-geo-alt-fill cmWriterLocationIcon"></i>${bvo.cmEmd }</p>
 			</div>
@@ -94,9 +99,9 @@
 	<div class="commentWrite">
 		<input type="hidden" id="cmtEmail" value="${authEmail }">
 		<span class="cmtWriter" id="cmtWriter">${authNick }</span>
-		<textarea rows="1" class="cmtText" id="cmtText" placeholder="댓글을 남겨주세요"></textarea>
+		<textarea rows="1" cols="25" class="cmtText" id="cmtText" placeholder="댓글을 남겨주세요" spellcheck="false"></textarea>
 <!-- 		<input type="text" class="cmtText" id="cmtText" placeholder="댓글을 남겨주세요"> -->
-		<button type="button" id="cmtPostBtn" class="cmtPostBtn">등록</button>
+		<button type="button" id="cmtPostBtn" class="cmtPostBtn" disabled="disabled">등록</button>
 	</div>
 	</sec:authorize>	
 </div>

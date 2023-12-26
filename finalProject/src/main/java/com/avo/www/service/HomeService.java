@@ -22,4 +22,6 @@ public interface HomeService {
 
 	List<ProductBoardVO> getJobList();
 
+	int getReviewCnt(String proEmail);
+
 }

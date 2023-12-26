@@ -82,6 +82,14 @@ public class HomeController {
 		List<ProductBoardVO> list = hsv.getStoreList();
 		return new ResponseEntity<List<ProductBoardVO>>(list ,HttpStatus.OK);
 	}	
+	//동네업체 리뷰개수
+	@GetMapping(value = "/reviewCnt/{proEmail}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> reviewCnt(@PathVariable("proEmail")String proEmail){
+		log.info("proEmail >>>>> "+proEmail);
+		int reviewCnt = hsv.getReviewCnt(proEmail);
+		String reviewCntString = Integer.toString(reviewCnt);
+		return new ResponseEntity<String>(reviewCntString ,HttpStatus.OK);
+	}	
 	
 	//알바구인
 	@GetMapping(value = "/jobList", produces = MediaType.APPLICATION_JSON_VALUE)

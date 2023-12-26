@@ -8,9 +8,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/css/page.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 
@@ -24,14 +27,17 @@
       </div>
       <div class="searchSec">
          <form action="/common/search" method="post">
-            <label class="inputIconLabel" for="searchInput"><i class="bi bi-search inputIcon" id="inputIcon"></i></label>	
+            <label class="inputIconLabel" for="searchInput"><span class="material-symbols-outlined inputIcon"  id="inputIcon">search</span></label>	
             <input type="text" id="searchInput" placeholder="검색어를 입력해 주세요." autocomplete="off">
             <button type="button" class="deleteInputText deleteIconOff" id="textCancelBtn">X</button>
 
             <div class="searchMenu off" id="searchMenu">
-               <h2>상품 검색</h2>
+               <h2>검색어</h2>
+               <span class="material-symbols-outlined keywordIcon">
+navigate_next
+</span>
                <input type="text" id="keyword" name="keyword" placeholder="검색어를 입력해 주세요." autocomplete="off">
-               <button type="submit">
+               <button type="submit" style="display:none">
                   <i class="bi bi-search"></i>         
                </button>
                <h3>검색 기준</h3>
@@ -52,7 +58,8 @@
             </div>
          </form>
          <button class="myBtn my">
-	         <i id="my" class="bi bi-person my"></i>
+<!-- 	         <i id="my" class="bi bi-person my"></i> -->
+	         <span id="my" class="material-symbols-outlined my">account_circle</span>
          </button>
          <!-- 회원 메뉴 -->
          <sec:authorize access="hasAuthority('ROLE_USER')">
@@ -75,7 +82,6 @@
 			         <li><a href="/cs/adminList">1:1 문의 내역</a></li>
 			         <li><a href="/info/register">공지사항 작성</a></li>
 			         <li><a href="/faq/adminList">FAQ 수정</a></li>
-			         <li><a href="#">회원 관리</a></li>
 			         <li class="logoutLi"><a href="#" id="logoutLink">로그아웃</a></li>
 			         <form action="/member/logout" method="post" id="logoutForm">
 			         	<input type="hidden" name="memEmail" value="${authEmail }">

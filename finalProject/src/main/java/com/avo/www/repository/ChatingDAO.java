@@ -16,14 +16,18 @@ public interface ChatingDAO {
 
 	List<ChatRoomVO> getChatingList(String userId);
 
-	List<ChatMessageVO> getMsgList(long chatBno);
-
 	String selectEmailFromBno(long chatBno);
 
 	String selectOtherEmailFromBno(long chatBno);
 
 	long selectChatRoomBno(long chatBno);
 
-	List<ChatMessageVO> selectChatMsg(long bno);
+	String getLastMsg(long chatBno);
+
+	List<ChatMessageVO> getMsgList(long bno);
+
+	ChatRoomVO getOneChatRoom(long chatBno);
+
+	void setReviewed(long chatBno);
 
 }

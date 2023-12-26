@@ -198,4 +198,9 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 		return cfdao.getProfile(cmEmail);
 	}
 
+	@Override
+	public long topBno() {
+		return cbdao.getFlistBno();
+	}
+
 }

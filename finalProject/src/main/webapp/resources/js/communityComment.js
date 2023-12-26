@@ -5,7 +5,7 @@ document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
     const cmtEmail = document.getElementById('cmtEmail').value;
 
     if(cmtText == "" || cmtText == null){ //댓글을 안 적었을 때
-        alert("댓글을 입력해주세요.");
+        document.getElementById('cmtPostBtn').disabled = true;  
         document.getElementById('cmtText').focus();
         return false; //메서드 종료
     }else{
@@ -20,7 +20,7 @@ document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
         //전송 function
         postCommentToServer(cmtData).then(result => {
             if(result == 1){
-                alert("댓글 등록 성공");
+                //alert("댓글 등록 성공");
                 //댓글 등록 후 인풋 빈값으로 만들어주기
                 document.getElementById('cmtText').value = '';
             }
@@ -30,6 +30,20 @@ document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
         })
     }//if문
 })
+
+let cmtField = document.getElementById('cmtText');
+cmtField.addEventListener('input', cmtBtnDisabled);
+
+function cmtBtnDisabled(){
+    const cmtText = document.getElementById('cmtText').value;
+    const cmtPostBtn = document.getElementById('cmtPostBtn');
+
+    if(cmtText == "" || cmtText == null){
+        cmtPostBtn.disabled = true;
+    }else{
+        cmtPostBtn.disabled = false;  
+    }
+}
 
 //댓글 전송 메서드
 async function postCommentToServer(cmtData){
@@ -64,6 +78,20 @@ async function getCommentListFromServer(bno){ //페이징을 위해 나중에 pa
     }
 }
 
+// 특정 textarea의 줄 수를 조정하는 함수
+function textAreaRows(textarea) {
+    // 글 내용에서 줄바꿈 수를 세어 변수 저장
+    let lineCount = (textarea.value.match(/\n/g) || []).length + 1;
+	
+	textarea.rows = lineCount;
+}
+
+let cmtText = document.getElementById('cmtText');
+// 글을 입력할 때마다 adjustTextareaRows 함수 호출
+cmtText.addEventListener('input',()=>{
+    textAreaRows(cmtText);
+})
+
 //화면에 뿌리기
 function spreadCommentList(bno){
     getCommentListFromServer(bno).then(result => {
@@ -90,7 +118,7 @@ function spreadCommentList(bno){
                     str += `<div class="cmtUserLine">
                             <div><img id="cmtProfile-${cvo.cmtCno}" class="cmUserProfile" alt="" src="/resources/image/기본 프로필.png"> <p class="cmtNickName">${cvo.cmtNickName}</p> `;
                             communityProfile(cvo.cmtEmail, `cmtProfile-${cvo.cmtCno}`);
-                    if(cvo.cmtEmail == userEmail){
+                    if(cvo.cmtEmail == boardWriterEmail){
                         str += `<span class="boardWriterSpan">작성자</span>`; 
                     } 
                     str += `<span class="cmtDate"> ${cvo.cmtModAt}</span></div>`;
@@ -108,7 +136,7 @@ function spreadCommentList(bno){
                     }
                     str += `</div>`;
                     
-                    str += `<div class="cmtContentLine">${cvo.cmtContent}</div>`;
+                    str += `<textarea class="cmtContentLine" spellcheck="false">${cvo.cmtContent}</textarea>`;
 
                     if(userEmail){
                         str += `<div class="cmtReBtnLine"><button class="reCmtBtn no-${cvo.cmtCno}" data-cmtnickname="${cvo.cmtNickName}">답글쓰기</button></div>`;
@@ -136,7 +164,7 @@ function spreadCommentList(bno){
                             str += `<div class="cmtUserLine">
                                     <div><img id="reCmtProfile-${cvo.reCno}" class="cmUserProfile" alt="" src="/resources/image/기본 프로필.png"> <p class="cmtNickName">${cvo.reNickName}</p> `;
                                     communityProfile(cvo.reEmail, `reCmtProfile-${cvo.reCno}`);
-                            if(cvo.reEmail == userEmail){
+                            if(cvo.reEmail == boardWriterEmail){
                                 str += `<span class="boardWriterSpan">작성자</span>`; 
                             } 
                             str += `<span class="cmtDate"> ${cvo.reModAt}</span></div>`;
@@ -154,7 +182,7 @@ function spreadCommentList(bno){
                             }
                             str += `</div>`;
                             
-                            str += `<div class="cmtContentLine">${cvo.reContent}</div>`;
+                            str += `<textarea class="cmtContentLine" spellcheck="false">${cvo.reContent}</textarea>`;
                             
                             str += `</div></li></ul>`;
                             
@@ -173,6 +201,14 @@ function spreadCommentList(bno){
         // 마지막 댓글에 클래스 추가
         const lastComment = ul.lastElementChild;
         lastComment.classList.add('last-comment');
+        
+        // 모든 'answerArea' 클래스를 가진 textarea 요소 찾기
+        let textareas = document.querySelectorAll('.cmtContentLine');
+
+        // 각 textarea에 대해 adjustTextareaRows 함수 호출
+        textareas.forEach(function(textarea) {
+            textAreaRows(textarea);
+        });
         
     })
 }
@@ -244,7 +280,7 @@ document.addEventListener('click', (e)=>{
         editCommentToServer(cmtModData).then(result => {
             if(result == 1){
                 document.querySelector('.btn-close').click();
-                alert("댓글 수정 성공");
+                //alert("댓글 수정 성공");
             }
             spreadCommentList(bnoVal);
         })
@@ -257,7 +293,7 @@ document.addEventListener('click', (e)=>{
 
         removeCommentToServer(cnoVal).then(result => {
             if(result == 1){
-                alert("댓글 삭제 성공");
+                //alert("댓글 삭제 성공");
             }
             spreadCommentList(bnoVal);
         })
@@ -283,25 +319,35 @@ async function hasReply(cno){
 document.addEventListener('click', (e)=>{
     //답글쓰기 눌렀을 때
     if(e.target.classList.contains('reCmtBtn')){
-        console.log(e.target);
         let li = e.target.closest('li');
-        console.log(li);
         let cmtCno = li.dataset.cmtcno;
-        console.log(cmtCno);
         let button = li.querySelector('.reCmtBtn');
         button.remove();
-        //let cmtNickName = e.target.dataset.cmtnickname;
-
     
         let str = `<div class="reCommentWrite">`;
         str += `<input type="hidden" id="writerEmail" value="${userEmail}">
                 <input type="hidden" id="cmtCno" value=${cmtCno}>
                 <span class="cmtWriter" id="reWriter">${userNick}</span>
                 <textarea rows="1" class="cmtText reText" id="reText" placeholder="댓글을 남겨주세요"></textarea>
-                <button type="button" id="rePostBtn" class="cmtPostBtn rePostBtn">등록</button>
+                <button type="button" id="rePostBtn" class="cmtPostBtn rePostBtn" disabled="disabled">등록</button>
                 <button type="button" id="cancelBtn" class="cmtCancelBtn cancelBtn">취소</button></div>`; 
         
         li.innerHTML += str;
+
+        //답글작성버튼 disabled
+        let reCmtField = document.getElementById('reText');
+        reCmtField.addEventListener('input', reBtnDisabled);
+        
+        function reBtnDisabled(){
+            const reText = document.getElementById('reText').value;
+            const rePostBtn = document.getElementById('rePostBtn');
+        
+            if(reText == "" || reText == null){
+                rePostBtn.disabled = true;
+            }else{
+                rePostBtn.disabled = false;  
+            }
+        }
 
         //취소 버튼 눌렀을 때
         let cancelBtn = li.querySelector('.cancelBtn');
@@ -312,7 +358,14 @@ document.addEventListener('click', (e)=>{
             // 답글 쓰기 버튼을 다시 보이게 함
             li.appendChild(button);
         });
+
     }
+
+    let reText = document.getElementById('reText');
+    // 글을 입력할 때마다 adjustTextareaRows 함수 호출
+    reText.addEventListener('input',()=>{
+        textAreaRows(reText);
+    })
     
     //대댓글 등록 버튼 눌렀을 때
     if(e.target.classList.contains('rePostBtn')){
@@ -338,7 +391,7 @@ document.addEventListener('click', (e)=>{
             //전송 function
             postReplyToServer(reData).then(result => {
                 if(result == 1){
-                    alert("대댓글 등록 성공");
+                    // alert("대댓글 등록 성공");
                 }
 
                 //화면에 뿌리기
@@ -436,9 +489,9 @@ document.addEventListener('click', (e)=>{
         reEditToServer(reModData).then(result => {
             if(result == 1){
                 document.querySelector('.btn-close').click();
-                alert("대댓글 수정 성공");
+                //alert("대댓글 수정 성공");
             }
-            
+            spreadCommentList(bnoVal);
         })
 
     //삭제버튼 클릭시
@@ -451,9 +504,9 @@ document.addEventListener('click', (e)=>{
 
         reRemoveToServer(cnoVal, cmtCnoVal).then(result => {
             if(result == 1){
-                alert("대댓글 삭제 성공");
+                //alert("대댓글 삭제 성공");
             }
-            
+            spreadCommentList(bnoVal);
         })
     }
 })

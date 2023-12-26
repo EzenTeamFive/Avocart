@@ -16,7 +16,7 @@
 	<p class="siteTitle">회원가입</p>
 	<div class="inputDiv1">
 		<label for="email" class="labels">이메일 주소</label>
-		<input type="email" class="emailInput inputs" name="memEmail" id="email" placeholder="예) avocart@avocart.co.kr">
+		<input type="email" class="emailInput inputs" name="memEmail" id="email" placeholder="예) avocart@avocart.co.kr" autocomplete="off">
 		<button type="button" class="testBtn" id="testBtn" disabled="disabled">인증하기</button>
 	    <input type="text" id="testNum" class="testInput inputs" placeholder="인증번호를 입력하세요">
 		<p class="msg" style="display:none" id="emailMsg">이메일 주소를 정확히 입력해주세요.</p>

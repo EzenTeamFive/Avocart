@@ -34,5 +34,7 @@ public interface CommunityBoardService {
 
 	FileVO getProfile(String cmEmail);
 
+	long topBno();
+
 
 }

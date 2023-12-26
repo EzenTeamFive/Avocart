@@ -20,4 +20,10 @@ public interface JobReviewDAO {
 
 	int modify(ReviewVO rvo);
 
+	int insertReview(ReviewVO rvo);
+
+	int setTempForReview(@Param("temp")int temp, @Param("bno")int bno);
+
+	int getLastBno();
+
 }

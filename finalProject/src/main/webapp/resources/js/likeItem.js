@@ -52,3 +52,19 @@ document.addEventListener('click', (e)=>{
         likeItem(bnoVal, userEmail, 0);
     }
 })
+
+//현재 url 변수로 가져오기
+let detailPageUrl = window.location.href;
+
+function clip(){ 
+	//detailPageUrl 변수에 담긴 주소를
+  	navigator.clipboard.writeText(detailPageUrl).then(res=>{
+        swal.fire({
+            text: "주소가 복사되었습니다!",
+            icon: "success",
+            showConfirmButton: false,
+            width: 400,
+            timer: 1000
+        });
+	})
+}

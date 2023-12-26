@@ -31,7 +31,7 @@ document.getElementById('showPwBtn').addEventListener('click',(e)=>{
 })
 
 //이메일 정규표현식&중복체크
-let emailVal = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+let emailVal = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
 document.getElementById('email').addEventListener('input', ()=>{
     let email = document.getElementById('email').value;
     console.log(email);
@@ -314,20 +314,18 @@ document.addEventListener('click',(e)=>{
 
 //메일
 document.getElementById('testBtn').addEventListener('click',()=>{
-    alert('인증메일 발송');
+    swal.fire({
+        text: "인증메일 발송",
+        icon: "success",
+        showConfirmButton: false,
+        width: 400,
+        timer: 1000
+    });
     const email = document.getElementById('email').value;
     const emailMsg = document.getElementById('emailMsg');
     const emailMsg2 = document.getElementById('emailMsg2');
     const emailMsgDisplay = window.getComputedStyle(emailMsg).getPropertyValue('display');
     const emailMsg2Display = window.getComputedStyle(emailMsg2).getPropertyValue('display');
-    //인증번호 input 보이게 해주기
-    // if(emailMsgDisplay === 'none' && emailMsg2Display === 'none' && email !== ''){
-    //     document.getElementById('emailMsg3').style = "display:none";
-    //     document.getElementById('testNum').style = "display:inline-block";
-    // }else{
-    //     document.getElementById('emailMsg3').style = "display:inline-block";
-    //     document.getElementById('testNum').style = "display:none";
-    // }
     
     if(emailMsgDisplay === 'inline-block' || emailMsg2Display === 'inline-block'){
         document.getElementById('emailMsg3').style = "display:none";

@@ -9,17 +9,12 @@
 			<foreach collection="emailList" item="email" separator="UNION ALL">
 			  select count(*) 
 			  from review
-			  where sender_email  = #{email}
+			  where receiver_email  = #{email} and re_category = 'store'
 			</foreach>
 		</if>
 	</select>
-	<select id="getTotalCount" resultType="int">
-		select count(re_rno) from review
-  		where re_category = #{type}
+	
+	<select id="getReviewCnt" resultType="int">
+		select count(*) from review where receiver_email  = #{email} and re_category = 'store'
 	</select>
-	<select id="SelectReviewPaging" resultType="com.avo.www.domain.ReviewVO">
-  		select * from review 		
-  		where re_category = #{type}
-  		limit #{pageStart}, #{qty}
-  	</select>
 </mapper>

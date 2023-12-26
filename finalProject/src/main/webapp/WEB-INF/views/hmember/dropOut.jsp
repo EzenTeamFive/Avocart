@@ -34,7 +34,7 @@ body {
 	font-size: 50px;
 	font-weight: 800;
 	display: block;
-	color: #84a331;
+	color: #323f11;;
 	margin-bottom: 50px;
   	font-family: fugaz;
 }
@@ -156,11 +156,15 @@ async function deleteMemberAndClosePopup(email) {
 
         if (result === '1') {
             console.log("탈퇴 성공");
-            // 탈퇴 성공 후 기존 페이지로 이동
-           	//인덱스에서 파라미터 값 받기
-            window.opener.location.replace('http://localhost:8088/?dropOrNot=1');
-            // 팝업 창 닫기
             window.close();
+            window.opener.location.replace('http://localhost:8088/');
+            Swal.fire({
+                text: "탈퇴가 성공적으로 처리되었습니다.",
+                icon: "success",
+                showConfirmButton: false,
+                width: 400,
+                timer: 1000
+            });
         }
     } catch (err) {
         console.log(err);
@@ -195,13 +199,36 @@ window.onload = function () {
     });
     
     // 탈퇴
-    document.getElementById('deleteMemBtn').addEventListener('click', async () => {
+/*     document.getElementById('deleteMemBtn').addEventListener('click', async () => {
         try {
-            await deleteMemberAndClosePopup(email);
+            //await deleteMemberAndClosePopup(email);
+        	  Swal.fire({
+                  text: "탈퇴가 성공적으로 처리되었습니다.",
+                  icon: "success",
+                  showConfirmButton: false,
+                  width: 400,
+                  timer: 1000
+              });
+        } catch (err) {
+            console.log(err);
+        }
+    }); */
+
+    document.getElementById('deleteMemBtn').addEventListener('click', (e) => {
+        console.log('Button clicked'); // 확인용 로그
+        try {
+            Swal.fire({
+                text: "탈퇴가 성공적으로 처리되었습니다.",
+                icon: "success",
+                showConfirmButton: false,
+                width: 400,
+                timer: 1000
+            });
         } catch (err) {
             console.log(err);
         }
     });
+
 };
 </script>
 </html>

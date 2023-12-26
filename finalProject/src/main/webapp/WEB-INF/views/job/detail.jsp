@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>job register page</title>
+<title>job detail page</title>
 
 
 <link rel="stylesheet" href="/resources/css/page.css">
@@ -18,7 +18,15 @@
 <body>
 <jsp:include page="../common/header.jsp" />
 
+ 			<a  href="/job/modify?proBno=${jbdto.pbvo.proBno}"><button style="width: 300px; height: 300px;" class="">수정</button></a>
+			<a  href="/job/remove?proBno=${jbdto.pbvo.proBno}"><button style="width: 300px; height: 300px;" class=" ">삭제</button></a>
+			
 <div class="bodyContainer" >
+
+		<div class="floatMenu">
+			<p><i class="bi bi-heart${checkLike > 0 ? '-fill' : '' }" id="likeBtn"></i>찜하기<span id="checkLikeCnt"></span></p>
+			<p><i class="bi bi-clipboard"></i>링크복사</p>
+		</div> 
 	
 	<div class="innerContainer">
 	<!-- 로그인 한 회원 일 경우에만 principal 가져오기 -->
@@ -83,7 +91,36 @@
 	
 	<div class="jobTitleSecction">
 		<h1>${jbdto.pbvo.proTitle}</h1>
-		<p>${jbdto.pbvo.proReAt}</p>
+		<span>
+		    <c:choose>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'food'}">
+		            외식.음료
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'shop'}">
+		            매장관리.판매
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'service'}">
+		            서비스
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'office'}">
+		            사무직
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'product'}">
+		            생산.건설
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'driver'}">
+		            운전.배달
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'education'}">
+		            교육.강사
+		        </c:when>
+		        <c:when test="${jbdto.pbvo.proMenu eq 'etc'}">
+		            기타
+		        </c:when>
+		    </c:choose>
+		</span>
+
+		<p id="proReAt">${jbdto.pbvo.proReAt}</p> 
 	</div>
 	
 	<div class="jobInfoSecction">
@@ -94,36 +131,35 @@
  		<p><i class="bi bi-calendar-check"></i>근무요일</p>
 		<p><i class="bi bi-clock"></i>근무시간</p> 
 -->
-		
 		<div class="jobInfoDetail">
 			<p><strong><i class="bi bi-pencil"></i>상세내용<i class="bi bi-pencil"></i></strong></p>
-			<p>${jbdto.pbvo.proContent}</p>
-			<p>
-			조회수 ${jbdto.pbvo.proReadCnt} <i class="bi bi-heart${checkLike > 0 ? '-fill' : '' }" id="likeBtn"></i>찜 ${pbvo.proLikeCnt} <span id="checkLikeCnt">${checkLikeCnt }</span> 
-			</p>
+			<textarea id="dynamicTextarea" readonly>${jbdto.pbvo.proContent}</textarea> 
 		</div>
 		
-		<!-- 지도 넣으면 좋겠다. -->
 		<div id="map"></div>
-	</div>
-	
+		</div>
+
+		<div class="cntArea"> 
+			<p>관심</p><p id="checkJobLikeCnt">${jbdto.pbvo.proLikeCnt}</p>
+			<p>조회 ${jbdto.pbvo.proReadCnt }</p>
+		</div> 
 	<sec:authorize access="isAuthenticated()">
+	<div class="lastBtnArea">
 	    <c:if test="${memEmail eq jbdto.pbvo.proEmail}">
-			<a href="/job/modify?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn">수정</button></a>
-			<a href="/job/remove?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn">삭제</button></a>
+ 			<a href="/job/modify?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn">수정</button></a>
+			<a href="/job/remove?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn jobDelBtn">삭제</button></a> 
 		</c:if>
+	</div>
 	</sec:authorize>
-		
-	<hr>
-	
+		 
 	<!-- 후기 라인 -->
 	<div class="container">
 	<!-- 평가 -->
 	<span><strong>후기</strong></span>
-		<!-- 후기 등록 라인 -->
+		<!-- 후기 등록 라인 --> 
 		<div class="rePost">
 			<div class="reProfile">
-				<c:choose>
+				<c:choose> 
 					<c:when test="${empty memProfile}">
 						<img class="frofileImg" alt="frofile error" src="../resources/image/기본 프로필.png">			
 					</c:when>
@@ -132,8 +168,8 @@
 					</c:otherwise>
 				</c:choose>
 			    
-			    <input type="hidden" id="reUserId" value="${memEmail }">
-			    <input type="hidden" id="reNickName" value="${memNickName }">
+			    <input type="hidden" id="memEmail" value="${memEmail }">
+			    <input type="hidden" id="memNickName" value="${memNickName }">
 			    <strong><span id="reWriter">${memNickName}</span></strong>
 		    </div>
 			<sec:authorize access="isAuthenticated()">
@@ -157,6 +193,7 @@
 				
 				<input type="text" placeholder="후기를 작성해주세요." id="reContent">
 			    <button type="button" class="jobBtn" id="rePostBtn">등록</button>
+			    <p id="attention"><br></p>
 			</div>
 				
 
@@ -175,7 +212,7 @@
 		<!-- 후기 페이징 라인 -->
 		<div class="moreBtnArea">
 			<button type="button" id="moreBtn" data-page="1" 
-			 class="moreBtn jobBtn" style="visibility:hidden">더보기</button>
+			 class="moreBtn" style="visibility:hidden">더보기</button>
 		</div>
 		
 	</div>
@@ -215,8 +252,17 @@
     const proBnoVal = `<c:out value="${jbdto.pbvo.proBno}"/>`;
     const receiverEmail = `<c:out value="${jbdto.pbvo.proEmail}"/>`;
     const memEmail = `<c:out value="${memEmail}"/>`;
+    const memNickName = `<c:out value="${memNickName}"/>`;
     const proFullAddr = `${jbdto.pbvo.proFullAddr}`;
+    const checkLikeCntDetail = `${jbdto.pbvo.proLikeCnt }`;
     console.log(proFullAddr);
+    
+    // 날짜 시간부분 자르기
+    const proReAtValue = `<c:out value="${jbdto.pbvo.proReAt }"/>`;
+    const formattedDate = proReAtValue.substring(0, 10);
+    //변경된 값을 HTML에 출력
+    document.getElementById('proReAt').innerText = formattedDate;
+    
 </script>
 <!-- 좋아요 -->
 <script type="text/javascript" src="/resources/js/jobLike.js"></script>
