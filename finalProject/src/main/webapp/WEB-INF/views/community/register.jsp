@@ -33,7 +33,7 @@
 	
     <div class="form">
     	<p class="label">제목</p>
-		<input type="text" name="cmTitle" class="titleInput" id="csTitle" placeholder="제목을 입력해 주세요" required="required">
+		<input type="text" name="cmTitle" class="titleInput" id="csTitle" placeholder="제목을 입력해 주세요" required="required" autocomplete="off">
 	</div>
 
 	<div class="form">
@@ -69,7 +69,7 @@
 	
 	<div class="cmButtons">
 		<a href="/community/list"><button type="button" class="cancelBtn">취소</button></a>
-		<button type="submit" class="regBtn" id="regBtn" disabled="disabled">작성하기</button>
+		<button type="submit" class="regBtn" id="regBtn" disabled="disabled">작성</button>
 	</div>
 </form>
 </div>

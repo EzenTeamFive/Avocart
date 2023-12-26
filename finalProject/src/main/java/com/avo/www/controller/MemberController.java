@@ -56,6 +56,7 @@ public class MemberController {
 		int isJoin = msv.register(mvo);
 		log.info(">>>>> member register >> "+(isJoin>0? "성공":"실패"));
 		
+		m.addAttribute("isJoin", isJoin);
 		return "index";
 	}
 	

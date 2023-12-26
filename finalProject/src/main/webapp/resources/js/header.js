@@ -3,6 +3,9 @@ let path = window.location.pathname;
 console.log("path : "+path);
 let activePath = path.substring(path.indexOf('/')+1,path.lastIndexOf('/'));
 console.log("activePath : "+activePath);
+if(activePath == 'cs'){
+    activePath = 'faq';
+}
 
 // nav의 li 요소 가져오기
 let liList = document.querySelectorAll('nav ul li');

@@ -104,10 +104,10 @@
 .likeInfoAddr {
 	position: absolute;
 	bottom: 0px;
-	left: 169px;
+	left: 150px;
 	width: calc(100% - 150px);
     border-top: 1px solid #ededed;
-    padding: 5px;
+    padding: 5px 5px 5px 25px;
     font-size: 14px;
 }
 .likeInfoAddr span{

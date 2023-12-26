@@ -114,8 +114,8 @@
 		</a>
 	</div>
 	
-	<button type="button" id="commuListmoreBtn" onclick="loadMoreCommuList()" ><i class="bi bi-plus-circle-fill"></i> 게시글 더 보기</button>
-	
+<!-- 	<button type="button" id="commuListmoreBtn" onclick="loadMoreCommuList()" ><i class="bi bi-plus-circle-fill"></i> 게시글 더 보기</button>
+ -->	
 
 <script type="text/javascript" src="/resources/js/commuList.js"></script>
 

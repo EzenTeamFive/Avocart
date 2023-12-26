@@ -99,10 +99,10 @@ async function getMoreBoard(page = 1, menu) {
         let moreBtn = document.getElementById('moreBtn');
 
         if (result.pgvo.pageNo < result.endPage) {
-            moreBtn.style.visibility = 'visible';
+            moreBtn.style = 'display:inline-block';
             moreBtn.dataset.page = page + 1;
         } else {
-            moreBtn.style.visibility = 'hidden';
+            moreBtn.style = 'display:none';
         }
     } catch (error) {
         console.error(error);

@@ -5,7 +5,7 @@ document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
     const cmtEmail = document.getElementById('cmtEmail').value;
 
     if(cmtText == "" || cmtText == null){ //댓글을 안 적었을 때
-        alert("댓글을 입력해주세요.");
+        document.getElementById('cmtPostBtn').disabled = true;  
         document.getElementById('cmtText').focus();
         return false; //메서드 종료
     }else{
@@ -30,6 +30,20 @@ document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
         })
     }//if문
 })
+
+let cmtField = document.getElementById('cmtText');
+cmtField.addEventListener('input', cmtBtnDisabled);
+
+function cmtBtnDisabled(){
+    const cmtText = document.getElementById('cmtText').value;
+    const cmtPostBtn = document.getElementById('cmtPostBtn');
+
+    if(cmtText == "" || cmtText == null){
+        cmtPostBtn.disabled = true;
+    }else{
+        cmtPostBtn.disabled = false;  
+    }
+}
 
 //댓글 전송 메서드
 async function postCommentToServer(cmtData){
@@ -305,25 +319,35 @@ async function hasReply(cno){
 document.addEventListener('click', (e)=>{
     //답글쓰기 눌렀을 때
     if(e.target.classList.contains('reCmtBtn')){
-        console.log(e.target);
         let li = e.target.closest('li');
-        console.log(li);
         let cmtCno = li.dataset.cmtcno;
-        console.log(cmtCno);
         let button = li.querySelector('.reCmtBtn');
         button.remove();
-        //let cmtNickName = e.target.dataset.cmtnickname;
-
     
         let str = `<div class="reCommentWrite">`;
         str += `<input type="hidden" id="writerEmail" value="${userEmail}">
                 <input type="hidden" id="cmtCno" value=${cmtCno}>
                 <span class="cmtWriter" id="reWriter">${userNick}</span>
                 <textarea rows="1" class="cmtText reText" id="reText" placeholder="댓글을 남겨주세요"></textarea>
-                <button type="button" id="rePostBtn" class="cmtPostBtn rePostBtn">등록</button>
+                <button type="button" id="rePostBtn" class="cmtPostBtn rePostBtn" disabled="disabled">등록</button>
                 <button type="button" id="cancelBtn" class="cmtCancelBtn cancelBtn">취소</button></div>`; 
         
         li.innerHTML += str;
+
+        //답글작성버튼 disabled
+        let reCmtField = document.getElementById('reText');
+        reCmtField.addEventListener('input', reBtnDisabled);
+        
+        function reBtnDisabled(){
+            const reText = document.getElementById('reText').value;
+            const rePostBtn = document.getElementById('rePostBtn');
+        
+            if(reText == "" || reText == null){
+                rePostBtn.disabled = true;
+            }else{
+                rePostBtn.disabled = false;  
+            }
+        }
 
         //취소 버튼 눌렀을 때
         let cancelBtn = li.querySelector('.cancelBtn');
@@ -467,7 +491,7 @@ document.addEventListener('click', (e)=>{
                 document.querySelector('.btn-close').click();
                 //alert("대댓글 수정 성공");
             }
-            
+            spreadCommentList(bnoVal);
         })
 
     //삭제버튼 클릭시
@@ -482,7 +506,7 @@ document.addEventListener('click', (e)=>{
             if(result == 1){
                 //alert("대댓글 삭제 성공");
             }
-            
+            spreadCommentList(bnoVal);
         })
     }
 })

@@ -14,6 +14,7 @@ import com.avo.www.repository.JobBoardDAO;
 import com.avo.www.repository.JoongoBoardDAO;
 import com.avo.www.repository.ProductFileDAO;
 import com.avo.www.repository.StoreBoardDAO;
+import com.avo.www.repository.StoreReviewDAO;
 
 @Service
 public class HomeServiceImpl implements HomeService {
@@ -32,6 +33,9 @@ public class HomeServiceImpl implements HomeService {
 	
 	@Inject
 	private CommunityBoardDAO cbdao;
+	
+	@Inject
+	private StoreReviewDAO srdao;
 
 	@Override
 	public List<ProductBoardVO> getJoongoList() {
@@ -67,6 +71,11 @@ public class HomeServiceImpl implements HomeService {
 	@Override
 	public List<ProductBoardVO> getJobList() {
 		return jobdao.getJobList();
+	}
+
+	@Override
+	public int getReviewCnt(String proEmail) {
+		return srdao.getReviewCnt(proEmail);
 	}
 
 	

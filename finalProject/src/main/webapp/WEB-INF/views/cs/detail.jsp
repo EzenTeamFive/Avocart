@@ -54,7 +54,7 @@
 	<div class="commentWrite">
 		<input type="hidden" id="cmtEmail" value="${authEmail }">
 		<textarea class="cmtText csTextAreas" id="cmtText" placeholder="답변 작성" required="required"></textarea>
-		<button type="button" id="cmtPostBtn" class="cmtPostBtn">등록</button>
+		<button type="button" id="cmtPostBtn" class="cmtPostBtn" disabled="disabled">등록</button>
 	</div>
 </div>
 </c:if>

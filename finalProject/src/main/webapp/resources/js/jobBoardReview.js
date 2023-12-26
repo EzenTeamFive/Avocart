@@ -1,23 +1,39 @@
 //----------------------------------------------------------------------------
 // REVIEW POST SECTION
+document.addEventListener('input', (e) => {
+    console.log(e.target);
+    const rePostBtn = document.getElementById('rePostBtn');
+    rePostBtn.disabled = false;
+})
 
 document.getElementById("rePostBtn").addEventListener('click',()=>{
     
     const reContent = document.getElementById('reContent').value;
+    const rePostBtn = document.getElementById('rePostBtn');
      // 선택된 라디오 버튼을 찾기
      const selectedRating = document.querySelector('input[name="rating"]:checked');
 
      // 선택된 라디오 버튼의 값 가져오기 값이 없다면 
      const ratingValue = selectedRating ? selectedRating.value : undefined;
- 
-    if (reContent == null || reContent =='') {
-        alert('댓글 내용을 입력해주세요.');
+
+     const attention = document.getElementById('attention');
+    //  if(cmtText == "" || cmtText == null){
+    //     cmtPostBtn.disabled = true;
+    // }else{
+    //     cmtPostBtn.disabled = false;  
+    // }
+    if(ratingValue == undefined || ratingValue == ''){
+        // swal.fire('별점을 체크해주세요.');
+        attention.innerHTML="※ 별점을 체크해주세요.";
+        rePostBtn.disabled = true;
         return false;
-    } else if(ratingValue == undefined){
-        alert('별점을 체크해주세요.');
+    } else if(reContent == null || reContent =='') {
+        rePostBtn.disabled = true;
         return false;
     } else {
+        rePostBtn.disabled = false;
         // 객체에 전송할 값 담기
+        attention.innerHTML= '<br>';
         let reData ={
             reBno : proBnoVal,
             receiverEmail : receiverEmail,
@@ -32,7 +48,7 @@ document.getElementById("rePostBtn").addEventListener('click',()=>{
         postReviewToServer(reData).then(result => {
             console.log("result >> " ,result);
             if (parseInt(result)) {
-                alert("댓글 등록 성공");
+                // swal.fire("댓글 등록 성공");
                 // 댓글 등록 후 input content,rating 비워주기
                 document.getElementById('reContent').value='';
                 selectedRating.checked = false;
@@ -90,9 +106,7 @@ async function getReProfile(reWriter){
         
     } catch (error) {
         console.log(error);
-        
     }
-
 }
 
 
@@ -120,6 +134,7 @@ async function spreadReviewList(reBno=proBnoVal, page=1){  //시작은 1페이�
                         if (profile) {
                             li += `<img class="frofileImg" alt="review profile error" src="../upload/profile/${profile.saveDir.replaceAll('\\','/')}/${profile.uuid}_th_${profile.fileName}">`;
                         } else {
+                            li += `<img class="frofileImg" alt="review profile error" src="../resources/image/defaultImage.jpg">`;
                             console.error("프로필을 가져오지 못했습니다.");
                         }
                     } catch (error) {
@@ -154,9 +169,9 @@ async function spreadReviewList(reBno=proBnoVal, page=1){  //시작은 1페이�
                 li+= `<input type="text" value="${rvo.reContent}" class="reContent" readonly="readonly">`;
                 li+= `<input type="hidden" value="${rvo.reRno}" class="reRno">`;
                 li+= `<input type="hidden" value="${rvo.senderEmail}" class="senderEmail ">`;
-                li+= `<input type="hidden" value="${receiverEmail}" class="receiverEmail ">`;
+                li+= `<input type="hidden" value="${rvo.receiverEmail}" class="receiverEmail ">`;
                 // 작성자와 로그인한 mem이 일치하는 경우에만 수정,삭제버튼 보이게 설정
-                if(rvo.reUserId == memEmail && memEmail!=""){
+                if(rvo.senderEmail == memEmail && memEmail!=""){
                 li+= `<button type="button" class="mod jobBtn-light">수정</button>`;
                 li+= `<button type="button" class="del jobBtn-light">삭제</button>`;
                 li+= `</div>`;
@@ -243,20 +258,21 @@ document.addEventListener('click',(e)=>{
     // target의 class가 'del'일 경우 삭제
     if(e.target.classList.contains('del')){
         const reRno = e.target.closest('li').querySelector('.reRno').value;
-        const reWriter = e.target.closest('li').querySelector('.reUserId').innerText;
+        const reWriter = e.target.closest('li').querySelector('.senderEmail').value;
+        console.log("reRno >> " + reRno + "// reWriter >> " + reWriter);
         // 삭제를 시도하는 mem과 reUser의 ID 동일한지 확인
         eraseReviewAtServer(reRno, reWriter).then(result=>{
             if(result == 1){
-                alert('댓글 삭제');
+                // swal.fire('댓글 삭제');
                 spreadReviewList();
             }else if(result == 0){
-            	alert('작성자가 일치하지 않습니다.');
+            	// swal.fire('작성자가 일치하지 않습니다.');
             }
         })
     // target의 class가 'mod' 일 경우 수정
     }else if (e.target.classList.contains('mod')) {
         const rnoVal = e.target.closest('li').querySelector('.reRno').value;
-        const reWriter = e.target.closest('li').querySelector('.reUserId').innerText;
+        const reWriter = e.target.closest('li').querySelector('.senderEmail').value;
         
 
         // content input 태그의 readonly 속성을 제거하여 수정 가능하게 변경
@@ -280,7 +296,7 @@ document.addEventListener('click',(e)=>{
             // 수정 된 정보 객체에 담기
             const reDataMod = {
                 reRno: rnoVal,
-                reUserId: reWriter,
+                senderEmail: reWriter,
                 reContent: reModContent.value,
                 reScore: e.target.closest('li').querySelector(`input[name="rating-${rnoVal}"]:checked`).value
             };

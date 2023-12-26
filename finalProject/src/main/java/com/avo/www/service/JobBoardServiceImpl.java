@@ -53,21 +53,27 @@ public class JobBoardServiceImpl implements JobBoardService {
 //		수정시 1개씩 조회올라가는거 방지
 		jdao.readCount(jbdto.getPbvo().getProBno(),-2);
 		
-		int isOk = jdao.modify(jbdto.getPbvo());
+		int isUp = jdao.modify(jbdto.getPbvo());
+		// 파일이 없을 경우 생략
 		if(jbdto.getFlist() == null) {
-			isOk *= 1;
-			return isOk;
+			isUp *= 1;
+			return isUp;
 		}
 		
-		if(isOk > 0 && jbdto.getFlist().size() > 0) {
+		if(isUp > 0 && jbdto.getFlist().size() > 0) {
 			long proBno = jbdto.getPbvo().getProBno();
+			int proFileCnt = jbdto.getFlist().size(); // proFileCnt 계산
+
+			log.info("profilecnt >>> " + proFileCnt);
+			
 			for(FileVO fvo : jbdto.getFlist()) {
 				fvo.setBno(proBno);
-				isOk *= fdao.insertFile(fvo);
+				isUp *= fdao.insertFile(fvo);
 			}
+			isUp *= jdao.updateFileCnt(proFileCnt,proBno);
 		}
 		
-		return isOk;
+		return isUp;
 	}
 	
 	
@@ -93,11 +99,11 @@ public class JobBoardServiceImpl implements JobBoardService {
 			int proFileCnt = jbdto.getFlist().size(); // proFileCnt 계산
 
 			log.info("profilecnt >>> " + proFileCnt);
-			jdao.updateFileCnt(proFileCnt);
 			for(FileVO fvo : jbdto.getFlist()) {
 				fvo.setBno(bno);
 				isUp *= fdao.insertFile(fvo);
 			}
+			isUp *=jdao.updateFileCnt(proFileCnt,bno);
 		}
 		
 		

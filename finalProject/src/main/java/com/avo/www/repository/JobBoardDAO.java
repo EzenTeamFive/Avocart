@@ -38,7 +38,7 @@ public interface JobBoardDAO {
 
 	List<ProductBoardVO> getMoreList(PagingVO pgvo);
 
-	void updateFileCnt(int proFileCnt);
+	int updateFileCnt(@Param("proFileCnt")int proFileCnt,@Param("bno") long bno);
 
 	List<ProductBoardVO> getJobList();
 

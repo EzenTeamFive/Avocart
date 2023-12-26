@@ -336,6 +336,13 @@
 </div>
 <jsp:include page="./common/footer.jsp" />
 
+<script type="text/javascript">
+let isJoin = `<c:out value="${isJoin}"/>`;
+console.log(isJoin);
+if(parseInt(isJoin) == 1){
+	swal.fire('', '회원가입이 완료되었습니다.','success')
+}
+</script>
 <script type="text/javascript" src="/resources/js/index.js"></script>
 </body>
 </html>

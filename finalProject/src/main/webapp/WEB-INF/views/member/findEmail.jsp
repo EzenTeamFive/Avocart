@@ -95,7 +95,7 @@
 	    font-size: 14px;
 	}
 	.buttonsDiv a:nth-child(1) button {
-	    border: 1px solid #ededed;
+	    border: 1px solid #afafaf7d;
     	background: none;
 	}
 	.buttonsDiv a:nth-child(2) button {

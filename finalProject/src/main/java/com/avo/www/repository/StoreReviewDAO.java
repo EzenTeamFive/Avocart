@@ -11,4 +11,6 @@ public interface StoreReviewDAO {
 
 	List<Integer> getAllReviewCnt(@Param("emailList") List<String> emailList);
 
+	int getReviewCnt(String proEmail);
+
 }
