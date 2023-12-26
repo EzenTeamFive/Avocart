@@ -18,8 +18,9 @@ import lombok.ToString;
 public class ChatRoomDTO {
 	
 	private String msgSendUserId;
-	private String msgGetUserNick;
+	private String msgSendUserNick;
 	private String msgGetUserEmail;
+	private String msgGetUserNick;
 	private ChatRoomVO crvo;
 	private ProductBoardVO pbvo;
 	private String lastMsg;

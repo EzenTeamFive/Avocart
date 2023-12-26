@@ -11,8 +11,8 @@
   	</insert>
   	<!-- 채팅 후기 입력 -->
   	<insert id="insertReview">
-  		insert into review(receiver_email, sender_email, re_content, re_score, re_category, re_bno)
-  		values(#{receiverEmail}, #{senderEmail}, #{reContent}, #{reScore}, #{reCategory}, #{reBno})
+  		insert into review(receiver_email, sender_email, re_content, re_score, re_category, re_bno, re_sender_nick)
+  		values(#{receiverEmail}, #{senderEmail}, #{reContent}, #{reScore}, #{reCategory}, #{reBno}, #{reSenderNick})
 
   	</insert>
   	<select id="selectOntBnoTotalCount" resultType="int">
