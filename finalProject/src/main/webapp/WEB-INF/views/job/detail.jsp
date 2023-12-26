@@ -18,9 +18,7 @@
 <body>
 <jsp:include page="../common/header.jsp" />
 
- 			<a  href="/job/modify?proBno=${jbdto.pbvo.proBno}"><button style="width: 300px; height: 300px;" class="">수정</button></a>
-			<a  href="/job/remove?proBno=${jbdto.pbvo.proBno}"><button style="width: 300px; height: 300px;" class=" ">삭제</button></a>
-			
+
 <div class="bodyContainer" >
 
 		<div class="floatMenu">

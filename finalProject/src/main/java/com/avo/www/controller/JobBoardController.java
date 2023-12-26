@@ -155,8 +155,7 @@ public class JobBoardController {
 		
 		re.addAttribute("proBno", pbvo.getProBno());
 		re.addFlashAttribute("isMod", isOk);
-		return "redirect:/job/list";
-//		return "redirect:/job/detail";
+		return "redirect:/job/detail";
 	}
 	
 	

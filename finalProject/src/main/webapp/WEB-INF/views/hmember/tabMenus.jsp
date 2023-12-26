@@ -19,7 +19,7 @@
 }
 .tabMenu li button{
 	border: 0;
-	background-color: #ededed;
+	background-color: #ededed52;
 	width: 100%;
 	height: 60px;
 	border-bottom: 1px solid #cdcdcd;

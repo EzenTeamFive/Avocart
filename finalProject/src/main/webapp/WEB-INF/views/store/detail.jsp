@@ -191,15 +191,15 @@
 			<p id="likeCount">관심 ${svo.proLikeCnt }</p><p>조회 ${svo.proReadCnt }</p>
 		</div>
 		
-	<%-- 	<sec:authorize access="isAuthenticated()">
-			<c:if test="${svo.proEmail eq authEmail}"> --%>
+		<sec:authorize access="isAuthenticated()">
+			<c:if test="${svo.proEmail eq authEmail}"> 
 				<div class="proBtnArea">
 					<!-- 글 작성자에게만 띄울 버튼 -->
 					<a href="/store/modify?bno=${svo.proBno }"><button type="submit">수정</button></a>
 					<a href="/store/remove?bno=${svo.proBno }"><button type="button" id="delBtn">삭제</button></a>
 				</div>
-	<%-- 		</c:if>
-		</sec:authorize> --%>
+	 		</c:if>
+		</sec:authorize> -
 		</div>
 		
 	</div>

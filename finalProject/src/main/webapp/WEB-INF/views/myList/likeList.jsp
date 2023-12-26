@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="titleLine">
-		<h4>찜 <span style="color: red" id="likeCnt"></span></h4>
+		<h4>찜 <span id="likeCnt"></span></h4>
 
 		<section>
 			<div class="allMenu">

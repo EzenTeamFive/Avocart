@@ -87,7 +87,7 @@
 </head>
 <body>
 	<div class="titleLine">
-		<h4>동네 생활 <span style="color: red" id="commuListCnt"></span></h4>
+		<h4>동네 생활 <span  id="commuListCnt"></span></h4>
 
 		<section>
 			<div class="commuListMenu">

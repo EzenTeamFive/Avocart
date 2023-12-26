@@ -95,7 +95,7 @@ function getReviewList(type = 'joongo') {
                             </div>
                         </div>
                     <div class="textContainer">                                                     
-                        <textarea cols="50" rows="3" onclick="onFitSizeOfTextArea();" class="reviewContent" readonly="readonly">${rvo.reContent}</textarea>
+                        <textarea cols="50" rows="3" class="reviewContent" readonly="readonly">${rvo.reContent}</textarea>
                     </div>
                 </div>
             `;                    

@@ -137,9 +137,9 @@
 //         let userEmail = likeBtn.querySelector('.cmUserId').value;
 //         console.log(bnoVal + "/" + userEmail);
 
-// 	        console.log("좋아요 취소"); 
-// 			document.getElementById('cmLikeCnt').innerText = currentLikeCount - 1;
-// 	        likeToServer(bnoVal, userEmail);
+//            console.log("좋아요 취소"); 
+//          document.getElementById('cmLikeCnt').innerText = currentLikeCount - 1;
+//            likeToServer(bnoVal, userEmail);
 // })
 // }
 
@@ -237,4 +237,3 @@ function getCommuList(type = 'commuWriterList'){
         }
     })
 }
-
