@@ -23,7 +23,7 @@
 		margin: 20px 24px 0 24px;	
 	}
 	.boardMenuName{
-	    background-color: #84a331;
+	    background-color: #63a44a;
 	    padding: 6px 10px;
 	    border-radius: 22px;
 	    margin: 0;
@@ -215,7 +215,7 @@
 		font-size: 14px;
 	}
 	.boardWriterSpan{
-		background-color: #93b336b8;
+		background-color: #63a44aad;
 		color: white;
 		border-radius: 10px;
 		padding: 4px;
@@ -316,7 +316,7 @@
 	}
 	.last-comment li:last-child{
 		border-bottom: none;
-		padding-bottom: 0;
+		padding-bottom: 0px;
 	}
 	
 	/* 바닥 버튼 라인 */
@@ -332,7 +332,7 @@
 	.listBtn, .topBtn{
 		border: none;
 		border-radius: 5px;
-		background-color: #93b336;
+		background-color: #63a44a;
 		padding: 8px 13px;
 		color: white;
 		font-size: 14px;
@@ -341,6 +341,7 @@
 		border: none;
 		resize: none;
 		margin: 5px 0;
+		width: 100%;
 	}
 	.cmContent:focus{
 		outline: none;

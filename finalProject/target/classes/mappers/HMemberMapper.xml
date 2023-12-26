@@ -22,10 +22,10 @@
 		update community_re_cmt set re_nick_name = #{memNickName} where re_email = #{memEmail}
 	</update>
 	<update id="modifyPwEmpty">
-		update member set mem_nick_name = #{memNickName}, mem_sido = #{memSido}, mem_sigg = #{memSigg}, mem_emd = #{memEmd}, mem_mod_at = now() where mem_email = #{memEmail}
+		update member set mem_nick_name = #{memNickName}, mem_sido = #{memSido}, mem_sigg = #{memSigg}, mem_emd = #{memEmd}, mem_mod_at = now() , mem_phone = #{memPhone} where mem_email = #{memEmail}
   	</update>
   	<update id="modify">
-  		update member set mem_pw = #{memPw}, mem_nick_name = #{memNickName}, mem_sido = #{memSido}, mem_sigg = #{memSigg}, mem_emd = #{memEmd}, mem_mod_at = now() where mem_email = #{memEmail}
+  		update member set mem_pw = #{memPw}, mem_nick_name = #{memNickName}, mem_sido = #{memSido}, mem_sigg = #{memSigg}, mem_emd = #{memEmd}, mem_mod_at = now(), mem_phone = #{memPhone} where mem_email = #{memEmail}
   	</update>	
   	<update id="jjsDelete">
   		update product set pro_is_del = 'Y' where pro_email = #{email}

@@ -16,10 +16,19 @@ document.getElementById('findBtn').addEventListener('click',()=>{
 
     getEmailFromServer(phoneNum).then(result => {
         console.log(">> 결과 >> "+result);
+        let id = result.memEmail.slice(0, result.memEmail.indexOf("@")-1);
+        console.log("id > "+id);
+        let newId = id.slice(0,1).padEnd(id.length, "*");
+        console.log("newId > "+newId);
+        let mailAddr = result.memEmail.slice(result.memEmail.indexOf("@")-1);
+        console.log("mailAddr > "+mailAddr);
+        let newEmail = newId+mailAddr;
+        console.log("newEmai l> "+newEmail);
+
         if(result !== undefined){ //가입된 번호면
             document.getElementById('inner1').classList.add("off");
             document.getElementById('inner2').classList.remove("off");
-            document.getElementById('findedEmail').innerHTML = result.memEmail;
+            document.getElementById('findedEmail').innerHTML = newEmail;
 
         }else{ //가입 안된 번호면
             swal.fire("", "일치하는 사용자 정보를 찾을 수 없습니다.", "error");

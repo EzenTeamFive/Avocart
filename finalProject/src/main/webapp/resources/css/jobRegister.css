@@ -10,7 +10,9 @@
 	justify-content: center;
 	flex-wrap: wrap;
 }
-
+.form-control {
+	resize: none;
+}
 .imgLine{
 	width: 100%;
 	min-width: 1280px;
@@ -132,11 +134,12 @@
 .imgOk, .imgNo{
 	width:50px;
 	text-align: center;
-	margin-left: 5px;
     border-radius: 10px;
     font-size: 13px;
     padding: 4px 5px;
     color: white;
+    position: absolute;
+    right: 8%;
 }
 .imgOk{
 	background-color: #84a331;

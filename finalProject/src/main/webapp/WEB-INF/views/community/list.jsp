@@ -16,7 +16,7 @@
 	</div>
 </div>
 
-<div class="bodyContainer">
+<div class="bodyContainer" id="bdCt">
 
 <div class="CommunityCategory">
 	<a href="/community/list" class="menu cmActive">전체</a>
@@ -64,8 +64,8 @@
 		</div>
 	</div>
 </div>
-<div>
-	<button class="moreBtn" type="button" id="moreBtn" data-page="1" style="visiblity:hidden">더보기</button>
+<div class="moreDiv">
+	<button class="moreBtn" type="button" id="moreBtn" data-page="1" style="display:none">더보기</button>
 </div>
 
 </div>

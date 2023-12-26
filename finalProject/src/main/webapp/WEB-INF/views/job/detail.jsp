@@ -18,10 +18,13 @@
 <body>
 <jsp:include page="../common/header.jsp" />
 
+ 			<a  href="/job/modify?proBno=${jbdto.pbvo.proBno}"><button style="width: 300px; height: 300px;" class="">수정</button></a>
+			<a  href="/job/remove?proBno=${jbdto.pbvo.proBno}"><button style="width: 300px; height: 300px;" class=" ">삭제</button></a>
+			
 <div class="bodyContainer" >
 
 		<div class="floatMenu">
-			<p><i class="bi bi-heart${checkLike > 0 ? '-fill' : '' }" id="likeBtn"></i>찜하기<span id="checkLikeCnt"></span></p> 
+			<p><i class="bi bi-heart${checkLike > 0 ? '-fill' : '' }" id="likeBtn"></i>찜하기<span id="checkLikeCnt"></span></p>
 			<p><i class="bi bi-clipboard"></i>링크복사</p>
 		</div> 
 	
@@ -130,21 +133,21 @@
 -->
 		<div class="jobInfoDetail">
 			<p><strong><i class="bi bi-pencil"></i>상세내용<i class="bi bi-pencil"></i></strong></p>
-			<p>${jbdto.pbvo.proContent}</p>
+			<textarea id="dynamicTextarea" readonly>${jbdto.pbvo.proContent}</textarea> 
 		</div>
 		
 		<div id="map"></div>
 		</div>
 
-		<div class="cntArea">
-			<p>관심 </p><p id="likeCount checkLikeCnt">${jbdto.pbvo.proLikeCnt }</p>
+		<div class="cntArea"> 
+			<p>관심</p><p id="checkJobLikeCnt">${jbdto.pbvo.proLikeCnt}</p>
 			<p>조회 ${jbdto.pbvo.proReadCnt }</p>
-		</div>
+		</div> 
 	<sec:authorize access="isAuthenticated()">
 	<div class="lastBtnArea">
 	    <c:if test="${memEmail eq jbdto.pbvo.proEmail}">
-			<a href="/job/modify?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn">수정</button></a>
-			<a href="/job/remove?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn jobDelBtn">삭제</button></a>
+ 			<a href="/job/modify?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn">수정</button></a>
+			<a href="/job/remove?proBno=${jbdto.pbvo.proBno}"><button class="jobBtn jobDelBtn">삭제</button></a> 
 		</c:if>
 	</div>
 	</sec:authorize>
@@ -153,10 +156,10 @@
 	<div class="container">
 	<!-- 평가 -->
 	<span><strong>후기</strong></span>
-		<!-- 후기 등록 라인 -->
+		<!-- 후기 등록 라인 --> 
 		<div class="rePost">
 			<div class="reProfile">
-				<c:choose>
+				<c:choose> 
 					<c:when test="${empty memProfile}">
 						<img class="frofileImg" alt="frofile error" src="../resources/image/기본 프로필.png">			
 					</c:when>
@@ -190,6 +193,7 @@
 				
 				<input type="text" placeholder="후기를 작성해주세요." id="reContent">
 			    <button type="button" class="jobBtn" id="rePostBtn">등록</button>
+			    <p id="attention"><br></p>
 			</div>
 				
 
@@ -208,7 +212,7 @@
 		<!-- 후기 페이징 라인 -->
 		<div class="moreBtnArea">
 			<button type="button" id="moreBtn" data-page="1" 
-			 class="moreBtn jobBtn" style="visibility:hidden">더보기</button>
+			 class="moreBtn" style="visibility:hidden">더보기</button>
 		</div>
 		
 	</div>

@@ -44,7 +44,7 @@ async function spreadJoongoList() {
                     let thumb = await getThumbnailToServer(bvo.proBno);
                     str += `<img src="/upload/product/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}"  alt="...">`;
                 }else {
-                    str += `<img src="../resources/image/logoimage.png" alt="사진 없을 때 띄우는 아보카도">`;
+                    str += `<img src="../resources/image/noImage.jpg" alt="사진 없을 때 띄우는 아보카도">`;
                 }
 
                 str += `<div class="joongo_item_detail">`;
@@ -97,7 +97,7 @@ async function spreadJoongoLikeList() {
                     let thumb = await getThumbnailToServer(bvo.proBno);
                     str += `<img src="/upload/product/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}"  alt="...">`;
                 }else {
-                    str += `<img src="../resources/image/logoimage.png" alt="사진 없을 때 띄우는 아보카도">`;
+                    str += `<img src="../resources/image/noImage.jpg" alt="사진 없을 때 띄우는 아보카도">`;
                 }
 
                 str += `<div class="joongo_item_detail">`;
@@ -157,14 +157,15 @@ async function spreadStoreList() {
                     let thumb = await getThumbnailToServer(bvo.proBno);
                     str += `<img src="/upload/product/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}"  alt="...">`;
                 }else {
-                    str += `<img src="../resources/image/logoimage.png" alt="사진 없을 때 띄우는 아보카도">`;
+                    str += `<img src="../resources/image/noImage.jpg" alt="사진 없을 때 띄우는 아보카도">`;
                 }
 
                 str += `</div>`;
                 str += `<div class="store_item_detail">`;
                 str += `<p>${bvo.proTitle}</p>`;
                 str += `<p>${bvo.proContent}</p>`;
-                str += `<p>${bvo.proEmd} | ${bvo.proMenu} | 후기 3개</p>`;
+                const result = await getReviewCntFromStore(bvo.proEmail);
+                str += `<p>${bvo.proEmd} | ${bvo.proMenu} | 후기 ${result}개</p>`;
 
                 str += `</div></a></div>`;
 
@@ -180,6 +181,16 @@ async function spreadStoreList() {
     }
 }
 spreadStoreList();
+//동네업체 후기개수
+async function getReviewCntFromStore(email){
+    try {
+        const resp = await fetch('/reviewCnt/'+email);
+        const result = await resp.text();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 //알바구인 
 async function getBoardListFromJob(){
@@ -212,7 +223,7 @@ async function spreadJobList() {
                     let thumb = await getThumbnailToServer(bvo.proBno);
                     str += `<img src="/upload/product/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}"  alt="...">`;
                 }else {
-                    str += `<img src="../resources/image/logoimage.png" alt="사진 없을 때 띄우는 아보카도">`;
+                    str += `<img src="../resources/image/noImage.jpg" alt="사진 없을 때 띄우는 아보카도">`;
                 }
 
                 str += `</div>`;

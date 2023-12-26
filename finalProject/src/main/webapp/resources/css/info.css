@@ -4,18 +4,19 @@
 .infoContainer{
     font-family: 'suit';
     width: 700px;
-    margin: 70px auto 120px;
+    margin: 70px auto 100px;
     color: #333;
 }
 .infoContainer > h2{
     font-weight: 600;
     font-size: 24px;
     line-height: 60px;
-    border-bottom: 2px solid #333;
+    border-bottom: 1px solid #333;
     margin: 0;
+    text-align: center;
 }
 .infoContainer .headerSection{
-    background-color: #fafafa;
+    background-color: #f1f4f6;
     border-bottom: 1px solid #ebebeb;
     height: 60px;
     text-align: center;
@@ -80,6 +81,7 @@
 	border: solid 1px #e5e5e5;
     margin-top: 30px;
     margin-bottom: 15px;
+    font-size: 14px;
 }
 .infoContainer textarea{
 	width: 100%;
@@ -87,12 +89,20 @@
 	border-radius: 5px;
     resize: none;
 	border: solid 1px #e5e5e5;
+    font-size: 14px;
 }
 .infoContainer input{
     width: 100%;
 }
 .infoContainer textarea:focus{
     outline: 0;
+}
+#infoRegiBtnDiv{
+    margin-top: 40px;
+}
+.regBtn:disabled{
+    border: 2px solid indianred;
+    color: indianred;
 }
 /* info register end */
 /* info detail start */
@@ -114,7 +124,7 @@
 .infoContent textarea:read-only{
     font-size: 14px;
     border: 0;
-    background-color: #fafafa;
+    background-color: #f1f4f6;
 }
 .infoList{
     font-weight: 'suit';

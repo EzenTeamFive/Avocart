@@ -50,7 +50,7 @@ function getStoreList(page = 1, type = null, sort = null) {
                     imgSrc = `/upload/product/${matchingFvo.saveDir.replace('\\', '/')}/${matchingFvo.uuid}_${matchingFvo.fileName}`;
                 } else {
                     // matchingFvo가 없는 경우 기본 이미지 
-                    imgSrc = "../resources/image/logoimage.png";
+                    imgSrc = "../resources/image/defaultImage.jpg";
                 }
             
                 // li 생성

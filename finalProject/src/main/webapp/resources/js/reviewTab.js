@@ -1,3 +1,8 @@
+const urlParams = new URL(location.href).searchParams;
+const userEmail = urlParams.get('memEmail');
+
+console.log(userEmail)
+
 let h3 = document.getElementById('reviewSize');
 let starScore =  document.getElementById('starScore');
 let star = '★';
@@ -5,7 +10,7 @@ let percentText = document.getElementById('percentText');
 
 async function spreadReviewFromServer(type){
     try{
-        const resp = await fetch('/hmember/reviewPage/'+type);
+        const resp = await fetch('/hmember/reviewPage/'+type+'/'+userEmail);
         const result = await resp.json();
         return result;
     }catch(err){
@@ -76,21 +81,21 @@ function getReviewList(type = 'joongo') {
                 const li = document.createElement('li');
                 li.classList.add('reviewLi');
                 li.innerHTML = `
-                <div class="reviewLiContanier">
-                    <a href="">     
+                <div class="reviewLiContanier">  
+                            <a href="/hmember/detail?memEmail=${rvo.senderEmail}">     
                         <div class="senderInfo">  
                             <img class="reviewProfile" src="${imgSrc}" alt="프사자리">
+                            </a>
                             <div class="innerSender">
                             <div class="reviewDate">${formattedDate}</div> 
-                                <div class="reviewNick">${rvo.snederNick}</div>
+                                <div class="reviewNick">${rvo.reSenderNick}</div>
                                 <div class="starContainer">
                                     <span class="goldStar">${'★'.repeat(rvo.reScore)}</span><span class="grayStar">${'★'.repeat(5-rvo.reScore)}</span>
                                 </div>
                             </div>
                         </div>
-                    </a>
                     <div class="textContainer">                                                     
-                        <div class="reviewContent">${rvo.reContent}</div>
+                        <textarea cols="50" rows="3" onclick="onFitSizeOfTextArea();" class="reviewContent" readonly="readonly">${rvo.reContent}</textarea>
                     </div>
                 </div>
             `;                    
@@ -111,6 +116,4 @@ document.addEventListener('change', (e) => {
         getReviewList(cateType);
     }
 });
-
-
 

@@ -26,18 +26,18 @@
 		</div>
 		
       <!-- 페이지 유저와 로그인 유저가 일치해야만 수정, 삭제 -->
-      <sec:authorize access="isAuthenticated()">
+    <%--   <sec:authorize access="isAuthenticated()">
       <sec:authentication property="principal.mvo.memEmail" var="authEmail" />
       <sec:authentication property="principal.mvo.memNickName" var="authNick" />
-      <c:if test="${mvo.memNickName eq authNick }">
+      <c:if test="${mvo.memNickName eq authNick }"> --%>
       <div id="editProfile">
          <ul id="btnContainer">
             <li><a id="editBtn">프로필 수정</a></li>
             <li><a id="delBtn">프로필 삭제</a></li>
          </ul>
       </div>      
-      </c:if>
-      </sec:authorize>		
+     <%--  </c:if>
+      </sec:authorize>	 --%>	
 		
       <div class="aboutMember">
       <span class="bold nick">${mvo.memNickName}</span>

@@ -12,7 +12,7 @@
 <jsp:include page="../common/header.jsp" />
 <c:set value="${mvo }" var="mvo"></c:set>
 <div class="bodyContainer">
-<form action="/hmember/modify" method="post">
+<form id="modForm" action="/hmember/modify" method="post">
 	<p class="siteTitle">회원 정보 수정</p>
 	<div class="inputDiv">
 		<label for="email" class="labels">이메일 주소</label>
@@ -36,8 +36,15 @@
 	
 	<div class="inputDiv">
 	  <label for="nick" class="labels">닉네임</label>
-	  <input type="text" class="inputs" name="memNickName" id="nick" placeholder="변경 닉네임을 입력해 주세요." value="${mvo.memNickName}">
+	  <input type="text" class="inputs" name="memNickName" id="nick" placeholder="변경 닉네임을 입력하세요" value="${mvo.memNickName}">
 	  <p class="msg" style="display:none" id="nickMsg">이미 존재하는 닉네임입니다.</p>
+	</div>
+	
+	<div class="inputDiv">
+	  <label for="phone" class="labels">전화번호</label>
+	  <input type="text" class="inputs" name="memPhone" id="phone" placeholder="전화번호를 (-)를 제외하고 입력하세요" value="${mvo.memPhone}" autocomplete="off">
+	  <p class="msg" style="display:none" id="phoneMsg1">번호를 올바르게 입력해주세요.</p>
+	  <p class="msg" style="display:none" id="phoneMsg2">이미 존재하는 번호입니다.</p>
 	</div>
 	
 	<div class="inputDiv">	
@@ -48,8 +55,12 @@
 	<input type="hidden" class="form-control" name="memSido" id="sido" value="${mvo.memSido}">
 	<input type="hidden" class="form-control" name="memSigg" id="sigg" value="${mvo.memSigg}">
 	<input type="hidden" class="form-control" name="memEmd" id="emd" value="${mvo.memEmd}">    
-	<button type="submit" class="registerBtn" id="regiBtn" disabled="disabled">수정하기</button>
-	<button type="button" class="registerBtn" id="deleteMemBtn">탈퇴하기</button>
+	
+	<div class="buttonContanier">
+	<button type="submit" class="registerBtn firstBtn" id="regiBtn" disabled="disabled">수정하기</button>
+	<button type="button" class="registerBtn secBtn" id="deleteMemBtn">탈퇴하기</button>
+	</div>
+	
 </form>
 </div>
 <jsp:include page="../common/footer.jsp" />

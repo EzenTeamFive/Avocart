@@ -13,4 +13,8 @@
 			</foreach>
 		</if>
 	</select>
+	
+	<select id="getReviewCnt" resultType="int">
+		select count(*) from review where receiver_email  = #{email} and re_category = 'store'
+	</select>
 </mapper>

@@ -272,10 +272,58 @@ background-color: #fff;
    text-align: center;
    width: 95px;
    font-size: 14px;
+  height: 40px;
+}
+
+.textContainer{
+}
+
+.reviewContent{
+	/* resize: none;
+	box-sizing: border-box; */
+	border: none;
+	outline: none;
+	width: 1180px;
+	resize: none; 
+	    overflow: hi;
+	
+	
 }
 /* 수정 끝  */
 </style>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+    // 페이지가 로딩된 후에 실행될 코드
 
+    // "받은 후기" 버튼을 찾아서 클릭 이벤트를 발생시킴
+    var receivedReviewsButton = document.getElementById('receivedReviews');
+
+    if (receivedReviewsButton) {
+        receivedReviewsButton.addEventListener('click', function () {
+            // "받은 후기" 버튼이 클릭되었을 때 실행될 동작
+            // 첫 번째 reviewContent 클래스를 가진 textarea를 찾아 클릭 이벤트를 발생시킴
+            var firstTextarea = document.querySelector('.reviewContent');
+
+            if (firstTextarea) {
+                onFitSizeOfTextArea(); // 추가: textarea 크기 조절 함수 호출
+            }
+
+            // 추가로 다른 동작을 수행하고 싶다면 여기에 코드를 추가
+        });
+    }
+});
+
+// textarea 크기 조절 함수
+function onFitSizeOfTextArea() {
+    var textAreas = document.querySelectorAll(".reviewContent");
+    textAreas.forEach(textArea => {
+        while (textArea.clientHeight < textArea.scrollHeight) {
+            textArea.rows = textArea.rows + 1;
+        }
+    });
+}
+
+</script>
 </head>
 <body>
 <div class="tabArea">

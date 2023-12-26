@@ -24,7 +24,7 @@
     background-color: #fff;
     font-size: 16px;
     width: 100px;
-    height: 55px;
+    height: 60x;
     border-radius: 28px;
     border-color:  #84a331;
     

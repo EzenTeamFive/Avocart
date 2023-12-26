@@ -155,7 +155,8 @@ public class JobBoardController {
 		
 		re.addAttribute("proBno", pbvo.getProBno());
 		re.addFlashAttribute("isMod", isOk);
-		return "redirect:/job/detail";
+		return "redirect:/job/list";
+//		return "redirect:/job/detail";
 	}
 	
 	
@@ -210,6 +211,7 @@ public class JobBoardController {
 		
 		//썸네일 가져와서 flist에 담기
 		List<FileVO> flist = jbsv.getThumb(proBno);
+		log.info("thumbnail >>  proBno >> "+proBno);
 		log.info("thumbnail >>  flist >> "+flist);
 		
 		return new ResponseEntity<FileVO>(flist.get(0), HttpStatus.OK);

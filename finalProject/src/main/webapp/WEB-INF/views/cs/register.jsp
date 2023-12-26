@@ -38,7 +38,7 @@
 		<option value="기타">기타</option>
 	</select>
 	
-	<input type="text" name="csTitle" class="titleInput" id="csTitle" placeholder="제목을 입력해 주세요" required="required">
+	<input type="text" name="csTitle" class="titleInput" id="csTitle" placeholder="제목을 입력해 주세요" required="required" autocomplete="off">
 	
 	<textarea name="csContent" id="dynamicTextarea" class="contentInput" placeholder="내용 입력" required="required"></textarea>
 	
@@ -55,7 +55,7 @@
 	
 	<div class="cmButtons">
 		<a href="/faq/list"><button type="button" class="cancelBtn">취소</button></a>
-		<button type="submit" class="regBtn" id="regBtn" disabled="disabled">작성하기</button>
+		<button type="submit" class="regBtn" id="regBtn" disabled="disabled">작성</button>
 	</div>
 </form>
 </div>

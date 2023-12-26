@@ -15,7 +15,6 @@
 	<div class="titleLine">
 		<h4>찜 <span style="color: red" id="likeCnt"></span></h4>
 
-
 		<section>
 			<div class="allMenu">
 				<select id="commuLikeListSelect" class="commuLikeListSelect" name="commuLikeListSelect">
@@ -34,8 +33,8 @@
 	
 	<hr>
 	
-	<button type="button" id="moreBtn" onclick="loadMore()"><i class="bi bi-plus-circle-fill"></i> 찜 더 보기</button>
-
+<!-- 	<button type="button" id="moreBtn" onclick="loadMore()"><i class="bi bi-plus-circle-fill"></i> 찜 더 보기</button>
+ -->
 
 <script type="text/javascript" src="/resources/js/likeList.js"></script>
 </body>

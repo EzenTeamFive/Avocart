@@ -82,7 +82,6 @@ navigate_next
 			         <li><a href="/cs/adminList">1:1 문의 내역</a></li>
 			         <li><a href="/info/register">공지사항 작성</a></li>
 			         <li><a href="/faq/adminList">FAQ 수정</a></li>
-			         <li><a href="#">회원 관리</a></li>
 			         <li class="logoutLi"><a href="#" id="logoutLink">로그아웃</a></li>
 			         <form action="/member/logout" method="post" id="logoutForm">
 			         	<input type="hidden" name="memEmail" value="${authEmail }">

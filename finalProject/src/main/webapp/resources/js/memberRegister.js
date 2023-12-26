@@ -314,7 +314,13 @@ document.addEventListener('click',(e)=>{
 
 //메일
 document.getElementById('testBtn').addEventListener('click',()=>{
-    alert('인증메일 발송');
+    swal.fire({
+        text: "인증메일 발송",
+        icon: "success",
+        showConfirmButton: false,
+        width: 400,
+        timer: 1000
+    });
     const email = document.getElementById('email').value;
     const emailMsg = document.getElementById('emailMsg');
     const emailMsg2 = document.getElementById('emailMsg2');
