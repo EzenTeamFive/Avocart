@@ -26,8 +26,8 @@
 }
 
 .formLine{
-	margin: 40px 0;
-	margin-bottom: 90px;
+	margin: 70px 0;
+	margin-bottom: 100px;
 	width: 720px;
 }
 
@@ -137,11 +137,11 @@
 .cmButtons{
 	display: flex;
 	justify-content: center;
-	margin-top: 30px;
+	margin-top: 40px;
 }
 .cancelBtn{
-	 width: 100px;
-    height: 55px;
+	width: 100px;
+    height: 60px;
 	font-size: 16px;
 	margin-right: 25px;
 	border-radius: 28px;
@@ -165,7 +165,7 @@
 	color: #84a331; */
 	font-size: 16px;
     width: 100px;
-    height: 55px;
+    height: 60px;
     border-radius: 28px;
 }
 .regBtn:hover:not(:disabled){

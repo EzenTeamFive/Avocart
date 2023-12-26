@@ -100,12 +100,12 @@
 
 .modBtn{
 	width: 125px;
+	height: 35px;
 	border: 2px solid #84a331;
 	background-color: white;
 	border-radius: 38px;
 	position: relative;
 	top: -3px;
-	padding: 5px;
 	color: #84a331;
 	font-size: 14px;
 }
@@ -127,7 +127,7 @@
 
 .memMsg1 {
     position: relative;
-    top: 14px;
+    top: 16px;
     margin-right: 35px;
     color: rgb(136, 136, 136);
 }
@@ -139,7 +139,7 @@
 
 .memMsg2{
 	position: relative;
-	top: 14px;
+	top: 16px;
     margin-right: 35px;
 	color: rgb(136, 136, 136);
 }
@@ -151,7 +151,7 @@
 
 .memMsg3{
 	position: relative;
-	top: 14px;
+	top: 16px;
     margin-right: 35px;
 	color: rgb(136, 136, 136);
 }
@@ -163,7 +163,7 @@
 
 .memMsg4{
 	position: relative;
-	top: 14px;
+	top: 16px;
 	color: rgb(136, 136, 136);
 }
 

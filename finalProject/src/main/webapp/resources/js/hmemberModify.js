@@ -158,6 +158,40 @@ async function hasNick(nick){
     }
 }
 
+//전화번호 중복체크
+let regExp = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
+document.getElementById('phone').addEventListener('input', async ()=>{
+    let phone = document.getElementById('phone').value;
+    console.log(phone);
+    if(!regExp.test(phone)){
+        document.getElementById('phoneMsg1').style = "display:inline-block";
+        document.getElementById('phoneMsg2').style = "display:none";
+    }else{
+        document.getElementById('phoneMsg1').style = "display:none";
+
+        const result = await hasPhone(phone);
+        if(result == 1){
+            document.getElementById('phoneMsg2').style = "display:inline-block";
+        }else{
+            document.getElementById('phoneMsg2').style = "display:none";
+        }
+    }
+    registerBtnAbled();
+
+})
+//전화번호 전송 메서드
+async function hasPhone(phone){
+    try{
+        const resp = await fetch('/member/phone/'+phone);
+        const result = await resp.text();
+        return result;
+
+    }catch(err){
+        console.log(err);
+    }
+}
+
+
 //모든 조건 충족시 가입하기 버튼오픈
 function registerBtnAbled(){
     const pwMsg1_1 = document.getElementById('pwMsg1_1');
@@ -196,21 +230,41 @@ async function deleteMemBtn(email){
 
         if (result === '1') {
             console.log("success");
-            window.location.replace('http://localhost:8089/');
+            window.location.replace('http://localhost:8088/');
         }
     }catch(err){
         console.log(err);
     }
 }
 
-// document.getElementById('deleteMemBtn').addEventListener('click',(e)=>{
-//     if (confirm('정말 탈퇴하시겠어요? \n작성한 댓글은 자동으로 삭제되지 않습니다.')) {
-//         deleteMemBtn(email);
-//     }
-// });
+document.getElementById('deleteMemBtn').addEventListener('click', async (e) => {
+    Swal.fire({
+        text: "탈퇴가 성공적으로 처리되었습니다.",
+        icon: "success",
+        showConfirmButton: false,
+        width: 400,
+        timer: 2000
+    }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+            deleteMemBtn(email);
+        }
+    });    
+});
 
-document.getElementById('deleteMemBtn').addEventListener('click',(e)=>{
- const delEmail = email;
-    const url = `http://localhost:8088/hmember/dropOut?delEmail=${encodeURIComponent(email)}`;
-    window.open(url, 'dropOut', 'width=370, height=451, top=350, left=700');
+//수정 버튼
+document.getElementById('regiBtn').addEventListener('click', function() {
+    if (!document.getElementById('regiBtn').hasAttribute('disabled')) {
+        Swal.fire({
+            text: "수정이 완료되었습니다!",
+            icon: "success",
+            showConfirmButton: false,
+            width: 400,
+            timer: 2000,
+            willClose: function () {
+                //알람이 닫히기 전에 폼 제출
+                document.getElementById('modForm').submit();
+            }
+        });
+        event.preventDefault();
+    }
 });

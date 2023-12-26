@@ -14,5 +14,15 @@ document.getElementById('showPwBtn').addEventListener('click',(e)=>{
 
 let resultZone = document.getElementById('resultZone');
 if (isOk == -1) {
-    resultZone.innerText = '잘못된 비밀번호입니다.';
+    resultZone.innerText = '비밀번호가 일치하지 않습니다.';
 } 
+
+let loginBtn = document.getElementById('loginBtn');
+let pwInput = document.getElementById('pw');
+pwInput.addEventListener('input', (e) => {
+    if (pwInput.value.trim() !== '') {
+        loginBtn.disabled = false;
+    } else {
+        loginBtn.disabled = true;
+    }
+});

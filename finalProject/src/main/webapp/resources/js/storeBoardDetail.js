@@ -1,17 +1,15 @@
-//확인 클릭 시 게시글 삭제
-document.addEventListener('click', (e) => {
-    if(e.target.id == 'delBtn') {
-       if(!confirm("게시글을 삭제하시겠습니까?")) {
-            e.preventDefault();
-            return;
-       }
-    }
-})
-
-// if(likeCnt==0) {
-//     document.getElementById('likeCount').innerHTML
-//     = `가장 먼저 좋아요를 남겨보세요. 조회 ${readCnt}`;
-// }
+// document.getElementById('delBtn').addEventListener('click', function(event) {
+//     Swal.fire({
+//         text: "게시글이 삭제되었습니다!",
+//         icon: "success",
+//         showConfirmButton: false,
+//         width: 400,
+//         timer: 1000
+//     }).then(() => {
+//         window.location.href = this.parentElement.getAttribute('href');
+//     });
+//     event.preventDefault();
+// });
 
 
 //좋아요 여부 체크
@@ -74,16 +72,22 @@ async function likeOrDislike(bno, user) {
     }
 }
 
-document.getElementById("like").addEventListener('click', (e)=> {
-    if(user == "") {
-        alert("로그인 하신 후 이용해 주세요.")
-    } else {
-         if(e.target.classList.contains('bi-heart')){
-            e.target.classList.replace('bi-heart','bi-heart-fill');
-            likeOrDislike(bno, user);
-        }else if(e.target.classList.contains('bi-heart-fill')){
-            e.target.classList.replace('bi-heart-fill','bi-heart');
-            likeOrDislike(bno, user);
-        }
-    }
-})
+//현재 url 변수로 가져오기
+let detailPageUrl = window.location.href;
+
+function clip(){ 
+	//detailPageUrl 변수에 담긴 주소를
+  	navigator.clipboard.writeText(detailPageUrl).then(res=>{
+        swal.fire({
+            text: "주소가 복사되었습니다!",
+            icon: "success",
+            showConfirmButton: false,
+            width: 400,
+            timer: 1000
+        });
+	})
+}
+
+function toLogin() {
+    window.location.href = 'http://localhost:8088/member/login';
+};

@@ -109,6 +109,7 @@ public class HMemberController {
 			mvo.setMemSido(mvo.getMemSido());
 			mvo.setMemSigg(mvo.getMemSigg());
 			mvo.setMemEmd(mvo.getMemEmd());
+			mvo.setMemPhone(mvo.getMemPhone());
 			hsv.modifyPwEmpty(mvo);		
 		} else {
 			//변경O
@@ -117,6 +118,7 @@ public class HMemberController {
 			mvo.setMemSido(mvo.getMemSido());
 			mvo.setMemSigg(mvo.getMemSigg());
 			mvo.setMemEmd(mvo.getMemEmd());
+			mvo.setMemPhone(mvo.getMemPhone());
 			hsv.modify(mvo);
 		}
 		
@@ -230,18 +232,25 @@ public class HMemberController {
         
 	}
 	
-	   @GetMapping(value = "/reviewPage/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
-	   public ResponseEntity<ReviewDTO> reviewList( @PathVariable("type") String type){		   
-			String userEmail = "";
-			
-			// 사용자 객체 불러옴
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {        	
-	        	//Principal => AuthMember 변환
-	        	AuthMember member = (AuthMember) authentication.getPrincipal();
-	        	log.info(">>>>>>review 확인 >>>>> "+member.getMvo());
-	        	userEmail = member.getMvo().getMemEmail();
-	        }
+//	   @GetMapping(value = "/reviewPage/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
+//	   public ResponseEntity<ReviewDTO> reviewList( @PathVariable("type") String type){		   
+//			String userEmail = "";
+//			
+//			// 사용자 객체 불러옴
+//			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//	        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {        	
+//	        	//Principal => AuthMember 변환
+//	        	AuthMember member = (AuthMember) authentication.getPrincipal();
+//	        	log.info(">>>>>>review 확인 >>>>> "+member.getMvo());
+//	        	userEmail = member.getMvo().getMemEmail();
+//	        }
+//	      return new ResponseEntity<ReviewDTO>(hsv.getReviewList(type, userEmail), HttpStatus.OK);
+//	   }
+	
+	   @GetMapping(value = "/reviewPage/{type}/{userEmail}", produces = MediaType.APPLICATION_JSON_VALUE)
+	   public ResponseEntity<ReviewDTO> reviewList(@PathVariable("type") String type,
+			   @PathVariable("userEmail") String userEmail){		   
+
 	      return new ResponseEntity<ReviewDTO>(hsv.getReviewList(type, userEmail), HttpStatus.OK);
 	   }
 	

@@ -85,7 +85,12 @@
 </div>
 <!-- floatingMenu -->
 <jsp:include page="../common/mainFloatingMenu.jsp"/>
-
+<c:if test="${not empty isOk}">
+   <!-- Flash 속성 사용 -->
+   <script>
+      alert('등록 성공 여부: ${isOk}');
+   </script>
+</c:if>
 <script src="/resources/js/storeBoardList.js"></script>
 <script type="text/javascript">
 getStoreList();
