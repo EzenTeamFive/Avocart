@@ -22,7 +22,7 @@
 <form action="/faq/register" method="post">
 	<input type="hidden" name="faqEmail" value="${authEmail }">
 		
-	<input type="text" name="faqTitle" id="csTitle" class="titleInput" placeholder="제목을 입력해 주세요" required="required">
+	<input type="text" name="faqTitle" id="csTitle" class="titleInput" placeholder="제목을 입력해 주세요" required="required" autocomplete="off">
 
 	<select name="faqCategory" class="csMenu" id="csMenu">
 		<option value="선택" selected style="display:none">선택</option>
@@ -37,7 +37,7 @@
 
 	<div class="cmButtons">
 		<a href="/faq/adminList"><button type="button" class="cancelBtn">취소</button></a>
-		<button type="submit" class="regBtn" id="regBtn" disabled="disabled">작성하기</button>
+		<button type="submit" class="regBtn" id="regBtn" disabled="disabled">작성</button>
 	</div>	
 </form>
 </div>

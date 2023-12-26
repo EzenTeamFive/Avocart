@@ -30,7 +30,7 @@
     
     <div class="form">
        <p class="label">제목</p>
-      <input type="text" name="cmTitle" id="csTitle" class="titleInput" value="${bvo.cmTitle }">
+      <input type="text" name="cmTitle" id="csTitle" class="titleInput" value="${bvo.cmTitle }" autocomplete="off">
    </div>
    
    <div class="form">
@@ -85,7 +85,7 @@
    
    <div class="cmButtons">
       <a href="/community/detail?cmBno=${bvo.cmBno }"><button type="button" class="cancelBtn">취소</button></a>
-      <button type="submit" class="regBtn" id="regBtn">수정하기</button>
+      <button type="submit" class="regBtn" id="regBtn">수정</button>
    </div>
 </form>
 </div>

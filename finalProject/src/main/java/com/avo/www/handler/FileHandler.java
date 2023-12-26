@@ -20,7 +20,7 @@ import net.coobird.thumbnailator.Thumbnails;
 @Component
 public class FileHandler {
    
-   private String UP_DIR = "D:\\_fileupload\\";
+   private String UP_DIR = "C:\\_fileupload\\";
    
    public List<FileVO> uploadFiles(MultipartFile[] files, String dir){ // dir : 게시판별 업로드 폴더명
       List<FileVO> flist = new ArrayList<FileVO>();
@@ -33,13 +33,16 @@ public class FileHandler {
       // 각 페이지 별 파일 업로드 폴더 위치 설정
       switch (dir) {
 		case "product":
-			UP_DIR = "D:\\_fileupload\\product";
+			UP_DIR = "C:\\_fileupload\\product";
 			break;
 		case "profile":
-			UP_DIR = "D:\\_fileupload\\profile";
+			UP_DIR = "C:\\_fileupload\\profile";
 			break;
 		case "community":
-			UP_DIR = "D:\\_fileupload\\community";
+			UP_DIR = "C:\\_fileupload\\community";
+			break;
+		case "cs":
+			UP_DIR = "C:\\_fileupload\\cs";
 			break;
       }
       

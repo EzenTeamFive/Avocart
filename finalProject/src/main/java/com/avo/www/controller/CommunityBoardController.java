@@ -49,7 +49,7 @@ public class CommunityBoardController {
 	
 	@PostMapping("/register")
 	public String register(CommunityBoardVO bvo, RedirectAttributes re,
-			@RequestParam(name = "files", required = false)MultipartFile[] files) {
+			@RequestParam(name = "files", required = false)MultipartFile[] files, Model m) {
 		log.info(">>>>> register bvo >>> "+bvo);
 		
 		List<FileVO> flist = null;
@@ -63,8 +63,9 @@ public class CommunityBoardController {
 		
 		int isUp = bsv.register(bdto);
 		log.info(">>>>> board register >>> "+(isUp>0? "성공":"실패"));
+		long cmBno = bsv.topBno();
 		
-		return "redirect:/community/list";
+		return "redirect:/community/detail?cmBno="+cmBno;
 	}
 //-----------------------------------------------------------------------------------------------	
 //	@GetMapping("/list")
