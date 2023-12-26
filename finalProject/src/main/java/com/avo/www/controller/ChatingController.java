@@ -24,6 +24,7 @@ import com.avo.www.domain.ChatRoomDTO;
 import com.avo.www.domain.ChatRoomVO;
 import com.avo.www.domain.FileVO;
 import com.avo.www.domain.ProductBoardVO;
+import com.avo.www.domain.ReviewVO;
 import com.avo.www.security.AuthMember;
 import com.avo.www.service.ChatingService;
 
@@ -87,4 +88,18 @@ public class ChatingController {
 		log.info(">>>>>>>>> chatList >>>>>>>>> "+chatList);
 		return new ResponseEntity<List<ChatMessageVO>>(chatList, HttpStatus.OK);
 	}
+	
+	@PostMapping(value = "/review/{chatBno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public void postReview(@PathVariable("chatBno") long chatBno, @RequestBody ReviewVO rvo) {
+		log.info(">>>>>>>> write review >>>>>>>> "+chatBno+", "+rvo);
+		int isOk = chatsv.insertReview(chatBno, rvo);
+		log.info("리뷰 등록 "+(isOk > 0 ? "OK" : "Fail"));
+		if(isOk > 0) {
+			int isSet = chatsv.setTempForReview(rvo.getReScore());
+			log.info("온도 등록 "+(isSet > 0 ? "OK" : "Fail"));
+			chatsv.setReviewed(chatBno);
+		}
+		
+	}
+	
 }

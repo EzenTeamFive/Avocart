@@ -18,5 +18,7 @@ public class ChatRoomVO {
 	private String chatSendUserId;
 	private String chatGetUserId;
 	private String chatRegAt;
+	private String chatIsSold;
+	private String chatIsReviewed;
 
 }

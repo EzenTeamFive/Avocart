@@ -13,6 +13,7 @@
 <body>
 <jsp:include page="../common/header.jsp" />
 	<div class="joongoBanner"></div>
+	<a href="/joongo/modify?proBno=${pbvo.proBno }"><button type="submit">수정</button></a>
 	<div class="bodyContainer">
 		<section class="floatMenu">
 			<!-- 찜 (북마크) -->

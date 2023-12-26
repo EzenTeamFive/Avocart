@@ -135,7 +135,7 @@ async function getMoreBoard(category, page = 1, proMenu = menu, proSort = sorted
                     let thumb = await getThumbnailToServer(category, prod.proBno);
                     li += `<img src="/upload/product/${thumb.saveDir.replaceAll('\\','/')}/${thumb.uuid}_${thumb.fileName}" alt="제품사진">`;
                 } else {
-                    li += `<img src="../resources/image/logoimage.png" class="card-img-top" alt="사진 없을 때 띄우는 아보카도">`;
+                    li += `<img src="../resources/image/defaultImage.jpg" class="card-img-top" alt="사진 없을 때 띄우는 아보카도">`;
                 }
                 
                 li += `<div class="itemInfo"><h5>${prod.proTitle}</h5><b>${price}원</b>`;

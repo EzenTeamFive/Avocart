@@ -5,6 +5,7 @@ import java.util.List;
 import com.avo.www.domain.ChatMessageVO;
 import com.avo.www.domain.ChatRoomDTO;
 import com.avo.www.domain.ChatRoomVO;
+import com.avo.www.domain.ReviewVO;
 
 public interface ChatingService {
 
@@ -17,5 +18,11 @@ public interface ChatingService {
 	List<ChatRoomVO> getChatList(String userId);
 
 	List<ChatMessageVO> selectChatMsg(long bno);
+
+	int insertReview(long chatBno, ReviewVO rvo);
+
+	int setTempForReview(int temp);
+
+	void setReviewed(long chatBno);
 
 }

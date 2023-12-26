@@ -11,7 +11,10 @@ import com.avo.www.domain.ChatMessageVO;
 import com.avo.www.domain.ChatRoomDTO;
 import com.avo.www.domain.ChatRoomVO;
 import com.avo.www.domain.FileVO;
+import com.avo.www.domain.ProductBoardVO;
+import com.avo.www.domain.ReviewVO;
 import com.avo.www.repository.ChatingDAO;
+import com.avo.www.repository.JobReviewDAO;
 import com.avo.www.repository.JoongoBoardDAO;
 import com.avo.www.repository.MemberDAO;
 import com.avo.www.repository.ProfileFileDAO;
@@ -33,6 +36,9 @@ public class ChatingServiceImpl implements ChatingService {
 	
 	@Inject
 	private ProfileFileDAO fdao;
+	
+	@Inject
+	private JobReviewDAO rvdao;
 
 	@Override
 	public int createChatRoom(ChatRoomVO roomvo) {
@@ -55,9 +61,9 @@ public class ChatingServiceImpl implements ChatingService {
 		ChatRoomDTO chatdto = new ChatRoomDTO();
 		chatdto.setMsgSendUserId(userId);
 		
-		// 글 제목
-		String boardTitle = jbdao.getDetail(crvo.getChatBno()).getProTitle();
-		chatdto.setBoardTitle(boardTitle);
+		// 게시글 vo
+		ProductBoardVO boardTitle = jbdao.getDetail(crvo.getChatBno());
+		chatdto.setPbvo(boardTitle);
 		
 		// 채팅방 번호
 		long chatBno = chatdao.selectChatRoomBno(crvo.getChatBno());
@@ -92,6 +98,34 @@ public class ChatingServiceImpl implements ChatingService {
 	public List<ChatMessageVO> selectChatMsg(long bno) {
 		return chatdao.getMsgList(bno);
 	}
+
+	@Override
+	public int insertReview(long chatBno, ReviewVO rvo) {
+		// chatBno로 chatRoom 불러와서 rvo에 설정
+		ChatRoomVO crvo = chatdao.getOneChatRoom(chatBno);
+		rvo.setReceiverEmail(crvo.getChatGetUserId());
+		rvo.setSenderEmail(crvo.getChatSendUserId());
+		
+		// pbvo 정보 불러와서 rvo에 설정
+		ProductBoardVO pbvo = jbdao.getDetail(crvo.getChatBno());
+		rvo.setReCategory(pbvo.getProCategory());
+		rvo.setReBno(pbvo.getProBno());
+		
+		return rvdao.insertReview(rvo);
+	}
+
+	@Override
+	public int setTempForReview(int temp) {
+		int bno = rvdao.getLastBno();
+		return rvdao.setTempForReview(temp, bno);
+	}
+
+	@Override
+	public void setReviewed(long chatBno) {
+		chatdao.setReviewed(chatBno);
+		
+	}
+
 	
 
 }

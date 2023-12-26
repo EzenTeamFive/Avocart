@@ -26,4 +26,8 @@ public interface ChatingDAO {
 
 	List<ChatMessageVO> getMsgList(long bno);
 
+	ChatRoomVO getOneChatRoom(long chatBno);
+
+	void setReviewed(long chatBno);
+
 }

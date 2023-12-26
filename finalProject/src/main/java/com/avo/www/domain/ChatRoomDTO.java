@@ -21,7 +21,7 @@ public class ChatRoomDTO {
 	private String msgGetUserNick;
 	private String msgGetUserEmail;
 	private ChatRoomVO crvo;
-	private String boardTitle;
+	private ProductBoardVO pbvo;
 	private String lastMsg;
 	private FileVO profileImage;
 

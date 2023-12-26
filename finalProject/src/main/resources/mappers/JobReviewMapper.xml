@@ -9,6 +9,12 @@
   		values(#{reBno},#{receiverEmail},#{senderEmail},#{reContent},#{reScore},#{reCategory}, #{reSenderNick})
 
   	</insert>
+  	<!-- 채팅 후기 입력 -->
+  	<insert id="insertReview">
+  		insert into review(receiver_email, sender_email, re_content, re_score, re_category, re_bno)
+  		values(#{receiverEmail}, #{senderEmail}, #{reContent}, #{reScore}, #{reCategory}, #{reBno})
+
+  	</insert>
   	<select id="selectOntBnoTotalCount" resultType="int">
   		select count(re_rno) from review where re_bno = #{reBno}
   	</select>
@@ -23,6 +29,32 @@
   	<update id="modify">
   		update review set re_content=#{reContent}, re_score=#{reScore}, reg_at=now() where re_rno=#{reRno}
   	</update>
+  	
+  	<select id="getLastBno" resultType="int">
+  		select max(re_bno) from review
+  	</select>
 
+	<update id="setTempForReview">
+		update review set
+		<include refid="setTemp" />
+		where re_bno = #{bno}
+	</update>
 
+	<sql id="setTemp">
+		<if test="temp == 1">
+			re_temp = re_temp - 0.2
+		</if>
+		<if test="temp == 2">
+			re_temp = re_temp - 0.1
+		</if>
+		<if test="temp == 3">
+			re_temp = re_temp + 0
+		</if>
+		<if test="temp == 4">
+			re_temp = re_temp + 0.1
+		</if>
+		<if test="temp == 5">
+			re_temp = re_temp + 0.2
+		</if>
+	</sql>
 </mapper>

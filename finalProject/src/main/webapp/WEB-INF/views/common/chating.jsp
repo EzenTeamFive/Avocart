@@ -80,6 +80,17 @@
 	.messageHeader p{
 		margin-bottom: 0;
 	}
+	.messageHeader button{
+	    position: absolute;
+	    right: 15px;
+	    top: 15px;
+	    width: 100px;
+	    height: 40px;
+	    border: 0;
+	    border-radius: 5px;
+	    background-color: #606C38;
+	    color: #fff;
+	}
 	.messages{
 		overflow: auto;
 		height: calc(100% - 130px);
@@ -151,9 +162,15 @@
 	}
 	
 	/* 별점평가 부분 */
+	.myform{
+		display: flex;
+	    flex-wrap: wrap;
+		align-items: center;
+	    justify-content: center;
+	}
 	.myform fieldset, .myStar fieldset, .myformMini fieldset {
-    display: inline-block;
-    direction: rtl;
+	    display: inline-block;
+	    direction: rtl;
 	}
 
 	.myform input[type=radio], .myStar input[type=radio], .myformMini input[type=radio] {
@@ -173,6 +190,17 @@
 	.myform input[type=radio]:checked ~ label, .myStar input[type=radio]:checked ~ label, .myformMini  input[type=radio]:checked ~ label{
 	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 	}
+	.myform textarea{
+		width: 100%;
+	    background-color: #fdfdfd;
+	    resize: none;
+	    border: 1px solid #ddd;
+	    border-radius: 5px;
+    	padding: 10px;
+	}
+	.myform textarea:focus{
+		outline: 0;
+	}
 	
 	label[for^="starFill"]{
 		color: rgba(250, 208, 0, 0.99);
@@ -181,23 +209,7 @@
 	label[for^="starEmpty"]{
 		color: #f0f0f0;
 	}
-	.myformMini label:hover{
-	text-shadow: ;
-		
-	}
-
-	.myformMini label{
-		font-size: 20px;
-	}
 	
-	.myformMini input {
-		border: none;
-		width: 390px;
-	}
-	#reListArea {
-		width: 90%;
-	    margin: 2% auto;
-	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -211,7 +223,8 @@
 		        <div class="chatListArea" data-chatroom="${list.crvo.chatRoomId}">
 		        	<input type="hidden" value="${list.msgGetUserEmail}">
 		        	<input type="hidden" value="${list.msgGetUserNick}">
-		        	<input type="hidden" value="${list.boardTitle}">
+		        	<input type="hidden" value="${list.pbvo.proTitle}">
+		        	<input type="hidden" value="${list.crvo.chatGetUserId}">
 		        	<!-- 프로필 이미지 -->
 		        	<c:choose>
 		        	<c:when test="${list.profileImage eq null}">
@@ -235,7 +248,7 @@
     	<div class="messageHeader">
     		<p>닉네임</p>
     		<small>글 제목</small>
-    		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">구매확정</button>
+    		<button type="button" id="reviewBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">구매확정</button>
     	</div>
 	    <div id="messages" class="messages">
 	    </div>
@@ -253,14 +266,14 @@
 </div>
 
 <!-- 리뷰 모달창 -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">거래는 어떠셨나요?</h1>
       </div>
       <div class="modal-body">
-      			<div class="mb-3 myform">
+      		<div class="mb-3 myform">
 				<fieldset>
 					<input type="radio" name="rating" value="5" id="rate1">
 					<label for="rate1">★</label>
@@ -278,12 +291,12 @@
 					<label for="rate5">★</label>
 				</fieldset>
 				
-				<input type="text" placeholder="후기를 작성해주세요." id="reContent">
+				<textarea id="dynamicTextarea" placeholder="후기를 작성해주세요."></textarea>
 			</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">다음에 적을래요</button>
+        <button type="button" class="btn btn-primary" onclick="setReview();">작성 완료</button>
       </div>
     </div>
   </div>
@@ -291,4 +304,5 @@
 </body>
 <jsp:include page="../common/footer.jsp" />
 <script type="text/javascript" src="/resources/js/chating.js"></script>
+<script type="text/javascript" src="/resources/js/abjustTextareaRows.js"></script>
 </html>

@@ -45,26 +45,53 @@ async function selectChatMsgForServer(chatroom){
     }
 }
 
-document.addEventListener('click', handleSocketClick);
+// DB에 리뷰 작성
+async function insertReviewForServer(bno, chatData){
+    try {
+        let url = "/common/review/"+bno;
+        let config = {
+            method : "post",
+            headers : {
+                'content-type' : 'application/json; charset=UTF-8'
+            },
+            body : JSON.stringify(chatData)
+        }
+        const resp = await fetch(url, config);
+        const result = await resp.text();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+document.addEventListener('click', checkClickEventForChating);
 
 // 대화방 선택 체크 후 소켓 오픈
-async function handleSocketClick(e){
+async function checkClickEventForChating(e){
     if(e.target.classList.contains('chatListArea')){
         if(checkFirstEnter == false){
             await closeSocket();
         }
+        // 리뷰 버튼 초기값 none
+        let reviewBtn = document.querySelector('.messageHeader button');
+        reviewBtn.style.display = "none";
+
         messages.innerHTML = "";
         console.log('버튼클릭');
         getUser = e.target.children[0].value;
         chatroom = e.target.dataset.chatroom;
+        reviewBtn.dataset.chatBno = chatroom;
+
         let nickName = document.querySelector('.messageHeader p');
         let BTitle = document.querySelector('.messageHeader small');
         nickName.innerText = e.target.children[1].value;
         BTitle.innerText = e.target.children[2].value;
+
         await selectChatMsgForServer(chatroom).then(result=>{
             if(result.length > 0){
                 for(let re of result){
-                    console.log(re);
                     if(re.msgSendUserId != getUser){
                         messages.innerHTML += "<div class='right'><span>"+dateFormater(re.msgRegAt)+"</span><div>"+re.msgContent+"</div></div>";
                     }else{
@@ -73,6 +100,12 @@ async function handleSocketClick(e){
                 }
             }
         });
+
+        // 구매자에게 구매 완료 버튼 띄우기
+        let seller = e.target.children[3].value;
+        if(seller == getUser){ // 메시지 받는 사람이 판매자일 경우 구매 완료 버튼 띄우기
+            reviewBtn.style.display = "block";
+        }
 
         openSocket(chatroom);
         prepareScroll();
@@ -142,7 +175,7 @@ function send(){
         msgRegAt : date
     }
     console.log(chatData);
-    if(msg.value != ""){
+    if(msg.value.trim() != ""){
         insertChatDataForServer(chatData);
         ws.send(JSON.stringify(chatData));
         msg.value = "";
@@ -188,4 +221,21 @@ function dateFormater(sendDate){
     let dateFormat = (date.getMonth()+1)+"/"+date.getDate()+" "
         +(date.getHours() < 12 ? "오전 "+date.getHours() : "오후 "+(date.getHours()-12))+":"+date.getMinutes();
     return dateFormat
+}
+
+function setReview(){
+    let rate = 'input[name="rating"]:checked';
+    let selectRate = document.querySelector(rate).value;
+    console.log("별점 : "+selectRate);
+    let reviewContent = document.getElementById('dynamicTextarea').value;
+    console.log("후기 내용 : "+reviewContent);
+    let chatBno = document.getElementById('reviewBtn').dataset.chatBno;
+    
+    let chatData = {
+        reContent : reviewContent,
+        reScore : selectRate
+    }
+
+    insertReviewForServer(chatBno, chatData);
+    location.href="/";
 }
