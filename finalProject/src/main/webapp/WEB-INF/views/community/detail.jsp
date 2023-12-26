@@ -14,8 +14,6 @@
 <jsp:include page="../common/header.jsp" />
 <c:set value="${bdto.bvo}" var="bvo" />
 
-<a href="/community/modify?cmBno=${bvo.cmBno }">수정하기</a>
-<a href="/community/remove?cmBno=${bvo.cmBno }">삭제하기</a>
 <div class="bodyContainer" id="cmDetailContainer">
 <!-- 게시판 라인 -->
 <div class="boardLine">
