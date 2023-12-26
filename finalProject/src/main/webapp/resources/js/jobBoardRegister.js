@@ -50,7 +50,7 @@ document.addEventListener('change', (e) => {
             let validResult = fileValidation(file.name, file.size); // 0 또는 1로 리턴
             isOk *= validResult;
             const imageUrl = URL.createObjectURL(file); // 파일 미리보기를 위한 URL 생성
-            ul += `<li class="list-group-item d-flex justify-content-between align-items-start">`;
+            ul += `<li class="list-group-item d-flex justify-content-between align-items-center">`;
             ul += `<div class="img">`;
             ul += `<img alt="첨부이미지영역" src="${imageUrl}" style="max-width: 75px; max-height: 75px;">`;
             ul += `</div>`;
@@ -91,6 +91,9 @@ document.addEventListener('click', (e) => {
 
             // 새로운 FileList를 input에 설정
             fileInput.files = newFileList;
+            if(newFileList.length <= 0){
+                newFileList.remove();
+            }
         }
 
         if (fileObjLength == 0) {
@@ -152,10 +155,10 @@ function checkFields() {
 
     if (proTitleValue.trim() === '' || proMenuValue === '선택' ||proPaymentValue === '선택' || proPriceValue.trim() === '' || proFullAddrValue.trim() === '' || proContentValue.trim() === '') {
         regBtn.disabled = true;
-        attention.innerHTML="※ 빈 칸을 작성해주세요.";
+        // attention.innerHTML="※ 빈 칸을 작성해주세요.";
     } else {
         regBtn.disabled = false;
-        attention.innerHTML= '<br>';
+        // attention.innerHTML= '<br>';
     }
 
 }

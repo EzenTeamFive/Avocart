@@ -71,8 +71,8 @@
 	<!-- 우리동네 알바 출력 리스트 -->
 	<div class="titleLine">
 <!-- 	<h3>우리동네 알바</h3> -->
-	 	<section>
-			<h3>동네 알바 <b>0</b>개</h3>
+	 	<section> 
+			<h3>동네 알바  <b id="jobListCount">0</b>개</h3>
 			<div class="titleLineSub">
 			<p>카테고리</p>
 			<div class="allMenu">
@@ -103,8 +103,9 @@
 
 	</div>
 	
-	<button type="button" id="moreBtn" onclick="loadMore()">더 보기</button>
-	
+	<div class="moreBtnArea">
+		<button type="button" id="moreBtn" onclick="loadMore()">더 보기</button>
+	</div>	
 </div>
 <script src="/resources/js/jobBoardList.js"></script>
 

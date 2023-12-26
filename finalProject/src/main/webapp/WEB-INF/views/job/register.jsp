@@ -85,7 +85,7 @@
 	  <!-- 첨부파일 표시 될 영역 -->
 	  </div>
   
-	  <p id="attention">※ 빈 칸을 작성해주세요.</p>
+	  
 	  <button type="reset" class="cancelBtn">취소</button>
 	  <button type="submit" class="regBtn" id="regBtn">작성</button>
 	</form>
