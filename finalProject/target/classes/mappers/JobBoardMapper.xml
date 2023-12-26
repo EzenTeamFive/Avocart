@@ -58,8 +58,8 @@
 		<include refid="count"></include>
    </select>
    
-   <update id="updateFileCnt" parameterType="int">
-		update product set pro_file_cnt = #{proFileCnt}
+   <update id="updateFileCnt" parameterType="java.util.Map">
+		update product set pro_file_cnt = #{proFileCnt} where pro_bno = #{bno}
    </update>
 	
 <!--
