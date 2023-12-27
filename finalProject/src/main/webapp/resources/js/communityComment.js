@@ -281,8 +281,8 @@ document.addEventListener('click', (e)=>{
             if(result == 1){
                 document.querySelector('.btn-close').click();
                 //alert("댓글 수정 성공");
-            }
             spreadCommentList(bnoVal);
+            }
         })
 
     //삭제버튼 클릭시
@@ -294,8 +294,8 @@ document.addEventListener('click', (e)=>{
         removeCommentToServer(cnoVal).then(result => {
             if(result == 1){
                 //alert("댓글 삭제 성공");
-            }
             spreadCommentList(bnoVal);
+            }
         })
 
     }
@@ -392,10 +392,10 @@ document.addEventListener('click', (e)=>{
             postReplyToServer(reData).then(result => {
                 if(result == 1){
                     // alert("대댓글 등록 성공");
+                spreadCommentList(bnoVal);
                 }
 
                 //화면에 뿌리기
-                spreadCommentList(bnoVal);
             })
         }
     }
@@ -490,8 +490,8 @@ document.addEventListener('click', (e)=>{
             if(result == 1){
                 document.querySelector('.btn-close').click();
                 //alert("대댓글 수정 성공");
-            }
             spreadCommentList(bnoVal);
+            }
         })
 
     //삭제버튼 클릭시
@@ -505,8 +505,8 @@ document.addEventListener('click', (e)=>{
         reRemoveToServer(cnoVal, cmtCnoVal).then(result => {
             if(result == 1){
                 //alert("대댓글 삭제 성공");
-            }
             spreadCommentList(bnoVal);
+            }
         })
     }
 })
