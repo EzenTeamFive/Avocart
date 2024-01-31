@@ -7,19 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Community List</title>
-<style type="text/css">
-	.user_profile>*, .item-info>*, .item-info>div>p{
-		display: inline;
-	}
-</style>
+<link rel="stylesheet" href="../resources/css/communityBoardList.css">
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
+<div class="cmBanner">
+	<div class="innerDiv">
+	</div>
+</div>
 
-<div class="bodyContainer">
+<div class="bodyContainer" id="bdCt">
 
 <div class="CommunityCategory">
-	<a href="/community/list?cmMenu=전체" class="menu">전체</a>
+	<a href="/community/list" class="menu cmActive">전체</a>
 	<a href="/community/list?cmMenu=일상" class="menu">일상</a>
 	<a href="/community/list?cmMenu=모임" class="menu">모임</a>
 	<a href="/community/list?cmMenu=질문" class="menu">질문</a>
@@ -28,49 +28,59 @@
 	<a href="/community/list?cmMenu=해주세요" class="menu">해주세요</a>
 	<a href="/community/list?cmMenu=동네사진전" class="menu">동네사진전</a>
 </div>
-<c:set value="${flist }" var="flist" />
 
-<c:if test="${list[0] eq null }">
-	<div>게시물이 존재하지 않습니다.</div>
-</c:if>
-<c:forEach items="${list }" var="bvo">
-<div class="cmBoard">
-	<%-- <p>${bvo.cmMenu }</p> --%>
-	<div class="user_profile">
-		<i class="bi bi-person-circle"></i>
-		<b>${bvo.cmNickName}</b>
-		<p>${bvo.cmRegAt }</p>
-		<p>구월동</p>
-	</div>
-	<a class="communityContentLine" href="/community/detail?cmBno=${bvo.cmBno }">
-		<p>${bvo.cmTitle }</p>
-		<!-- 썸네일 -->
-		<c:forEach items="${flist }" var="fvo" varStatus="loop">
-			<c:if test="${fvo.bno eq bvo.cmBno }">
-				<img alt="그림없음" src="/upload/community/${fn:replace(fvo.saveDir,'\\','/')}/${fvo.uuid}_th_${fvo.fileName}">
-			</c:if>
-		</c:forEach>
-	</a>
-	<div class="item-info">
-		<div>
-			<i class="bi bi-eye"></i>
-			<span>${bvo.cmReadCnt }</span>
-			<i class="bi bi-heart"></i>
-			<span>${bvo.cmLikeCnt } </span>
+<!-- 로딩페이지 -->
+<div id="loading"></div>
+
+<!-- 작성된 글 출력 공간 -->
+<div class="cmBoard" id="cmBoard">
+	<div class="oneBoard">
+		<p class="boardMenuName">${bvo.cmMenu }</p>
+		
+		<div class="user_profile">
+			<img id="cmListProfile" class="cmUserProfile" alt="" src="/resources/image/기본 프로필.png">
+			<b>${bvo.cmNickName}</b>
+			<p>${bvo.cmRegAt }</p>
+			<p><i class="bi bi-geo-alt-fill"></i>${bvo.cmEmd }</p>
 		</div>
-		<div>
-			<i class="bi bi-chat-right-dots"></i>
-			<span class="readCount">${bvo.cmCmtCnt }</span>
+		
+		<a class="communityContentLine" href="/community/detail?cmBno=${bvo.cmBno }">
+			<p>${bvo.cmTitle }</p>
+			<!-- 썸네일 -->
+			<img class="thumbImg" alt="그림없음" src="/upload/community/${fn:replace(fvo.saveDir,'\\','/')}/${fvo.uuid}_th_${fvo.fileName}">
+		</a>
+		
+		<div class="item-info">
+			<div class="left-item">
+				<i class="bi bi-eye"></i>
+				<span>${bvo.cmReadCnt }</span>
+				<i class="bi bi-heart"></i>
+				<span>${bvo.cmLikeCnt } </span>
+			</div>
+			<div class="right-item">
+				<i class="bi bi-chat-right-dots"></i>
+				<span class="readCount">${bvo.cmCmtCnt }</span>
+			</div>
 		</div>
 	</div>
 </div>
-</c:forEach>
-
-<a href="/community/register">
-	<button type="button" class="btn btn-success">등록</button>
-</a>
+<div class="moreDiv">
+	<button class="moreBtn" type="button" id="moreBtn" data-page="1" style="display:none">더보기</button>
 </div>
+
+</div>
+<!-- 여기까지 bodyContainer -->
+
+<!-- floatingMenu -->
+<jsp:include page="../common/mainFloatingMenu.jsp"/>
 
 <jsp:include page="../common/footer.jsp" />
+<!-- 프로필 메서드 불러오기 위해서 -->
+<script type="text/javascript" src="/resources/js/communityBoardLike.js"></script>
+<script type="text/javascript" src="/resources/js/communityBoardList.js"></script>
+<script type="text/javascript">
+let myMenu = `<c:out value="${cmMenu}"/>`;
+getMoreBoard(1, myMenu);
+</script>
 </body>
 </html>

@@ -4,7 +4,7 @@ document.addEventListener('click',(e)=>{
 
         removeFileToServer(uuid).then(result => {
             if(result == 1){
-                alert("파일 삭제 성공");
+                //alert("파일 삭제 성공");
                 e.target.closest('div').remove(); //파일이 담긴 ul삭제
                 location.reload(); //새로고침
             }else{
@@ -28,3 +28,4 @@ async function removeFileToServer(uuid){
         console.log(err);
     }
 }
+

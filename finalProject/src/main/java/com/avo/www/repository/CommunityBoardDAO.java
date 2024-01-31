@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.avo.www.domain.CommunityBoardVO;
+import com.avo.www.domain.PagingVO;
 
 public interface CommunityBoardDAO {
 
@@ -28,6 +29,22 @@ public interface CommunityBoardDAO {
 
 	long getFlistBno();
 
-	List<CommunityBoardVO> getMenuList(String cmMenu);
+	int updateFileCnt(CommunityBoardVO bvo);
+
+	int communityTotal();
+
+	List<CommunityBoardVO> getListMore(PagingVO pgvo);
+
+	List<CommunityBoardVO> getMenuList(@Param("pgvo")PagingVO pgvo, @Param("cmMenu")String cmMenu);
+
+	int communityMenuTotal(String cmMenu);
+	
+	int getSearchCommunityTotalCount(PagingVO pgvo);
+
+	List<CommunityBoardVO> getSearchCommunityList(PagingVO pgvo);
+
+	List<CommunityBoardVO> getCommunityList();
+
+	List<CommunityBoardVO> getCommunityLikeList();
 
 }

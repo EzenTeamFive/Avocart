@@ -1,3 +1,12 @@
+//메뉴 보이게
+document.addEventListener('DOMContentLoaded', function() {
+    let menuZone = document.getElementById('menuZone');
+    
+    if (mlist>0) {
+        menuZone.style.display = 'block';
+    }
+});
+
 //파일 삭제
 async function removeFileToServer(uuid){
     try{

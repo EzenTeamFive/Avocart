@@ -8,6 +8,9 @@ import javax.inject.Inject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.avo.www.domain.FileVO;
@@ -26,13 +30,14 @@ import com.avo.www.domain.ProductBoardDTO;
 import com.avo.www.domain.ProductBoardVO;
 import com.avo.www.handler.FileHandler;
 import com.avo.www.handler.PagingHandler;
+import com.avo.www.security.AuthMember;
 import com.avo.www.service.JoongoBoardService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/joongo/**")
+@RequestMapping("/joongo/*")
 public class JoongoBoardController {
 
 	@Inject
@@ -58,10 +63,25 @@ public class JoongoBoardController {
 		// file upload handler
 		if(files[0].getSize() > 0) {
 			flist = fh.uploadFiles(files, "product");
-			
 		}
 		
-		int isOk = jbsv.register(new ProductBoardDTO(pbvo, flist));
+		//사용자 객체 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {        	
+        	//Principal => AuthMember 변환
+        	AuthMember member = (AuthMember) authentication.getPrincipal();
+        	log.info(">>>>>> member 확인 >>>>> "+member.getMvo());
+        	//주소 추출
+        	String sido = member.getMvo().getMemSido();
+        	String sigg = member.getMvo().getMemSigg();
+        	String emd = member.getMvo().getMemEmd();
+        	pbvo.setProSido(sido);
+        	pbvo.setProSigg(sigg);
+        	pbvo.setProEmd(emd);
+        }
+        log.info(">>>>>>>>>>>> pbvo 확인 >>>>>>>> "+pbvo);
+        
+		int isOk = jbsv.register(new ProductBoardDTO(pbvo, null, flist, null));
 		log.info("등록 "+(isOk > 0 ? "성공" : "실패"));
 		
 		return "redirect:/joongo/list";
@@ -85,15 +105,33 @@ public class JoongoBoardController {
 		
 		m.addAttribute("pbvo", pbdto.getPbvo());
 		m.addAttribute("flist", pbdto.getPflist());
+    	
+    	// 프로필 사진 가져오기
+    	FileVO fvo = new FileVO();
+    	if(jbsv.getProfileImage(pbvo.getProEmail()) != null) {
+    		fvo = jbsv.getProfileImage(pbvo.getProEmail());
+    		m.addAttribute("profile", fvo);
+    	}
+    	log.info(">>>>>>>>>> fvo >>>>>> "+fvo);
 		
-		// 찜 여부 확인
-		LikeItemVO livo = new LikeItemVO();
-		livo.setLiBno(bno);
-		livo.setLiUserId("joongoJY@naver.com"); // 나중에 변경
-		int checkLike = jbsv.checkLikeTF(livo);
-		if(checkLike > 0) {
-			m.addAttribute("checkLike", checkLike);
-		}
+		//사용자 객체 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {        	
+        	//Principal => AuthMember 변환
+        	AuthMember member = (AuthMember) authentication.getPrincipal();
+        	//email 추출
+        	String email = member.getUsername();
+        	
+        	// 찜 여부 확인
+        	LikeItemVO livo = new LikeItemVO();
+        	livo.setLiBno(bno);
+        	livo.setLiUserId(email);
+        	int checkLike = jbsv.checkLikeTF(livo);
+        	if(checkLike > 0) {
+        		m.addAttribute("checkLike", checkLike);
+        	}
+        	
+        }
 		
 	}
 	
@@ -115,7 +153,7 @@ public class JoongoBoardController {
 			flist = fh.uploadFiles(files, "product");
 		}
 		
-		int isMod = jbsv.modify(new ProductBoardDTO(pbvo, flist));
+		int isMod = jbsv.modify(new ProductBoardDTO(pbvo, null, flist, null));
 		log.info("수정 "+(isMod > 0 ? "성공" : "실패"));
 		
 		return "redirect:/joongo/detail?proBno="+pbvo.getProBno();
@@ -129,12 +167,20 @@ public class JoongoBoardController {
 		return "redirect:/joongo/list";
 	}
 	
-	@GetMapping(value = "/{page}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PagingHandler> moreBtn(@PathVariable("page")int page, Model m){
+	@GetMapping(value = "/page/{page}/{proMenu}/{proSort}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PagingHandler> moreBtn(@PathVariable("page")int page,
+			@PathVariable("proMenu")String proMenu, @PathVariable("proSort")String proSort, Model m){
 		log.info(">>>>>>>>>> page >>>>>>> "+page);
+		log.info("proMenu, sorted >>>> "+proMenu+", "+proSort);
 		PagingVO pgvo = new PagingVO(page, 8);
+		pgvo.setType(proMenu);
+		pgvo.setSorted(proSort);
 		
-		return new ResponseEntity<PagingHandler>(jbsv.getListMore(pgvo),HttpStatus.OK);
+		int totalCount = jbsv.selectJoongoTotal(pgvo);
+		PagingHandler ph = new PagingHandler(pgvo, totalCount, 8);
+		ph.setProdList(jbsv.getListMore(pgvo));
+		
+		return new ResponseEntity<PagingHandler>(ph,HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/like", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
@@ -143,7 +189,7 @@ public class JoongoBoardController {
 		int isOk = jbsv.insertOrUpdate(livo);
 		log.info("찜 "+(isOk > 0 ? "성공" : "실패"));
 		
-		return new ResponseEntity<String>("", HttpStatus.OK);
+		return new ResponseEntity<String>(""+jbsv.selectAllLikeCnt(livo.getLiBno()), HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/file/{uuid}", produces = MediaType.TEXT_PLAIN_VALUE)

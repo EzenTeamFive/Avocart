@@ -7,63 +7,90 @@
 <head>
 <meta charset="UTF-8">
 <title>Store List</title>
-<link rel="stylesheet" href="../resources/css/page.css">
 <link rel="stylesheet" href="../resources/css/storeBoardList.css">
 </head>
-<body class="bodyContainer">
+<body>
 <jsp:include page="../common/header.jsp" />
-<a href="/store/register">register</a>
+<div class="storeBanner">
+     <div class="innerDiv"></div>
+</div>
+<div class="bodyContainer">
 
-<!-- 카테고리 버튼 -->
-<button type="button" id="all" value="null">전체</button>
-<button type="button" id="lesson" value="lesson">과외/클래스</button>
-<button type="button" id="pet" value="pet">반려동물</button>
-<button type="button" id="hospital" value="hospital">병원/약국</button>
-<button type="button" id="beauty" value="beauty">뷰티샵</button>
-<button type="button" id="laundry" value="laundry">세탁소</button>
-<button type="button" id="repair" value="repair">수리</button>
-<button type="button" id="sports" value="sports">운동</button>
-<button type="button" id="infant" value="infant">육아</button>
-<button type="button" id="eatery" value="eatery">음식점</button>
-<button type="button" id="move" value="move">이사/용달</button>
-<button type="button" id="interior" value="interior">인테리어 시공</button>
-<button type="button" id="cleaning" value="cleaning">청소</button>
-<button type="button" id="hobby" value="hobby">취미</button>
-<button type="button" id="dessert" value="dessert">카페/디저트</button>
+<div class="allBtns">
+<h3 class="totalCnt">등록 업체 <b>0</b>개</h3>
 
+<p>카테고리</p>
+<select name="categorySelect" id="categorySelect">
+    <option value="null" selected="selected">전체</option>
+    <option value="lesson">과외/클래스</option>
+    <option value="pet">반려동물</option>
+    <option value="hospital">병원/약국</option>
+    <option value="beauty">뷰티샵</option>
+    <option value="laundry">세탁소</option>
+    <option value="repair">수리</option>
+    <option value="sports">운동</option>
+    <option value="infant">육아</option>
+    <option value="eatery">음식점</option>
+    <option value="move">이사/용달</option>
+    <option value="interior">인테리어 시공</option>
+    <option value="cleaning">청소</option>
+    <option value="hobby">취미</option>
+    <option value="dessert">카페/디저트</option>
+</select>
+
+<p>정렬기준</p>
+<select name="sortSelect" id="sortSelect">
+    <option value="latest" selected="selected">최신순</option>
+    <option value="oldest">오래된 순</option>
+    <option value="likes">좋아요 순</option>
+    <option value="views">조회수 순</option>
+</select>
+</div>
+
+<div id="loading">
+   <!--로딩페이지  -->
+</div>
+   
 <!-- list 시작 -->
 <div class="listContainer">
-	<ul id="ulZone">
-	    <c:forEach items="${list}" var="pvo">
-	        <li id="liZone">
-	            <a href="/store/detail?bno=${pvo.proBno }">
-	            	<div>
-	            		<div>
-	            			<img class="thumbnail">
-	            		</div>
-	            	</div>
-	            	<div>
-	            		<div>
-			                <span class="title">${pvo.proTitle }</span>
-			                <span class="gray">주소 수정</span>
-						</div>
-		                <span class="content">${pvo.proContent }</span>
-		                <span class="gray">${pvo.proMenu }</span>
-	                </div>
-	            </a>
-	        </li>
-	    </c:forEach>
-	</ul>
+   <ul id="ulZone">
+       <c:forEach items="${list}" var="pvo">
+           <li id="liZone">
+               <a href="/store/detail?bno=${pvo.proBno }">
+                  
+                  <div class="profileContainer">
+                    <img class="profile" src="${imgSrc}">
+                  </div>
+       
+                  <div class="textContainer">
+                     <span class="title">${pvo.proTitle }</span>
+                    <span class="content">${pvo.proContent }</span>
+                  
+                  <div class="infoTexts">
+                    <span class="gray infoTexts">${svo.proEmd } | ${svo.proMenu} | 후기</span>
+                  </div>   
+                  
+               </div>   
+               </a>
+           </li>
+       </c:forEach>
+   </ul>
 </div>
 
 <!-- 페이징 더보기 버튼 -->
-<div class="commentContainer">
-	<div>
-		<div>
-			<button type="button" id="moreBtn" data-page="1" style="visibility:hidden;">더보기</button>
-		</div>
-	</div>
+<div class="moreBtnContainer">
+   <button type="button" class="moreBtn" id="moreBtn" data-page="1" style="visibility:hidden;">더보기</button>
 </div>
+
+</div>
+<!-- floatingMenu -->
+<jsp:include page="../common/mainFloatingMenu.jsp"/>
+<c:if test="${not empty isOk}">
+   <!-- Flash 속성 사용 -->
+   <script>
+      alert('등록 성공 여부: ${isOk}');
+   </script>
+</c:if>
 <script src="/resources/js/storeBoardList.js"></script>
 <script type="text/javascript">
 getStoreList();

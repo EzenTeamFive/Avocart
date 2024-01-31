@@ -61,10 +61,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//승인 요청
 		http.authorizeRequests()
 		.antMatchers("/member/list").hasRole("ADMIN") //멤버리스트는 admin만, ROLE_접두사 자동으로 추가됨.
-		.antMatchers("/", "/community/list", "/community/detail", "/joongo/list", "/joongo/detail",
-				 "/store/list", "/store/detail", "/job/list", "/job/detail", "/resources/**", "/joongo/menuSelect",
-				"/upload/**", "/communityCmt/**", "/reCmt/**", "/member/register", "/member/login", 
-				"/member/email/**", "/member/nick/**").permitAll() //비회원일 때 허용되는 경로, permitAll=모두에게
+		.antMatchers("/", "/community/list", "/community/detail", "/community/page/**", "/community/thumb/**", "/community/profile/**",
+				"/joongo/list", "/joongo/detail", "/joongo/page/**", "/joongo/thumb/**", "/info/**",
+				 "/store/list", "/store/detail", "/store/page/**", "/job/list/**","/jobReview/**", "/job/detail","/job/about", "/resources/**", "/joongo/menuSelect",
+				"/upload/**", "/communityCmt/**", "/reCmt/**", "/member/register", "/member/login", "/member/test/**",
+				"/member/email/**", "/member/nick/**", "/common/search", "/member/phone/**",
+				"/faq/list", "/joongoList", "/thumb/**", "/storeList", "/joongoLikeList", "/communityList", "/communityLikeList",
+				"/jobList", "/info/**", "/member/findEmail", "/member/findEmail/**", "/member/findPw", "/member/findPw/**",
+				"/reviewCnt/**", "/common/joongo/**", "/common/store/**", "/common/job/**", "/common/community/**",
+				"/hmember/detail/**","/myList/commuList/**", "/myList/likeList/**",
+				"/hmember/buy/**", "/hmember/reviewPage/**","/hmember/sell/**").permitAll() //비회원일 때 허용되는 경로, permitAll=모두에게
 		.anyRequest().authenticated(); //나머지는 로그인한 사용자만 허용 처리 (글쓰기, 수정하기 등)
 		
 		//커스텀 로그인 페이지를 구성

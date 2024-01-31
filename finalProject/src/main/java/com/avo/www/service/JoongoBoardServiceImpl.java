@@ -15,6 +15,7 @@ import com.avo.www.domain.ProductBoardDTO;
 import com.avo.www.domain.ProductBoardVO;
 import com.avo.www.handler.PagingHandler;
 import com.avo.www.repository.ProductFileDAO;
+import com.avo.www.repository.ProfileFileDAO;
 import com.avo.www.repository.JoongoBoardDAO;
 import com.avo.www.repository.LikeItemDAO;
 
@@ -32,6 +33,9 @@ public class JoongoBoardServiceImpl implements JoongoBoardService {
 	
 	@Inject
 	private ProductFileDAO pfdao;
+	
+	@Inject
+	private ProfileFileDAO profileDAO; 
 
 //	@Override
 //	public int register(ProductBoardVO pbvo) {
@@ -65,13 +69,13 @@ public class JoongoBoardServiceImpl implements JoongoBoardService {
 
 	@Transactional
 	@Override
-	public PagingHandler getListMore(PagingVO pgvo) {
-		int totalCount = jbdao.selectJoongoTotal();
+	public List<ProductBoardVO> getListMore(PagingVO pgvo) {
+//		int totalCount = jbdao.selectJoongoTotal();
 		jbdao.setLikeCnt();
 		jbdao.setFileCnt();
 		List<ProductBoardVO> list = jbdao.getListMore(pgvo);
-		PagingHandler ph = new PagingHandler(pgvo, totalCount, list);
-		return ph;
+//		PagingHandler ph = new PagingHandler(pgvo, totalCount, list);
+		return list;
 	}
 
 	@Transactional
@@ -161,5 +165,22 @@ public class JoongoBoardServiceImpl implements JoongoBoardService {
 		return flist;
 	}
 
+	@Override
+	public int selectJoongoTotal(PagingVO pgvo) {
+		// TODO Auto-generated method stub
+		return jbdao.selectJoongoTotal(pgvo);
+	}
+
+	@Override
+	public int selectAllLikeCnt(long liBno) {
+		
+		return lidao.selectAllLikeCnt(liBno);
+	}
+
+	@Override
+	public FileVO getProfileImage(String email) {
+		
+		return profileDAO.getProfile(email);
+	}
 	
 }

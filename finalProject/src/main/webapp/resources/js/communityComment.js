@@ -5,7 +5,7 @@ document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
     const cmtEmail = document.getElementById('cmtEmail').value;
 
     if(cmtText == "" || cmtText == null){ //댓글을 안 적었을 때
-        alert("댓글을 입력해주세요.");
+        document.getElementById('cmtPostBtn').disabled = true;  
         document.getElementById('cmtText').focus();
         return false; //메서드 종료
     }else{
@@ -20,7 +20,7 @@ document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
         //전송 function
         postCommentToServer(cmtData).then(result => {
             if(result == 1){
-                alert("댓글 등록 성공");
+                //alert("댓글 등록 성공");
                 //댓글 등록 후 인풋 빈값으로 만들어주기
                 document.getElementById('cmtText').value = '';
             }
@@ -30,6 +30,20 @@ document.getElementById("cmtPostBtn").addEventListener('click', ()=>{
         })
     }//if문
 })
+
+let cmtField = document.getElementById('cmtText');
+cmtField.addEventListener('input', cmtBtnDisabled);
+
+function cmtBtnDisabled(){
+    const cmtText = document.getElementById('cmtText').value;
+    const cmtPostBtn = document.getElementById('cmtPostBtn');
+
+    if(cmtText == "" || cmtText == null){
+        cmtPostBtn.disabled = true;
+    }else{
+        cmtPostBtn.disabled = false;  
+    }
+}
 
 //댓글 전송 메서드
 async function postCommentToServer(cmtData){
@@ -64,6 +78,20 @@ async function getCommentListFromServer(bno){ //페이징을 위해 나중에 pa
     }
 }
 
+// 특정 textarea의 줄 수를 조정하는 함수
+function textAreaRows(textarea) {
+    // 글 내용에서 줄바꿈 수를 세어 변수 저장
+    let lineCount = (textarea.value.match(/\n/g) || []).length + 1;
+	
+	textarea.rows = lineCount;
+}
+
+let cmtText = document.getElementById('cmtText');
+// 글을 입력할 때마다 adjustTextareaRows 함수 호출
+cmtText.addEventListener('input',()=>{
+    textAreaRows(cmtText);
+})
+
 //화면에 뿌리기
 function spreadCommentList(bno){
     getCommentListFromServer(bno).then(result => {
@@ -75,44 +103,53 @@ function spreadCommentList(bno){
                 ul.innerHTML = ""; //jsp에 임시로 넣어둔 댓글 표시영역을 지우고, 비어있는 값으로 바꿔버리기
             
             for(let cvo of result){
-                
                 console.log(cvo.cmtIsDel);
                 //부모댓글
                 if(cvo.cmtIsDel == 'Y'){
                     if(cvo.cmtAnswerCnt > 0){
-                        let str = `<li class="list-group-item" data-cmtcno="${cvo.cmtCno}">삭제된 댓글입니다.</li>`;
-                        str += `<ul class="list-group" id="replies-${cvo.cmtCno}">`; // 자식 댓글을 위한 ul 요소 추가
-                        ul.innerHTML = str;
+                        let str = `<li class="cmtLi" data-cmtcno="${cvo.cmtCno}">삭제된 댓글입니다.</li>`;
+                        str += `<ul class="repliesUl" id="replies-${cvo.cmtCno}">`; // 자식 댓글을 위한 ul 요소 추가
+                        ul.innerHTML += str;
                     }  
                 }else{
-                    let str = `<li class="list-group-item" data-cmtcno="${cvo.cmtCno}">`;
-                    str += `<div>`; 
+                    let str = `<li class="cmtLi" data-cmtcno="${cvo.cmtCno}">`;
+                    str += `<div class="cmtContainer">`; 
     
-                    str += `<div class="fw-bold"><i class="bi bi-person-circle"></i>${cvo.cmtNickName}`;
-                    str += `<span class="badge rounded-pill text-bg-success">${cvo.cmtModAt}</span>`;
+                    str += `<div class="cmtUserLine">
+                            <div><img id="cmtProfile-${cvo.cmtCno}" class="cmUserProfile" alt="" src="/resources/image/기본 프로필.png"> <p class="cmtNickName">${cvo.cmtNickName}</p> `;
+                            communityProfile(cvo.cmtEmail, `cmtProfile-${cvo.cmtCno}`);
+                    if(cvo.cmtEmail == boardWriterEmail){
+                        str += `<span class="boardWriterSpan">작성자</span>`; 
+                    } 
+                    str += `<span class="cmtDate"> ${cvo.cmtModAt}</span></div>`;
                     //수정, 삭제 버튼
-                    str += `<div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                ...
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <a class="dropdown-item modBtn" href="#" data-bs-toggle="modal" data-bs-target="#myModal">수정</a>
-                                    <a class="dropdown-item delBtn" href="#">삭제</a>
-                                </ul>
-                            </div>`
+                    if(cvo.cmtEmail == userEmail){ 
+                        str += `<div class="userDropdownMenu">
+                        <button class="boardUserBtn cmtUserBtn" type="button">
+                            <i class="bi bi-three-dots cmtUserBtn"></i>
+                        </button>
+                        <ul class="cmtUserMenu menu-off" style="display:none">
+                            <a class="modBtn" href="#" data-cmtcontent="${cvo.cmtContent}" data-bs-toggle="modal" data-bs-target="#myModal">수정하기</a>
+                            <a class="delBtn" href="#">삭제하기</a>
+                        </ul>
+                        </div>`
+                    }
                     str += `</div>`;
                     
-                    str += `<div class="cmCon">${cvo.cmtContent}</div>`;
-                    
-                    str += `<div><button class="reCmtBtn no-${cvo.cmtCno}" data-cmtnickname="${cvo.cmtNickName}">답글쓰기</button></div>`;
+                    str += `<textarea class="cmtContentLine" spellcheck="false">${cvo.cmtContent}</textarea>`;
+
+                    if(userEmail){
+                        str += `<div class="cmtReBtnLine"><button class="reCmtBtn no-${cvo.cmtCno}" data-cmtnickname="${cvo.cmtNickName}">답글쓰기</button></div>`;
+                    }
                     
                     str += `</div></li></ul>`;
 
                     if(cvo.cmtAnswerCnt > 0){
-                        str += `<ul class="list-group" id="replies-${cvo.cmtCno}">`; // 자식 댓글을 위한 ul 요소 추가
-                    } 
+                        str += `<ul class="repliesUl" id="replies-${cvo.cmtCno}">`; // 자식 댓글을 위한 ul 요소 추가
+                    }
                     
                     ul.innerHTML += str;
+                    
                 }
                 
                 //자식댓글
@@ -120,50 +157,59 @@ function spreadCommentList(bno){
                     if(result.length > 0){
                         for(let cvo of result){ 
                             let reUl = document.getElementById(`replies-${cvo.reCmtCno}`);
-                            //let reUl = document.getElementsByClassName(`replies-${cvo.reCmtCno}`)[0];
 
-                            let str = `<li class="list-group-item" data-recno=${cvo.reCno}>`;
-                            str += `<div class="re-comment">`; 
+                            let str = `<li class="cmtLi2" data-recno=${cvo.reCno}>`;
+                            str += `<div class="cmtContainer">`; 
 
-                            str += `<div class="fw-bold">ㄴ<i class="bi bi-person-circle"></i>${cvo.reNickName}`;
-                            str += `<span class="badge rounded-pill text-bg-success">${cvo.reModAt}</span>`;
+                            str += `<div class="cmtUserLine">
+                                    <div><img id="reCmtProfile-${cvo.reCno}" class="cmUserProfile" alt="" src="/resources/image/기본 프로필.png"> <p class="cmtNickName">${cvo.reNickName}</p> `;
+                                    communityProfile(cvo.reEmail, `reCmtProfile-${cvo.reCno}`);
+                            if(cvo.reEmail == boardWriterEmail){
+                                str += `<span class="boardWriterSpan">작성자</span>`; 
+                            } 
+                            str += `<span class="cmtDate"> ${cvo.reModAt}</span></div>`;
                             //수정, 삭제 버튼
-                            str += `<div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        ...
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <a class="dropdown-item modBtn" href="#" data-bs-toggle="modal" data-bs-target="#myModal">수정</a>
-                                            <a class="dropdown-item delBtn" href="#">삭제</a>
-                                        </ul>
-                                    </div>`
+                            if(cvo.reEmail == userEmail){
+                                str += `<div class="userDropdownMenu">
+                                <button class="boardUserBtn cmtUserBtn" type="button">
+                                    <i class="bi bi-three-dots cmtUserBtn"></i>
+                                </button>
+                                <ul class="cmtUserMenu menu-off" style="display:none">
+                                    <a class="reModBtn" href="#" data-recontent="${cvo.reContent}" data-bs-toggle="modal" data-bs-target="#myModal">수정하기</a>
+                                    <a class="reDelBtn" href="#" data-recmtcno="${cvo.reCmtCno}">삭제하기</a>
+                                </ul>
+                                </div>`
+                            }
                             str += `</div>`;
                             
-                            str += `<div class="cmCon">${cvo.reContent}</div>`;
+                            str += `<textarea class="cmtContentLine" spellcheck="false">${cvo.reContent}</textarea>`;
                             
                             str += `</div></li></ul>`;
                             
                             reUl.innerHTML += str;
-                           
                         }
                     }
                 })
-            }
 
+            }
+            
         }else{
-            let str = `<li class="list-group-item">댓글 없음.</li>`;
+            let str = `<li class="noComment">첫 댓글을 남겨주세요</li>`;
             ul.innerHTML = str;
         }
         
-        //댓글 페이징 코드
-        let moreBtn = document.getElementById('moreBtn');
-        //DB에서 pgvo + list 같이 가져와야 값을 줄 수 있음.
-        if(result.pgvo.pageNo < result.endPage){ 
-            moreBtn.style.visibility = 'visible'; //다시 나타냄
-            moreBtn.dataset.page = page + 1;
-        }else{
-            moreBtn.style.visibility = 'hidden';
-        }
+        // 마지막 댓글에 클래스 추가
+        const lastComment = ul.lastElementChild;
+        lastComment.classList.add('last-comment');
+        
+        // 모든 'answerArea' 클래스를 가진 textarea 요소 찾기
+        let textareas = document.querySelectorAll('.cmtContentLine');
+
+        // 각 textarea에 대해 adjustTextareaRows 함수 호출
+        textareas.forEach(function(textarea) {
+            textAreaRows(textarea);
+        });
+        
     })
 }
 
@@ -212,10 +258,11 @@ document.addEventListener('click', (e)=>{
         console.log('수정버튼 클릭!');
         let li = e.target.closest('li');
         //nextSibling() : 같은 부모의 다음 형제 객체를 반환 => ${cvo.content}
-        let cmtText = li.querySelector('.fw-bold').nextSibling;
-        console.log(cmtText);
+        //let cmtText = li.querySelector('.fw-bold').nextSibling;
+        let cmtText = e.target.dataset.cmtcontent;
+        console.log(">>> cmtText >> "+cmtText);
         //기존 내용 모달창에 반영
-        document.getElementById('cmtTextMod').value = cmtText.innerText; 
+        document.getElementById('cmtTextMod').value = cmtText; 
         //value는 input태그에만 사용
         //nodeValue = innerText(div로 쌓여있을 때)
         //cmtModBtn에 data-cno 달기 
@@ -233,9 +280,9 @@ document.addEventListener('click', (e)=>{
         editCommentToServer(cmtModData).then(result => {
             if(result == 1){
                 document.querySelector('.btn-close').click();
-                alert("댓글 수정 성공");
-            }
+                //alert("댓글 수정 성공");
             spreadCommentList(bnoVal);
+            }
         })
 
     //삭제버튼 클릭시
@@ -246,14 +293,11 @@ document.addEventListener('click', (e)=>{
 
         removeCommentToServer(cnoVal).then(result => {
             if(result == 1){
-                alert("댓글 삭제 성공");
-            }
+                //alert("댓글 삭제 성공");
             spreadCommentList(bnoVal);
+            }
         })
 
-    //페이징 버튼
-    }else if(e.target.id == 'moreBtn'){
-        spreadCommentList(bnoVal, parseInt(e.target.dataset.page));
     }
 })
 
@@ -275,36 +319,53 @@ async function hasReply(cno){
 document.addEventListener('click', (e)=>{
     //답글쓰기 눌렀을 때
     if(e.target.classList.contains('reCmtBtn')){
-        console.log(e.target);
         let li = e.target.closest('li');
-        console.log(li);
         let cmtCno = li.dataset.cmtcno;
-        console.log(cmtCno);
         let button = li.querySelector('.reCmtBtn');
         button.remove();
-        //let cmtNickName = e.target.dataset.cmtnickname;
-
     
-        let str = `<div class="input-group mb-3 commentWrite">`;
-        str += `<input type="hidden" id="writerEmail" value="hong@naver.com">
+        let str = `<div class="reCommentWrite">`;
+        str += `<input type="hidden" id="writerEmail" value="${userEmail}">
                 <input type="hidden" id="cmtCno" value=${cmtCno}>
-                <span class="input-group-text" id="reWriter">hong</span>
-                <input type="text" class="form-control" id="reText" placeholder="Add Comment">
-                <button type="button" id="rePostBtn" class="btn btn-secondary rePostBtn">등록</button>
-                <button type="button" id="cancelBtn" class="btn btn-success cancelBtn">취소</button></div>`; 
+                <span class="cmtWriter" id="reWriter">${userNick}</span>
+                <textarea rows="1" class="cmtText reText" id="reText" placeholder="댓글을 남겨주세요"></textarea>
+                <button type="button" id="rePostBtn" class="cmtPostBtn rePostBtn" disabled="disabled">등록</button>
+                <button type="button" id="cancelBtn" class="cmtCancelBtn cancelBtn">취소</button></div>`; 
         
         li.innerHTML += str;
+
+        //답글작성버튼 disabled
+        let reCmtField = document.getElementById('reText');
+        reCmtField.addEventListener('input', reBtnDisabled);
+        
+        function reBtnDisabled(){
+            const reText = document.getElementById('reText').value;
+            const rePostBtn = document.getElementById('rePostBtn');
+        
+            if(reText == "" || reText == null){
+                rePostBtn.disabled = true;
+            }else{
+                rePostBtn.disabled = false;  
+            }
+        }
 
         //취소 버튼 눌렀을 때
         let cancelBtn = li.querySelector('.cancelBtn');
         cancelBtn.addEventListener('click', ()=> {
             // 입력 폼을 제거
-            li.querySelector('.commentWrite').remove();
+            li.querySelector('.reCommentWrite').remove();
 
             // 답글 쓰기 버튼을 다시 보이게 함
             li.appendChild(button);
         });
+
     }
+
+    let reText = document.getElementById('reText');
+    // 글을 입력할 때마다 adjustTextareaRows 함수 호출
+    reText.addEventListener('input',()=>{
+        textAreaRows(reText);
+    })
     
     //대댓글 등록 버튼 눌렀을 때
     if(e.target.classList.contains('rePostBtn')){
@@ -330,11 +391,11 @@ document.addEventListener('click', (e)=>{
             //전송 function
             postReplyToServer(reData).then(result => {
                 if(result == 1){
-                    alert("대댓글 등록 성공");
+                    // alert("대댓글 등록 성공");
+                spreadCommentList(bnoVal);
                 }
 
                 //화면에 뿌리기
-                spreadCommentList(bnoVal);
             })
         }
     }
@@ -384,9 +445,9 @@ async function reEditToServer(reModData){
 }
 
 //대댓글 삭제
-async function reRemoveToServer(cno){
+async function reRemoveToServer(cno, cmtCno){
     try{
-        const url = '/reCmt/'+cno;
+        const url = '/reCmt/'+cno+'/'+cmtCno;
         const config = {
             method : 'delete',
         };
@@ -402,14 +463,15 @@ async function reRemoveToServer(cno){
 
 document.addEventListener('click', (e)=>{
     //수정버튼 클릭시
-    if(e.target.classList.contains('modBtn')){
+    if(e.target.classList.contains('reModBtn')){
         console.log('수정버튼 클릭!');
         let li = e.target.closest('li');
         //nextSibling() : 같은 부모의 다음 형제 객체를 반환 => ${cvo.content}
-        let cmtText = li.querySelector('.fw-bold').nextSibling;
+        //let cmtText = li.querySelector('.fw-bold').nextSibling;
+        let cmtText = e.target.dataset.recontent;
         console.log(cmtText);
         //기존 내용 모달창에 반영
-        document.getElementById('cmtTextMod').value = cmtText.innerText; 
+        document.getElementById('cmtTextMod').value = cmtText; 
         //value는 input태그에만 사용
         //nodeValue = innerText(div로 쌓여있을 때)
         //cmtModBtn에 data-cno 달기 
@@ -427,22 +489,60 @@ document.addEventListener('click', (e)=>{
         reEditToServer(reModData).then(result => {
             if(result == 1){
                 document.querySelector('.btn-close').click();
-                alert("대댓글 수정 성공");
+                //alert("대댓글 수정 성공");
+            spreadCommentList(bnoVal);
             }
-            
         })
 
     //삭제버튼 클릭시
-    }else if(e.target.classList.contains('delBtn')){
+    }else if(e.target.classList.contains('reDelBtn')){
         console.log('삭제버튼 클릭!');
         let li = e.target.closest('li');
         let cnoVal = li.dataset.recno;
+        let cmtCnoVal = e.target.dataset.recmtcno;
+        console.log("cmtcno >> "+cmtCnoVal);
 
-        reRemoveToServer(cnoVal).then(result => {
+        reRemoveToServer(cnoVal, cmtCnoVal).then(result => {
             if(result == 1){
-                alert("대댓글 삭제 성공");
+                //alert("대댓글 삭제 성공");
+            spreadCommentList(bnoVal);
             }
-            
         })
     }
 })
+
+
+document.addEventListener('click', (e) => {
+    // 게시글 삭제, 수정 버튼 보이게 하기
+    if (e.target.id === 'boardUserMenuBtn') {
+        let userMenu = document.getElementById('boardUserMenu');
+        userMenu.classList.toggle('menu-on', !userMenu.classList.contains('menu-on'));
+        userMenu.style.display = userMenu.classList.contains('menu-on') ? 'inline-block' : 'none';
+
+    }else if (e.target.id === 'boardUserMenuBtn2') {
+        let userMenu = document.getElementById('boardUserMenu');
+        userMenu.classList.toggle('menu-on', !userMenu.classList.contains('menu-on'));
+        userMenu.style.display = userMenu.classList.contains('menu-on') ? 'inline-block' : 'none';
+
+    // 댓글 수정, 삭제 버튼 보이게 하기
+    }else if (e.target.classList.contains('cmtUserBtn')) {
+        const userMenu = e.target.closest('.cmtContainer').querySelector('.cmtUserMenu');
+        userMenu.classList.toggle('menu-on', !userMenu.classList.contains('menu-on'));
+        userMenu.style.display = userMenu.classList.contains('menu-on') ? 'inline-block' : 'none';
+    
+    // 화면의 다른 부분을 클릭했을 때 메뉴 숨기기
+    }else {
+        const boardUserMenu = document.getElementById('boardUserMenu');
+        if (boardUserMenu && boardUserMenu.classList.contains('menu-on')) {
+            boardUserMenu.classList.replace('menu-on', 'menu-off');
+            boardUserMenu.style.display = 'none';
+        }
+
+        document.querySelectorAll('.cmtUserMenu').forEach(menu => {
+            if (menu.classList.contains('menu-on')) {
+                menu.classList.replace('menu-on', 'menu-off');
+                menu.style.display = 'none';
+            }
+        });
+    }
+});
