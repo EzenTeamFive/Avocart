@@ -20,9 +20,9 @@
   + 공지 게시판 및 Footer에 실시간 공지 Slider
   + 마이페이지 판매 상품 목록, 구매 내역 출력
 + 강서연
-  + 메인페이지, 슬라이드 배너
+  + 메인페이지
   + 동네소식 게시판(CRUD) + 댓글 / 대댓글 기능, 좋아요 기능
-  + 로그인, 회원가입 페이지, 사용자 정보 중복불가 기능 및 이메일 인증
+  + 로그인, 회원가입(사용자 정보 중복불가, 이메일 인증, 카카오 맵 api로 주소 받기)
   + 이메일, 비밀번호 찾기
   + 고객센터 FAQ, 1대1 문의 및 관리자 전용 관리 페이지 제작
 + 김미수
@@ -35,3 +35,14 @@
   + 회원정보 수정, 탈퇴 기능
   + 동네업체 카카오 맵 api 추가
   + 마이페이지 기본 틀 작성, 받은 후기 리스트 출력
+ 
+### 개발환경
+
+### 디자인
+
+### ERD & 아이디어 노트
+  [ERD 링크](https://www.erdcloud.com/d/MhSpmN4b2vyNPsFH2)
+  
+  [아이디어 노트 링크](https://docs.google.com/spreadsheets/d/1ZOZwR0B_X8I1P6qzVrh81SMwq_vHxTIM0tgUCZA-j3E/edit#gid=0)
+![ERD](https://github.com/EzenTeamFive/Avocart/assets/134473033/95030127-157d-44fb-be64-b8a249061dd4)
+
