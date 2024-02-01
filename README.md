@@ -45,20 +45,7 @@
 
 ## 개발환경🔧
 ### Server
-Apache Tomcat 9.0.8
-
-### Framework/Flatform
-Spring MVC, SpringSecurity, MyBatis, Bootstrap
-
-### DB
-<img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white"> 8.0
-
-### Tool
-<div>
-  <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
-  <img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white">
-  <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
-</div>
+<img src="https://img.shields.io/badge/apache tomcat 9.0.8-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black"/>
 
 ### Development
 <div>
@@ -67,6 +54,28 @@ Spring MVC, SpringSecurity, MyBatis, Bootstrap
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 <div>
+  
+### Framework/Flatform
+<div>
+  <img src="https://img.shields.io/badge/Spring MVC-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
+  <img src="https://img.shields.io/badge/spring security-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white">
+  <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white">
+</div>
+
+### DB
+<img src="https://img.shields.io/badge/MySQL 8.0-005C84?style=for-the-badge&logo=mysql&logoColor=white">
+
+### ORM
+  <img src="https://img.shields.io/badge/MyBatis-100000?style=for-the-badge&logo=MyBatis&logoColor=white">
+
+### Tool
+<div>
+  <img src="https://img.shields.io/badge/STS 3.9.18-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
+  <img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white">
+  <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">
+  <img src="https://img.shields.io/badge/sublimetext-FF9800?style=for-the-badge&logo=sublimetext&logoColor=white">
+</div>
 
 ### Idea
 <img src="https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=google-sheets&logoColor=white">
