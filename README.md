@@ -3,7 +3,7 @@
 
 <p align="center"><img src="https://github.com/EzenTeamFive/Avocart/assets/126663021/c40ba3fa-c7b7-4c54-9632-ae1dd934d5a7" width="80"></p>
 
-## AVOCADO + CART
+## Avocado🥑 + Shopping Cart🛒
 **Spring MVC Project**
 
 **개발기간** 2023.11.08 - 2023.12.26
@@ -40,6 +40,7 @@
   + 회원정보 수정, 탈퇴 기능
   + 동네업체 카카오 맵 api 추가
   + 마이페이지 기본 틀 작성, 받은 후기 리스트 출력
+
 <br>
 
 ## 개발환경
@@ -69,10 +70,12 @@ Spring MVC, SpringSecurity, MyBatis, Bootstrap
 
 ### Idea
 <img src="https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=google-sheets&logoColor=white">
-<br>
+
+<br><br>
 
 ## 디자인 이미지
 ![main](https://github.com/EzenTeamFive/Avocart/assets/134473033/5fb402aa-39b1-4b71-a8f7-fc31c4c681b4)
+
 <br>
 
 ## 그 외 링크
