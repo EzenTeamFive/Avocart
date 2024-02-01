@@ -16,7 +16,7 @@
 또한 커뮤니티 게시판을 통해 사용자의 근처 이웃들과 소통하며 일상을 공유하고 동네 소식을 주고 받을 수 있습니다.
 <br>
 
-## 맴버구성
+## 맴버구성👩‍👩‍👧‍👧
 
 + **류지영 (팀장)**
   + 전체 디자인 및 Header, Footer, 게시글 검색
@@ -43,7 +43,7 @@
 
 <br>
 
-## 개발환경
+## 개발환경🔧
 ### Server
 Apache Tomcat 9.0.8
 
@@ -73,12 +73,12 @@ Spring MVC, SpringSecurity, MyBatis, Bootstrap
 
 <br><br>
 
-## 디자인 이미지
-![main](https://github.com/EzenTeamFive/Avocart/assets/134473033/5fb402aa-39b1-4b71-a8f7-fc31c4c681b4)
+## 디자인 이미지🖼️
+![main img](https://github.com/EzenTeamFive/Avocart/assets/134473033/dec2ac05-1e78-48b2-b8cd-83cfa934cda6)
 
 <br>
 
-## 그 외 링크
+## 그 외 링크🔗
 ERD https://www.erdcloud.com/d/MhSpmN4b2vyNPsFH2
 ![ERD](https://github.com/EzenTeamFive/Avocart/assets/134473033/95030127-157d-44fb-be64-b8a249061dd4)
 
