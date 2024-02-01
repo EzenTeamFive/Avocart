@@ -38,11 +38,14 @@
  
 ### 개발환경
 
-### 디자인
 
-### ERD & 아이디어 노트
-  [ERD 링크](https://www.erdcloud.com/d/MhSpmN4b2vyNPsFH2)
-  
-  [아이디어 노트 링크](https://docs.google.com/spreadsheets/d/1ZOZwR0B_X8I1P6qzVrh81SMwq_vHxTIM0tgUCZA-j3E/edit#gid=0)
+### 디자인 이미지
+![main](https://github.com/EzenTeamFive/Avocart/assets/134473033/5fb402aa-39b1-4b71-a8f7-fc31c4c681b4)
+
+
+### 그 외 링크
+ERD https://www.erdcloud.com/d/MhSpmN4b2vyNPsFH2
 ![ERD](https://github.com/EzenTeamFive/Avocart/assets/134473033/95030127-157d-44fb-be64-b8a249061dd4)
+
+아이디어 노트 https://docs.google.com/spreadsheets/d/1ZOZwR0B_X8I1P6qzVrh81SMwq_vHxTIM0tgUCZA-j3E/edit#gid=0
 
